@@ -4,13 +4,13 @@ import { useLanguage } from '@/context/LanguageContext'
 import { useEffect } from 'react'
 
 export function LangAttributeUpdater({ children }: { children: React.ReactNode }) {
-  const { language } = useLanguage()
+  const { language, isClient } = useLanguage()
   
   useEffect(() => {
-    if (document.documentElement.lang !== language) {
+    if (isClient && document.documentElement.lang !== language) {
       document.documentElement.lang = language
     }
-  }, [language])
+  }, [language, isClient])
   
   return <>{children}</>
 } 
