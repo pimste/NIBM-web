@@ -1,0 +1,38 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "analyze": "ANALYZE=true next build",
+    "optimize-images": "node scripts/optimize-images.js"
+  },
+  "dependencies": {
+    "@fontsource/inter": "^5.0.8",
+    "@fontsource/montserrat": "^5.0.8",
+    "@heroicons/react": "^2.2.0",
+    "framer-motion": "^10.16.4",
+    "next": "^14.1.0",
+    "next-seo": "^6.1.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.12.0",
+    "react-intersection-observer": "^9.16.0"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^14.2.26",
+    "@types/node": "^20.9.0",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.53.0",
+    "eslint-config-next": "^14.1.0",
+    "postcss": "^8.4.31",
+    "sharp": "^0.33.2",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.2.2"
+  }
+}
