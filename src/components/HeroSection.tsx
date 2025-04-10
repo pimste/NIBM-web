@@ -17,13 +17,14 @@ export default function HeroSection() {
         <div className="absolute inset-0 w-full h-full">
           {/* Prioritized Image - Main LCP element */}
           <Image
-            src="/images/sunset-TC.png"
+            src="/images/sunset-TC-2.png"
             alt="Tower crane silhouette against sunset cityscape"
             fill
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 85vw"
             priority
             fetchPriority="high"
-            quality={90}
+            quality={80}
+            loading="eager"
             className="object-cover"
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
