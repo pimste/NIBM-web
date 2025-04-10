@@ -11,7 +11,6 @@ type LanguageContextType = {
   language: Language
   setLanguage: (lang: Language) => void
   t: (key: string) => string
-  isClient: boolean
 }
 
 // Create the context with default values
@@ -19,7 +18,6 @@ const LanguageContext = createContext<LanguageContextType>({
   language: 'en',
   setLanguage: () => {},
   t: (key: string) => key,
-  isClient: false,
 })
 
 // Translations object
@@ -91,9 +89,10 @@ export const translations: Record<Language, Record<string, string>> = {
     'about.values.innovation.desc': 'We continuously seek innovative approaches to improve our services and offerings.',
     'about.values.sustainability.title': 'Sustainability',
     'about.values.sustainability.desc': 'We are committed to environmentally responsible practices in our operations and recommendations.',
-    'about.team.title': 'Meet Our Team',
+    'about.team.title': 'Meet the Founder',
     'about.team.ceo': 'CEO & Founder',
-    'about.team.ceo.bio': 'With over 25 years of experience in the construction industry, Johan founded NIBM Tower Cranes with a vision to provide reliable and innovative crane solutions.',
+    'about.team.ceo.bio': 'With over 25 years of experience in the construction industry, Gid Gehlen founded NIBM Tower Cranes with a vision to provide reliable and innovative crane solutions.',
+    'about.team.ceo.bio2': 'His deep technical knowledge and commitment to customer satisfaction have been the driving forces behind NIBM\'s growth and success. Under his leadership, the company has established itself as a trusted partner for construction firms seeking high-quality tower crane solutions.',
     'about.team.technical': 'Technical Director',
     'about.team.technical.bio': 'Emma brings 15 years of engineering expertise to NIBM, ensuring all tower cranes meet the highest technical and safety standards.',
     'about.team.operations': 'Operations Manager',
@@ -311,9 +310,10 @@ export const translations: Record<Language, Record<string, string>> = {
     'about.values.innovation.desc': 'We zoeken voortdurend nieuwe benaderingen om onze diensten en aanbod te verbeteren.',
     'about.values.sustainability.title': 'Duurzaamheid',
     'about.values.sustainability.desc': 'We zijn vastbesloten om duurzaam te handelen in onze bedrijfsvoering en aanbevelingen.',
-    'about.team.title': 'Ontmoet Ons Team',
+    'about.team.title': 'Meet the Founder',
     'about.team.ceo': 'CEO & Oprichter',
-    'about.team.ceo.bio': 'Met meer dan 25 jaar ervaring in de bouwindustrie, richt Johan NIBM Tower Cranes op met een visie om betrouwbare en innovatieve kraanoplossingen te bieden.',
+    'about.team.ceo.bio': 'Met meer dan 25 jaar ervaring in de bouwindustrie, richt Gid Gehlen NIBM Tower Cranes op met een visie om betrouwbare en innovatieve kraanoplossingen te bieden.',
+    'about.team.ceo.bio2': 'Zijn diepgaande technische kennis en toewijding aan klanttevredenheid zijn de drijvende krachten achter de groei en het succes van NIBM. Onder zijn leiding heeft het bedrijf zich gevestigd als een betrouwbare partner voor bouwbedrijven die op zoek zijn naar hoogwaardige torenkraanoplossingen.',
     'about.team.technical': 'Technische Directeur',
     'about.team.technical.bio': 'Emma brengt 15 jaar ingenieurservaring aan NIBM, waarborgend dat alle torenkranen voldoen aan de hoogste technische en veiligheidsstandaarden.',
     'about.team.operations': 'Operations Manager',
@@ -469,8 +469,8 @@ export const translations: Record<Language, Record<string, string>> = {
     'nav.home': 'Startseite',
     'nav.about': 'Über Uns',
     'nav.services': 'Dienstleistungen',
-    'nav.towercranes': 'Available Towercranes',
-    'nav.technical': 'Technische Informationen',
+    'nav.towercranes': 'Verfügbare Turmkrane',
+    'nav.technical': 'Technische Information',
     'nav.contact': 'Kontakt',
     'nav.quote': 'Angebot Anfordern',
     
@@ -531,9 +531,10 @@ export const translations: Record<Language, Record<string, string>> = {
     'about.values.innovation.desc': 'Wir suchen fortwährend neue Ansätze, um unsere Dienstleistungen und Angebot zu verbessern.',
     'about.values.sustainability.title': 'Nachhaltigkeit',
     'about.values.sustainability.desc': 'Wir sind verpflichtet, umweltverantwortliche Praktiken in unserer Geschäftsführung und Empfehlungen zu betreiben.',
-    'about.team.title': 'Treffen Sie Unser Team',
+    'about.team.title': 'Treffen Sie den Gründer',
     'about.team.ceo': 'CEO & Gründer',
-    'about.team.ceo.bio': 'Mit über 25 Jahren Erfahrung in der Bauindustrie gründete Johan NIBM Turmkrane mit einem Vision, zuverlässige und innovative Kranlösungen zu bieten.',
+    'about.team.ceo.bio': 'Mit über 25 Jahren Erfahrung in der Bauindustrie gründete Gid Gehlen NIBM Turmkrane mit einem Vision, zuverlässige und innovative Kranlösungen zu bieten.',
+    'about.team.ceo.bio2': 'Seine fundierte technische Expertise und sein Engagement für Kundenzufriedenheit waren die treibenden Kräfte hinter NIBMs Wachstum und Erfolg. Unter seiner Führung hat sich das Unternehmen als zuverlässiger Partner für Baufirmen etabliert, die hochwertige Turmkranlösungen suchen.',
     'about.team.technical': 'Technischer Direktor',
     'about.team.technical.bio': 'Emma bringt 15 Jahre Ingenieurserfahrung nach NIBM, die sicherstellen, dass alle Turmkrane die höchsten technischen und Sicherheitsstandards erfüllen.',
     'about.team.operations': 'Operations Manager',
@@ -690,16 +691,14 @@ export const translations: Record<Language, Record<string, string>> = {
 export function LanguageProvider({ children }: { children: ReactNode }) {
   // Start with 'en' as default for SSR, then update client-side
   const [language, setLanguageState] = useState<Language>('en')
-  // Flag to track if client-side code is running
-  const [isClient, setIsClient] = useState(false)
+  const [mounted, setMounted] = useState(false)
   
   // Get the router for handling navigation
   const router = useRouter()
 
   // This effect runs only once on client-side after first render
   useEffect(() => {
-    // Set isClient to true immediately
-    setIsClient(true)
+    setMounted(true)
     
     let detectedLang: Language = 'en';
     
@@ -735,7 +734,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   // Update language and save to localStorage
   const setLanguage = useCallback((lang: Language) => {
-    if (!isClient) return; // Only run on client
+    if (!mounted) return; // Only run on client
     
     try {
       localStorage.setItem('language', lang);
@@ -758,11 +757,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     } catch (error) {
       console.error('Error saving language preference:', error);
     }
-  }, [isClient]);
+  }, [mounted]);
   
   // Force update on language change
   useEffect(() => {
-    if (!isClient) return;
+    if (!mounted) return;
     
     // Dispatch an event when language changes through context
     const handleLanguageChange = () => {
@@ -775,7 +774,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     return () => {
       window.removeEventListener('languageChange', handleLanguageChange);
     };
-  }, [language, isClient]);
+  }, [language, mounted]);
   
   // Translation function
   const t = useCallback((key: string): string => {
@@ -798,9 +797,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const value = useMemo(() => ({
     language,
     setLanguage,
-    t,
-    isClient
-  }), [language, setLanguage, t, isClient]);
+    t
+  }), [language, setLanguage, t]);
   
   return (
     <LanguageContext.Provider value={value}>

@@ -36,8 +36,8 @@ function CtaSection() {
               delay={0.2}
             >
               <FaPhone className="text-primary mr-3 h-5 w-5" />
-              <a href="tel:+31889993332" className="text-neutral-900 font-medium">
-                +31 889 99 3332
+              <a href="tel:+31653206004" className="text-neutral-900 font-medium">
+                Gid Gehlen
               </a>
             </AnimatedElement>
             
@@ -47,8 +47,8 @@ function CtaSection() {
               delay={0.3}
             >
               <FaEnvelope className="text-primary mr-3 h-5 w-5" />
-              <a href="mailto:info@nibmtowercranes.com" className="text-neutral-900 font-medium">
-                info@nibmtowercranes.com
+              <a href="mailto:gid.gehlen@nibmtowercranes.com" className="text-neutral-900 font-medium">
+                gid.gehlen@nibmtowercranes.com
               </a>
             </AnimatedElement>
           </div>

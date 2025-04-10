@@ -91,10 +91,15 @@ type FilterState = {
 }
 
 export default function TowerCranes() {
-  const { t, language, isClient } = useLanguage()
-  const [, updateState] = useState({});
-  const forceUpdate = useCallback(() => updateState({}), []);
+  // Use language for translations and filtering
+  const { t, language } = useLanguage()
+  const [mounted, setMounted] = useState(false)
   
+  // Set mounted state once on client
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const [filters, setFilters] = useState<FilterState>({
     status: 'all',
     type: 'all',
@@ -102,28 +107,6 @@ export default function TowerCranes() {
   })
   const [searchTerm, setSearchTerm] = useState('')
   
-  // Force re-render on language change
-  useEffect(() => {
-    if (isClient) {
-      console.log(`Language changed to: ${language}`);
-      forceUpdate();
-    }
-    
-    // Add global listener for language changes
-    const handleLanguageChange = () => {
-      console.log('Language change event detected');
-      forceUpdate();
-    };
-    
-    window.addEventListener('languageChange', handleLanguageChange);
-    window.addEventListener('languageChanged', handleLanguageChange);
-    
-    return () => {
-      window.removeEventListener('languageChange', handleLanguageChange);
-      window.removeEventListener('languageChanged', handleLanguageChange);
-    };
-  }, [language, forceUpdate, isClient]);
-
   const filteredCranes = cranes.filter((crane) => {
     const matchesStatus = filters.status === 'all' || crane.status === filters.status
     const matchesType = filters.type === 'all' || crane.type === filters.type

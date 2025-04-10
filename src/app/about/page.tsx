@@ -11,29 +11,11 @@ export default function About() {
   
   const teamMembers = [
     {
-      name: 'Johan van der Berg',
+      name: 'Gid Gehlen',
       position: t('about.team.ceo'),
-      image: '/images/Potain-MDT-178_3W.jpg', // Placeholder, would be replaced with actual team photos
+      image: '/images/Potain-MDT-178_3W.jpg', // Placeholder, would be replaced with actual team photo
       bio: t('about.team.ceo.bio'),
-    },
-    {
-      name: 'Emma Schmidt',
-      position: t('about.team.technical'),
-      image: '/images/Potain-MDT-178_3W.jpg', // Placeholder
-      bio: t('about.team.technical.bio'),
-    },
-    {
-      name: 'Thomas Weber',
-      position: t('about.team.operations'),
-      image: '/images/Potain-MDT-178_3W.jpg', // Placeholder
-      bio: t('about.team.operations.bio'),
-    },
-    {
-      name: 'Lisa Jansen',
-      position: t('about.team.customer'),
-      image: '/images/Potain-MDT-178_3W.jpg', // Placeholder
-      bio: t('about.team.customer.bio'),
-    },
+    }
   ]
 
   const values = [
@@ -136,7 +118,7 @@ export default function About() {
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden">
               <Image
-                src="/images/cropped-Top-page2-potain6.png"
+                src="/images/1733749919967.jpeg"
                 alt={t('about.story.image')}
                 fill
                 className="object-cover"
@@ -285,12 +267,12 @@ export default function About() {
         </div>
       </section>
 
-      {/* Our Team */}
+      {/* Meet the Founder */}
       <section className="py-16 bg-neutral-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <ClientOnly fallback={
             <h2 className="text-3xl font-bold text-neutral-900 text-center mb-12">
-              Meet Our Team
+              Meet the Founder
             </h2>
           }>
             <h2 className="text-3xl font-bold text-neutral-900 text-center mb-12">
@@ -298,37 +280,40 @@ export default function About() {
             </h2>
           </ClientOnly>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {teamMembers.map((member, index) => (
-              <motion.div
-                key={index}
-                className="bg-white rounded-lg overflow-hidden shadow-sm"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="relative h-64">
+          <div className="max-w-5xl mx-auto">
+            <motion.div
+              className="bg-white rounded-lg overflow-hidden shadow-sm"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="relative min-h-[400px]">
                   <Image
-                    src={member.image}
-                    alt={member.name}
+                    src="/images/gidgehlen.jpg"
+                    alt="Gid Gehlen - CEO & Founder"
                     fill
-                    className="object-cover"
+                    className="object-cover object-center"
+                    priority
                   />
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-neutral-900 mb-1">
-                    {member.name}
+                <div className="p-8 flex flex-col justify-center">
+                  <h3 className="text-2xl font-bold text-neutral-900 mb-2">
+                    Gid Gehlen
                   </h3>
-                  <p className="text-primary font-medium mb-3">
-                    {member.position}
+                  <p className="text-primary font-medium text-lg mb-4">
+                    {t('about.team.ceo')}
+                  </p>
+                  <p className="text-neutral-700 mb-4">
+                    {t('about.team.ceo.bio')}
                   </p>
                   <p className="text-neutral-700">
-                    {member.bio}
+                    {t('about.team.ceo.bio2')}
                   </p>
                 </div>
-              </motion.div>
-            ))}
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

@@ -51,15 +51,6 @@ const technicalDocuments = [
     category: 'Specifications',
     url: '#',
   },
-  {
-    id: 6,
-    title: 'Tower Crane Operator Training Manual',
-    description: 'Training manual for tower crane operators.',
-    fileSize: '5.7 MB',
-    fileType: 'PDF',
-    category: 'Training',
-    url: '#',
-  },
 ]
 
 // FAQs about tower cranes

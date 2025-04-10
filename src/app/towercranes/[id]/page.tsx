@@ -262,14 +262,14 @@ export default function CraneDetails() {
                 <h3 className="text-xl font-bold mb-4 text-primary">Quick Contact</h3>
                 <div className="flex items-center mb-4">
                   <FaPhone className="text-primary mr-3" />
-                  <a href="tel:+31123456789" className="text-neutral-700 hover:text-primary transition-colors">
-                    +31 (0) 123 456 789
+                  <a href="tel:+31653206004" className="text-neutral-700 hover:text-primary transition-colors">
+                    Gid Gehlen
                   </a>
                 </div>
                 <div className="flex items-center">
                   <FaEnvelope className="text-primary mr-3" />
-                  <a href="mailto:info@nibmvb.eu" className="text-neutral-700 hover:text-primary transition-colors">
-                    info@nibmvb.eu
+                  <a href="mailto:gid.gehlen@nibmtowercranes.com" className="text-neutral-700 hover:text-primary transition-colors">
+                    gid.gehlen@nibmtowercranes.com
                   </a>
                 </div>
               </div>

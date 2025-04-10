@@ -1,6 +1,9 @@
+'use client'
+
 import Link from 'next/link'
 import Image from 'next/image'
 import { FaFacebook, FaLinkedin, FaInstagram, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
+import ClientOnly from './ClientOnly'
 
 export function Footer() {
   return (
@@ -132,26 +135,28 @@ export function Footer() {
           {/* Contact Information */}
           <div>
             <h3 className="text-lg font-bold mb-4">Contact Us</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start">
-                <FaMapMarkerAlt className="text-primary-300 mt-1 mr-3 flex-shrink-0" aria-hidden="true" />
-                <span className="text-neutral-300">
-                  123 Construction Avenue, Building District, 1234 AB, Netherlands
-                </span>
-              </li>
-              <li className="flex items-center">
-                <FaPhone className="text-primary-300 mr-3 flex-shrink-0" aria-hidden="true" />
-                <a href="tel:+31123456789" className="text-neutral-300 hover:text-white transition-colors" aria-label="Call our office at +31 (0) 123 456 789">
-                  +31 (0) 123 456 789
-                </a>
-              </li>
-              <li className="flex items-center">
-                <FaEnvelope className="text-primary-300 mr-3 flex-shrink-0" aria-hidden="true" />
-                <a href="mailto:info@nibmvb.eu" className="text-neutral-300 hover:text-white transition-colors" aria-label="Email us at info@nibmvb.eu">
-                  info@nibmvb.eu
-                </a>
-              </li>
-            </ul>
+            <ClientOnly>
+              <ul className="space-y-4">
+                <li className="flex items-start">
+                  <FaMapMarkerAlt className="text-primary-300 mt-1 mr-3 flex-shrink-0" aria-hidden="true" />
+                  <span className="text-neutral-300">
+                    Kruisweg 8 6361 TG Nuth
+                  </span>
+                </li>
+                <li className="flex items-center">
+                  <FaPhone className="text-primary-300 mr-3 flex-shrink-0" aria-hidden="true" />
+                  <a href="tel:+31653206004" className="text-neutral-300 hover:text-white transition-colors" aria-label="Call our office">
+                    Gid Gehlen
+                  </a>
+                </li>
+                <li className="flex items-center">
+                  <FaEnvelope className="text-primary-300 mr-3 flex-shrink-0" aria-hidden="true" />
+                  <a href="mailto:gid.gehlen@nibmtowercranes.com" className="text-neutral-300 hover:text-white transition-colors" aria-label="Email us">
+                    gid.gehlen@nibmtowercranes.com
+                  </a>
+                </li>
+              </ul>
+            </ClientOnly>
           </div>
         </div>
 

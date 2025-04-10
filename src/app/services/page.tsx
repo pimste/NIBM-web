@@ -41,7 +41,7 @@ export default function Services() {
       id: 'planning',
       title: t('services.planning.title'),
       description: t('services.planning.desc'),
-      image: '/images/Potain-MDT-178_3W.jpg',
+      image: '/images/helmet1a.jpg',
       features: [
         t('services.planning.feature1'),
         t('services.planning.feature2'),
@@ -74,19 +74,6 @@ export default function Services() {
         t('services.mounting.feature3'),
         t('services.mounting.feature4'),
         t('services.mounting.feature5'),
-      ],
-    },
-    {
-      id: 'training',
-      title: t('services.training.title'),
-      description: t('services.training.desc'),
-      image: '/images/cropped-Top-page2-potain6.png',
-      features: [
-        t('services.training.feature1'),
-        t('services.training.feature2'),
-        t('services.training.feature3'),
-        t('services.training.feature4'),
-        t('services.training.feature5'),
       ],
     },
   ]

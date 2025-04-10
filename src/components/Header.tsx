@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { FaBars, FaTimes, FaPhone, FaEnvelope } from 'react-icons/fa'
 import { useLanguage } from '@/context/LanguageContext'
 import { LanguageSwitcher } from './LanguageSwitcher'
+import ClientOnly from './ClientOnly'
 
 const navigation = [
   { key: 'nav.home', href: '/' },
@@ -50,22 +51,26 @@ export function Header() {
       <div className="hidden lg:block bg-primary-900 text-white py-2">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-6">
-              <a href="tel:+31123456789" className="flex items-center text-sm hover:text-secondary transition-colors">
-                <FaPhone className="mr-2" /> +31 (0) 123 456 789
-              </a>
-              <a href="mailto:info@nibmvb.eu" className="flex items-center text-sm hover:text-secondary transition-colors">
-                <FaEnvelope className="mr-2" /> info@nibmvb.eu
-              </a>
-            </div>
-            <div className="flex space-x-4 items-center">
-              <a href="#" className="text-xs hover:text-secondary transition-colors">{t('topbar.news')}</a>
-              <a href="#" className="text-xs hover:text-secondary transition-colors">{t('topbar.careers')}</a>
-              <a href="#" className="text-xs hover:text-secondary transition-colors">{t('topbar.faq')}</a>
-              <div className="ml-4">
-                <LanguageSwitcher />
+            <ClientOnly>
+              <div className="flex items-center space-x-6">
+                <a href="tel:+31653206004" className="flex items-center text-sm hover:text-secondary transition-colors">
+                  <FaPhone className="mr-2" /> Gid Gehlen
+                </a>
+                <a href="mailto:gid.gehlen@nibmtowercranes.com" className="flex items-center text-sm hover:text-secondary transition-colors">
+                  <FaEnvelope className="mr-2" /> gid.gehlen@nibmtowercranes.com
+                </a>
               </div>
-            </div>
+            </ClientOnly>
+            <ClientOnly>
+              <div className="flex space-x-4 items-center">
+                <Link href="#" className="text-xs hover:text-secondary transition-colors">{t('topbar.news')}</Link>
+                <Link href="#" className="text-xs hover:text-secondary transition-colors">{t('topbar.careers')}</Link>
+                <Link href="#" className="text-xs hover:text-secondary transition-colors">{t('topbar.faq')}</Link>
+                <div className="ml-4">
+                  <LanguageSwitcher />
+                </div>
+              </div>
+            </ClientOnly>
           </div>
         </div>
       </div>
@@ -242,15 +247,18 @@ export function Header() {
                   </Link>
                 </motion.div>
                 
-                <div className="pt-8 border-t border-primary-800">
-                  <p className="text-white/60 mb-4">Contact Us</p>
-                  <a href="tel:+31123456789" className="flex items-center text-white mb-3 hover:text-secondary transition-colors">
-                    <FaPhone className="mr-3" /> +31 (0) 123 456 789
-                  </a>
-                  <a href="mailto:info@nibmvb.eu" className="flex items-center text-white hover:text-secondary transition-colors">
-                    <FaEnvelope className="mr-3" /> info@nibmvb.eu
-                  </a>
-                </div>
+                <ClientOnly>
+                  <div className="pt-8 border-t border-primary-800">
+                    <p className="text-white/60 mb-4">Contact Us</p>
+                    <a href="tel:+31653206004" className="flex items-center text-white mb-3 hover:text-secondary transition-colors">
+                      <FaPhone className="mr-3" /> Gid Gehlen
+                    </a>
+                    <a href="mailto:gid.gehlen@nibmtowercranes.com" className="flex items-center text-white hover:text-secondary transition-colors">
+                      <FaEnvelope className="mr-3" /> gid.gehlen@nibmtowercranes.com
+                    </a>
+                    <p className="text-white mt-3">Kruisweg 8 6361 TG Nuth</p>
+                  </div>
+                </ClientOnly>
               </nav>
             </div>
           </motion.div>
