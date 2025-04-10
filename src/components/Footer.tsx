@@ -146,7 +146,7 @@ export function Footer() {
                 <li className="flex items-center">
                   <FaPhone className="text-primary-300 mr-3 flex-shrink-0" aria-hidden="true" />
                   <a href="tel:+31653206004" className="text-neutral-300 hover:text-white transition-colors" aria-label="Call our office">
-                    Gid Gehlen
+                    +31 6 53206004
                   </a>
                 </li>
                 <li className="flex items-center">

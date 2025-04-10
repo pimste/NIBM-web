@@ -54,7 +54,7 @@ export function Header() {
             <ClientOnly>
               <div className="flex items-center space-x-6">
                 <a href="tel:+31653206004" className="flex items-center text-sm hover:text-secondary transition-colors">
-                  <FaPhone className="mr-2" /> Gid Gehlen
+                  <FaPhone className="mr-2" /> +31 6 53206004
                 </a>
                 <a href="mailto:gid.gehlen@nibmtowercranes.com" className="flex items-center text-sm hover:text-secondary transition-colors">
                   <FaEnvelope className="mr-2" /> gid.gehlen@nibmtowercranes.com
@@ -251,7 +251,7 @@ export function Header() {
                   <div className="pt-8 border-t border-primary-800">
                     <p className="text-white/60 mb-4">Contact Us</p>
                     <a href="tel:+31653206004" className="flex items-center text-white mb-3 hover:text-secondary transition-colors">
-                      <FaPhone className="mr-3" /> Gid Gehlen
+                      <FaPhone className="mr-3" /> +31 6 53206004
                     </a>
                     <a href="mailto:gid.gehlen@nibmtowercranes.com" className="flex items-center text-white hover:text-secondary transition-colors">
                       <FaEnvelope className="mr-3" /> gid.gehlen@nibmtowercranes.com

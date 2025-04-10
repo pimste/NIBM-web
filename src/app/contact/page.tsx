@@ -253,7 +253,7 @@ export default function Contact() {
                     <h3 className="font-bold text-neutral-900 mb-1">Contact</h3>
                     <p className="text-neutral-700">
                       <a href="tel:+31653206004" className="hover:text-primary transition-colors">
-                        Gid Gehlen
+                        +31 6 53206004
                       </a>
                     </p>
                   </div>

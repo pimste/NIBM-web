@@ -37,7 +37,7 @@ function CtaSection() {
             >
               <FaPhone className="text-primary mr-3 h-5 w-5" />
               <a href="tel:+31653206004" className="text-neutral-900 font-medium">
-                Gid Gehlen
+                +31 6 53206004
               </a>
             </AnimatedElement>
             
