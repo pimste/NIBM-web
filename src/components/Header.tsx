@@ -63,9 +63,7 @@ export function Header() {
             </ClientOnly>
             <ClientOnly>
               <div className="flex space-x-4 items-center">
-                <Link href="#" className="text-xs hover:text-secondary transition-colors">{t('topbar.news')}</Link>
-                <Link href="#" className="text-xs hover:text-secondary transition-colors">{t('topbar.careers')}</Link>
-                <Link href="#" className="text-xs hover:text-secondary transition-colors">{t('topbar.faq')}</Link>
+                <Link href="/technical-info#faq" className="text-xs hover:text-secondary transition-colors">{t('topbar.faq')}</Link>
                 <div className="ml-4">
                   <LanguageSwitcher />
                 </div>
