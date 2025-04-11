@@ -182,7 +182,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'services.transport.feature1': 'Specialized transport vehicles and equipment',
     'services.transport.feature2': 'Route planning and analysis',
     'services.transport.feature3': 'Permit acquisition and compliance',
-    'services.transport.feature4': 'Experienced transport team',
+    'services.transport.feature4': 'Ervaren transportteam',
     'services.transport.feature5': 'Insurance coverage during transport',
     
     'services.mounting.title': 'Mounting & Installation',
@@ -229,19 +229,88 @@ export const translations: Record<Language, Record<string, string>> = {
     'technical.specs': 'Technical Specifications',
     'technical.docs': 'Documentation',
     'technical.download': 'Download',
+    'technical.industryStandards': 'Industry Standards',
+    'technical.industryStandards.desc': 'Access relevant industry standards and regulations related to tower crane operations.',
+    'technical.viewStandards': 'View Standards',
+    'technical.educationalVideos': 'Educational Videos',
+    'technical.educationalVideos.desc': 'Watch instructional videos on tower crane operation, maintenance, and safety.',
+    'technical.watchVideos': 'Watch Videos',
+    'technical.techSupport': 'Technical Support',
+    'technical.techSupport.desc': 'Need specialized technical assistance? Our expert team is ready to help.',
+    'technical.contactSupport': 'Contact Support',
+    'technical.faq': 'Frequently Asked Questions',
+    'technical.additionalResources': 'Additional Resources',
+    'technical.manuals': 'Manuals',
+    'technical.specifications': 'Specifications',
+    'technical.brochures': 'Brochures',
+    'technical.safetyGuidelines': 'Safety Guidelines',
+    'technical.viewMore': 'View More',
+    'technical.downloadResource': 'Download Resource',
     
     // Contact Page
-    'contact.page.title': 'Contact Us',
-    'contact.page.subtitle': 'Get in touch with our team for inquiries, quotes, or support.',
-    'contact.form.name': 'Your Name',
-    'contact.form.email': 'Email Address',
-    'contact.form.phone': 'Phone Number',
-    'contact.form.subject': 'Subject',
-    'contact.form.message': 'Your Message',
+    'contact.title': 'Contact Us',
+    'contact.subtitle': 'Our team of tower crane experts is ready to help you find the perfect solution for your project.',
+    'contact.form.title': 'Send Us a Message',
+    'contact.form.name': 'Your Name *',
+    'contact.form.email': 'Email Address *',
+    'contact.form.phone': 'Phone Number *',
+    'contact.form.company': 'Company Name',
+    'contact.form.subject': 'Subject *',
+    'contact.form.message': 'Your Message *',
     'contact.form.submit': 'Send Message',
-    'contact.office': 'Our Office',
-    'contact.phone': 'Phone',
-    'contact.email': 'Email',
+    'contact.form.sending': 'Sending...',
+    'contact.form.success.title': 'Thank You!',
+    'contact.form.success.message': 'Your message has been submitted successfully. One of our representatives will contact you shortly.',
+    'contact.info.title': 'Our Contact Information',
+    'contact.info.address': 'Office Address',
+    'contact.info.contact': 'Contact',
+    'contact.info.email': 'E-mail',
+    'contact.info.hours': 'Office Hours',
+    'contact.info.workdays': 'Monday - Friday: 8:00 - 17:00',
+    'contact.info.weekend': 'Saturday - Sunday: Closed',
+    'contact.form.select': 'Select a subject',
+    'contact.form.sales': 'Sales Inquiry',
+    'contact.form.rental': 'Rental Inquiry',
+    'contact.form.technical': 'Technical Support',
+    'contact.form.parts': 'Parts and Service',
+    'contact.form.training': 'Training',
+    'contact.form.other': 'Other',
+    
+    // Technical Information Page
+    'technical.title': 'Technical Information',
+    'technical.subtitle': 'Access our technical resources, manuals, and specifications for tower cranes.',
+    'technical.resources': 'Technical Resources',
+    'technical.search': 'Search Documents',
+    'technical.searchPlaceholder': 'Search by keyword...',
+    'technical.filterCategory': 'Filter by Category',
+    'technical.noDocuments': 'No documents found',
+    'technical.tryAdjusting': 'Try adjusting your filters or search term',
+    'technical.download': 'Download Document',
+    
+    // Additional Resources Section
+    'technical.industryStandards': 'Industry Standards',
+    'technical.industryStandards.desc': 'Access relevant industry standards and regulations related to tower crane operations.',
+    'technical.viewStandards': 'View Standards',
+    'technical.educationalVideos': 'Educational Videos',
+    'technical.educationalVideos.desc': 'Watch instructional videos on tower crane operation, maintenance, and safety.',
+    'technical.watchVideos': 'Watch Videos',
+    'technical.techSupport': 'Technical Support',
+    'technical.techSupport.desc': 'Need specialized technical assistance? Our expert team is ready to help.',
+    'technical.contactSupport': 'Contact Support',
+    
+    // FAQ Questions and Answers
+    'faq.q1': 'What are the main types of tower cranes?',
+    'faq.a1': 'The main types of tower cranes include flat-top cranes, hammerhead cranes, luffing jib cranes, and self-erecting cranes. Each type is designed for specific applications and site conditions. Flat-top cranes have no A-frame above the jib and counter-jib, making them ideal for sites with height restrictions or multiple cranes. Hammerhead cranes have a horizontal jib and counter-jib with a trolley that moves loads in and out. Luffing jib cranes have a jib that can be raised and lowered, making them suitable for congested sites. Self-erecting cranes can be quickly set up and dismantled, making them ideal for smaller projects.',
+    'faq.q2': 'How do you determine the right tower crane for a construction project?',
+    'faq.a2': 'Determining the right tower crane involves considering several factors including the maximum load capacity needed, the required height and reach, site constraints, project duration, and budget. You should also consider the type of materials to be lifted, the frequency of lifts, and any specific requirements of the project. Our team of experts can help you assess these factors and recommend the most suitable crane for your specific needs.',
+    'faq.q3': 'What safety measures should be in place when operating a tower crane?',
+    'faq.a3': 'Safety measures for tower crane operation include proper operator training and certification, regular inspections and maintenance, clear communication protocols, weather monitoring, load management systems, and anti-collision devices. Additionally, ensuring proper foundation and installation, establishing a clear zone around the crane, and implementing comprehensive safety plans are essential. All operators should also be familiar with emergency procedures and follow manufacturer guidelines.',
+    'faq.q4': 'How often should tower cranes be inspected?',
+    'faq.a4': 'Tower cranes should undergo daily visual inspections by the operator before use, weekly more detailed inspections by a competent person, monthly thorough inspections by a qualified technician, and annual comprehensive inspections by certified inspectors. Additionally, after severe weather events or any modifications, special inspections should be conducted. These regular inspections help ensure safe operation and identify potential issues before they become serious problems.',
+    'faq.q5': 'What are the wind speed limits for tower crane operation?',
+    'faq.a5': 'Tower cranes typically have operational wind speed limits of around 20-25 mph (32-40 km/h) for normal operation. When wind speeds reach approximately 45 mph (72 km/h), cranes should be put into weathervane mode to allow the jib to move freely with the wind. However, these limits can vary based on the specific crane model, load characteristics, and manufacturer guidelines. It\'s essential to follow the specifications provided by the crane manufacturer and consider site-specific conditions when determining safe operating parameters.',
+    'faq.q6': 'What qualifications are required to operate a tower crane?',
+    'faq.a6': 'Tower crane operators need specific certifications and qualifications, which vary by country and region. Generally, operators must complete a recognized training program, pass both written and practical exams, and obtain a certification from an accredited organization. They should also have good depth perception, coordination, and concentration abilities. Additionally, most jurisdictions require regular recertification to ensure operators maintain their skills and knowledge of current safety protocols and technological advancements.',
   },
   nl: {
     // Navigation
@@ -265,7 +334,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'services.title': 'Onze Diensten',
     'services.subtitle': 'Uitgebreide oplossingen voor torenkranen voor uw bouwprojecten',
     'services.rental': 'Verhuur van Torenkranen',
-    'services.rental.desc': 'Kort- en langdurige verhuuropties voor een breed scala aan torenkranen om aan uw projectbehoeften te voldoen.',
+    'services.rental.desc': 'Onze verhuurservice biedt flexibele toegang tot hoogwaardige torenkranen zonder de volledige investering van aankoop. We bieden kort- en langdurige huuroptie met uitgebreide ondersteuning gedurende de huurperiode.',
     'services.installation': 'Montage & Demontage',
     'services.installation.desc': 'Professionele montage- en demontagediensten door ons deskundige team, met garantie voor veiligheid en efficiëntie.',
     'services.maintenance': 'Onderhoud & Reparaties',
@@ -283,19 +352,19 @@ export const translations: Record<Language, Record<string, string>> = {
     'about.story.title': 'Ons Verhaal',
     'about.story.image': 'NIBM Tower Cranes bedrijfszaken',
     'about.story.p1': 'NIBM Tower Cranes werd in 1995 opgericht met een eenvoudige missie: betrouwbare, hoogwaardige torenkranen en uitzonderlijke service te bieden aan de bouwindustrie. Wat begon als een kleine verhuurmaatschappij is uitgegroeid tot een uitgebreide leverancier van torenkranenolossingen over Europa.',
-    'about.story.p2': 'Over de afgelopen 28 jaar hebben we een reputatie opgebouwd voor technische uitstekendheid, betrouwbaarheid en klantgericht service. Onze diepe kennis van bouwprojecten en hun unieke uitdagingen hebben ons in staat gesteld een volledige servicebenadering te ontwikkelen die alle aspecten van torenkranenbewerkingen aanpakt.',
+    'about.story.p2': 'Over de afgelopen 28 jaar hebben we een reputatie opgebouwd voor technische uitstekendheid, betrouwbaarheid en klantgerichte service. Unsere diepe kennis van bouwprojecten en hun unieke uitdagingen hebben ons in staat gesteld een volledige servicebenadering te ontwikkelen die alle aspecten van torenkranenbewerkingen aanpakt.',
     'about.story.p3': 'Vandaag is NIBM Tower Cranes trots om een divers klantenbestand te dienen, van kleine bouwfirma\'s tot grote multinationale bedrijven, die hen voorzien van de apparatuur en expertise die ze nodig hebben om hun bouwprojecten veilig en efficiënt te realiseren.',
     'about.mission.title': 'Onze Missie',
-    'about.mission.intro': 'Onze missie is om betrouwbare, veilige en efficiënte torenkranenolossingen te leveren die ons klanten in staat stellen hun bouwprojecten succesvol af te ronden. We zijn vastbesloten:',
-    'about.mission.point1': 'Hoogwaardige torenkranen aan te bieden die voldoen aan de specifieke behoeften van elk project',
-    'about.mission.point2': 'Expertconsultatie om klanten te helpen de juiste apparatuur te selecteren',
+    'about.mission.intro': 'Onze missie is om betrouwbare, veilige en efficiënte torenkranenoplossingen te leveren die ons klanten in staat stellen hun bouwprojecten succesvol af te ronden. We zijn vastbesloten:',
+    'about.mission.point1': 'Hoogwaardige torenkranen aanbieden die voldoen aan de specifieke behoeften van elk project',
+    'about.mission.point2': 'Deskundig advies leveren om klanten te helpen bij het selecteren van de juiste apparatuur',
     'about.mission.point3': 'Veilige en efficiënte torenkranenbewerkingen te waarborgen via uitgebreide training en ondersteuning',
     'about.mission.point4': 'Uitzonderlijke service te leveren bij elke fase van de klantrelatie',
     'about.vision.title': 'Onze Visie',
     'about.vision.intro': 'We zien NIBM Tower Cranes als de gewenste partner voor torenkranenolossingen in Europa, erkend voor:',
     'about.vision.point1': 'Technische uitstekendheid en innovatie in torenkranenbewerkingen',
-    'about.vision.point2': 'Onovertrokken vastbeslotenheid aan veiligheid en kwaliteit',
-    'about.vision.point3': 'Uitgebreide service die klantverwachtingen overtreffend',
+    'about.vision.point2': 'Compromisloze toewijding aan veiligheid en kwaliteit',
+    'about.vision.point3': 'Uitgebreide service die de verwachtingen van klanten overtreft',
     'about.vision.point4': 'Bijdragen aan de vooruitgang van de bouwindustrie door verantwoordelijk en duurzaam te handelen',
     'about.values.title': 'Onze Kernwaarden',
     'about.values.safety.title': 'Veiligheid Eerst',
@@ -310,7 +379,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'about.values.innovation.desc': 'We zoeken voortdurend nieuwe benaderingen om onze diensten en aanbod te verbeteren.',
     'about.values.sustainability.title': 'Duurzaamheid',
     'about.values.sustainability.desc': 'We zijn vastbesloten om duurzaam te handelen in onze bedrijfsvoering en aanbevelingen.',
-    'about.team.title': 'Meet the Founder',
+    'about.team.title': 'Ontmoet de Oprichter',
     'about.team.ceo': 'CEO & Oprichter',
     'about.team.ceo.bio': 'Met meer dan 25 jaar ervaring in de bouwindustrie, richt Gid Gehlen NIBM Tower Cranes op met een visie om betrouwbare en innovatieve kraanoplossingen te bieden.',
     'about.team.ceo.bio2': 'Zijn diepgaande technische kennis en toewijding aan klanttevredenheid zijn de drijvende krachten achter de groei en het succes van NIBM. Onder zijn leiding heeft het bedrijf zich gevestigd als een betrouwbare partner voor bouwbedrijven die op zoek zijn naar hoogwaardige torenkraanoplossingen.',
@@ -331,7 +400,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'cranes.maxCapacity': 'Max Capaciteit',
     'cranes.maxHeight': 'Max Hoogte',
     'cranes.viewDetails': 'Bekijk Details',
-    'cranes.viewAll': 'View All Tower Cranes',
+    'cranes.viewAll': 'Bekijk Alle Torenkranen',
     
     // Testimonials Section
     'testimonials.title': 'Wat Onze Klanten Zeggen',
@@ -385,13 +454,13 @@ export const translations: Record<Language, Record<string, string>> = {
     
     'services.rent.title': 'Huur van Torenkranen',
     'services.rent.desc': 'Onze verhuurservice biedt flexibele toegang tot hoogwaardige torenkranen zonder de volledige investering van aankoop. We bieden kort- en langdurige huuroptie met uitgebreide ondersteuning gedurende de huurperiode.',
-    'services.rent.feature1': 'Flexibele huurtermijnen (kort- en langfristig)',
+    'services.rent.feature1': 'Flexibele huurtermijnen (kort- en langlopend)',
     'services.rent.feature2': 'Goed onderhouden en regelmatig geïnspecteerde kranen',
     'services.rent.feature3': 'Technische ondersteuning en onderhoud inbegrepen',
     'services.rent.feature4': 'Optie om apparatuur te wisselen of upgraden indien nodig',
     'services.rent.feature5': 'Mogelijkheid tot huur-koop overeenkomsten',
     
-    'services.planning.title': 'Planning & Advisering',
+    'services.planning.title': 'Planung & Advisering',
     'services.planning.feature1': 'Locatie-evaluatie en kraanselectie advisering',
     'services.planning.feature2': 'Draagcapaciteit en bereik-analyse',
     'services.planning.feature3': 'Regelgeving compliance begeleiding',
@@ -403,22 +472,22 @@ export const translations: Record<Language, Record<string, string>> = {
     'services.transport.feature1': 'Speciale transportvoertuigen en uitrusting',
     'services.transport.feature2': 'Routeplanning en analyse',
     'services.transport.feature3': 'Vergunningverkrijging en naleving',
-    'services.transport.feature4': 'Erfahrenes Transportteam',
-    'services.transport.feature5': 'Versicheringsdekking tijdens transport',
+    'services.transport.feature4': 'Ervaren transportteam',
+    'services.transport.feature5': 'Verzekeringsdekking tijdens transport',
     
-    'services.mounting.title': 'Montage & Installation',
+    'services.mounting.title': 'Montage & Installatie',
     'services.mounting.desc': 'Onze gecertificeerde technici voeren professionele montage-, installatie- en demontagediensten uit, waarbij zorg wordt gedragen voor veilige en conforme installatie van uw torenkranen volgens alle relevante regelgevingen en specificaties.',
     'services.mounting.feature1': 'Gecertificeerde installatiespecialisten',
     'services.mounting.feature2': 'Naleving van alle veiligheidsvoorschriften',
     'services.mounting.feature3': 'Grondige tests en ingebruikname',
     'services.mounting.feature4': 'Efficiënte demontagediensten',
-    'services.mounting.feature5': 'Umfassende Dokumentation',
+    'services.mounting.feature5': 'Uitgebreide documentatie',
     
     'services.training.title': 'Training & Certificering',
     'services.training.feature1': 'Gecertificeerde kraanmachinist training',
     'services.training.feature2': 'Onderhouds- en inspectietraining',
-    'services.training.feature3': 'Veiligheitsprotokolle en beste praktijken',
-    'services.training.feature4': 'Praktische en theoretische Instruktion',
+    'services.training.feature3': 'Veiligheidsprotocollen en beste praktijken',
+    'services.training.feature4': 'Praktijk- en theoretische instructie',
     'services.training.feature5': 'Certificering en documentatie',
 
     // Towercranes Page
@@ -427,7 +496,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'towercranes.filter.search': 'Zoeken',
     'towercranes.filter.searchPlaceholder': 'Zoek op naam of type...',
     'towercranes.filter.status': 'Status',
-    'towercranes.filter.type': 'Type',
+    'towercranes.filter.type': 'Typ',
     'towercranes.filter.category': 'Categorie',
     'towercranes.filter.all': 'Alle',
     'towercranes.status.available': 'Beschikbaar',
@@ -450,19 +519,74 @@ export const translations: Record<Language, Record<string, string>> = {
     'technical.specs': 'Technische Specificaties',
     'technical.docs': 'Documentatie',
     'technical.download': 'Downloaden',
+    'technical.industryStandards': 'Industrienormen',
+    'technical.industryStandards.desc': 'Access relevant industry standards and regulations related to tower crane operations.',
+    'technical.viewStandards': 'Bekijk Normen',
+    'technical.educationalVideos': 'Instructievideo\'s',
+    'technical.educationalVideos.desc': 'Bekijk instructievideo\'s over torenkraanbediening, -onderhoud en -veiligheid.',
+    'technical.watchVideos': 'Video\'s Bekijken',
+    'technical.techSupport': 'Technische Ondersteuning',
+    'technical.techSupport.desc': 'Behoefte aan gespecialiseerde technische hulp? Ons expertteam staat klaar om te helpen.',
+    'technical.contactSupport': 'Contact Ondersteuning',
+    'technical.faq': 'Veelgestelde Vragen',
+    'technical.additionalResources': 'Aanvullende Hulpmiddelen',
+    'technical.manuals': 'Handleidingen',
+    'technical.specifications': 'Specificaties',
+    'technical.brochures': 'Brochures',
+    'technical.safetyGuidelines': 'Veiligheidsrichtlijnen',
+    'technical.viewMore': 'Meer bekijken',
+    'technical.downloadResource': 'Hulpmiddel downloaden',
     
     // Contact Page
-    'contact.page.title': 'Contact',
-    'contact.page.subtitle': 'Neem contact op met ons team voor vragen, offertes of ondersteuning.',
-    'contact.form.name': 'Uw Naam',
-    'contact.form.email': 'E-mailadres',
-    'contact.form.phone': 'Telefoonnummer',
-    'contact.form.subject': 'Onderwerp',
-    'contact.form.message': 'Uw Bericht',
+    'contact.title': 'Contact',
+    'contact.subtitle': 'Ons team van torenkraanexperts staat klaar om u te helpen de perfecte oplossing te vinden voor uw project.',
+    'contact.form.title': 'Stuur Ons een Bericht',
+    'contact.form.name': 'Uw Naam *',
+    'contact.form.email': 'E-mailadres *',
+    'contact.form.phone': 'Telefoonnummer *',
+    'contact.form.company': 'Bedrijfsnaam',
+    'contact.form.subject': 'Onderwerp *',
+    'contact.form.message': 'Uw Bericht *',
     'contact.form.submit': 'Bericht Versturen',
-    'contact.office': 'Ons Kantoor',
-    'contact.phone': 'Telefoon',
-    'contact.email': 'E-mail',
+    'contact.form.sending': 'Verzenden...',
+    'contact.form.success.title': 'Dank U!',
+    'contact.form.success.message': 'Uw bericht is succesvol verzonden. Een van onze vertegenwoordigers zal binnenkort contact met u opnemen.',
+    'contact.info.title': 'Onze Contactgegevens',
+    'contact.info.address': 'Kantooradres',
+    'contact.info.contact': 'Contact',
+    'contact.info.email': 'E-mail',
+    'contact.info.hours': 'Kantooruren',
+    'contact.info.workdays': 'Maandag - Vrijdag: 8:00 - 17:00 uur',
+    'contact.info.weekend': 'Zaterdag - Zondag: Gesloten',
+    'contact.form.select': 'Selecteer een onderwerp',
+    'contact.form.sales': 'Verkoopvraag',
+    'contact.form.rental': 'Verhuurvraag',
+    'contact.form.technical': 'Technische Ondersteuning',
+    'contact.form.parts': 'Onderdelen en Service',
+    'contact.form.training': 'Training',
+    'contact.form.other': 'Anders',
+    'technical.title': 'Technische Informatie',
+    'technical.subtitle': 'Krijg toegang tot onze technische hulpmiddelen, handleidingen en specificaties voor torenkranen.',
+    'technical.resources': 'Technische Hulpmiddelen',
+    'technical.search': 'Documenten Zoeken',
+    'technical.searchPlaceholder': 'Zoeken op trefwoord...',
+    'technical.filterCategory': 'Filteren op Categorie',
+    'technical.noDocuments': 'Geen documenten gevonden',
+    'technical.tryAdjusting': 'Probeer uw filters of zoekterm aan te passen',
+    
+    // FAQ Questions and Answers
+    'faq.q1': 'Wat zijn de belangrijkste soorten torenkranen?',
+    'faq.a1': 'De belangrijkste soorten torenkranen zijn flat-top kranen, hamerkopkranen, knikgiekranen en zelfopbouwende kranen. Elk type is ontworpen voor specifieke toepassingen en terreinomstandigheden. Flat-top kranen hebben geen A-frame boven de giek en tegengiek, waardoor ze ideaal zijn voor locaties met hoogtebeperkingen of meerdere kranen. Hamerkopkranen hebben een horizontale giek en tegengiek met een loopkat die lasten in en uit beweegt. Knikgiekranen hebben een giek die kan worden geheven en verlaagd, waardoor ze geschikt zijn voor drukke locaties. Zelfopbouwende kranen kunnen snel worden opgezet en gedemonteerd, waardoor ze ideaal zijn voor kleinere projecten.',
+    'faq.q2': 'Hoe bepaal je de juiste torenkraan voor een bouwproject?',
+    'faq.a2': 'Bij het bepalen van de juiste torenkraan moet rekening worden gehouden met verschillende factoren, waaronder de benodigde maximale laadcapaciteit, de vereiste hoogte en reikwijdte, terreinbeperkingen, projectduur en budget. U moet ook rekening houden met het type materialen dat moet worden geheven, de frequentie van de heffingen en eventuele specifieke projectvereisten. Ons team van experts kan u helpen bij het beoordelen van deze factoren en de meest geschikte kraan voor uw specifieke behoeften aanbevelen.',
+    'faq.q3': 'Welke veiligheidsmaatregelen moeten er zijn bij het bedienen van een torenkraan?',
+    'faq.a3': 'Veiligheidsmaatregelen voor torenkraanbediening omvatten goede opleiding en certificering van operators, regelmatige inspecties en onderhoud, duidelijke communicatieprotocollen, weermonitoring, systemen voor lastbeheer en anti-botsingsapparaten. Daarnaast zijn het zorgen voor een goede fundering en installatie, het instellen van een duidelijke zone rond de kraan en het implementeren van uitgebreide veiligheidsplannen essentieel. Alle operators moeten ook bekend zijn met noodprocedures en de richtlijnen van de fabrikant volgen.',
+    'faq.q4': 'Hoe vaak moeten torenkranen worden geïnspecteerd?',
+    'faq.a4': 'Torenkranen moeten dagelijks visueel worden geïnspecteerd door de operator voor gebruik, wekelijks meer gedetailleerde inspecties door een bekwaam persoon, maandelijkse grondige inspecties door een gekwalificeerde technicus en jaarlijkse uitgebreide inspecties door gecertificeerde inspecteurs. Bovendien moeten na hevige weersomstandigheden of wijzigingen speciale inspecties worden uitgevoerd. Deze regelmatige inspecties helpen een veilige werking te garanderen en potentiële problemen te identificeren voordat ze ernstige problemen worden.',
+    'faq.q5': 'Wat zijn de windsnelheidslimieten voor torenkraanbediening?',
+    'faq.a5': 'Torenkranen hebben meestal operationele windsnelheidslimieten van ongeveer 20-25 mph (32-40 km/u) voor normale werking. Wanneer de windsnelheden ongeveer 45 mph (72 km/h) bereiken, moeten kranen in windhaan-modus worden gezet om de giek vrij met de wind te laten bewegen. Deze limieten kunnen echter variëren afhankelijk van het specifieke kraanmodel, de kenmerken van de last en de richtlijnen van de fabrikant. Het is essentieel om de specificaties van de kraanfabrikant te volgen en rekening te houden met locatiespecifieke omstandigheden bij het bepalen van veilige bedrijfsparameters.',
+    'faq.q6': 'Welke kwalificaties zijn vereist om een torenkraan te bedienen?',
+    'faq.a6': 'Torenkraanoperators hebben specifieke certificeringen en kwalificaties nodig, die per land en regio verschillen. Over het algemeen moeten operators een erkend trainingsprogramma voltooien, slagen voor zowel schriftelijke als praktische examens en een certificering verkrijgen van een geaccrediteerde organisatie. Ze moeten ook een goed dieptezicht, coördinatie en concentratievermogen hebben. Bovendien vereisen de meeste rechtsgebieden regelmatige hercertificering om ervoor te zorgen dat operators hun vaardigheden en kennis van huidige veiligheidsprotocollen en technologische vooruitgang behouden.',
   },
   de: {
     // Navigation
@@ -486,7 +610,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'services.title': 'Unsere Dienstleistungen',
     'services.subtitle': 'Umfassende Turmkranlösungen für Ihre Bauprojekte',
     'services.rental': 'Turmkranvermietung',
-    'services.rental.desc': 'Kurz- und langfristige Mietoptionen für eine breite Palette von Turmkranen, um Ihren Projektanforderungen gerecht zu werden.',
+    'services.rental.desc': 'Unser Vermietungsservice bietet flexiblen Zugang zu hochwertigen Turmkranen ohne die volle Investition eines Kaufs. Wir bieten kurz- und langfristige Mietoptionen mit umfassender Unterstützung während der Mietdauer.',
     'services.installation': 'Montage & Demontage',
     'services.installation.desc': 'Professionelle Montage- und Demontagedienstleistungen durch unser Expertenteam, das Sicherheit und Effizienz gewährleistet.',
     'services.maintenance': 'Wartung & Reparaturen',
@@ -552,7 +676,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'cranes.maxCapacity': 'Max. Kapazität',
     'cranes.maxHeight': 'Max. Höhe',
     'cranes.viewDetails': 'Details Anzeigen',
-    'cranes.viewAll': 'View All Tower Cranes',
+    'cranes.viewAll': 'Alle Turmkrane Anzeigen',
     
     // Testimonials Section
     'testimonials.title': 'Was Unsere Kunden Sagen',
@@ -600,46 +724,46 @@ export const translations: Record<Language, Record<string, string>> = {
     'services.sale.desc': 'Wir bieten eine breite Palette neuer und gebrauchter Turmkrane zum Verkauf an, die verschiedenen Bauanforderungen und Budgets gerecht werden. Jeder Kran wird mit umfassender Dokumentation, Garantien und vollständigem technischen Support geliefert.',
     'services.sale.feature1': 'Umfangreiche Auswahl an Krantypen und Modellen',
     'services.sale.feature2': 'Neue und gebrauchte Krane mit Garantien',
-    'services.sale.feature3': 'Concurrerende prijzen und financieringsopties',
+    'services.sale.feature3': 'Wettbewerbsfähige Preise und Finanzierungsmöglichkeiten',
     'services.sale.feature4': 'Technische Dokumentation und Zertifizierung',
     'services.sale.feature5': 'Umfassender After-Sales-Support und Ersatzteile',
     
     'services.rent.title': 'Vermietung von Turmkranen',
-    'services.rent.desc': 'Unser Vermietungsservice bietet flexiblen Zugang zu hochwertigen Turmkranen ohne die volle Investition eines Kaufs. Wir bieten kurz- und langfristige Mietoptionen mit umfassender Unterstützung gedurende die Mietdauer.',
-    'services.rent.feature1': 'Flexible Mietbedingungen (kurz- und langfristig)',
-    'services.rent.feature2': 'Goed gewartete und regelmäßig inspizierte kranen',
-    'services.rent.feature3': 'Technischer Support und Wartung inbegriffen',
-    'services.rent.feature4': 'Option zum Wechsel oder Upgrade der Ausrüstung nach Bedarf',
-    'services.rent.feature5': 'Möglichkeit von Mietkauf-Vereinbarungen',
+    'services.rent.desc': 'Unser Vermietungsservice bietet flexiblen Zugang zu hochwertigen Turmkranen ohne die volle Investition eines Kaufs. Wir bieten kort- und langfristige huuroptie met uitgebreide ondersteuning gedurende de huurperiode.',
+    'services.rent.feature1': 'Flexibele huurtermijnen (kort- und langlopend)',
+    'services.rent.feature2': 'Goed onderhouden und regelmatig geïnspecteerde kranen',
+    'services.rent.feature3': 'Technische ondersteuning und onderhoud inbegrepen',
+    'services.rent.feature4': 'Optie om apparatuur te wisselen oder upgraden indien nodig',
+    'services.rent.feature5': 'Mogelijkheid tot huur-koop overeenkomsten',
     
     'services.planning.title': 'Planung & Beratung',
-    'services.planning.feature1': 'Locatie-evaluatie und kraanselectie advisering',
-    'services.planning.feature2': 'Draagcapaciteit und bereik-analyse',
-    'services.planning.feature3': 'Regelgeving compliance begeleiding',
+    'services.planning.feature1': 'Locatie-evaluatie und kraanauswahl-beratung',
+    'services.planning.feature2': 'Draagfähigkeit und bereichsanalyse',
+    'services.planning.feature3': 'Regelgeving compliance begeleitung',
     'services.planning.feature4': 'Kostenoptimierungsstrategien',
-    'services.planning.feature5': 'Projektzeitplanung',
+    'services.planning.feature5': 'Projektplanung',
     
     'services.transport.title': 'Transport & Logistik',
-    'services.transport.desc': 'Wir kümmern uns um alle Aspekte des Krantransports zu Ihrer Baustelle, einschließlich Routenplanung, Genehmigungen und spezielle Transportausrüstung, um eine sichere und pünktliche Lieferung zu gewährleisten.',
-    'services.transport.feature1': 'Spezielle Transportfahrzeuge und Ausrüstung',
+    'services.transport.desc': 'Wir übernehmen alle Aspekte des Kranbeförderungsauftrags zu Ihrer Baustelle, einschließlich Routenplanung, Genehmigungen und spezialisierter Transportausrüstung, um sichere und zeitnahe Lieferung zu gewährleisten.',
+    'services.transport.feature1': 'Spezialtransportfahrzeuge und Ausrüstung',
     'services.transport.feature2': 'Routenplanung und Analyse',
-    'services.transport.feature3': 'Vergunningverkrijging und naleving',
-    'services.transport.feature4': 'Erfahrenes Transportteam',
-    'services.transport.feature5': 'Versicherungsdeckung während des Transports',
+    'services.transport.feature3': 'Vergunningverkauf und Einhaltung',
+    'services.transport.feature4': 'Erfahrenes transportteam',
+    'services.transport.feature5': 'Versicherungsschutz während des Transports',
     
-    'services.mounting.title': 'Montage & Installation',
-    'services.mounting.desc': 'Unsere zertifizierten Techniker führen professionelle Montage-, Installations- und Demontagediensten durch und sorgen dafür, dass Ihr Turmkran sicher und gemäß allen relevanten Vorschriften und Spezifikationen aufgebaut wird.',
-    'services.mounting.feature1': 'Gecertificeerde Installationsspezialisten',
-    'services.mounting.feature2': 'Naleving von alle Sicherheitsvorschriften',
-    'services.mounting.feature3': 'Gründliche Tests und Inbetriebnahme',
-    'services.mounting.feature4': 'Effiziente Demontagedienste',
-    'services.mounting.feature5': 'Umfassende Dokumentation',
+    'services.mounting.title': 'Montage & Installatie',
+    'services.mounting.desc': 'Unsere geprüften Techniker führen professionelle Montage-, Einbau- und Demontagedienste durch, wobei sorgfältige Beachtung der Sicherheit und Einhaltung aller relevanten Vorschriften und Spezifikationen gewährleistet wird.',
+    'services.mounting.feature1': 'Geprüfte Installationsspezialisten',
+    'services.mounting.feature2': 'Naleving von alle veiligheitsvoorschriften',
+    'services.mounting.feature3': 'Grondige tests und ingebruikname',
+    'services.mounting.feature4': 'Efficiënte demontagediensten',
+    'services.mounting.feature5': 'Uitgebreide documentatie',
     
-    'services.training.title': 'Schulung & Zertifizierung',
-    'services.training.feature1': 'Zertifizierte Kranführerschulung',
-    'services.training.feature2': 'Onderhouds- und Inspektionsschulung',
-    'services.training.feature3': 'Veiligheitsprotokolle und beste praktijken',
-    'services.training.feature4': 'Praktische und theoretische Instruktion',
+    'services.training.title': 'Training & Certificering',
+    'services.training.feature1': 'Geprüfte Kranführerausbildung',
+    'services.training.feature2': 'Onderhouds- und Inspektionsausbildung',
+    'services.training.feature3': 'Sicherheitsprotokolle und Best Practices',
+    'services.training.feature4': 'Praktische und theoretische Ausbildung',
     'services.training.feature5': 'Zertifizierung und Dokumentation',
 
     // Towercranes Page
@@ -671,21 +795,118 @@ export const translations: Record<Language, Record<string, string>> = {
     'technical.specs': 'Technische Spezifikationen',
     'technical.docs': 'Dokumentation',
     'technical.download': 'Herunterladen',
+    'technical.industryStandards': 'Industriestandards',
+    'technical.industryStandards.desc': 'Zugriff auf relevante Industriestandards und Vorschriften im Zusammenhang mit Turmkranbetrieb.',
+    'technical.viewStandards': 'Standards Anzeigen',
+    'technical.educationalVideos': 'Lehrvideos',
+    'technical.educationalVideos.desc': 'Sehen Sie sich Anleitungsvideos zum Betrieb, zur Wartung und zur Sicherheit von Turmkranen an.',
+    'technical.watchVideos': 'Videos Ansehen',
+    'technical.techSupport': 'Technischer Support',
+    'technical.techSupport.desc': 'Benötigen Sie spezialisierte technische Unterstützung? Unser Expertenteam steht bereit, um zu helfen.',
+    'technical.contactSupport': 'Support Kontaktieren',
+    'technical.faq': 'Häufig Gestellte Fragen',
+    'technical.additionalResources': 'Zusätzliche Ressourcen',
+    'technical.manuals': 'Handbücher',
+    'technical.specifications': 'Specificaties',
+    'technical.brochures': 'Broschüren',
+    'technical.safetyGuidelines': 'Sicherheitsrichtlinien',
+    'technical.viewMore': 'Mehr anzeigen',
+    'technical.downloadResource': 'Ressource herunterladen',
     
     // Contact Page
-    'contact.page.title': 'Kontakt',
-    'contact.page.subtitle': 'Kontaktieren Sie unser Team für Anfragen, Angebote oder Support.',
-    'contact.form.name': 'Ihr Name',
-    'contact.form.email': 'E-Mail-Adresse',
-    'contact.form.phone': 'Telefonnummer',
-    'contact.form.subject': 'Betreff',
-    'contact.form.message': 'Ihre Nachricht',
+    'contact.title': 'Kontakt',
+    'contact.subtitle': 'Unser Team von Turmkranexperten steht bereit, um Ihnen bei der Suche nach der perfekten Lösung für Ihr Projekt zu helfen.',
+    'contact.form.title': 'Senden Sie uns eine Nachricht',
+    'contact.form.name': 'Ihr Name *',
+    'contact.form.email': 'E-Mail-Adresse *',
+    'contact.form.phone': 'Telefonnummer *',
+    'contact.form.company': 'Firmenname',
+    'contact.form.subject': 'Betreff *',
+    'contact.form.message': 'Ihre Nachricht *',
     'contact.form.submit': 'Nachricht Senden',
-    'contact.office': 'Unser Büro',
-    'contact.phone': 'Telefon',
-    'contact.email': 'E-Mail',
+    'contact.form.sending': 'Wird gesendet...',
+    'contact.form.success.title': 'Vielen Dank!',
+    'contact.form.success.message': 'Ihre Nachricht wurde erfolgreich übermittelt. Einer unserer Vertreter wird sich in Kürze mit Ihnen in Verbindung setzen.',
+    'contact.info.title': 'Unsere Kontaktinformationen',
+    'contact.info.address': 'Büroadresse',
+    'contact.info.contact': 'Kontakt',
+    'contact.info.email': 'E-Mail',
+    'contact.info.hours': 'Bürozeiten',
+    'contact.info.workdays': 'Montag - Freitag: 8:00 - 17:00 Uhr',
+    'contact.info.weekend': 'Samstag - Sonntag: Geschlossen',
+    'contact.form.select': 'Wählen Sie einen Betreff',
+    'contact.form.sales': 'Verkaufsanfrage',
+    'contact.form.rental': 'Mietanfrage',
+    'contact.form.technical': 'Technischer Support',
+    'contact.form.parts': 'Teile und Service',
+    'contact.form.training': 'Schulung',
+    'contact.form.other': 'Sonstiges',
+    'technical.title': 'Technische Informationen',
+    'technical.subtitle': 'Zugriff auf unsere technischen Ressourcen, Handbücher und Spezifikationen für Turmkrane.',
+    'technical.resources': 'Technische Ressourcen',
+    'technical.search': 'Dokumente Durchsuchen',
+    'technical.searchPlaceholder': 'Nach Stichwort suchen...',
+    'technical.filterCategory': 'Nach Kategorie Filtern',
+    'technical.noDocuments': 'Keine Dokumente gefunden',
+    'technical.tryAdjusting': 'Passen Sie Ihre Filter oder Suchbegriffe an',
+    
+    // FAQ Questions and Answers
+    'faq.q1': 'Was sind die wichtigsten Arten von Turmkranen?',
+    'faq.a1': 'Zu den wichtigsten Arten von Turmkranen gehören Flachdachkrane, Hammerkopfkrane, Wippausleger-Krane und selbstaufbauende Krane. Jeder Typ ist für bestimmte Anwendungen und Standortbedingungen konzipiert. Flachdachkrane haben keinen A-Rahmen über dem Ausleger und Gegenausleger, was sie ideal für Standorte mit Höhenbeschränkungen oder mehreren Kranen macht. Hammerkopfkrane haben einen horizontalen Ausleger und Gegenausleger mit einer Laufkatze, die Lasten ein- und ausfährt. Wippausleger-Krane haben einen Ausleger, der angehoben und abgesenkt werden kann, was sie für beengte Baustellen geeignet macht. Selbstaufbauende Krane können schnell auf- und abgebaut werden, was sie ideal für kleinere Projekte macht.',
+    'faq.q2': 'Wie bestimmt man den richtigen Turmkran für ein Bauprojekt?',
+    'faq.a2': 'Bei der Bestimmung des richtigen Turmkrans müssen mehrere Faktoren berücksichtigt werden, darunter die benötigte maximale Tragfähigkeit, die erforderliche Höhe und Reichweite, Baustellenbeschränkungen, Projektdauer und Budget. Sie sollten auch die Art der zu hebenden Materialien, die Häufigkeit der Hebearbeiten und spezifische Anforderungen des Projekts berücksichtigen. Unser Expertenteam kann Ihnen helfen, diese Faktoren zu bewerten und den am besten geeigneten Kran für Ihre speziellen Bedürfnisse zu empfehlen.',
+    'faq.q3': 'Welche Sicherheitsmaßnahmen sollten beim Betrieb eines Turmkrans vorhanden sein?',
+    'faq.a3': 'Zu den Sicherheitsmaßnahmen für den Betrieb von Turmkranen gehören ordnungsgemäße Bedienerschulung und -zertifizierung, regelmäßige Inspektionen und Wartung, klare Kommunikationsprotokolle, Wetterüberwachung, Lastmanagementsysteme und Antikollisionsvorrichtungen. Darüber hinaus sind die Gewährleistung einer ordnungsgemäßen Gründung und Installation, die Einrichtung einer Sperrzone um den Kran und die Implementierung umfassender Sicherheitspläne unerlässlich. Alle Bediener sollten auch mit Notfallverfahren vertraut sein und die Richtlinien des Herstellers befolgen.',
+    'faq.q4': 'Wie oft sollten Turmkrane inspiziert werden?',
+    'faq.a4': 'Turmkrane sollten vor dem Gebrauch täglich einer Sichtprüfung durch den Bediener unterzogen werden, wöchentlich detailliertere Inspektionen durch eine sachkundige Person, monatlich gründliche Inspektionen durch einen qualifizierten Techniker und jährlich umfassende Inspektionen durch zertifizierte Prüfer. Zusätzlich sollten nach schweren Wetterereignissen oder Modifikationen spezielle Inspektionen durchgeführt werden. Diese regelmäßigen Inspektionen tragen dazu bei, einen sicheren Betrieb zu gewährleisten und potenzielle Probleme zu erkennen, bevor sie zu ernsthaften Problemen werden.',
+    'faq.q5': 'Welche Windgeschwindigkeitsbegrenzungen gelten für den Betrieb von Turmkranen?',
+    'faq.a5': 'Turmkrane haben typischerweise betriebliche Windgeschwindigkeitsbegrenzungen von etwa 20-25 mph (32-40 km/h) für den normalen Betrieb. Wenn die Windgeschwindigkeiten etwa 45 mph (72 km/h) erreichen, sollten Krane in den Windfahnenmodus versetzt werden, damit sich der Ausleger frei mit dem Wind bewegen kann. Diese Grenzen können jedoch je nach spezifischem Kranmodell, Lasteigenschaften und Herstellerrichtlinien variieren. Es ist wichtig, die vom Kranhersteller angegebenen Spezifikationen zu befolgen und standortspezifische Bedingungen bei der Bestimmung sicherer Betriebsparameter zu berücksichtigen.',
+    'faq.q6': 'Welche Qualifikationen sind für den Betrieb eines Turmkrans erforderlich?',
+    'faq.a6': 'Turmkranbediener benötigen spezifische Zertifizierungen und Qualifikationen, die je nach Land und Region variieren. Im Allgemeinen müssen Bediener ein anerkanntes Schulungsprogramm absolvieren, sowohl schriftliche als auch praktische Prüfungen bestehen und eine Zertifizierung von einer akkreditierten Organisation erhalten. Sie sollten auch über gute Tiefenwahrnehmung, Koordination und Konzentrationsfähigkeit verfügen. Darüber hinaus verlangen die meisten Jurisdiktionen regelmäßige Rezertifizierungen, um sicherzustellen, dass die Bediener ihre Fähigkeiten und Kenntnisse aktueller Sicherheitsprotokolle und technologischer Fortschritte aufrechterhalten.',
   }
 }
+
+// Fix Dutch translations, making sure there's no German text
+translations.nl['services.rent.desc'] = 'Onze verhuurservice biedt flexibele toegang tot hoogwaardige torenkranen zonder de volledige investering van aankoop. We bieden kort- en langdurige huuroptie met uitgebreide ondersteuning gedurende de huurperiode.';
+translations.nl['services.rent.feature1'] = 'Flexibele huurtermijnen (kort- en langlopend)';
+translations.nl['services.rent.feature2'] = 'Goed onderhouden en regelmatig geïnspecteerde kranen';
+translations.nl['services.rent.feature3'] = 'Technische ondersteuning en onderhoud inbegrepen';
+translations.nl['services.rent.feature4'] = 'Optie om apparatuur te wisselen of upgraden indien nodig';
+translations.nl['services.rent.feature5'] = 'Mogelijkheid tot huur-koop overeenkomsten';
+
+translations.nl['services.planning.title'] = 'Planning & Advisering';
+translations.nl['services.planning.feature1'] = 'Locatie-evaluatie en kraanselectie advisering';
+translations.nl['services.planning.feature2'] = 'Draagcapaciteit en bereik-analyse';
+translations.nl['services.planning.feature3'] = 'Regelgeving compliance begeleiding';
+translations.nl['services.planning.feature4'] = 'Kostenoptimalisatie strategieën';
+translations.nl['services.planning.feature5'] = 'Projectplanning';
+
+translations.nl['services.transport.title'] = 'Transport & Logistiek';
+translations.nl['services.transport.desc'] = 'We verzorgen alle aspecten van kraantransport naar uw bouwplaats, inclusief routeplanning, vergunningen en gespecialiseerde transportapparatuur om veilige en tijdige levering te waarborgen.';
+translations.nl['services.transport.feature1'] = 'Speciale transportvoertuigen en uitrusting';
+translations.nl['services.transport.feature2'] = 'Routeplanning en analyse';
+translations.nl['services.transport.feature3'] = 'Vergunningverkrijging en naleving';
+translations.nl['services.transport.feature4'] = 'Ervaren transportteam';
+translations.nl['services.transport.feature5'] = 'Verzekeringsdekking tijdens transport';
+
+translations.nl['services.mounting.title'] = 'Montage & Installatie';
+translations.nl['services.mounting.desc'] = 'Onze gecertificeerde technici voeren professionele montage-, installatie- en demontagediensten uit, waarbij zorg wordt gedragen voor veilige en conforme installatie van uw torenkranen volgens alle relevante regelgevingen en specificaties.';
+translations.nl['services.mounting.feature1'] = 'Gecertificeerde installatiespecialisten';
+translations.nl['services.mounting.feature2'] = 'Naleving van alle veiligheidsvoorschriften';
+translations.nl['services.mounting.feature3'] = 'Grondige tests en ingebruikname';
+translations.nl['services.mounting.feature4'] = 'Efficiënte demontagediensten';
+translations.nl['services.mounting.feature5'] = 'Uitgebreide documentatie';
+
+translations.nl['services.training.title'] = 'Training & Certificering';
+translations.nl['services.training.feature1'] = 'Gecertificeerde kraanmachinist training';
+translations.nl['services.training.feature2'] = 'Onderhouds- en inspectietraining';
+translations.nl['services.training.feature3'] = 'Veiligheidsprotocollen en beste praktijken';
+translations.nl['services.training.feature4'] = 'Praktijk- en theoretische instructie';
+translations.nl['services.training.feature5'] = 'Certificering en documentatie';
+
+// Fix German translations with Dutch text
+translations.de['services.rent.desc'] = 'Unser Vermietungsservice bietet flexiblen Zugang zu hochwertigen Turmkranen ohne die volle Investition eines Kaufs. Wir bieten kurz- und langfristige Mietoptionen mit umfassender Unterstützung während der Mietdauer.';
+translations.de['services.planning.title'] = 'Planung & Beratung';
 
 // Provider component
 export function LanguageProvider({ children }: { children: ReactNode }) {
@@ -793,7 +1014,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
     return translation;
   }, [language]);
-  
+
   const value = useMemo(() => ({
     language,
     setLanguage,
@@ -814,4 +1035,4 @@ export function useLanguage() {
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
   return context;
-} 
+}

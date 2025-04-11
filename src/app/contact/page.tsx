@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa'
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -16,6 +17,7 @@ export default function Contact() {
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
+  const { t } = useLanguage()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -72,10 +74,10 @@ export default function Contact() {
       <div className="bg-primary py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white text-center">
-            Contact Us
+            {t('contact.title')}
           </h1>
           <p className="text-xl text-white/80 text-center mt-4 max-w-3xl mx-auto">
-            Our team of tower crane experts is ready to help you find the perfect solution for your project.
+            {t('contact.subtitle')}
           </p>
         </div>
       </div>
@@ -86,7 +88,7 @@ export default function Contact() {
             {/* Contact Form */}
             <div>
               <h2 className="text-2xl font-bold text-neutral-900 mb-6">
-                Send Us a Message
+                {t('contact.form.title')}
               </h2>
 
               {formSubmitted ? (
@@ -95,8 +97,8 @@ export default function Contact() {
                   animate={{ opacity: 1, y: 0 }}
                   className="bg-green-50 text-green-800 p-6 rounded-lg"
                 >
-                  <h3 className="text-xl font-bold mb-2">Thank You!</h3>
-                  <p>Your message has been submitted successfully. One of our representatives will contact you shortly.</p>
+                  <h3 className="text-xl font-bold mb-2">{t('contact.form.success.title')}</h3>
+                  <p>{t('contact.form.success.message')}</p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="bg-neutral-50 p-8 rounded-lg">
@@ -108,7 +110,7 @@ export default function Contact() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-neutral-700 mb-1">
-                        Your Name *
+                        {t('contact.form.name')}
                       </label>
                       <input
                         type="text"
@@ -123,7 +125,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-1">
-                        Email Address *
+                        {t('contact.form.email')}
                       </label>
                       <input
                         type="email"
@@ -138,7 +140,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <label htmlFor="phone" className="block text-sm font-medium text-neutral-700 mb-1">
-                        Phone Number *
+                        {t('contact.form.phone')}
                       </label>
                       <input
                         type="tel"
@@ -153,7 +155,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <label htmlFor="company" className="block text-sm font-medium text-neutral-700 mb-1">
-                        Company Name
+                        {t('contact.form.company')}
                       </label>
                       <input
                         type="text"
@@ -168,7 +170,7 @@ export default function Contact() {
                   </div>
                   <div className="mb-6">
                     <label htmlFor="subject" className="block text-sm font-medium text-neutral-700 mb-1">
-                      Subject *
+                      {t('contact.form.subject')}
                     </label>
                     <select
                       id="subject"
@@ -179,18 +181,18 @@ export default function Contact() {
                       onChange={handleInputChange}
                       disabled={isSubmitting}
                     >
-                      <option value="">Select a subject</option>
-                      <option value="Sales Inquiry">Sales Inquiry</option>
-                      <option value="Rental Inquiry">Rental Inquiry</option>
-                      <option value="Technical Support">Technical Support</option>
-                      <option value="Parts and Service">Parts and Service</option>
-                      <option value="Training">Training</option>
-                      <option value="Other">Other</option>
+                      <option value="">{t('contact.form.select')}</option>
+                      <option value="Sales Inquiry">{t('contact.form.sales')}</option>
+                      <option value="Rental Inquiry">{t('contact.form.rental')}</option>
+                      <option value="Technical Support">{t('contact.form.technical')}</option>
+                      <option value="Parts and Service">{t('contact.form.parts')}</option>
+                      <option value="Training">{t('contact.form.training')}</option>
+                      <option value="Other">{t('contact.form.other')}</option>
                     </select>
                   </div>
                   <div className="mb-6">
                     <label htmlFor="message" className="block text-sm font-medium text-neutral-700 mb-1">
-                      Your Message *
+                      {t('contact.form.message')}
                     </label>
                     <textarea
                       id="message"
@@ -215,10 +217,10 @@ export default function Contact() {
                             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                           </svg>
-                          Sending...
+                          {t('contact.form.sending')}
                         </>
                       ) : (
-                        'Send Message'
+                        t('contact.form.submit')
                       )}
                     </button>
                   </div>
@@ -229,7 +231,7 @@ export default function Contact() {
             {/* Contact Information */}
             <div>
               <h2 className="text-2xl font-bold text-neutral-900 mb-6">
-                Our Contact Information
+                {t('contact.info.title')}
               </h2>
               <div className="bg-neutral-50 p-8 rounded-lg mb-8">
                 <div className="flex items-start mb-6">
@@ -237,7 +239,7 @@ export default function Contact() {
                     <FaMapMarkerAlt className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-neutral-900 mb-1">Office Address</h3>
+                    <h3 className="font-bold text-neutral-900 mb-1">{t('contact.info.address')}</h3>
                     <address className="not-italic text-neutral-700">
                       Kruisweg 8<br />
                       6361 TG Nuth<br />
@@ -250,7 +252,7 @@ export default function Contact() {
                     <FaPhone className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-neutral-900 mb-1">Contact</h3>
+                    <h3 className="font-bold text-neutral-900 mb-1">{t('contact.info.contact')}</h3>
                     <p className="text-neutral-700">
                       <a href="tel:+31653206004" className="hover:text-primary transition-colors">
                         +31 6 53206004
@@ -263,7 +265,7 @@ export default function Contact() {
                     <FaEnvelope className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-neutral-900 mb-1">Email</h3>
+                    <h3 className="font-bold text-neutral-900 mb-1">{t('contact.info.email')}</h3>
                     <p className="text-neutral-700">
                       <a href="mailto:gid.gehlen@nibmtowercranes.com" className="hover:text-primary transition-colors">
                         gid.gehlen@nibmtowercranes.com
@@ -276,10 +278,10 @@ export default function Contact() {
                     <FaClock className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-neutral-900 mb-1">Office Hours</h3>
+                    <h3 className="font-bold text-neutral-900 mb-1">{t('contact.info.hours')}</h3>
                     <p className="text-neutral-700">
-                      Monday - Friday: 8:00 AM - 5:00 PM<br />
-                      Saturday - Sunday: Closed
+                      {t('contact.info.workdays')}<br />
+                      {t('contact.info.weekend')}
                     </p>
                   </div>
                 </div>

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { FaDownload, FaPlus, FaMinus, FaFileAlt, FaExternalLinkAlt } from 'react-icons/fa'
+import { useLanguage } from '@/context/LanguageContext'
 
 // Example technical documents
 const technicalDocuments = [
@@ -85,6 +86,7 @@ export default function TechnicalInfo() {
   const [activeCategories, setActiveCategories] = useState<string[]>([])
   const [activeFaq, setActiveFaq] = useState<number | null>(null)
   const [searchTerm, setSearchTerm] = useState('')
+  const { t } = useLanguage()
 
   const categories = Array.from(new Set(technicalDocuments.map(doc => doc.category)))
 
@@ -111,10 +113,10 @@ export default function TechnicalInfo() {
       <div className="bg-primary py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white text-center">
-            Technical Information
+            {t('technical.title')}
           </h1>
           <p className="text-xl text-white/80 text-center mt-4 max-w-3xl mx-auto">
-            Access our technical resources, manuals, and specifications for tower cranes.
+            {t('technical.subtitle')}
           </p>
         </div>
       </div>
@@ -123,7 +125,7 @@ export default function TechnicalInfo() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-neutral-900 mb-8">
-            Technical Resources
+            {t('technical.resources')}
           </h2>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-12">
@@ -131,12 +133,12 @@ export default function TechnicalInfo() {
             <div className="lg:col-span-1">
               <div className="bg-neutral-50 p-6 rounded-lg">
                 <h3 className="text-xl font-bold text-neutral-900 mb-4">
-                  Search Documents
+                  {t('technical.search')}
                 </h3>
                 <div className="mb-6">
                   <input
                     type="text"
-                    placeholder="Search by keyword..."
+                    placeholder={t('technical.searchPlaceholder')}
                     className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -144,7 +146,7 @@ export default function TechnicalInfo() {
                 </div>
 
                 <h3 className="text-xl font-bold text-neutral-900 mb-4">
-                  Filter by Category
+                  {t('technical.filterCategory')}
                 </h3>
                 <div className="space-y-2">
                   {categories.map((category) => (
@@ -173,8 +175,8 @@ export default function TechnicalInfo() {
               {filteredDocuments.length === 0 ? (
                 <div className="text-center py-12 bg-neutral-50 rounded-lg">
                   <FaFileAlt className="h-12 w-12 text-neutral-400 mx-auto mb-4" />
-                  <h3 className="text-xl font-medium text-neutral-700">No documents found</h3>
-                  <p className="text-neutral-500 mt-2">Try adjusting your filters or search term</p>
+                  <h3 className="text-xl font-medium text-neutral-700">{t('technical.noDocuments')}</h3>
+                  <p className="text-neutral-500 mt-2">{t('technical.tryAdjusting')}</p>
                 </div>
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -203,7 +205,7 @@ export default function TechnicalInfo() {
                           download
                         >
                           <FaDownload className="mr-2" />
-                          Download Document
+                          {t('technical.download')}
                         </a>
                       </div>
                     </div>
@@ -219,7 +221,7 @@ export default function TechnicalInfo() {
       <section className="py-16 bg-neutral-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-neutral-900 mb-12 text-center">
-            Frequently Asked Questions
+            {t('technical.faq')}
           </h2>
 
           <div className="max-w-3xl mx-auto">
@@ -234,7 +236,7 @@ export default function TechnicalInfo() {
                     onClick={() => setActiveFaq(activeFaq === index ? null : index)}
                   >
                     <h3 className="text-lg font-bold text-neutral-900 text-left">
-                      {faq.question}
+                      {t(`faq.q${index + 1}`)}
                     </h3>
                     <span className="ml-4">
                       {activeFaq === index ? (
@@ -245,9 +247,9 @@ export default function TechnicalInfo() {
                     </span>
                   </button>
                   {activeFaq === index && (
-                    <div className="px-6 pb-6">
+                    <div className="p-6 pt-0">
                       <p className="text-neutral-700">
-                        {faq.answer}
+                        {t(`faq.a${index + 1}`)}
                       </p>
                     </div>
                   )}
@@ -262,50 +264,50 @@ export default function TechnicalInfo() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-neutral-900 mb-8 text-center">
-            Additional Resources
+            {t('technical.additionalResources')}
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="bg-neutral-50 p-6 rounded-lg">
               <h3 className="text-xl font-bold text-neutral-900 mb-4">
-                Industry Standards
+                {t('technical.industryStandards')}
               </h3>
               <p className="text-neutral-700 mb-4">
-                Access relevant industry standards and regulations related to tower crane operations.
+                {t('technical.industryStandards.desc')}
               </p>
               <a 
                 href="#" 
                 className="inline-flex items-center text-primary hover:text-primary-700 font-medium"
               >
-                View Standards <FaExternalLinkAlt className="ml-2 h-3 w-3" />
+                {t('technical.viewStandards')} <FaExternalLinkAlt className="ml-2 h-3 w-3" />
               </a>
             </div>
             <div className="bg-neutral-50 p-6 rounded-lg">
               <h3 className="text-xl font-bold text-neutral-900 mb-4">
-                Educational Videos
+                {t('technical.educationalVideos')}
               </h3>
               <p className="text-neutral-700 mb-4">
-                Watch instructional videos on tower crane operation, maintenance, and safety.
+                {t('technical.educationalVideos.desc')}
               </p>
               <a 
                 href="#" 
                 className="inline-flex items-center text-primary hover:text-primary-700 font-medium"
               >
-                Watch Videos <FaExternalLinkAlt className="ml-2 h-3 w-3" />
+                {t('technical.watchVideos')} <FaExternalLinkAlt className="ml-2 h-3 w-3" />
               </a>
             </div>
             <div className="bg-neutral-50 p-6 rounded-lg">
               <h3 className="text-xl font-bold text-neutral-900 mb-4">
-                Technical Support
+                {t('technical.techSupport')}
               </h3>
               <p className="text-neutral-700 mb-4">
-                Need specialized technical assistance? Our expert team is ready to help.
+                {t('technical.techSupport.desc')}
               </p>
               <Link
                 href="/contact?subject=Technical%20Support"
                 className="inline-flex items-center text-primary hover:text-primary-700 font-medium"
               >
-                Contact Support <FaExternalLinkAlt className="ml-2 h-3 w-3" />
+                {t('technical.contactSupport')} <FaExternalLinkAlt className="ml-2 h-3 w-3" />
               </Link>
             </div>
           </div>
