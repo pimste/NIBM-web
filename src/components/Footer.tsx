@@ -14,11 +14,18 @@ export function Footer() {
           <div>
             <Link href="/" className="inline-block mb-6" aria-label="NIBM Tower Cranes - Homepage">
               <Image
-                src="/images/logo-white.png"
+                src="/images/optimized/logo-white.webp"
                 alt="NIBM Tower Cranes Logo"
                 width={150}
                 height={50}
                 className="h-12 w-auto"
+                placeholder="blur" 
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
+                priority 
+                fetchPriority="high" 
+                loading="eager"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                quality={80}
               />
             </Link>
             <p className="text-neutral-300 mb-6">
@@ -135,7 +142,28 @@ export function Footer() {
           {/* Contact Information */}
           <div>
             <h3 className="text-lg font-bold mb-4">Contact Us</h3>
-            <ClientOnly>
+            <ClientOnly fallback={
+              <ul className="space-y-4">
+                <li className="flex items-start">
+                  <FaMapMarkerAlt className="text-primary-300 mt-1 mr-3 flex-shrink-0" aria-hidden="true" />
+                  <span className="text-neutral-300">
+                    Kruisweg 8 6361 TG Nuth
+                  </span>
+                </li>
+                <li className="flex items-center">
+                  <FaPhone className="text-primary-300 mr-3 flex-shrink-0" aria-hidden="true" />
+                  <span className="text-neutral-300">
+                    +31 6 53206004
+                  </span>
+                </li>
+                <li className="flex items-center">
+                  <FaEnvelope className="text-primary-300 mr-3 flex-shrink-0" aria-hidden="true" />
+                  <span className="text-neutral-300">
+                    gid.gehlen@nibmtowercranes.com
+                  </span>
+                </li>
+              </ul>
+            }>
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <FaMapMarkerAlt className="text-primary-300 mt-1 mr-3 flex-shrink-0" aria-hidden="true" />

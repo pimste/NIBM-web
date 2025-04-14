@@ -15,7 +15,7 @@ export default function Services() {
       id: 'sale',
       title: t('services.sale.title'),
       description: t('services.sale.desc'),
-      image: '/images/Potain-MDT-178_3W.jpg',
+      image: '/images/optimized/Potain-MDT-178_3W.webp',
       features: [
         t('services.sale.feature1'),
         t('services.sale.feature2'),
@@ -28,7 +28,7 @@ export default function Services() {
       id: 'rent',
       title: t('services.rent.title'),
       description: t('services.rent.desc'),
-      image: '/images/cropped-Top-page2-potain6.png',
+      image: '/images/optimized/cropped-Top-page2-potain6.webp',
       features: [
         t('services.rent.feature1'),
         t('services.rent.feature2'),
@@ -41,7 +41,7 @@ export default function Services() {
       id: 'planning',
       title: t('services.planning.title'),
       description: t('services.planning.desc'),
-      image: '/images/helmet1a.jpg',
+      image: '/images/optimized/helmet1a.webp',
       features: [
         t('services.planning.feature1'),
         t('services.planning.feature2'),
@@ -54,7 +54,7 @@ export default function Services() {
       id: 'transport',
       title: t('services.transport.title'),
       description: t('services.transport.desc'),
-      image: '/images/cropped-Top-page2-potain6.png',
+      image: '/images/optimized/sunset-TC.webp',
       features: [
         t('services.transport.feature1'),
         t('services.transport.feature2'),
@@ -67,7 +67,7 @@ export default function Services() {
       id: 'mounting',
       title: t('services.mounting.title'),
       description: t('services.mounting.desc'),
-      image: '/images/Potain-MDT-178_3W.jpg',
+      image: '/images/optimized/sunset-TC-2.webp',
       features: [
         t('services.mounting.feature1'),
         t('services.mounting.feature2'),
@@ -226,8 +226,13 @@ export default function Services() {
                     <Image
                       src={service.image}
                       alt={service.title}
-                      fill
-                      className="object-cover"
+                      width={800}
+                      height={600}
+                      className="object-cover w-full h-full"
+                      quality={75}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      placeholder="blur"
+                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
                     />
                   </motion.div>
                 ) : null}
@@ -277,8 +282,13 @@ export default function Services() {
                     <Image
                       src={service.image}
                       alt={service.title}
-                      fill
-                      className="object-cover"
+                      width={800}
+                      height={600}
+                      className="object-cover w-full h-full"
+                      quality={75}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      placeholder="blur"
+                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
                     />
                   </motion.div>
                 ) : null}

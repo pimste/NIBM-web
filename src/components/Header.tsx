@@ -48,10 +48,10 @@ export function Header() {
   return (
     <>
       {/* Top Contact Bar */}
-      <div className="hidden lg:block bg-primary-900 text-white py-2">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center">
-            <ClientOnly>
+      <ClientOnly fallback={null}>
+        <div className="hidden lg:block bg-primary-900 text-white py-2">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center">
               <div className="flex items-center space-x-6">
                 <a href="tel:+31653206004" className="flex items-center text-sm hover:text-secondary transition-colors">
                   <FaPhone className="mr-2" /> +31 6 53206004
@@ -60,18 +60,16 @@ export function Header() {
                   <FaEnvelope className="mr-2" /> gid.gehlen@nibmtowercranes.com
                 </a>
               </div>
-            </ClientOnly>
-            <ClientOnly>
               <div className="flex space-x-4 items-center">
                 <Link href="/technical-info#faq" className="text-xs hover:text-secondary transition-colors">{t('topbar.faq')}</Link>
                 <div className="ml-4">
                   <LanguageSwitcher />
                 </div>
               </div>
-            </ClientOnly>
+            </div>
           </div>
         </div>
-      </div>
+      </ClientOnly>
 
       {/* Main Header */}
       <header 
@@ -92,7 +90,7 @@ export function Header() {
             >
               <Link href="/" className="flex items-center">
                 <Image 
-                  src={isScrolled ? "/images/logo-blue.png" : "/images/logo-white.png"}
+                  src={isScrolled ? "/images/optimized/logo-blue.webp" : "/images/optimized/logo-white.webp"}
                   alt="NIBM Tower Cranes Logo"
                   width={160}
                   height={50}
@@ -174,94 +172,104 @@ export function Header() {
       </header>
 
       {/* Fullscreen Mobile Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div 
-            className="fixed inset-0 z-40 bg-primary-900 lg:hidden overflow-y-auto"
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ duration: 0.3 }}
-          >
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-10">
-                <Link href="/" onClick={() => setMobileMenuOpen(false)}>
-                  <Image 
-                    src="/images/logo-white.png"
-                    alt="NIBM Tower Cranes Logo"
-                    width={150}
-                    height={50}
-                    className="h-12 w-auto"
-                  />
-                </Link>
-                <div className="flex items-center">
-                  <div className="mr-4">
-                    <LanguageSwitcher />
-                  </div>
-                  <button
-                    type="button"
-                    className="text-white hover:text-secondary"
-                    onClick={toggleMenu}
-                  >
-                    <FaTimes className="h-6 w-6" />
-                  </button>
-                </div>
-              </div>
-              
-              <nav className="space-y-8">
-                {navigation.map((item, index) => (
-                  <motion.div
-                    key={item.key}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
-                  >
-                    <Link
-                      href={item.href}
-                      className={`block text-2xl font-display font-medium ${
-                        pathname === item.href
-                          ? 'text-secondary'
-                          : 'text-white hover:text-secondary'
-                      }`}
+      <ClientOnly fallback={null}>
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div 
+              className="fixed inset-0 z-40 bg-primary-900 lg:hidden overflow-y-auto"
+              initial={{ opacity: 0, x: '100%' }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: '100%' }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-10">
+                  <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+                    <Image 
+                      src="/images/optimized/logo-white.webp"
+                      alt="NIBM Tower Cranes Logo"
+                      width={150}
+                      height={50}
+                      className="h-12 w-auto"
+                      placeholder="blur"
+                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
+                      priority
+                      fetchPriority="high"
+                      loading="eager"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      quality={80}
+                    />
+                  </Link>
+                  <div className="flex items-center">
+                    <div className="mr-4">
+                      <LanguageSwitcher />
+                    </div>
+                    <button
+                      type="button"
+                      className="text-white hover:text-secondary"
                       onClick={toggleMenu}
                     >
-                      {t(item.key)}
+                      <FaTimes className="h-6 w-6" />
+                    </button>
+                  </div>
+                </div>
+                
+                <nav className="space-y-8">
+                  {navigation.map((item, index) => (
+                    <motion.div
+                      key={item.key}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                    >
+                      <Link
+                        href={item.href}
+                        className={`block text-2xl font-display font-medium ${
+                          pathname === item.href
+                            ? 'text-secondary'
+                            : 'text-white hover:text-secondary'
+                        }`}
+                        onClick={toggleMenu}
+                      >
+                        {t(item.key)}
+                      </Link>
+                    </motion.div>
+                  ))}
+                  
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: navigation.length * 0.1 }}
+                    className="pt-6"
+                  >
+                    <Link
+                      href="/contact"
+                      className="inline-block bg-secondary hover:bg-secondary-600 text-white font-medium px-8 py-3 rounded-md transition-colors w-full text-center text-lg"
+                      onClick={toggleMenu}
+                    >
+                      {t('nav.quote')}
                     </Link>
                   </motion.div>
-                ))}
-                
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: navigation.length * 0.1 }}
-                  className="pt-6"
-                >
-                  <Link
-                    href="/contact"
-                    className="inline-block bg-secondary hover:bg-secondary-600 text-white font-medium px-8 py-3 rounded-md transition-colors w-full text-center text-lg"
-                    onClick={toggleMenu}
-                  >
-                    {t('nav.quote')}
-                  </Link>
-                </motion.div>
-                
-                <ClientOnly>
+                  
                   <div className="pt-8 border-t border-primary-800">
                     <p className="text-white/60 mb-4">Contact Us</p>
-                    <a href="tel:+31653206004" className="flex items-center text-white mb-3 hover:text-secondary transition-colors">
-                      <FaPhone className="mr-3" /> +31 6 53206004
-                    </a>
-                    <a href="mailto:gid.gehlen@nibmtowercranes.com" className="flex items-center text-white hover:text-secondary transition-colors">
-                      <FaEnvelope className="mr-3" /> gid.gehlen@nibmtowercranes.com
-                    </a>
-                    <p className="text-white mt-3">Kruisweg 8 6361 TG Nuth</p>
+                    <div className="space-y-3">
+                      <a href="tel:+31653206004" className="flex items-center text-white hover:text-secondary transition-colors">
+                        <FaPhone className="mr-3 w-4 h-4" /> 
+                        <span>+31 6 53206004</span>
+                      </a>
+                      <a href="mailto:gid.gehlen@nibmtowercranes.com" className="flex items-center text-white hover:text-secondary transition-colors">
+                        <FaEnvelope className="mr-3 w-4 h-4" /> 
+                        <span>gid.gehlen@nibmtowercranes.com</span>
+                      </a>
+                    </div>
                   </div>
-                </ClientOnly>
-              </nav>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                </nav>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </ClientOnly>
     </>
   )
 } 

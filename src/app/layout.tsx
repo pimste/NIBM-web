@@ -29,10 +29,73 @@ const montserrat = Montserrat({
 function Preload() {
   return (
     <>
-      <link rel="preload" href="/images/cropped-Top-page2-potain6.png" as="image" />
-      <link rel="preload" href="/images/logo-blue.png" as="image" />
+      {/* Critical images that should load immediately */}
+      <link rel="preload" href="/images/optimized/sunset-TC-2.webp" as="image" type="image/webp" fetchPriority="high" />
+      <link rel="preload" href="/images/optimized/cropped-Top-page2-potain6.webp" as="image" type="image/webp" />
+      <link rel="preload" href="/images/optimized/logo-blue.webp" as="image" type="image/webp" fetchPriority="high" />
+      
+      {/* Prefetch next likely images - assuming these are commonly accessed */}
+      <link rel="prefetch" href="/images/optimized/gidgehlen.webp" as="image" type="image/webp" />
+      <link rel="prefetch" href="/images/optimized/Potain-MDT-178_3W.webp" as="image" type="image/webp" />
+      
+      {/* DNS prefetch and preconnect */}
       <link rel="preconnect" href="https://www.nibmvb.eu" />
+      <link rel="dns-prefetch" href="https://www.nibmvb.eu" />
+      <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
     </>
+  )
+}
+
+// Progressive image loading script - helps with lazy loading and avoiding layout shifts
+function ProgressiveImageLoadingScript() {
+  return (
+    <Script 
+      id="progressive-image-loading"
+      strategy="afterInteractive"
+    >{`
+      document.addEventListener('DOMContentLoaded', function() {
+        // Handle progressive image loading with blur transitions
+        const progressiveImages = document.querySelectorAll('.progressive-image');
+        
+        function loadImage(img) {
+          const src = img.dataset.src;
+          if (!src) return;
+          
+          const newImg = new Image();
+          newImg.src = src;
+          newImg.onload = () => {
+            img.classList.add('loaded');
+            img.src = src;
+            img.removeAttribute('data-src');
+          };
+        }
+        
+        if ('IntersectionObserver' in window) {
+          const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                loadImage(entry.target);
+                imageObserver.unobserve(entry.target);
+              }
+            });
+          }, {
+            rootMargin: '50px 0px',
+            threshold: 0.01
+          });
+          
+          progressiveImages.forEach(img => {
+            imageObserver.observe(img);
+          });
+        } else {
+          // Fallback for browsers that don't support IntersectionObserver
+          progressiveImages.forEach(img => {
+            loadImage(img);
+          });
+        }
+      });
+    `}
+    </Script>
   )
 }
 
@@ -137,8 +200,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/images/logo-blue.png',
-    apple: '/images/logo-blue.png',
+    icon: '/images/optimized/logo-blue.webp',
+    apple: '/images/optimized/logo-blue.webp',
   },
   openGraph: {
     type: 'website',
@@ -148,7 +211,7 @@ export const metadata: Metadata = {
     title: 'NIBM Tower Cranes | Professional Tower Crane Solutions',
     description: 'Expert tower crane sales, rentals, and services for construction projects of any scale. Full-service support from planning to dismantling.',
     images: [{
-      url: '/images/cropped-Top-page2-potain6.png',
+      url: '/images/optimized/cropped-Top-page2-potain6.webp',
       width: 1200,
       height: 630,
       alt: 'NIBM Tower Cranes - Professional Tower Crane Solutions',
@@ -160,7 +223,7 @@ export const metadata: Metadata = {
     creator: '@nibmvb',
     title: 'NIBM Tower Cranes | Professional Tower Crane Solutions',
     description: 'Expert tower crane sales, rentals, and services for construction projects of any scale. Full-service support from planning to dismantling.',
-    images: ['/images/cropped-Top-page2-potain6.png'],
+    images: ['/images/optimized/cropped-Top-page2-potain6.webp'],
   },
   manifest: '/site.webmanifest',
   verification: {
@@ -178,7 +241,10 @@ export default function RootLayout({
       <head>
         <Preload />
       </head>
-      <body className="font-sans antialiased min-h-screen bg-neutral-50 text-neutral-900 flex flex-col">
+      <body 
+        suppressHydrationWarning
+        className="font-sans antialiased min-h-screen bg-neutral-50 text-neutral-900 flex flex-col"
+      >
         <SEOProvider />
         <LanguageProvider>
           <LangAttributeUpdater>
@@ -188,6 +254,7 @@ export default function RootLayout({
           </LangAttributeUpdater>
         </LanguageProvider>
         <LazyLoadScript />
+        <ProgressiveImageLoadingScript />
       </body>
     </html>
   )

@@ -11,7 +11,8 @@ const featuredCranes = [
   {
     id: 1,
     name: 'Potain MDT 178',
-    image: '/images/Potain-MDT-178_3W.jpg',
+    slug: 'potain-mdt-178',
+    image: '/images/optimized/Potain-MDT-178_3W.webp',
     status: 'available',
     year: 2019,
     maxCapacity: '8 tons',
@@ -22,7 +23,8 @@ const featuredCranes = [
   {
     id: 2,
     name: 'Potain MC 85 B',
-    image: '/images/cropped-Top-page2-potain6.png',
+    slug: 'potain-mc-85-b',
+    image: '/images/optimized/cropped-Top-page2-potain6.webp',
     status: 'available',
     year: 2020,
     maxCapacity: '5 tons',
@@ -33,7 +35,8 @@ const featuredCranes = [
   {
     id: 3,
     name: 'Potain MDT 219 J10',
-    image: '/images/cropped-Top-page2-potain6.png',
+    slug: 'potain-mdt-219-j10',
+    image: '/images/optimized/sunset-TC.webp',
     status: 'comingSoon',
     year: 2021,
     maxCapacity: '10 tons',
@@ -77,6 +80,10 @@ function FeaturedCranes() {
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  quality={80}
+                  loading={index === 0 ? "eager" : "lazy"}
+                  placeholder="blur"
+                  blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
                 />
                 <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-medium ${
                   crane.status === 'available' ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800'
@@ -108,7 +115,7 @@ function FeaturedCranes() {
                   </div>
                 </div>
                 <Link
-                  href={`/towercranes/${crane.id}`}
+                  href={`/towercranes/${crane.slug}`}
                   className="btn-primary w-full text-center block"
                 >
                   {t('cranes.viewDetails')}

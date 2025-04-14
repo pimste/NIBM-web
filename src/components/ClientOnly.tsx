@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, Fragment } from 'react'
 
 export default function ClientOnly({ children, fallback = null }: { 
   children: React.ReactNode;
@@ -13,11 +13,12 @@ export default function ClientOnly({ children, fallback = null }: {
     setHasMounted(true)
   }, [])
   
-  // Return fallback if not mounted
+  // Use Fragment to avoid adding extra DOM nodes
+  // If not mounted, either show fallback or nothing
   if (!hasMounted) {
-    return <>{fallback}</>
+    return <Fragment>{fallback ?? null}</Fragment>
   }
   
-  // After hydration, render the children
-  return <>{children}</>
+  // After client-side hydration completes, render the children
+  return <Fragment>{children}</Fragment>
 } 

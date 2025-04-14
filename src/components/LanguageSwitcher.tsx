@@ -43,17 +43,9 @@ const flagStyles: Record<Language, { background: string }> = {
 export function LanguageSwitcher() {
   const { language, setLanguage } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
-  const [mounted, setMounted] = useState(false)
-
-  // Set mounted state once component is mounted on client
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   // Close dropdown when clicking outside
   useEffect(() => {
-    if (!mounted) return;
-    
     const handleClickOutside = () => setIsOpen(false)
     
     if (isOpen) {
@@ -61,7 +53,7 @@ export function LanguageSwitcher() {
     }
     
     return () => document.removeEventListener('click', handleClickOutside)
-  }, [isOpen, mounted])
+  }, [isOpen])
 
   // Handle language change
   const changeLanguage = (lang: Language) => {
@@ -93,9 +85,8 @@ export function LanguageSwitcher() {
     de: 'Deutsch'
   };
 
-  // If not mounted yet (during SSR), render a simple button to avoid hydration mismatch
-  if (!mounted) {
-    return (
+  return (
+    <ClientOnly fallback={
       <div className="relative">
         <button 
           className="flex items-center p-1.5 rounded-md hover:bg-white/10 transition-colors"
@@ -104,11 +95,7 @@ export function LanguageSwitcher() {
           <div className="w-6 h-6 rounded-full border border-white/20"></div>
         </button>
       </div>
-    )
-  }
-
-  return (
-    <ClientOnly>
+    }>
       <div className="relative">
         <button 
           className="flex items-center p-1.5 rounded-md hover:bg-white/10 transition-colors group"

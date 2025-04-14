@@ -13,7 +13,7 @@ export default function About() {
     {
       name: 'Gid Gehlen',
       position: t('about.team.ceo'),
-      image: '/images/Potain-MDT-178_3W.jpg', // Placeholder, would be replaced with actual team photo
+      image: '/images/optimized/gidgehlen.webp',
       bio: t('about.team.ceo.bio'),
     }
   ]
@@ -118,10 +118,17 @@ export default function About() {
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden">
               <Image
-                src="/images/1733749919967.jpeg"
-                alt={t('about.story.image')}
-                fill
-                className="object-cover"
+                src="/images/optimized/our-story-2.webp"
+                alt="NIBM Tower Cranes story"
+                width={500}
+                height={500}
+                priority
+                quality={80}
+                loading="eager"
+                className="rounded-md shadow-lg object-cover w-full h-auto"
+                placeholder="blur"
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
             </div>
           </div>
@@ -249,7 +256,7 @@ export default function About() {
             {values.map((value, index) => (
               <motion.div
                 key={index}
-                className="p-6 bg-neutral-50 rounded-lg"
+                className="bg-neutral-50 p-8 rounded-lg shadow-sm"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -267,7 +274,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Meet the Founder */}
+      {/* Meet the Team */}
       <section className="py-16 bg-neutral-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <ClientOnly fallback={
@@ -289,13 +296,18 @@ export default function About() {
               viewport={{ once: true }}
             >
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="relative min-h-[400px]">
+                <div className="relative min-h-[400px] flex items-center justify-center">
                   <Image
-                    src="/images/gidgehlen.jpg"
-                    alt="Gid Gehlen - CEO & Founder"
-                    fill
-                    className="object-cover object-center"
-                    priority
+                    src="/images/optimized/gidgehlen.webp"
+                    alt="Team Member"
+                    width={300}
+                    height={300}
+                    className="rounded-full shadow-lg object-cover"
+                    quality={80}
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
+                    sizes="(max-width: 768px) 100vw, 300px"
                   />
                 </div>
                 <div className="p-8 flex flex-col justify-center">

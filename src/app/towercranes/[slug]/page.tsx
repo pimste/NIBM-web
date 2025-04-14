@@ -12,10 +12,11 @@ const cranes = [
   {
     id: 1,
     name: 'Potain MDT 178',
-    image: '/images/Potain-MDT-178_3W.jpg',
+    slug: 'potain-mdt-178', // SEO-friendly slug
+    image: '/images/optimized/Potain-MDT-178_3W.webp',
     gallery: [
-      '/images/Potain-MDT-178_3W.jpg',
-      '/images/cropped-Top-page2-potain6.png',
+      '/images/optimized/Potain-MDT-178_3W.webp',
+      '/images/optimized/cropped-Top-page2-potain6.webp',
     ],
     status: 'Available',
     year: 2019,
@@ -56,10 +57,11 @@ const cranes = [
   {
     id: 2,
     name: 'Potain MC 85 B',
-    image: '/images/cropped-Top-page2-potain6.png',
+    slug: 'potain-mc-85-b', // SEO-friendly slug
+    image: '/images/optimized/cropped-Top-page2-potain6.webp',
     gallery: [
-      '/images/cropped-Top-page2-potain6.png',
-      '/images/Potain-MDT-178_3W.jpg',
+      '/images/optimized/cropped-Top-page2-potain6.webp',
+      '/images/optimized/Potain-MDT-178_3W.webp',
     ],
     status: 'Available',
     year: 2020,
@@ -100,8 +102,9 @@ const cranes = [
 ]
 
 export default function CraneDetails() {
-  const { id } = useParams()
-  const crane = cranes.find((c) => c.id === Number(id))
+  const params = useParams()
+  const slug = params.slug as string
+  const crane = cranes.find(c => c.slug === slug)
   const [activeImage, setActiveImage] = useState(0)
   const [formData, setFormData] = useState({
     name: '',
@@ -248,35 +251,41 @@ export default function CraneDetails() {
                 <h3 className="text-xl font-bold mb-4 flex items-center">
                   <FaInfoCircle className="mr-2 text-primary" /> Key Features
                 </h3>
-                <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                <ul className="space-y-2">
                   {crane.features.map((feature, index) => (
                     <li key={index} className="flex items-start">
-                      <FaCheck className="text-green-600 mt-1 mr-2 flex-shrink-0" />
+                      <FaCheck className="text-green-500 mt-1 mr-2 flex-shrink-0" />
                       <span>{feature}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="bg-primary-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold mb-4 text-primary">Quick Contact</h3>
-                <div className="flex items-center mb-4">
-                  <FaPhone className="text-primary mr-3" />
-                  <a href="tel:+31653206004" className="text-neutral-700 hover:text-primary transition-colors">
-                    Gid Gehlen
+              <div className="bg-neutral-50 p-6 rounded-lg">
+                <h3 className="text-xl font-bold mb-4 flex items-center">
+                  <FaPhone className="mr-2 text-primary" /> Contact Us About This Crane
+                </h3>
+                <p className="text-neutral-700 mb-4">
+                  Interested in this {crane.name}? Contact our sales team for more information, pricing, or to schedule a viewing.
+                </p>
+                <div className="flex flex-col sm:flex-row sm:space-x-4">
+                  <a 
+                    href="tel:+31123456789" 
+                    className="flex items-center justify-center bg-primary hover:bg-primary-700 text-white font-medium px-6 py-3 rounded-md transition-colors mb-3 sm:mb-0"
+                  >
+                    <FaPhone className="mr-2" /> Call Us
                   </a>
-                </div>
-                <div className="flex items-center">
-                  <FaEnvelope className="text-primary mr-3" />
-                  <a href="mailto:gid.gehlen@nibmtowercranes.com" className="text-neutral-700 hover:text-primary transition-colors">
-                    gid.gehlen@nibmtowercranes.com
+                  <a 
+                    href="mailto:gid.gehlen@nibmtowercranes.com" 
+                    className="flex items-center justify-center border border-primary text-primary hover:bg-primary hover:text-white font-medium px-6 py-3 rounded-md transition-colors"
+                  >
+                    <FaEnvelope className="mr-2" /> Email Us
                   </a>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Technical Specifications */}
           <div className="mt-16">
             <h2 className="text-2xl font-bold text-neutral-900 mb-6">
               Technical Specifications
@@ -303,92 +312,85 @@ export default function CraneDetails() {
           {/* Inquiry Form */}
           <div className="mt-16 bg-neutral-50 p-8 rounded-lg">
             <h2 className="text-2xl font-bold text-neutral-900 mb-6">
-              Interested in this {crane.category === 'Sale' ? 'Tower Crane?' : 'Rental?'}
+              Request More Information
             </h2>
+            
             {formSubmitted ? (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-green-50 text-green-800 p-6 rounded-lg"
-              >
-                <h3 className="text-xl font-bold mb-2">Thank You!</h3>
-                <p>Your inquiry has been submitted successfully. One of our representatives will contact you shortly.</p>
-              </motion.div>
+              <div className="bg-green-50 border border-green-200 text-green-800 p-4 rounded-md">
+                <h3 className="text-lg font-semibold mb-2">Thank You for Your Interest!</h3>
+                <p>We've received your inquiry about the {crane.name}. Our team will get back to you shortly with more information.</p>
+              </div>
             ) : (
-              <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-neutral-700 mb-1">
-                      Your Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-1">
-                      Email Address *
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-neutral-700 mb-1">
-                      Phone Number *
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      required
-                      className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-neutral-700 mb-1">
-                      Company Name
-                    </label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                      value={formData.company}
-                      onChange={handleInputChange}
-                    />
-                  </div>
+              <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-neutral-700 mb-1">
+                    Your Name*
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                  />
                 </div>
-                <div className="mb-6">
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-1">
+                    Email Address*
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-neutral-700 mb-1">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="company" className="block text-sm font-medium text-neutral-700 mb-1">
+                    Company Name
+                  </label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="md:col-span-2">
                   <label htmlFor="message" className="block text-sm font-medium text-neutral-700 mb-1">
-                    Your Message *
+                    Your Message*
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    rows={5}
+                    rows={4}
                     required
-                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    placeholder={`I am interested in the ${crane.name} ${crane.category === 'Sale' ? 'for purchase' : 'for rental'}. Please contact me with more information.`}
-                    value={formData.message}
+                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    defaultValue={`I'm interested in the ${crane.name} and would like more information.`}
                     onChange={handleInputChange}
-                  ></textarea>
+                  />
                 </div>
-                <div>
+                <div className="md:col-span-2">
                   <button
                     type="submit"
                     className="bg-primary hover:bg-primary-700 text-white font-medium px-6 py-3 rounded-md transition-colors"

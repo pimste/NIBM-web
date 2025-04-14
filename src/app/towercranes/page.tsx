@@ -7,13 +7,20 @@ import { NextSeo } from 'next-seo'
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/context/LanguageContext'
 import ClientOnly from '@/components/ClientOnly'
+import { FaArrowRight } from 'react-icons/fa'
+
+// Utility function to generate slugs from crane names
+const generateSlug = (name: string): string => {
+  return name.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '')
+}
 
 // This would be fetched from a CMS or API in a real implementation
 const cranes = [
   {
     id: 1,
     name: 'Potain MDT 178',
-    image: '/images/Potain-MDT-178_3W.jpg',
+    slug: 'potain-mdt-178', // SEO-friendly slug
+    image: '/images/optimized/Potain-MDT-178_3W.webp',
     status: 'towercranes.status.available',
     year: 2019,
     maxCapacity: '8 tons',
@@ -25,7 +32,8 @@ const cranes = [
   {
     id: 2,
     name: 'Potain MC 85 B',
-    image: '/images/cropped-Top-page2-potain6.png',
+    slug: 'potain-mc-85-b', // SEO-friendly slug
+    image: '/images/optimized/cropped-Top-page2-potain6.webp',
     status: 'towercranes.status.available',
     year: 2020,
     maxCapacity: '5 tons',
@@ -37,7 +45,8 @@ const cranes = [
   {
     id: 3,
     name: 'Potain MDT 219 J10',
-    image: '/images/cropped-Top-page2-potain6.png',
+    slug: 'potain-mdt-219-j10', // SEO-friendly slug
+    image: '/images/optimized/cropped-Top-page2-potain6.webp',
     status: 'towercranes.status.comingsoon',
     year: 2021,
     maxCapacity: '10 tons',
@@ -49,7 +58,8 @@ const cranes = [
   {
     id: 4,
     name: 'Potain MCT 88',
-    image: '/images/Potain-MDT-178_3W.jpg',
+    slug: 'potain-mct-88', // SEO-friendly slug
+    image: '/images/optimized/Potain-MDT-178_3W.webp',
     status: 'towercranes.status.available',
     year: 2018,
     maxCapacity: '5 tons',
@@ -61,7 +71,8 @@ const cranes = [
   {
     id: 5,
     name: 'Potain MC 125',
-    image: '/images/cropped-Top-page2-potain6.png',
+    slug: 'potain-mc-125', // SEO-friendly slug
+    image: '/images/optimized/cropped-Top-page2-potain6.webp',
     status: 'towercranes.status.available',
     year: 2017,
     maxCapacity: '6 tons',
@@ -73,7 +84,8 @@ const cranes = [
   {
     id: 6,
     name: 'Potain MDT 189',
-    image: '/images/Potain-MDT-178_3W.jpg',
+    slug: 'potain-mdt-189', // SEO-friendly slug
+    image: '/images/optimized/Potain-MDT-178_3W.webp',
     status: 'towercranes.status.available',
     year: 2020,
     maxCapacity: '8 tons',
@@ -85,7 +97,8 @@ const cranes = [
   {
     id: 7,
     name: 'Potain MC 175 B',
-    image: '/images/cropped-Top-page2-potain6.png',
+    slug: 'potain-mc-175-b', // SEO-friendly slug
+    image: '/images/optimized/cropped-Top-page2-potain6.webp',
     status: 'towercranes.status.sold',
     year: 2019,
     maxCapacity: '8 tons',
@@ -97,7 +110,8 @@ const cranes = [
   {
     id: 8,
     name: 'Potain MDT 268 J12',
-    image: '/images/Potain-MDT-178_3W.jpg',
+    slug: 'potain-mdt-268-j12', // SEO-friendly slug
+    image: '/images/optimized/Potain-MDT-178_3W.webp',
     status: 'towercranes.status.sold',
     year: 2018,
     maxCapacity: '12 tons',
@@ -109,7 +123,8 @@ const cranes = [
   {
     id: 9,
     name: 'Potain MCT 135',
-    image: '/images/cropped-Top-page2-potain6.png',
+    slug: 'potain-mct-135', // SEO-friendly slug
+    image: '/images/optimized/cropped-Top-page2-potain6.webp',
     status: 'towercranes.status.sold',
     year: 2020,
     maxCapacity: '6 tons',
@@ -343,12 +358,14 @@ export default function TowerCranes() {
                         <span className="font-medium">{crane.maxJibLength}</span>
                       </div>
                     </div>
-                    <Link
-                      href={`/towercranes/${crane.id}`}
-                      className="block w-full text-center bg-primary hover:bg-primary-700 text-white font-medium py-2 rounded-md transition-colors"
-                    >
-                      {t('towercranes.viewDetails')}
-                    </Link>
+                    <div className="mt-auto">
+                      <Link
+                        href={`/towercranes/${crane.slug}`}
+                        className="inline-flex items-center bg-primary hover:bg-primary-700 text-white font-medium px-4 py-2 rounded-md transition-colors mt-4"
+                      >
+                        {mounted ? t('towercranes.viewDetails') : 'View Details'} <FaArrowRight className="ml-2" />
+                      </Link>
+                    </div>
                   </div>
                 </motion.div>
               ))}

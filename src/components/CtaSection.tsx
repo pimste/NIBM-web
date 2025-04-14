@@ -13,7 +13,7 @@ function CtaSection() {
       {/* Background Image with Overlay */}
       <div 
         className="absolute inset-0 bg-cover bg-center z-0"
-        style={{ backgroundImage: "url('/images/cropped-Top-page2-potain6.png')" }}
+        style={{ backgroundImage: "url('/images/optimized/sunset-TC-2.webp')" }}
       >
         <div className="absolute inset-0 bg-primary opacity-90"></div>
       </div>

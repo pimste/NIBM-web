@@ -588,7 +588,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'faq.q5': 'Wat zijn de windsnelheidslimieten voor torenkraanbediening?',
     'faq.a5': 'Torenkranen hebben meestal operationele windsnelheidslimieten van ongeveer 20-25 mph (32-40 km/u) voor normale werking. Wanneer de windsnelheden ongeveer 45 mph (72 km/h) bereiken, moeten kranen in windhaan-modus worden gezet om de giek vrij met de wind te laten bewegen. Deze limieten kunnen echter variëren afhankelijk van het specifieke kraanmodel, de kenmerken van de last en de richtlijnen van de fabrikant. Het is essentieel om de specificaties van de kraanfabrikant te volgen en rekening te houden met locatiespecifieke omstandigheden bij het bepalen van veilige bedrijfsparameters.',
     'faq.q6': 'Welke kwalificaties zijn vereist om een torenkraan te bedienen?',
-    'faq.a6': 'Torenkraanoperators hebben specifieke certificeringen en kwalificaties nodig, die per land en regio verschillen. Over het algemeen moeten operators een erkend trainingsprogramma voltooien, slagen voor zowel schriftelijke als praktische examens en een certificering verkrijgen van een geaccrediteerde organisatie. Ze moeten ook een goed dieptezicht, coördinatie en concentratievermogen hebben. Bovendien vereisen de meeste rechtsgebieden regelmatige hercertificering om ervoor te zorgen dat operators hun vaardigheden en kennis van huidige veiligheidsprotocollen en technologische vooruitgang behouden.',
+    'faq.a6': 'Torenkraanoperators hebben specifieke certificeringen en kwalificaties nodig, die je naar land en regio verschillen. Over het algemeen moeten operators een erkend trainingsprogramma voltooien, slagen voor zowel schriftelijke als praktische examens en een certificering verkrijgen van een geaccrediteerde organisatie. Ze moeten ook een goed dieptezicht, coördinatie en concentratievermogen hebben. Bovendien vereisen de meeste rechtsgebieden regelmatige hercertificering om ervoor te zorgen dat operators hun vaardigheden en kennis van huidige veiligheidsprotocollen en technologische vooruitgang behouden.',
   },
   de: {
     // Navigation
@@ -869,166 +869,55 @@ export const translations: Record<Language, Record<string, string>> = {
   }
 }
 
-// Fix Dutch translations, making sure there's no German text
-translations.nl['services.rent.desc'] = 'Onze verhuurservice biedt flexibele toegang tot hoogwaardige torenkranen zonder de volledige investering van aankoop. We bieden kort- en langdurige huuroptie met uitgebreide ondersteuning gedurende de huurperiode.';
-translations.nl['services.rent.feature1'] = 'Flexibele huurtermijnen (kort- en langlopend)';
-translations.nl['services.rent.feature2'] = 'Goed onderhouden en regelmatig geïnspecteerde kranen';
-translations.nl['services.rent.feature3'] = 'Technische ondersteuning en onderhoud inbegrepen';
-translations.nl['services.rent.feature4'] = 'Optie om apparatuur te wisselen of upgraden indien nodig';
-translations.nl['services.rent.feature5'] = 'Mogelijkheid tot huur-koop overeenkomsten';
-
-translations.nl['services.planning.title'] = 'Planning & Advisering';
-translations.nl['services.planning.feature1'] = 'Locatie-evaluatie en kraanselectie advisering';
-translations.nl['services.planning.feature2'] = 'Draagcapaciteit en bereik-analyse';
-translations.nl['services.planning.feature3'] = 'Regelgeving compliance begeleiding';
-translations.nl['services.planning.feature4'] = 'Kostenoptimalisatie strategieën';
-translations.nl['services.planning.feature5'] = 'Projectplanning';
-
-translations.nl['services.transport.title'] = 'Transport & Logistiek';
-translations.nl['services.transport.desc'] = 'We verzorgen alle aspecten van kraantransport naar uw bouwplaats, inclusief routeplanning, vergunningen en gespecialiseerde transportapparatuur om veilige en tijdige levering te waarborgen.';
-translations.nl['services.transport.feature1'] = 'Speciale transportvoertuigen en uitrusting';
-translations.nl['services.transport.feature2'] = 'Routeplanning en analyse';
-translations.nl['services.transport.feature3'] = 'Vergunningverkrijging en naleving';
-translations.nl['services.transport.feature4'] = 'Ervaren transportteam';
-translations.nl['services.transport.feature5'] = 'Verzekeringsdekking tijdens transport';
-
-translations.nl['services.mounting.title'] = 'Montage & Installatie';
-translations.nl['services.mounting.desc'] = 'Onze gecertificeerde technici voeren professionele montage-, installatie- en demontagediensten uit, waarbij zorg wordt gedragen voor veilige en conforme installatie van uw torenkranen volgens alle relevante regelgevingen en specificaties.';
-translations.nl['services.mounting.feature1'] = 'Gecertificeerde installatiespecialisten';
-translations.nl['services.mounting.feature2'] = 'Naleving van alle veiligheidsvoorschriften';
-translations.nl['services.mounting.feature3'] = 'Grondige tests en ingebruikname';
-translations.nl['services.mounting.feature4'] = 'Efficiënte demontagediensten';
-translations.nl['services.mounting.feature5'] = 'Uitgebreide documentatie';
-
-translations.nl['services.training.title'] = 'Training & Certificering';
-translations.nl['services.training.feature1'] = 'Gecertificeerde kraanmachinist training';
-translations.nl['services.training.feature2'] = 'Onderhouds- en inspectietraining';
-translations.nl['services.training.feature3'] = 'Veiligheidsprotocollen en beste praktijken';
-translations.nl['services.training.feature4'] = 'Praktijk- en theoretische instructie';
-translations.nl['services.training.feature5'] = 'Certificering en documentatie';
-
-// Fix German translations with Dutch text
-translations.de['services.rent.desc'] = 'Unser Vermietungsservice bietet flexiblen Zugang zu hochwertigen Turmkranen ohne die volle Investition eines Kaufs. Wir bieten kurz- und langfristige Mietoptionen mit umfassender Unterstützung während der Mietdauer.';
-translations.de['services.planning.title'] = 'Planung & Beratung';
-
 // Provider component
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Start with 'en' as default for SSR, then update client-side
+  // Start with 'en' as default for SSR
   const [language, setLanguageState] = useState<Language>('en')
   const [mounted, setMounted] = useState(false)
   
-  // Get the router for handling navigation
-  const router = useRouter()
-
   // This effect runs only once on client-side after first render
   useEffect(() => {
     setMounted(true)
     
-    let detectedLang: Language = 'en';
-    
-    try {
-      // Try to get language from localStorage first
-      const savedLanguage = localStorage.getItem('language') as Language;
-      if (savedLanguage && ['en', 'nl', 'de'].includes(savedLanguage)) {
-        detectedLang = savedLanguage;
-      } else {
-        // Fall back to browser language
-        const browserLang = navigator.language.split('-')[0] as Language;
-        if (['en', 'nl', 'de'].includes(browserLang)) {
-          detectedLang = browserLang;
-        }
+    // Only run language detection on the client
+    const storedLang = localStorage.getItem('language') as Language
+    if (storedLang && ['en', 'nl', 'de'].includes(storedLang)) {
+      setLanguageState(storedLang)
+    } else {
+      // Default to browser language if supported
+      const browserLang = navigator.language.split('-')[0] as Language
+      if (['en', 'nl', 'de'].includes(browserLang)) {
+        setLanguageState(browserLang)
       }
-      
-      // Update state with detected language
-      setLanguageState(detectedLang);
-      
-      // Update HTML lang attribute
-      document.documentElement.lang = detectedLang;
-      
-      // Dispatch language change events
-      window.dispatchEvent(new Event('languageChange'));
-      setTimeout(() => {
-        window.dispatchEvent(new Event('languageChanged'));
-      }, 50);
-      
-    } catch (error) {
-      console.error('Error detecting language:', error);
     }
-  }, []);
+  }, [])
 
   // Update language and save to localStorage
   const setLanguage = useCallback((lang: Language) => {
-    if (!mounted) return; // Only run on client
+    if (!mounted) return // Only run on client
     
-    try {
-      localStorage.setItem('language', lang);
-      document.documentElement.lang = lang;
-      setLanguageState(lang);
-      
-      // Dispatch a custom event to notify components that language has changed
-      // This helps with components that might not be directly using the context
-      try {
-        window.dispatchEvent(new Event('languageChange'));
-        console.log(`Language changed to: ${lang}, event dispatched`);
-        
-        // Dispatch a second event with a slight delay to ensure all components catch it
-        setTimeout(() => {
-          window.dispatchEvent(new Event('languageChanged'));
-        }, 50);
-      } catch (error) {
-        console.error('Error dispatching language change event:', error);
-      }
-    } catch (error) {
-      console.error('Error saving language preference:', error);
-    }
-  }, [mounted]);
-  
-  // Force update on language change
-  useEffect(() => {
-    if (!mounted) return;
-    
-    // Dispatch an event when language changes through context
-    const handleLanguageChange = () => {
-      console.log('Language change detected in LanguageContext:', language);
-      // No need to do anything here as components will be notified via context updates
-    };
-    
-    window.addEventListener('languageChange', handleLanguageChange);
-    
-    return () => {
-      window.removeEventListener('languageChange', handleLanguageChange);
-    };
-  }, [language, mounted]);
+    localStorage.setItem('language', lang)
+    setLanguageState(lang)
+  }, [mounted])
   
   // Translation function
   const t = useCallback((key: string): string => {
     // Get the translation from the current language or fallback to English
-    const translationSet = translations[language] || translations.en;
-    const translation = translationSet[key];
-
-    if (!translation) {
-      // Fallback to English if translation is missing
-      const englishTranslation = translations.en[key];
-      if (!englishTranslation) {
-        console.warn(`Missing translation for key: ${key} in ${language} and English`);
-        return key; // Return key if English also missing
-      }
-      return englishTranslation;
-    }
-    return translation;
-  }, [language]);
+    const translationSet = translations[language] || translations.en
+    return translationSet[key] || key
+  }, [language])
 
   const value = useMemo(() => ({
     language,
     setLanguage,
-    t
-  }), [language, setLanguage, t]);
-  
+    t,
+  }), [language, setLanguage, t])
+
   return (
     <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
-  );
+  )
 }
 
 // Custom hook to use language context

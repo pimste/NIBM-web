@@ -8,12 +8,17 @@
     "start": "next start",
     "lint": "next lint",
     "analyze": "ANALYZE=true next build",
-    "optimize-images": "node scripts/optimize-images.js"
+    "optimize-images": "node scripts/optimize-images.js",
+    "convert-to-webp": "node scripts/convert-to-webp.js",
+    "update-image-refs": "node scripts/update-image-references.js",
+    "optimize-for-web": "node scripts/optimize-for-web.js",
+    "prebuild": "npm run optimize-for-web && npm run update-image-refs"
   },
   "dependencies": {
     "@fontsource/inter": "^5.0.8",
     "@fontsource/montserrat": "^5.0.8",
     "@heroicons/react": "^2.2.0",
+    "critters": "^0.0.23",
     "framer-motion": "^10.16.4",
     "next": "^14.1.0",
     "next-seo": "^6.1.0",
@@ -31,6 +36,7 @@
     "autoprefixer": "^10.4.16",
     "eslint": "^8.53.0",
     "eslint-config-next": "^14.1.0",
+    "glob": "^11.0.1",
     "postcss": "^8.4.31",
     "sharp": "^0.33.2",
     "tailwindcss": "^3.4.17",
