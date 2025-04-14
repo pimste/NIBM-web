@@ -82,6 +82,42 @@ const cranes = [
     type: 'towercranes.type.flattop',
     category: 'towercranes.category.rental',
   },
+  {
+    id: 7,
+    name: 'Potain MC 175 B',
+    image: '/images/cropped-Top-page2-potain6.png',
+    status: 'towercranes.status.sold',
+    year: 2019,
+    maxCapacity: '8 tons',
+    maxJibLength: '60 meters',
+    maxHeight: '58 meters',
+    type: 'towercranes.type.topslewing',
+    category: '',
+  },
+  {
+    id: 8,
+    name: 'Potain MDT 268 J12',
+    image: '/images/Potain-MDT-178_3W.jpg',
+    status: 'towercranes.status.sold',
+    year: 2018,
+    maxCapacity: '12 tons',
+    maxJibLength: '75 meters',
+    maxHeight: '72.8 meters',
+    type: 'towercranes.type.flattop',
+    category: '',
+  },
+  {
+    id: 9,
+    name: 'Potain MCT 135',
+    image: '/images/cropped-Top-page2-potain6.png',
+    status: 'towercranes.status.sold',
+    year: 2020,
+    maxCapacity: '6 tons',
+    maxJibLength: '50 meters',
+    maxHeight: '53 meters',
+    type: 'towercranes.type.flattop',
+    category: '',
+  },
 ]
 
 type FilterState = {
@@ -188,6 +224,7 @@ export default function TowerCranes() {
                   <option value="all">{t('towercranes.filter.all')}</option>
                   <option value="towercranes.status.available">{t('towercranes.status.available')}</option>
                   <option value="towercranes.status.comingsoon">{t('towercranes.status.comingsoon')}</option>
+                  <option value="towercranes.status.sold">{t('towercranes.status.sold')}</option>
                 </select>
               </div>
               <div>
@@ -274,13 +311,17 @@ export default function TowerCranes() {
                       className="object-cover"
                     />
                     <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-medium ${
-                      crane.status === 'towercranes.status.available' ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800'
+                      crane.status === 'towercranes.status.available' ? 'bg-green-100 text-green-800' : 
+                      crane.status === 'towercranes.status.sold' ? 'bg-red-100 text-red-800' : 
+                      'bg-orange-100 text-orange-800'
                     }`}>
                       {t(crane.status)}
                     </div>
-                    <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                      {t(crane.category)}
-                    </div>
+                    {crane.category && (
+                      <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                        {t(crane.category)}
+                      </div>
+                    )}
                   </div>
                   <div className="p-6">
                     <h3 className="text-xl font-bold text-neutral-900 mb-2">{crane.name}</h3>
