@@ -7,8 +7,19 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaBars, FaTimes, FaPhone, FaEnvelope } from 'react-icons/fa'
 import { useLanguage } from '@/context/LanguageContext'
-import { LanguageSwitcher } from './LanguageSwitcher'
-import ClientOnly from './ClientOnly'
+import dynamic from 'next/dynamic'
+
+// Dynamically import the LanguageSwitcher with fallback
+const LanguageSwitcher = dynamic(
+  () => import('./LanguageSwitcher').then(mod => mod.LanguageSwitcher),
+  { ssr: false, loading: () => <div className="w-6 h-6 rounded-full bg-primary-800"></div> }
+)
+
+// Dynamically import ClientOnly with fallback
+const ClientOnly = dynamic(
+  () => import('./ClientOnly').then(mod => mod.ClientOnly),
+  { ssr: false, loading: () => null }
+)
 
 const navigation = [
   { key: 'nav.home', href: '/' },
@@ -20,10 +31,20 @@ const navigation = [
 ]
 
 export function Header() {
-  const { t } = useLanguage()
+  const { t: translate } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+
+  // Ensure we always have a translation function even if context fails
+  const t = (key: string) => {
+    try {
+      return translate(key) || key
+    } catch (error) {
+      console.error('Translation error:', error)
+      return key // Fallback to key if translation fails
+    }
+  }
 
   useEffect(() => {
     function onScroll() {
@@ -63,7 +84,11 @@ export function Header() {
               <div className="flex space-x-4 items-center">
                 <Link href="/technical-info#faq" className="text-xs hover:text-secondary transition-colors">{t('topbar.faq')}</Link>
                 <div className="ml-4">
-                  <LanguageSwitcher />
+                  {typeof LanguageSwitcher === 'function' ? (
+                    <LanguageSwitcher />
+                  ) : (
+                    <div className="w-6 h-6 rounded-full bg-primary-800"></div>
+                  )}
                 </div>
               </div>
             </div>
@@ -202,7 +227,11 @@ export function Header() {
                   </Link>
                   <div className="flex items-center">
                     <div className="mr-4">
-                      <LanguageSwitcher />
+                      {typeof LanguageSwitcher === 'function' ? (
+                        <LanguageSwitcher />
+                      ) : (
+                        <div className="w-6 h-6 rounded-full bg-primary-800"></div>
+                      )}
                     </div>
                     <button
                       type="button"

@@ -1,7 +1,7 @@
 'use client'
 
 import { useLanguage } from '@/context/LanguageContext'
-import ClientOnly from '@/components/ClientOnly'
+import { ClientOnly } from '@/components/ClientOnly'
 
 export default function TermsOfService() {
   const { t } = useLanguage()

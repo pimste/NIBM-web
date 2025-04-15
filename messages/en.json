@@ -1,0 +1,34 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About Us",
+    "services": "Services",
+    "contact": "Contact",
+    "news": "News"
+  },
+  "common": {
+    "readMore": "Read More",
+    "contactUs": "Contact Us",
+    "learnMore": "Learn More",
+    "back": "Back"
+  },
+  "home": {
+    "hero": {
+      "title": "Professional Tower Crane Solutions",
+      "subtitle": "Expert service and support for your construction projects"
+    }
+  },
+  "about": {
+    "title": "About NIBM Tower Cranes",
+    "description": "With decades of experience in tower crane solutions, NIBM is your trusted partner in construction."
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "submit": "Send Message"
+    }
+  }
+} 

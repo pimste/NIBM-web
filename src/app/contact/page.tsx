@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa'
+import { useEffect, useState } from 'react'
+import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaClock } from 'react-icons/fa'
 import { useLanguage } from '@/context/LanguageContext'
+import { ClientOnly } from '@/components/ClientOnly'
+import { MotionDiv } from '@/components/MotionWrapper'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -92,14 +93,14 @@ export default function Contact() {
               </h2>
 
               {formSubmitted ? (
-                <motion.div
+                <MotionDiv
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="bg-green-50 text-green-800 p-6 rounded-lg"
                 >
                   <h3 className="text-xl font-bold mb-2">{t('contact.form.success.title')}</h3>
                   <p>{t('contact.form.success.message')}</p>
-                </motion.div>
+                </MotionDiv>
               ) : (
                 <form onSubmit={handleSubmit} className="bg-neutral-50 p-8 rounded-lg">
                   {submitError && (

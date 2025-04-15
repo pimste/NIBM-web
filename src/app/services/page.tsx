@@ -2,78 +2,82 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { FaArrowRight } from 'react-icons/fa'
 import { useLanguage } from '@/context/LanguageContext'
-import ClientOnly from '@/components/ClientOnly'
+import { ClientOnly } from '@/components/ClientOnly'
+import { MotionDiv } from '@/components/MotionWrapper'
+import { useEffect, useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { useIsClient } from '@/hooks/useIsClient'
 
 export default function Services() {
   const { t } = useLanguage()
+  const isClient = useIsClient()
   
   const services = [
     {
       id: 'sale',
-      title: t('services.sale.title'),
-      description: t('services.sale.desc'),
+      title: isClient ? t('services.sale.title') : 'Tower Crane Sales',
+      description: isClient ? t('services.sale.desc') : '',
       image: '/images/optimized/Potain-MDT-178_3W.webp',
       features: [
-        t('services.sale.feature1'),
-        t('services.sale.feature2'),
-        t('services.sale.feature3'),
-        t('services.sale.feature4'),
-        t('services.sale.feature5'),
+        isClient ? t('services.sale.feature1') : '',
+        isClient ? t('services.sale.feature2') : '',
+        isClient ? t('services.sale.feature3') : '',
+        isClient ? t('services.sale.feature4') : '',
+        isClient ? t('services.sale.feature5') : '',
       ],
     },
     {
       id: 'rent',
-      title: t('services.rent.title'),
-      description: t('services.rent.desc'),
+      title: isClient ? t('services.rent.title') : 'Tower Crane Rental',
+      description: isClient ? t('services.rent.desc') : '',
       image: '/images/optimized/cropped-Top-page2-potain6.webp',
       features: [
-        t('services.rent.feature1'),
-        t('services.rent.feature2'),
-        t('services.rent.feature3'),
-        t('services.rent.feature4'),
-        t('services.rent.feature5'),
+        isClient ? t('services.rent.feature1') : '',
+        isClient ? t('services.rent.feature2') : '',
+        isClient ? t('services.rent.feature3') : '',
+        isClient ? t('services.rent.feature4') : '',
+        isClient ? t('services.rent.feature5') : '',
       ],
     },
     {
       id: 'planning',
-      title: t('services.planning.title'),
-      description: t('services.planning.desc'),
+      title: isClient ? t('services.planning.title') : 'Planning & Consulting',
+      description: isClient ? t('services.planning.desc') : '',
       image: '/images/optimized/helmet1a.webp',
       features: [
-        t('services.planning.feature1'),
-        t('services.planning.feature2'),
-        t('services.planning.feature3'),
-        t('services.planning.feature4'),
-        t('services.planning.feature5'),
+        isClient ? t('services.planning.feature1') : '',
+        isClient ? t('services.planning.feature2') : '',
+        isClient ? t('services.planning.feature3') : '',
+        isClient ? t('services.planning.feature4') : '',
+        isClient ? t('services.planning.feature5') : '',
       ],
     },
     {
       id: 'transport',
-      title: t('services.transport.title'),
-      description: t('services.transport.desc'),
+      title: isClient ? t('services.transport.title') : 'Transport & Logistics',
+      description: isClient ? t('services.transport.desc') : '',
       image: '/images/optimized/sunset-TC.webp',
       features: [
-        t('services.transport.feature1'),
-        t('services.transport.feature2'),
-        t('services.transport.feature3'),
-        t('services.transport.feature4'),
-        t('services.transport.feature5'),
+        isClient ? t('services.transport.feature1') : '',
+        isClient ? t('services.transport.feature2') : '',
+        isClient ? t('services.transport.feature3') : '',
+        isClient ? t('services.transport.feature4') : '',
+        isClient ? t('services.transport.feature5') : '',
       ],
     },
     {
       id: 'mounting',
-      title: t('services.mounting.title'),
-      description: t('services.mounting.desc'),
+      title: isClient ? t('services.mounting.title') : 'Mounting & Installation',
+      description: isClient ? t('services.mounting.desc') : '',
       image: '/images/optimized/sunset-TC-2.webp',
       features: [
-        t('services.mounting.feature1'),
-        t('services.mounting.feature2'),
-        t('services.mounting.feature3'),
-        t('services.mounting.feature4'),
-        t('services.mounting.feature5'),
+        isClient ? t('services.mounting.feature1') : '',
+        isClient ? t('services.mounting.feature2') : '',
+        isClient ? t('services.mounting.feature3') : '',
+        isClient ? t('services.mounting.feature4') : '',
+        isClient ? t('services.mounting.feature5') : '',
       ],
     },
   ]
@@ -216,81 +220,87 @@ export default function Services() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 {/* Image (switches sides based on index) */}
                 {index % 2 === 0 ? (
-                  <motion.div 
-                    className="relative h-96 rounded-lg overflow-hidden"
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                  >
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      width={800}
-                      height={600}
-                      className="object-cover w-full h-full"
-                      quality={75}
-                      loading={index === 0 ? "eager" : "lazy"}
-                      placeholder="blur"
-                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
-                    />
-                  </motion.div>
+                  <ClientOnly>
+                    <MotionDiv
+                      className="relative h-96 rounded-lg overflow-hidden"
+                      initial={{ opacity: 0, x: -50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6 }}
+                      viewport={{ once: true }}
+                    >
+                      <Image
+                        src={service.image}
+                        alt={service.title}
+                        width={800}
+                        height={600}
+                        className="object-cover w-full h-full"
+                        quality={75}
+                        loading={index === 0 ? "eager" : "lazy"}
+                        placeholder="blur"
+                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
+                      />
+                    </MotionDiv>
+                  </ClientOnly>
                 ) : null}
 
                 {/* Content */}
-                <motion.div
-                  initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6 }}
-                  viewport={{ once: true }}
-                >
-                  <h2 className="text-3xl font-bold text-neutral-900 mb-4">
-                    {service.title}
-                  </h2>
-                  <p className="text-lg text-neutral-700 mb-6">
-                    {service.description}
-                  </p>
-                  <h3 className="text-xl font-semibold text-neutral-900 mb-3">
-                    {t('services.features')}
-                  </h3>
-                  <ul className="space-y-2 mb-6">
-                    {service.features.map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <span className="text-primary mr-2">•</span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href={`/contact?subject=${encodeURIComponent(service.title)}`}
-                    className="inline-flex items-center text-primary hover:text-primary-700 font-medium transition-colors"
-                  >
-                    {t('services.learnMore')}
-                    <FaArrowRight className="ml-2" />
-                  </Link>
-                </motion.div>
-
-                {/* Image (switches sides based on index) */}
-                {index % 2 !== 0 ? (
-                  <motion.div 
-                    className="relative h-96 rounded-lg overflow-hidden"
-                    initial={{ opacity: 0, x: 50 }}
+                <ClientOnly>
+                  <MotionDiv
+                    initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                   >
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      width={800}
-                      height={600}
-                      className="object-cover w-full h-full"
-                      quality={75}
-                      loading={index === 0 ? "eager" : "lazy"}
-                      placeholder="blur"
-                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
-                    />
-                  </motion.div>
+                    <h2 className="text-3xl font-bold text-neutral-900 mb-4">
+                      {service.title}
+                    </h2>
+                    <p className="text-lg text-neutral-700 mb-6">
+                      {service.description}
+                    </p>
+                    <h3 className="text-xl font-semibold text-neutral-900 mb-3">
+                      {t('services.features')}
+                    </h3>
+                    <ul className="space-y-2 mb-6">
+                      {service.features.map((feature, i) => (
+                        <li key={i} className="flex items-start">
+                          <span className="text-primary mr-2">•</span>
+                          <span>{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      href={`/contact?subject=${encodeURIComponent(service.title)}`}
+                      className="inline-flex items-center text-primary hover:text-primary-700 font-medium transition-colors"
+                    >
+                      {t('services.learnMore')}
+                      <FaArrowRight className="ml-2" />
+                    </Link>
+                  </MotionDiv>
+                </ClientOnly>
+
+                {/* Image (switches sides based on index) */}
+                {index % 2 !== 0 ? (
+                  <ClientOnly>
+                    <MotionDiv
+                      className="relative h-96 rounded-lg overflow-hidden"
+                      initial={{ opacity: 0, x: 50 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.6 }}
+                      viewport={{ once: true }}
+                    >
+                      <Image
+                        src={service.image}
+                        alt={service.title}
+                        width={800}
+                        height={600}
+                        className="object-cover w-full h-full"
+                        quality={75}
+                        loading={index === 0 ? "eager" : "lazy"}
+                        placeholder="blur"
+                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
+                      />
+                    </MotionDiv>
+                  </ClientOnly>
                 ) : null}
               </div>
             </div>

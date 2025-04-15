@@ -1,11 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { motion } from 'framer-motion'
 import { FaArrowLeft, FaCheck, FaDownload, FaEnvelope, FaInfoCircle, FaPhone, FaPrint } from 'react-icons/fa'
+import { MotionDiv } from '@/components/MotionWrapper'
+import { useLanguage } from '@/context/LanguageContext'
 
 // This would be fetched from a CMS or API in a real implementation
 const cranes = [

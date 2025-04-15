@@ -1,0 +1,34 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "Over Ons",
+    "services": "Diensten",
+    "contact": "Contact",
+    "news": "Nieuws"
+  },
+  "common": {
+    "readMore": "Lees Meer",
+    "contactUs": "Neem Contact Op",
+    "learnMore": "Meer Informatie",
+    "back": "Terug"
+  },
+  "home": {
+    "hero": {
+      "title": "Professionele Torenkraan Oplossingen",
+      "subtitle": "Deskundige service en ondersteuning voor uw bouwprojecten"
+    }
+  },
+  "about": {
+    "title": "Over NIBM Torenkranen",
+    "description": "Met tientallen jaren ervaring in torenkraanoplossingen is NIBM uw betrouwbare partner in de bouw."
+  },
+  "contact": {
+    "title": "Neem Contact Op",
+    "form": {
+      "name": "Naam",
+      "email": "E-mail",
+      "message": "Bericht",
+      "submit": "Verstuur Bericht"
+    }
+  }
+} 

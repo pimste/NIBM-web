@@ -1,24 +1,19 @@
 'use client'
 
-import { useEffect, useState, Fragment } from 'react'
+import { useIsClient } from '@/hooks/useIsClient'
+import { ReactNode } from 'react'
 
-export default function ClientOnly({ children, fallback = null }: { 
-  children: React.ReactNode;
-  fallback?: React.ReactNode;
-}) {
-  const [hasMounted, setHasMounted] = useState(false)
-  
-  useEffect(() => {
-    // Set hasMounted to true after component mounts on client
-    setHasMounted(true)
-  }, [])
-  
-  // Use Fragment to avoid adding extra DOM nodes
-  // If not mounted, either show fallback or nothing
-  if (!hasMounted) {
-    return <Fragment>{fallback ?? null}</Fragment>
+interface ClientOnlyProps {
+  children: ReactNode
+  fallback?: ReactNode
+}
+
+export function ClientOnly({ children, fallback = null }: ClientOnlyProps) {
+  const isClient = useIsClient()
+
+  if (!isClient) {
+    return <>{fallback}</>
   }
-  
-  // After client-side hydration completes, render the children
-  return <Fragment>{children}</Fragment>
+
+  return <>{children}</>
 } 

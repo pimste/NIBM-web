@@ -4,9 +4,31 @@ import type { Metadata, Viewport } from 'next'
 import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { SEOProvider } from '@/components/SEOProvider'
+import { BreadcrumbNav } from '@/components/BreadcrumbNav'
 import Script from 'next/script'
-import { LanguageProvider } from '@/context/LanguageContext'
+import dynamic from 'next/dynamic'
 import { LangAttributeUpdater } from '@/components/LangAttributeUpdater'
+import { FontFallbacks } from '@/components/FontFallbacks'
+
+// Dynamically import client components with no SSR and a fallback
+const ClientLanguageProvider = dynamic(
+  () => import('@/context/LanguageContext').then(mod => {
+    // Make sure the component exists
+    if (!mod || !mod.LanguageProvider) {
+      console.error('LanguageProvider not found in module:', mod)
+      return ({ children }: { children: React.ReactNode }) => <>{children}</>
+    }
+    return mod.LanguageProvider
+  }).catch(err => {
+    console.error('Failed to load LanguageProvider:', err)
+    return ({ children }: { children: React.ReactNode }) => <>{children}</>
+  }),
+  { 
+    ssr: false,
+    // For loading, we can't use the children prop as it's not available in this context
+    loading: () => <div>Loading provider...</div>
+  }
+)
 
 // Optimized font loading with subsets and display options
 const inter = Inter({
@@ -43,6 +65,8 @@ function Preload() {
       <link rel="dns-prefetch" href="https://www.nibmvb.eu" />
       <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+
+      <FontFallbacks />
     </>
   )
 }
@@ -169,16 +193,63 @@ function LazyLoadScript() {
   )
 }
 
+// Service Worker Registration
+function ServiceWorkerScript() {
+  return (
+    <Script
+      id="register-sw"
+      strategy="afterInteractive"
+    >{`
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js').then(
+            function(registration) {
+              // Registration was successful
+              console.log('ServiceWorker registration successful with scope: ', registration.scope);
+            }, 
+            function(err) {
+              // registration failed :(
+              console.log('ServiceWorker registration failed: ', err);
+            }
+          );
+        });
+      }
+    `}</Script>
+  )
+}
+
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
+  themeColor: '#0F172A', // primary-900 color
 }
 
 export const metadata: Metadata = {
-  title: 'NIBM Tower Cranes | Premium Tower Crane Solutions',
-  description: 'NIBM Tower Cranes provides premium tower crane sales, rental, and services across Europe. Expert guidance, reliable equipment, and professional support.',
-  keywords: 'tower cranes, crane rental, crane sales, construction equipment, potain, liebherr, terex, crane installation, crane dismantling, netherlands',
+  metadataBase: new URL('https://www.nibmvb.eu'),
+  title: {
+    default: 'NIBM Tower Cranes | Professional Crane Solutions',
+    template: '%s | NIBM Tower Cranes',
+  },
+  description:
+    'NIBM Tower Cranes offers services in sale, rental, transport, assembly, technical support, repairs and maintenance of tower cranes.',
+  keywords: [
+    'tower cranes',
+    'crane rental',
+    'crane sales',
+    'crane maintenance',
+    'construction equipment',
+    'NIBM tower cranes',
+    'crane services',
+    'crane assembly',
+    'crane disassembly',
+    'crane transport',
+    'tower crane parts',
+    'tower crane solutions',
+    'construction machinery',
+    'building equipment',
+    'crane repairs',
+  ],
   authors: [{ name: 'NIBM Tower Cranes' }],
   creator: 'NIBM Tower Cranes',
   publisher: 'NIBM Tower Cranes',
@@ -187,9 +258,13 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://www.nibmvb.eu'),
   alternates: {
     canonical: '/',
+    languages: {
+      'en': '/en',
+      'nl': '/nl',
+      'de': '/de',
+    },
   },
   robots: {
     index: true,
@@ -197,11 +272,18 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
+      'max-image-preview': 'large',
+      'max-video-preview': -1,
+      'max-snippet': -1,
     },
   },
   icons: {
-    icon: '/images/optimized/logo-blue.webp',
-    apple: '/images/optimized/logo-blue.webp',
+    icon: [
+      { url: '/favicon.ico', sizes: '16x16' },
+      { url: '/images/optimized/logo-blue.webp', sizes: 'any' }
+    ],
+    apple: { url: '/images/optimized/logo-blue.webp' },
+    shortcut: { url: '/favicon.ico' },
   },
   openGraph: {
     type: 'website',
@@ -229,6 +311,7 @@ export const metadata: Metadata = {
   verification: {
     google: 'google-site-verification=YOUR_GOOGLE_VERIFICATION_CODE', // Replace with your actual code
   },
+  category: 'Construction Equipment',
 }
 
 export default function RootLayout({
@@ -246,15 +329,19 @@ export default function RootLayout({
         className="font-sans antialiased min-h-screen bg-neutral-50 text-neutral-900 flex flex-col"
       >
         <SEOProvider />
-        <LanguageProvider>
+        <ClientLanguageProvider>
           <LangAttributeUpdater>
             <Header />
-            <main className="flex-grow">{children}</main>
+            <BreadcrumbNav />
+            <main className="flex-grow content-visibility-auto">
+              {children}
+            </main>
             <Footer />
           </LangAttributeUpdater>
-        </LanguageProvider>
+        </ClientLanguageProvider>
         <LazyLoadScript />
         <ProgressiveImageLoadingScript />
+        <ServiceWorkerScript />
       </body>
     </html>
   )

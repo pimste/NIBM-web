@@ -288,16 +288,16 @@ export const translations: Record<Language, Record<string, string>> = {
     'technical.tryAdjusting': 'Try adjusting your filters or search term',
     'technical.download': 'Download Document',
     
-    // Additional Resources Section
-    'technical.industryStandards': 'Industry Standards',
-    'technical.industryStandards.desc': 'Access relevant industry standards and regulations related to tower crane operations.',
-    'technical.viewStandards': 'View Standards',
-    'technical.educationalVideos': 'Educational Videos',
-    'technical.educationalVideos.desc': 'Watch instructional videos on tower crane operation, maintenance, and safety.',
-    'technical.watchVideos': 'Watch Videos',
-    'technical.techSupport': 'Technical Support',
-    'technical.techSupport.desc': 'Need specialized technical assistance? Our expert team is ready to help.',
-    'technical.contactSupport': 'Contact Support',
+    // Additional Resources Section - Renamed keys to avoid duplicates 
+    'technical.standards': 'Industry Standards',
+    'technical.standards.desc': 'Access relevant industry standards and regulations related to tower crane operations.',
+    'technical.standards.view': 'View Standards',
+    'technical.videos': 'Educational Videos',
+    'technical.videos.desc': 'Watch instructional videos on tower crane operation, maintenance, and safety.',
+    'technical.videos.watch': 'Watch Videos',
+    'technical.support': 'Technical Support',
+    'technical.support.desc': 'Need specialized technical assistance? Our expert team is ready to help.',
+    'technical.support.contact': 'Contact Support',
     
     // FAQ Questions and Answers
     'faq.q1': 'What are the main types of tower cranes?',
@@ -556,9 +556,9 @@ export const translations: Record<Language, Record<string, string>> = {
     'contact.info.title': 'Onze Contactgegevens',
     'contact.info.address': 'Kantooradres',
     'contact.info.contact': 'Contact',
-    'contact.info.email': 'E-mail',
+    'contact.info.email': 'E-Mail',
     'contact.info.hours': 'Kantooruren',
-    'contact.info.workdays': 'Maandag - Vrijdag: 8:00 - 17:00 uur',
+    'contact.info.workdays': 'Maandag - Vrijdag: 8:00 - 17:00 Uur',
     'contact.info.weekend': 'Zaterdag - Zondag: Gesloten',
     'contact.form.select': 'Selecteer een onderwerp',
     'contact.form.sales': 'Verkoopvraag',
@@ -588,7 +588,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'faq.q5': 'Wat zijn de windsnelheidslimieten voor torenkraanbediening?',
     'faq.a5': 'Torenkranen hebben meestal operationele windsnelheidslimieten van ongeveer 20-25 mph (32-40 km/u) voor normale werking. Wanneer de windsnelheden ongeveer 45 mph (72 km/h) bereiken, moeten kranen in windhaan-modus worden gezet om de giek vrij met de wind te laten bewegen. Deze limieten kunnen echter variëren afhankelijk van het specifieke kraanmodel, de kenmerken van de last en de richtlijnen van de fabrikant. Het is essentieel om de specificaties van de kraanfabrikant te volgen en rekening te houden met locatiespecifieke omstandigheden bij het bepalen van veilige bedrijfsparameters.',
     'faq.q6': 'Welke kwalificaties zijn vereist om een torenkraan te bedienen?',
-    'faq.a6': 'Torenkraanoperators hebben specifieke certificeringen en kwalificaties nodig, die je naar land en regio verschillen. Over het algemeen moeten operators een erkend trainingsprogramma voltooien, slagen voor zowel schriftelijke als praktische examens en een certificering verkrijgen van een geaccrediteerde organisatie. Ze moeten ook een goed dieptezicht, coördinatie en concentratievermogen hebben. Bovendien vereisen de meeste rechtsgebieden regelmatige hercertificering om ervoor te zorgen dat operators hun vaardigheden en kennis van huidige veiligheidsprotocollen en technologische vooruitgang behouden.',
+    'faq.a6': 'Torenkraanoperators hebben specifieke certificeringen en kwalificaties nodig, die je naar land en regio verschillen. Over het algemeen moeten operators een erkend trainingsprogramma voltooien, slagen voor zowel schriftelijke als praktische examens en een certificering verkrijgen van een geaccrediteerde organisatie. Ze moeten ook een goed dieptezicht, coördinatie en concentratievermogen hebben. Bovendien verlangen de meeste Jurisdiktionen regelmäßige Rezertifizierungen, um sicherzustellen, dass die Bediener ihre Fähigkeiten und Kenntnisse aktueller Sicherheitsprotokolle und technologischer Fortschritte aufrechterhalten.',
   },
   de: {
     // Navigation
@@ -922,9 +922,16 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
 // Custom hook to use language context
 export function useLanguage() {
-  const context = useContext(LanguageContext);
+  const context = useContext(LanguageContext)
+  
   if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
+    // Provide a fallback context if used outside provider
+    return {
+      language: 'en' as Language,
+      setLanguage: () => console.warn('LanguageContext: setLanguage called outside provider'),
+      t: (key: string) => key // Return the key itself as fallback
+    }
   }
-  return context;
+  
+  return context
 }

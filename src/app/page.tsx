@@ -38,4 +38,4 @@ export default function Home() {
       <DynamicCtaSection />
     </main>
   )
-}
+} 

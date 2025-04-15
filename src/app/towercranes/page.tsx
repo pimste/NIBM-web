@@ -6,8 +6,9 @@ import Link from 'next/link'
 import { NextSeo } from 'next-seo'
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/context/LanguageContext'
-import ClientOnly from '@/components/ClientOnly'
-import { FaArrowRight } from 'react-icons/fa'
+import { ClientOnly } from '@/components/ClientOnly'
+import { FaArrowRight, FaSearch, FaFilter, FaTimes } from 'react-icons/fa'
+import { MotionDiv } from '@/components/MotionWrapper'
 
 // Utility function to generate slugs from crane names
 const generateSlug = (name: string): string => {
@@ -311,7 +312,7 @@ export default function TowerCranes() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredCranes.map((crane) => (
-                <motion.div
+                <MotionDiv
                   key={crane.id}
                   className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
                   initial={{ opacity: 0, y: 20 }}
@@ -367,7 +368,7 @@ export default function TowerCranes() {
                       </Link>
                     </div>
                   </div>
-                </motion.div>
+                </MotionDiv>
               ))}
             </div>
           )}

@@ -1,22 +1,51 @@
 {
   "name": "NIBM Tower Cranes",
-  "short_name": "NIBM",
-  "description": "Professional tower crane solutions for construction projects",
+  "short_name": "NIBM Cranes",
+  "description": "Professional tower crane services including sales, rental, and support across Europe",
   "icons": [
     {
-      "src": "/images/logo-blue.png",
+      "src": "/images/optimized/logo-blue.webp",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/webp",
+      "purpose": "any maskable"
     },
     {
-      "src": "/images/logo-blue.png",
+      "src": "/images/optimized/logo-blue.webp",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/webp",
+      "purpose": "any maskable"
     }
   ],
-  "theme_color": "#0B3B7F",
+  "theme_color": "#0F172A",
   "background_color": "#ffffff",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/"
+  "start_url": "/",
+  "orientation": "portrait-primary",
+  "shortcuts": [
+    {
+      "name": "Tower Cranes",
+      "short_name": "Cranes",
+      "description": "Browse available tower cranes",
+      "url": "/towercranes",
+      "icons": [{ "src": "/images/optimized/logo-blue.webp", "sizes": "192x192" }]
+    },
+    {
+      "name": "Services",
+      "short_name": "Services",
+      "description": "Learn about our services",
+      "url": "/services",
+      "icons": [{ "src": "/images/optimized/logo-blue.webp", "sizes": "192x192" }]
+    },
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch with our team",
+      "url": "/contact",
+      "icons": [{ "src": "/images/optimized/logo-blue.webp", "sizes": "192x192" }]
+    }
+  ],
+  "lang": "en",
+  "dir": "ltr",
+  "prefer_related_applications": false
 } 
