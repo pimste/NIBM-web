@@ -1,4 +1,5 @@
 import '@/app/globals.css'
+import '@/app/form-normalizer.css'
 import { Inter, Montserrat } from 'next/font/google'
 import type { Metadata, Viewport } from 'next'
 import { Header } from '@/components/Header'

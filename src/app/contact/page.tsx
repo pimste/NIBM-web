@@ -173,23 +173,25 @@ export default function Contact() {
                     <label htmlFor="subject" className="block text-sm font-medium text-neutral-700 mb-1">
                       {t('contact.form.subject')}
                     </label>
-                    <select
-                      id="subject"
-                      name="subject"
-                      required
-                      className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      disabled={isSubmitting}
-                    >
-                      <option value="">{t('contact.form.select')}</option>
-                      <option value="Sales Inquiry">{t('contact.form.sales')}</option>
-                      <option value="Rental Inquiry">{t('contact.form.rental')}</option>
-                      <option value="Technical Support">{t('contact.form.technical')}</option>
-                      <option value="Parts and Service">{t('contact.form.parts')}</option>
-                      <option value="Training">{t('contact.form.training')}</option>
-                      <option value="Other">{t('contact.form.other')}</option>
-                    </select>
+                    <div className="select-wrapper">
+                      <select
+                        id="subject"
+                        name="subject"
+                        required
+                        className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                        value={formData.subject}
+                        onChange={handleInputChange}
+                        disabled={isSubmitting}
+                      >
+                        <option value="">{t('contact.form.select')}</option>
+                        <option value="Sales Inquiry">{t('contact.form.sales')}</option>
+                        <option value="Rental Inquiry">{t('contact.form.rental')}</option>
+                        <option value="Technical Support">{t('contact.form.technical')}</option>
+                        <option value="Parts and Service">{t('contact.form.parts')}</option>
+                        <option value="Training">{t('contact.form.training')}</option>
+                        <option value="Other">{t('contact.form.other')}</option>
+                      </select>
+                    </div>
                   </div>
                   <div className="mb-6">
                     <label htmlFor="message" className="block text-sm font-medium text-neutral-700 mb-1">

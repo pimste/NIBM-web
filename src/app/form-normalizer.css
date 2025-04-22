@@ -1,0 +1,63 @@
+/* Custom CSS for normalizing form select elements across browsers */
+
+/* Base styles for select elements */
+select {
+  appearance: none; /* Remove browser-specific styling */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+  padding-right: 2.5rem !important; /* Ensure space for the arrow */
+}
+
+/* Hide default arrow in IE10+ */
+select::-ms-expand {
+  display: none;
+}
+
+/* Firefox specific fixes */
+@-moz-document url-prefix() {
+  select {
+    text-indent: 0.01px;
+    text-overflow: '';
+    padding-right: 2.5rem;
+  }
+}
+
+/* Edge and IE11 fixes */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  select {
+    background-image: none;
+    padding-right: 0.75rem;
+  }
+}
+
+/* Safari specific fixes for alignment */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select {
+    padding-right: 2.5rem;
+  }
+}
+
+/* Styles for the container to help position the custom arrow */
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Style focus state consistently */
+select:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(11, 59, 127, 0.2);
+}
+
+/* Disabled state */
+select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: #F1F5F9;
+} 

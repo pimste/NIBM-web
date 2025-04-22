@@ -231,17 +231,19 @@ export default function TowerCranes() {
                     {t('towercranes.filter.status')}
                   </label>
                 </ClientOnly>
-                <select
-                  id="status"
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  value={filters.status}
-                  onChange={(e) => handleFilterChange('status', e.target.value)}
-                >
-                  <option value="all">{t('towercranes.filter.all')}</option>
-                  <option value="towercranes.status.available">{t('towercranes.status.available')}</option>
-                  <option value="towercranes.status.comingsoon">{t('towercranes.status.comingsoon')}</option>
-                  <option value="towercranes.status.sold">{t('towercranes.status.sold')}</option>
-                </select>
+                <div className="select-wrapper">
+                  <select
+                    id="status"
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    value={filters.status}
+                    onChange={(e) => handleFilterChange('status', e.target.value)}
+                  >
+                    <option value="all">{t('towercranes.filter.all')}</option>
+                    <option value="towercranes.status.available">{t('towercranes.status.available')}</option>
+                    <option value="towercranes.status.comingsoon">{t('towercranes.status.comingsoon')}</option>
+                    <option value="towercranes.status.sold">{t('towercranes.status.sold')}</option>
+                  </select>
+                </div>
               </div>
               <div>
                 <ClientOnly fallback={
@@ -253,16 +255,18 @@ export default function TowerCranes() {
                     {t('towercranes.filter.type')}
                   </label>
                 </ClientOnly>
-                <select
-                  id="type"
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  value={filters.type}
-                  onChange={(e) => handleFilterChange('type', e.target.value)}
-                >
-                  <option value="all">{t('towercranes.filter.all')}</option>
-                  <option value="towercranes.type.flattop">{t('towercranes.type.flattop')}</option>
-                  <option value="towercranes.type.topslewing">{t('towercranes.type.topslewing')}</option>
-                </select>
+                <div className="select-wrapper">
+                  <select
+                    id="type"
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    value={filters.type}
+                    onChange={(e) => handleFilterChange('type', e.target.value)}
+                  >
+                    <option value="all">{t('towercranes.filter.all')}</option>
+                    <option value="towercranes.type.flattop">{t('towercranes.type.flattop')}</option>
+                    <option value="towercranes.type.topslewing">{t('towercranes.type.topslewing')}</option>
+                  </select>
+                </div>
               </div>
               <div>
                 <ClientOnly fallback={
@@ -274,16 +278,18 @@ export default function TowerCranes() {
                     {t('towercranes.filter.category')}
                   </label>
                 </ClientOnly>
-                <select
-                  id="category"
-                  className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                  value={filters.category}
-                  onChange={(e) => handleFilterChange('category', e.target.value)}
-                >
-                  <option value="all">{t('towercranes.filter.all')}</option>
-                  <option value="towercranes.category.sale">{t('towercranes.category.sale')}</option>
-                  <option value="towercranes.category.rental">{t('towercranes.category.rental')}</option>
-                </select>
+                <div className="select-wrapper">
+                  <select
+                    id="category"
+                    className="w-full px-3 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                    value={filters.category}
+                    onChange={(e) => handleFilterChange('category', e.target.value)}
+                  >
+                    <option value="all">{t('towercranes.filter.all')}</option>
+                    <option value="towercranes.category.sale">{t('towercranes.category.sale')}</option>
+                    <option value="towercranes.category.rental">{t('towercranes.category.rental')}</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
