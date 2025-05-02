@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react'
 import { FaCheckCircle } from 'react-icons/fa'
 import { useLanguage } from '@/context/LanguageContext'
 import dynamic from 'next/dynamic'
+import { Metadata } from 'next'
+import { generatePageMetadata } from '../page-metadata'
 
 // Safely import ClientOnly
 const ClientOnly = dynamic(
@@ -23,6 +25,42 @@ const MotionDiv = dynamic(
     loading: () => <div /> 
   }
 )
+
+// Generate metadata for this page
+export const generateMetadata = async ({
+  params,
+  searchParams,
+}: {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}): Promise<Metadata> {
+  // Define base metadata for this specific page
+  const baseMetadata: Metadata = {
+    title: 'About Us',
+    description: 'Learn about NIBM Tower Cranes, your trusted partner for tower crane sales, rentals, and services since 1995.',
+    openGraph: {
+      title: 'About NIBM Tower Cranes',
+      description: 'Your trusted partner for tower crane sales, rentals, and services since 1995.',
+      url: 'https://www.nibmvb.eu/about',
+      images: [
+        {
+          url: 'https://www.nibmvb.eu/images/about-og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'NIBM Tower Cranes Headquarters'
+        }
+      ]
+    },
+  }
+
+  // Use the utility to generate metadata with canonical URLs
+  return generatePageMetadata(
+    baseMetadata,
+    '/about',
+    'https://www.nibmvb.eu',
+    ['en', 'nl', 'de']
+  )
+}
 
 export default function About() {
   const languageContext = useLanguage()

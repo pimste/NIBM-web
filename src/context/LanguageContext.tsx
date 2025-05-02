@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode, useCallback, useMemo } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
+import { setCookie, getCookie } from 'cookies-next'
 
 // Define available languages
 export type Language = 'en' | 'nl' | 'de'
@@ -318,7 +319,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'nav.home': 'Home',
     'nav.about': 'Over Ons',
     'nav.services': 'Diensten',
-    'nav.towercranes': 'Available Towercranes',
+    'nav.towercranes': 'Beschikbare Torenkranen',
     'nav.technical': 'Technische Informatie',
     'nav.contact': 'Contact',
     'nav.quote': 'Offerte Aanvragen',
@@ -482,7 +483,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'services.mounting.feature2': 'Naleving van alle veiligheidsvoorschriften',
     'services.mounting.feature3': 'Grondige tests en ingebruikname',
     'services.mounting.feature4': 'Efficiënte demontagediensten',
-    'services.mounting.feature5': 'Uitgebreide documentatie',
+    'services.mounting.feature5': 'Comprehensive documentation',
     
     'services.training.title': 'Training & Certificering',
     'services.training.feature1': 'Gecertificeerde kraanmachinist training',
@@ -874,31 +875,111 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   // Start with 'en' as default for SSR
   const [language, setLanguageState] = useState<Language>('en')
   const [mounted, setMounted] = useState(false)
+  const pathname = usePathname()
+  
+  // This effect detects language from URL path and sets it as the active language
+  useEffect(() => {
+    if (!pathname || !mounted) return
+    
+    console.log(`LanguageContext: Checking URL path: ${pathname}`);
+    
+    // Check if the URL has a language prefix
+    const pathParts = pathname.split('/').filter(Boolean)
+    const firstPart = pathParts[0]
+    
+    if (['en', 'nl', 'de'].includes(firstPart)) {
+      const urlLang = firstPart as Language
+      console.log(`LanguageContext: Detected language from URL: ${urlLang}, current: ${language}`);
+      
+      // Always update state to match URL language - URL is the source of truth
+      if (urlLang !== language) {
+        console.log(`LanguageContext: Setting language from URL: ${urlLang}`);
+        // Update all language indicators
+        localStorage.setItem('language', urlLang)
+        setCookie('NEXT_LOCALE', urlLang, { maxAge: 30 * 24 * 60 * 60 }) // 30 days
+        setLanguageState(urlLang)
+      }
+    }
+  }, [pathname, mounted, language])
   
   // This effect runs only once on client-side after first render
   useEffect(() => {
     setMounted(true)
     
-    // Only run language detection on the client
-    const storedLang = localStorage.getItem('language') as Language
-    if (storedLang && ['en', 'nl', 'de'].includes(storedLang)) {
-      setLanguageState(storedLang)
+    // Only run once on initial client-side render
+    // Check URL first as it's the most authoritative source
+    const pathParts = pathname?.split('/').filter(Boolean) || [];
+    const firstPart = pathParts[0];
+    
+    if (['en', 'nl', 'de'].includes(firstPart)) {
+      // URL has a language prefix, use it
+      const urlLang = firstPart as Language;
+      setLanguageState(urlLang);
+      localStorage.setItem('language', urlLang);
+      setCookie('NEXT_LOCALE', urlLang, { maxAge: 30 * 24 * 60 * 60 });
     } else {
-      // Default to browser language if supported
-      const browserLang = navigator.language.split('-')[0] as Language
-      if (['en', 'nl', 'de'].includes(browserLang)) {
-        setLanguageState(browserLang)
+      // URL has no language prefix, check cookie/localStorage/browser
+      const cookieLang = getCookie('NEXT_LOCALE') as Language;
+      const storedLang = localStorage.getItem('language') as Language;
+      
+      if (cookieLang && ['en', 'nl', 'de'].includes(cookieLang)) {
+        setLanguageState(cookieLang);
+        localStorage.setItem('language', cookieLang);
+      } else if (storedLang && ['en', 'nl', 'de'].includes(storedLang)) {
+        setLanguageState(storedLang);
+        setCookie('NEXT_LOCALE', storedLang, { maxAge: 30 * 24 * 60 * 60 });
+      } else {
+        // Default to browser language if supported
+        const browserLang = navigator.language.split('-')[0] as Language;
+        if (['en', 'nl', 'de'].includes(browserLang)) {
+          setLanguageState(browserLang);
+          localStorage.setItem('language', browserLang);
+          setCookie('NEXT_LOCALE', browserLang, { maxAge: 30 * 24 * 60 * 60 });
+        }
       }
     }
-  }, [])
+  }, [pathname]);
 
-  // Update language and save to localStorage
+  // Update language and save to localStorage and cookie
   const setLanguage = useCallback((lang: Language) => {
     if (!mounted) return // Only run on client
     
+    console.log(`LanguageContext: Setting language to ${lang}`);
     localStorage.setItem('language', lang)
+    setCookie('NEXT_LOCALE', lang, { maxAge: 30 * 24 * 60 * 60 }) // 30 days
     setLanguageState(lang)
-  }, [mounted])
+    
+    // Force reload the page with the correct language URL
+    if (pathname) {
+      // Extract the current path without the language prefix
+      const pathParts = pathname.split('/').filter(Boolean)
+      const currentLang = pathParts[0]
+      let newPathname = pathname
+      
+      // Check if current path starts with a language code
+      if (['en', 'nl', 'de'].includes(currentLang)) {
+        // It does have a language prefix, replace it
+        const pathWithoutLang = pathParts.slice(1).join('/')
+        newPathname = `/${lang}${pathWithoutLang ? `/${pathWithoutLang}` : ''}`
+        console.log(`LanguageContext: Path has language prefix. New path: ${newPathname}`);
+      } else {
+        // It doesn't have a language prefix, add the new one
+        newPathname = `/${lang}${pathname}`
+        console.log(`LanguageContext: Path doesn't have language prefix. New path: ${newPathname}`);
+      }
+      
+      // Normalize the path to avoid double slashes
+      newPathname = newPathname.replace(/\/+/g, '/')
+      if (newPathname.endsWith('/') && newPathname !== '/') {
+        newPathname = newPathname.slice(0, -1)
+      }
+      
+      console.log(`LanguageContext: Redirecting to: ${newPathname}`);
+      
+      // Force hard navigation to the new URL to ensure complete page reload
+      window.location.href = newPathname
+    }
+  }, [mounted, pathname])
   
   // Translation function
   const t = useCallback((key: string): string => {

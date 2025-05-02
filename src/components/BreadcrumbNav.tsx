@@ -20,7 +20,7 @@ export function BreadcrumbNav() {
   }
 
   // Don't render breadcrumbs on the homepage
-  if (pathname === '/') {
+  if (!pathname || pathname === '/') {
     return null
   }
 
@@ -29,6 +29,19 @@ export function BreadcrumbNav() {
   
   // If no segments after filtering, don't render breadcrumbs
   if (pathSegments.length === 0) {
+    return null
+  }
+
+  // Get the language from the URL path (first segment)
+  const supportedLanguages = ['en', 'nl', 'de']
+  const urlLanguage = supportedLanguages.includes(pathSegments[0]) ? pathSegments[0] : 'en'
+  
+  // Check if the first segment is a language code and skip it in breadcrumbs display
+  const isFirstSegmentLanguage = supportedLanguages.includes(pathSegments[0])
+  const contentSegments = isFirstSegmentLanguage ? pathSegments.slice(1) : pathSegments
+
+  // Don't render breadcrumbs if we're on the language root page
+  if (isFirstSegmentLanguage && contentSegments.length === 0) {
     return null
   }
 
@@ -51,14 +64,14 @@ export function BreadcrumbNav() {
   }
 
   // Create the breadcrumb items
-  let currentPath = ''
+  let currentPath = isFirstSegmentLanguage ? `/${pathSegments[0]}` : ''
   const breadcrumbs = [
     // Always start with Home
-    { href: '/', label: t('nav.home') }
+    { href: isFirstSegmentLanguage ? `/${pathSegments[0]}` : '/', label: t('nav.home') }
   ]
 
-  // Build up the breadcrumbs based on path segments
-  pathSegments.forEach((segment) => {
+  // Build up the breadcrumbs based on content segments
+  contentSegments.forEach((segment) => {
     currentPath += `/${segment}`
     breadcrumbs.push({
       href: currentPath,

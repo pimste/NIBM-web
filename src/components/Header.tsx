@@ -5,14 +5,15 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaBars, FaTimes, FaPhone, FaEnvelope } from 'react-icons/fa'
+import { FaBars, FaTimes, FaPhone, FaEnvelope, FaArrowRight } from 'react-icons/fa'
 import { useLanguage } from '@/context/LanguageContext'
 import dynamic from 'next/dynamic'
+import { ProtectedContact } from './ProtectedContact'
 
 // Dynamically import the LanguageSwitcher with fallback
 const LanguageSwitcher = dynamic(
   () => import('./LanguageSwitcher').then(mod => mod.LanguageSwitcher),
-  { ssr: false, loading: () => <div className="w-6 h-6 rounded-full bg-primary-800"></div> }
+  { ssr: false, loading: () => null }
 )
 
 // Dynamically import ClientOnly with fallback
@@ -21,17 +22,16 @@ const ClientOnly = dynamic(
   { ssr: false, loading: () => null }
 )
 
-const navigation = [
-  { key: 'nav.home', href: '/' },
-  { key: 'nav.about', href: '/about' },
-  { key: 'nav.services', href: '/services' },
-  { key: 'nav.towercranes', href: '/towercranes' },
-  { key: 'nav.technical', href: '/technical-info' },
-  { key: 'nav.contact', href: '/contact' },
-]
+// Instead of hardcoded paths, create a function to get language-aware URLs
+const getLanguageAwareUrl = (path: string, language: string) => {
+  if (path === '/') {
+    return `/${language}`;
+  }
+  return `/${language}${path}`;
+};
 
 export function Header() {
-  const { t: translate } = useLanguage()
+  const { t: translate, language } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
@@ -66,6 +66,16 @@ export function Header() {
     }
   }
 
+  // Navigation with language-aware URLs
+  const navigationItems = [
+    { key: 'nav.home', href: getLanguageAwareUrl('/', language) },
+    { key: 'nav.about', href: getLanguageAwareUrl('/about', language) },
+    { key: 'nav.services', href: getLanguageAwareUrl('/services', language) },
+    { key: 'nav.towercranes', href: getLanguageAwareUrl('/towercranes', language) },
+    { key: 'nav.technical', href: getLanguageAwareUrl('/technical-info', language) },
+    { key: 'nav.contact', href: getLanguageAwareUrl('/contact', language) },
+  ]
+
   return (
     <>
       {/* Top Contact Bar */}
@@ -74,12 +84,18 @@ export function Header() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center">
               <div className="flex items-center space-x-6">
-                <a href="tel:+31653206004" className="flex items-center text-sm hover:text-secondary transition-colors">
-                  <FaPhone className="mr-2" /> +31 6 53206004
-                </a>
-                <a href="mailto:gid.gehlen@nibmtowercranes.com" className="flex items-center text-sm hover:text-secondary transition-colors">
-                  <FaEnvelope className="mr-2" /> gid.gehlen@nibmtowercranes.com
-                </a>
+                <ProtectedContact 
+                  type="phone" 
+                  value="+31653206004" 
+                  className="flex items-center text-sm hover:text-secondary transition-colors"
+                  iconClassName="mr-2"
+                />
+                <ProtectedContact 
+                  type="email" 
+                  value="gid.gehlen@nibmtowercranes.com" 
+                  className="flex items-center text-sm hover:text-secondary transition-colors"
+                  iconClassName="mr-2"
+                />
               </div>
               <div className="flex space-x-4 items-center">
                 <Link href="/technical-info#faq" className="text-xs hover:text-secondary transition-colors">{t('topbar.faq')}</Link>
@@ -128,7 +144,7 @@ export function Header() {
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center space-x-1 flex-grow justify-end">
               <div className="flex flex-wrap justify-end items-center">
-                {navigation.map((item, index) => (
+                {navigationItems.map((item, index) => (
                   <motion.div
                     key={item.key}
                     initial={{ opacity: 0, y: -10 }}
@@ -167,7 +183,7 @@ export function Header() {
                 className="ml-4"
               >
                 <Link
-                  href="/contact"
+                  href={getLanguageAwareUrl('/contact', language)}
                   className="bg-secondary hover:bg-secondary-600 text-white font-medium px-3 lg:px-4 xl:px-6 py-2.5 rounded-md transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 text-sm lg:text-base whitespace-nowrap"
                 >
                   {t('nav.quote')}
@@ -244,7 +260,7 @@ export function Header() {
                 </div>
                 
                 <nav className="space-y-8">
-                  {navigation.map((item, index) => (
+                  {navigationItems.map((item, index) => (
                     <motion.div
                       key={item.key}
                       initial={{ opacity: 0, y: 20 }}
@@ -268,29 +284,39 @@ export function Header() {
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: navigation.length * 0.1 }}
+                    transition={{ duration: 0.3, delay: navigationItems.length * 0.1 }}
                     className="pt-6"
                   >
-                    <Link
-                      href="/contact"
-                      className="inline-block bg-secondary hover:bg-secondary-600 text-white font-medium px-8 py-3 rounded-md transition-colors w-full text-center text-lg"
-                      onClick={toggleMenu}
+                    <Link 
+                      href={getLanguageAwareUrl('/contact', language)} 
+                      className="w-full flex items-center justify-center bg-secondary hover:bg-secondary-600 text-white font-medium px-5 py-3 rounded-md transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 space-x-2 mt-4"
                     >
-                      {t('nav.quote')}
+                      <span>{t('nav.quote')}</span>
+                      <motion.span 
+                        initial={{ x: 0 }}
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 1, repeat: Infinity, repeatDelay: 2 }}
+                      >
+                        <FaArrowRight />
+                      </motion.span>
                     </Link>
                   </motion.div>
                   
                   <div className="pt-8 border-t border-primary-800">
                     <p className="text-white/60 mb-4">Contact Us</p>
                     <div className="space-y-3">
-                      <a href="tel:+31653206004" className="flex items-center text-white hover:text-secondary transition-colors">
-                        <FaPhone className="mr-3 w-4 h-4" /> 
-                        <span>+31 6 53206004</span>
-                      </a>
-                      <a href="mailto:gid.gehlen@nibmtowercranes.com" className="flex items-center text-white hover:text-secondary transition-colors">
-                        <FaEnvelope className="mr-3 w-4 h-4" /> 
-                        <span>gid.gehlen@nibmtowercranes.com</span>
-                      </a>
+                      <ProtectedContact 
+                        type="phone" 
+                        value="+31653206004" 
+                        className="flex items-center text-white hover:text-secondary transition-colors"
+                        iconClassName="mr-3 w-4 h-4"
+                      />
+                      <ProtectedContact 
+                        type="email" 
+                        value="gid.gehlen@nibmtowercranes.com" 
+                        className="flex items-center text-white hover:text-secondary transition-colors"
+                        iconClassName="mr-3 w-4 h-4"
+                      />
                     </div>
                   </div>
                 </nav>

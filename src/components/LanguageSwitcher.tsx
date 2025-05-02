@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage, Language } from '@/context/LanguageContext'
 import dynamic from 'next/dynamic'
@@ -49,6 +50,8 @@ const flagStyles: Record<Language, { background: string }> = {
 export function LanguageSwitcher() {
   const languageContext = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
   
   // Create safe versions of the language context
   const language = languageContext?.language || 'en' as Language
@@ -70,20 +73,39 @@ export function LanguageSwitcher() {
     if (lang !== language) {
       console.log(`Changing language from ${language} to ${lang}`);
       
-      // Set the language in context/localStorage
-      setLanguage(lang);
+      // Set cookie for language preference
+      document.cookie = `NEXT_LOCALE=${lang}; path=/; max-age=${30 * 24 * 60 * 60}`;
       
-      // Force re-render by dispatching custom events
-      try {
-        // Use both events for redundancy
-        window.dispatchEvent(new Event('languageChange'));
-        setTimeout(() => {
-          window.dispatchEvent(new Event('languageChanged'));
-          console.log('Language change events dispatched');
-        }, 50);
-      } catch (error) {
-        console.error('Error dispatching language change event:', error);
+      // Parse the current pathname to properly update the URL
+      const pathParts = pathname?.split('/').filter(Boolean) || [];
+      const supportedLangs = ['en', 'nl', 'de'];
+      
+      // Check if the first part is a language code
+      const hasLangPrefix = pathParts.length > 0 && supportedLangs.includes(pathParts[0]);
+      
+      // Construct new URL with correct language prefix
+      let newPath;
+      if (hasLangPrefix) {
+        // Replace existing language prefix
+        const pathWithoutLang = pathParts.slice(1).join('/');
+        newPath = `/${lang}${pathWithoutLang ? `/${pathWithoutLang}` : ''}`;
+      } else {
+        // Add language prefix to path
+        newPath = `/${lang}${pathname || ''}`;
       }
+      
+      // Normalize path (remove duplicate slashes)
+      newPath = newPath.replace(/\/+/g, '/');
+      
+      // Remove trailing slash unless it's the root path
+      if (newPath.endsWith('/') && newPath !== '/') {
+        newPath = newPath.slice(0, -1);
+      }
+      
+      console.log(`Redirecting to: ${newPath}`);
+      
+      // Navigate to the new URL
+      window.location.href = newPath;
     }
     setIsOpen(false);
   }

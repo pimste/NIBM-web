@@ -5,6 +5,7 @@ import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaClock } from 'react-icons/fa'
 import { useLanguage } from '@/context/LanguageContext'
 import { ClientOnly } from '@/components/ClientOnly'
 import { MotionDiv } from '@/components/MotionWrapper'
+import { ProtectedContact } from '@/components/ProtectedContact'
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -256,11 +257,12 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-bold text-neutral-900 mb-1">{t('contact.info.contact')}</h3>
-                    <p className="text-neutral-700">
-                      <a href="tel:+31653206004" className="hover:text-primary transition-colors">
-                        +31 6 53206004
-                      </a>
-                    </p>
+                    <ProtectedContact 
+                      type="phone" 
+                      value="+31653206004" 
+                      className="text-neutral-700 hover:text-primary transition-colors"
+                      iconClassName="hidden"
+                    />
                   </div>
                 </div>
                 <div className="flex items-start mb-6">
@@ -269,11 +271,12 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-bold text-neutral-900 mb-1">{t('contact.info.email')}</h3>
-                    <p className="text-neutral-700">
-                      <a href="mailto:gid.gehlen@nibmtowercranes.com" className="hover:text-primary transition-colors">
-                        gid.gehlen@nibmtowercranes.com
-                      </a>
-                    </p>
+                    <ProtectedContact 
+                      type="email" 
+                      value="gid.gehlen@nibmtowercranes.com" 
+                      className="text-neutral-700 hover:text-primary transition-colors"
+                      iconClassName="hidden"
+                    />
                   </div>
                 </div>
                 <div className="flex items-start">

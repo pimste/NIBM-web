@@ -1,73 +1,88 @@
 'use client'
 
 import Link from 'next/link'
-import { FaPhone, FaEnvelope } from 'react-icons/fa'
-import { AnimatedElement } from './AnimatedElement'
+import Image from 'next/image'
+import { FaArrowRight } from 'react-icons/fa'
+import { motion } from 'framer-motion'
 import { useLanguage } from '@/context/LanguageContext'
+import { useLanguageUrl } from '@/hooks/useLanguageUrl'
 
-function CtaSection() {
+export default function CtaSection() {
   const { t } = useLanguage()
+  const { getUrl } = useLanguageUrl()
   
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="relative py-20 overflow-hidden">
       {/* Background Image with Overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center z-0"
-        style={{ backgroundImage: "url('/images/optimized/sunset-TC-2.webp')" }}
-      >
-        <div className="absolute inset-0 bg-primary opacity-90"></div>
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/optimized/cropped-Top-page2-potain6.webp"
+          alt="Tower cranes at a construction site"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          priority={false}
+          quality={80}
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary-900/90 to-primary-800/80"></div>
       </div>
 
+      {/* Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <AnimatedElement>
-            <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6"
+            >
               {t('cta.title')}
-            </h2>
-            <p className="text-xl text-white/90 mb-10 max-w-3xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto"
+            >
               {t('cta.subtitle')}
-            </p>
-          </AnimatedElement>
-          
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-10">
-            <AnimatedElement 
-              className="flex items-center justify-center px-6 py-4 bg-white rounded-md shadow-md" 
-              animationVariant="fadeInLeft"
-              delay={0.2}
-            >
-              <FaPhone className="text-primary mr-3 h-5 w-5" />
-              <a href="tel:+31653206004" className="text-neutral-900 font-medium">
-                +31 6 53206004
-              </a>
-            </AnimatedElement>
-            
-            <AnimatedElement 
-              className="flex items-center justify-center px-6 py-4 bg-white rounded-md shadow-md"
-              animationVariant="fadeInRight" 
-              delay={0.3}
-            >
-              <FaEnvelope className="text-primary mr-3 h-5 w-5" />
-              <a href="mailto:gid.gehlen@nibmtowercranes.com" className="text-neutral-900 font-medium">
-                gid.gehlen@nibmtowercranes.com
-              </a>
-            </AnimatedElement>
+            </motion.p>
           </div>
           
-          <AnimatedElement delay={0.4}>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className="flex flex-col sm:flex-row gap-6 justify-center"
+          >
             <Link
-              href="/contact"
-              className="btn-primary"
+              href={getUrl('/contact')}
+              className="flex items-center justify-center gap-2 bg-secondary hover:bg-secondary-600 text-white font-medium px-8 py-4 rounded-md transition-all shadow-lg hover:shadow-secondary/30 text-center group"
             >
               {t('cta.quote')}
+              <motion.span 
+                animate={{ x: [0, 5, 0] }}
+                transition={{ duration: 1, repeat: Infinity, repeatDelay: 1 }}
+              >
+                <FaArrowRight />
+              </motion.span>
             </Link>
-          </AnimatedElement>
+            <Link
+              href={getUrl('/towercranes')}
+              className="flex items-center justify-center gap-2 bg-white hover:bg-neutral-100 text-primary-900 font-medium px-8 py-4 rounded-md transition-all shadow-lg hover:shadow-white/30 text-center"
+            >
+              {t('cta.explore')}
+            </Link>
+          </motion.div>
         </div>
       </div>
     </section>
   )
 }
 
-// Default export for dynamic import
-export default CtaSection
-// Named export for direct imports
 export { CtaSection } 

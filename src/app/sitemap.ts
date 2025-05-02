@@ -16,94 +16,71 @@ const towercranes = [
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://www.nibmvb.eu';
   
-  // Main static pages
-  const staticPages = [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/services`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/towercranes`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/technical-info`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/privacy-policy`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/terms-of-service`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
-    {
-      url: `${baseUrl}/cookies`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
+  // Define supported languages
+  const languages = ['en', 'nl', 'de'];
+  
+  // Main static pages - these will now use language prefixes
+  const routes = [
+    '',                  // Home
+    '/about',            // About
+    '/services',         // Services
+    '/towercranes',      // Towercranes
+    '/technical-info',   // Technical info
+    '/contact',          // Contact
+    '/privacy-policy',   // Privacy policy
+    '/terms-of-service', // Terms of service
+    '/cookies',          // Cookies policy
   ];
   
-  // Tower crane detail pages
-  const towercranesPages = towercranes.map(crane => {
-    return {
-      url: `${baseUrl}/towercranes/${crane.slug}`,
-      lastModified: crane.lastModified,
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    };
-  });
+  // Create sitemap entries with proper language subfolders
+  const entries: MetadataRoute.Sitemap = [];
   
-  // Localized pages for each supported language
-  const languages = ['en', 'nl', 'de'];
-  const localizedPages = staticPages.flatMap(page => {
-    return languages.map(lang => {
-      // Skip the default language as it doesn't have a prefix
-      if (lang === 'en' && page.url === baseUrl) {
-        return null;
+  // Add entries for each route in each language
+  languages.forEach(lang => {
+    routes.forEach(route => {
+      // For home page
+      if (route === '') {
+        entries.push({
+          url: `${baseUrl}/${lang}`,
+          lastModified: new Date(),
+          changeFrequency: lang === 'en' ? 'weekly' : 'monthly',
+          priority: lang === 'en' ? 1.0 : 0.9,
+          alternateRefs: languages.map(altLang => ({
+            hreflang: altLang,
+            href: `${baseUrl}/${altLang}`
+          }))
+        });
+      } else {
+        // For other pages
+        entries.push({
+          url: `${baseUrl}/${lang}${route}`,
+          lastModified: new Date(),
+          changeFrequency: lang === 'en' ? 'monthly' : 'monthly',
+          priority: lang === 'en' ? 0.8 : 0.7,
+          alternateRefs: languages.map(altLang => ({
+            hreflang: altLang,
+            href: `${baseUrl}/${altLang}${route}`
+          }))
+        });
       }
-      
-      const langPath = lang === 'en' ? '' : `/${lang}`;
-      const pagePath = page.url.replace(baseUrl, '');
-      
-      return {
-        url: `${baseUrl}${langPath}${pagePath}`,
-        lastModified: page.lastModified,
-        changeFrequency: page.changeFrequency,
-        priority: page.priority - 0.1, // Slightly lower priority for localized versions
-      };
-    }).filter(Boolean);
+    });
   });
   
-  return [...staticPages, ...towercranesPages, ...localizedPages];
+  // Tower crane detail pages with language prefixes
+  languages.forEach(lang => {
+    towercranes.forEach(crane => {
+      entries.push({
+        url: `${baseUrl}/${lang}/towercranes/${crane.slug}`,
+        lastModified: crane.lastModified,
+        changeFrequency: 'monthly',
+        priority: lang === 'en' ? 0.7 : 0.6,
+        alternateRefs: languages.map(altLang => ({
+          hreflang: altLang,
+          href: `${baseUrl}/${altLang}/towercranes/${crane.slug}`
+        }))
+      });
+    });
+  });
+  
+  return entries;
 } 

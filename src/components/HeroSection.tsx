@@ -5,10 +5,12 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { AnimatedElement } from './AnimatedElement'
 import { useLanguage } from '@/context/LanguageContext'
+import { useLanguageUrl } from '@/hooks/useLanguageUrl'
 
 export default function HeroSection() {
   const ref = useRef(null)
   const { t } = useLanguage()
+  const { getUrl } = useLanguageUrl()
 
   return (
     <div ref={ref} className="relative h-screen min-h-[650px] flex items-center justify-center overflow-hidden">
@@ -55,14 +57,14 @@ export default function HeroSection() {
           
           <AnimatedElement className="flex flex-col sm:flex-row justify-center gap-4">
             <Link
-              href="/towercranes"
+              href={getUrl('/towercranes')}
               className="relative overflow-hidden group bg-primary hover:bg-primary-600 text-white font-medium px-8 py-4 rounded-md transition-all duration-300 shadow-lg hover:shadow-primary/30 border border-transparent hover:border-white/10"
               aria-label="Browse our tower crane catalog"
             >
               <span className="relative z-10">{t('hero.cta1')}</span>
             </Link>
             <Link
-              href="/contact"
+              href={getUrl('/contact')}
               className="relative overflow-hidden group bg-secondary hover:bg-secondary-600 text-white font-medium px-8 py-4 rounded-md transition-all duration-300 shadow-lg hover:shadow-secondary/30 border border-transparent hover:border-white/10"
               aria-label="Contact us for a quote on tower cranes"
             >
