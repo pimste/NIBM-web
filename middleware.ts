@@ -4,8 +4,13 @@ const defaultLocale = 'en';
 const supportedLocales = ['en', 'nl', 'de'];
 const publicFiles = [
   '/favicon.ico',
+  '/favicon.png',
+  '/apple-touch-icon.png',
+  '/nibm-favicon.avif',
   '/robots.txt',
   '/sitemap.xml',
+  '/site.webmanifest',
+  '/sw.js',
   '/images',
   '/assets',
   '/fonts'
@@ -14,13 +19,26 @@ const publicFiles = [
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
-  // Check if the request is for a public file or Next.js internal routes
+  // Explicit favicon handling - exclude ALL favicon-related requests
   if (
-    publicFiles.some(file => pathname.startsWith(file)) ||
+    pathname === '/favicon.ico' ||
+    pathname === '/favicon.png' ||
+    pathname === '/apple-touch-icon.png' ||
+    pathname === '/nibm-favicon.avif' ||
+    pathname === '/icon.png' ||
+    pathname === '/icon.avif' ||
+    pathname === '/apple-icon.png' ||
+    pathname.startsWith('/images') ||
+    pathname.startsWith('/assets') ||
+    pathname.startsWith('/fonts') ||
+    pathname === '/robots.txt' ||
+    pathname === '/sitemap.xml' ||
+    pathname === '/site.webmanifest' ||
+    pathname === '/sw.js' ||
     pathname.includes('/_next') ||
     pathname.startsWith('/api')
   ) {
-    return;
+    return NextResponse.next();
   }
   
   // Get locale from cookie first (prioritize this over URL)
@@ -115,6 +133,6 @@ export function middleware(request: NextRequest) {
 export const config = {
   // Match all paths except static files, images, and API routes
   matcher: [
-    '/((?!_next/static|_next/image|_next/data|favicon.ico|robots.txt|sitemap.xml|images|assets|fonts|api).*)'
+    '/((?!_next/static|_next/image|_next/data|favicon.ico|favicon.png|apple-touch-icon.png|nibm-favicon.avif|icon.png|icon.avif|apple-icon.png|robots.txt|sitemap.xml|site.webmanifest|sw.js|images|assets|fonts|api).*)'
   ]
 }; 

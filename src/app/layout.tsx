@@ -10,26 +10,11 @@ import Script from 'next/script'
 import dynamic from 'next/dynamic'
 import { LangAttributeUpdater } from '@/components/LangAttributeUpdater'
 import { FontFallbacks } from '@/components/FontFallbacks'
-
-// Dynamically import client components with no SSR and a fallback
-const ClientLanguageProvider = dynamic(
-  () => import('@/context/LanguageContext').then(mod => {
-    // Make sure the component exists
-    if (!mod || !mod.LanguageProvider) {
-      console.error('LanguageProvider not found in module:', mod)
-      return ({ children }: { children: React.ReactNode }) => <>{children}</>
-    }
-    return mod.LanguageProvider
-  }).catch(err => {
-    console.error('Failed to load LanguageProvider:', err)
-    return ({ children }: { children: React.ReactNode }) => <>{children}</>
-  }),
-  { 
-    ssr: false,
-    // For loading, we can't use the children prop as it's not available in this context
-    loading: () => <div>Loading provider...</div>
-  }
-)
+import { Analytics } from '@/components/Analytics'
+import PerformanceMonitor from '@/components/PerformanceMonitor'
+import SEOOptimizer from '@/components/SEOOptimizer'
+import { LanguageProvider } from '@/context/LanguageContext'
+import { CookieBanner } from '@/components/CookieBanner'
 
 // Optimized font loading with subsets and display options
 const inter = Inter({
@@ -279,12 +264,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: '16x16' },
-      { url: '/images/optimized/logo-blue.webp', sizes: 'any' }
-    ],
-    apple: { url: '/images/optimized/logo-blue.webp' },
-    shortcut: { url: '/favicon.ico' },
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
   },
   openGraph: {
     type: 'website',
@@ -310,7 +292,7 @@ export const metadata: Metadata = {
   },
   manifest: '/site.webmanifest',
   verification: {
-    google: 'google-site-verification=YOUR_GOOGLE_VERIFICATION_CODE', // Replace with your actual code
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION_CODE, // Add your Google Search Console verification code to environment variables
   },
   category: 'Construction Equipment',
 }
@@ -330,7 +312,7 @@ export default function RootLayout({
         className="font-sans antialiased min-h-screen bg-neutral-50 text-neutral-900 flex flex-col"
       >
         <SEOProvider />
-        <ClientLanguageProvider>
+        <LanguageProvider>
           <LangAttributeUpdater>
             <Header />
             <BreadcrumbNav />
@@ -338,11 +320,15 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
+            <CookieBanner />
           </LangAttributeUpdater>
-        </ClientLanguageProvider>
+        </LanguageProvider>
         <LazyLoadScript />
         <ProgressiveImageLoadingScript />
         <ServiceWorkerScript />
+        <Analytics />
+        <PerformanceMonitor />
+        <SEOOptimizer />
       </body>
     </html>
   )

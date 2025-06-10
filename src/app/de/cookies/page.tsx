@@ -1,27 +1,7 @@
 'use client'
 
 import { useLanguage } from '@/context/LanguageContext'
-import { Metadata } from 'next'
-import { generatePageMetadata } from '../../page-metadata'
-
-// Base metadata for cookies page in de language
-const baseMetadata: Metadata = {
-  title: 'NIBM Tower Cranes | Cookies',
-  description: 'Cookies page for NIBM Tower Cranes',
-}
 import { ClientOnly } from '@/components/ClientOnly'
-
-
-// Generate metadata for this page
-export const generateMetadata = async () => {
-  // Use the utility to generate metadata with canonical URLs
-  return generatePageMetadata(
-    baseMetadata,
-    '/de/cookies',
-    'https://www.nibmvb.eu',
-    ['en', 'nl', 'de']
-  )
-}
 
 export default function CookiesPolicy() {
   const { t } = useLanguage()
@@ -54,18 +34,33 @@ export default function CookiesPolicy() {
               Cookies are not harmful to your computer or mobile device, and they cannot access other information on your device. They are simply a way for websites to remember your preferences and provide a better experience when you return.
             </p>
 
-            <h2 className="text-2xl font-bold text-neutral-900 mb-4">2. How We Use Cookies</h2>
+            <h2 className="text-2xl font-bold text-neutral-900 mb-4">2. Wie Wir Cookies Verwenden</h2>
             <p className="text-neutral-700 mb-4">
-              We use cookies for the following purposes:
+              Wir verwenden Cookies für die folgenden Zwecke:
             </p>
             <ul className="list-disc pl-6 mb-6 text-neutral-700">
-              <li><strong>Essential Cookies:</strong> These cookies are necessary for the website to function properly. They enable basic functions like page navigation and access to secure areas of the website.</li>
-              <li><strong>Performance Cookies:</strong> These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously.</li>
-              <li><strong>Functionality Cookies:</strong> These cookies allow the website to remember choices you make (such as your language preference) and provide enhanced, more personal features.</li>
-              <li><strong>Targeting Cookies:</strong> These cookies are used to deliver advertisements more relevant to you and your interests. They are also used to limit the number of times you see an advertisement and help measure the effectiveness of advertising campaigns.</li>
+              <li><strong>Unbedingt Erforderliche Cookies:</strong> Diese Cookies sind für das ordnungsgemäße Funktionieren der Website unerlässlich und können nicht deaktiviert werden. Sie umfassen Sprachpräferenz-Cookies (NEXT_LOCALE), die Ihre gewählte Sprache (Englisch, Niederländisch oder Deutsch) speichern, um sicherzustellen, dass die Website in Ihrer bevorzugten Sprache auf allen Seiten angezeigt wird.</li>
+              <li><strong>Leistungs-Cookies:</strong> Diese Cookies helfen uns zu verstehen, wie Besucher mit unserer Website interagieren, indem sie Informationen anonym sammeln und berichten.</li>
+              <li><strong>Funktionalitäts-Cookies:</strong> Diese Cookies ermöglichen es der Website, sich an andere Entscheidungen zu erinnern, die Sie treffen, und verbesserte, persönlichere Funktionen bereitzustellen.</li>
+              <li><strong>Targeting-Cookies:</strong> Diese Cookies werden verwendet, um Werbung zu liefern, die für Sie und Ihre Interessen relevanter ist. Sie werden auch verwendet, um die Anzahl der Male zu begrenzen, die Sie eine Anzeige sehen, und die Wirksamkeit von Werbekampagnen zu messen.</li>
             </ul>
 
-            <h2 className="text-2xl font-bold text-neutral-900 mb-4">3. Types of Cookies We Use</h2>
+            <h2 className="text-2xl font-bold text-neutral-900 mb-4">2.1 Unbedingt Erforderliche Sprach-Cookies</h2>
+            <p className="text-neutral-700 mb-6">
+              Unsere Website funktioniert in drei Sprachen (Englisch, Niederländisch und Deutsch). Um Ihnen Inhalte in Ihrer bevorzugten Sprache anzubieten, verwenden wir unbedingt erforderliche Cookies, die Ihre Sprachpräferenz speichern. Diese Cookies sind für die Grundfunktionalität unserer mehrsprachigen Website unerlässlich und erfordern keine Zustimmung, da sie für den von Ihnen angeforderten Service notwendig sind.
+            </p>
+            <p className="text-neutral-700 mb-6">
+              <strong>Cookie-Details:</strong>
+            </p>
+            <ul className="list-disc pl-6 mb-6 text-neutral-700">
+              <li><strong>Name:</strong> NEXT_LOCALE</li>
+              <li><strong>Zweck:</strong> Speichert Ihre Sprachpräferenz (en/nl/de)</li>
+              <li><strong>Dauer:</strong> 30 Tage</li>
+              <li><strong>Typ:</strong> Unbedingt erforderlich - keine Zustimmung erforderlich</li>
+              <li><strong>Gespeicherte Daten:</strong> Nur Sprachcode (en, nl oder de)</li>
+            </ul>
+
+            <h2 className="text-2xl font-bold text-neutral-900 mb-4">3. Arten von Cookies, die Wir Verwenden</h2>
             <h3 className="text-xl font-bold text-neutral-900 mb-3">3.1 First-Party Cookies</h3>
             <p className="text-neutral-700 mb-6">
               First-party cookies are set by the website you are visiting. We use first-party cookies to:

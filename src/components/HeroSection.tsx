@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { AnimatedElement } from './AnimatedElement'
@@ -11,26 +11,44 @@ export default function HeroSection() {
   const ref = useRef(null)
   const { t } = useLanguage()
   const { getUrl } = useLanguageUrl()
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   return (
     <div ref={ref} className="relative h-screen min-h-[650px] flex items-center justify-center overflow-hidden">
-      {/* Background Image - Optimized */}
+      {/* Background Video - Testing */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 w-full h-full">
-          {/* Prioritized Image - Main LCP element */}
-          <Image
-            src="/images/optimized/sunset-TC-2.webp"
-            alt="Tower crane silhouette against sunset cityscape"
-            fill
-            sizes="100vw"
-            priority
-            fetchPriority="high"
-            quality={85}
-            loading="eager"
-            className="object-cover"
-            placeholder="blur"
-            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
-          />
+          {isClient ? (
+            /* Video Background - Only render on client */
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src={`/api/video?t=${Date.now()}`} type="video/mp4" />
+            </video>
+          ) : (
+            /* Fallback image for server-side rendering */
+            <Image
+              src="/images/optimized/sunset-TC-2.webp"
+              alt="Tower crane silhouette against sunset cityscape"
+              fill
+              sizes="100vw"
+              priority
+              fetchPriority="high"
+              quality={85}
+              loading="eager"
+              className="object-cover"
+              placeholder="blur"
+              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
+            />
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
         </div>
       </div>

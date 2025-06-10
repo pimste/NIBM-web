@@ -1,27 +1,7 @@
 'use client'
 
 import { useLanguage } from '@/context/LanguageContext'
-import { Metadata } from 'next'
-import { generatePageMetadata } from '../../page-metadata'
-
-// Base metadata for terms-of-service page in en language
-const baseMetadata: Metadata = {
-  title: 'NIBM Tower Cranes | Terms of service',
-  description: 'Terms of service page for NIBM Tower Cranes',
-}
 import { ClientOnly } from '@/components/ClientOnly'
-
-
-// Generate metadata for this page
-export const generateMetadata = async () => {
-  // Use the utility to generate metadata with canonical URLs
-  return generatePageMetadata(
-    baseMetadata,
-    '/en/terms-of-service',
-    'https://www.nibmvb.eu',
-    ['en', 'nl', 'de']
-  )
-}
 
 export default function TermsOfService() {
   const { t } = useLanguage()

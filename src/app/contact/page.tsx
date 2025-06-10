@@ -237,26 +237,30 @@ export default function Contact() {
               <h2 className="text-2xl font-bold text-neutral-900 mb-6">
                 {t('contact.info.title')}
               </h2>
-              <div className="bg-neutral-50 p-8 rounded-lg mb-8">
-                <div className="flex items-start mb-6">
-                  <div className="bg-primary rounded-full p-3 mr-4 text-white">
+              <div className="bg-neutral-50 p-6 rounded-lg space-y-6">
+                {/* Address */}
+                <div className="flex items-start space-x-4">
+                  <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
                     <FaMapMarkerAlt className="h-5 w-5" />
                   </div>
-                  <div>
-                    <h3 className="font-bold text-neutral-900 mb-1">{t('contact.info.address')}</h3>
-                    <address className="not-italic text-neutral-700">
+                  <div className="flex-1">
+                    <h3 className="font-bold text-neutral-900 mb-2">{t('contact.info.address')}</h3>
+                    <address className="not-italic text-neutral-700 leading-relaxed">
+                      NIBM Kranen BV<br />
                       Kruisweg 8<br />
                       6361 TG Nuth<br />
-                      Netherlands
+                      Nederland
                     </address>
                   </div>
                 </div>
-                <div className="flex items-start mb-6">
-                  <div className="bg-primary rounded-full p-3 mr-4 text-white">
+
+                {/* Phone */}
+                <div className="flex items-start space-x-4">
+                  <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
                     <FaPhone className="h-5 w-5" />
                   </div>
-                  <div>
-                    <h3 className="font-bold text-neutral-900 mb-1">{t('contact.info.contact')}</h3>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-neutral-900 mb-2">{t('contact.info.contact')}</h3>
                     <ProtectedContact 
                       type="phone" 
                       value="+31653206004" 
@@ -265,12 +269,14 @@ export default function Contact() {
                     />
                   </div>
                 </div>
-                <div className="flex items-start mb-6">
-                  <div className="bg-primary rounded-full p-3 mr-4 text-white">
+
+                {/* Email */}
+                <div className="flex items-start space-x-4">
+                  <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
                     <FaEnvelope className="h-5 w-5" />
                   </div>
-                  <div>
-                    <h3 className="font-bold text-neutral-900 mb-1">{t('contact.info.email')}</h3>
+                  <div className="flex-1">
+                    <h3 className="font-bold text-neutral-900 mb-2">{t('contact.info.email')}</h3>
                     <ProtectedContact 
                       type="email" 
                       value="gid.gehlen@nibmtowercranes.com" 
@@ -279,29 +285,33 @@ export default function Contact() {
                     />
                   </div>
                 </div>
-                <div className="flex items-start">
-                  <div className="bg-primary rounded-full p-3 mr-4 text-white">
+
+                {/* Office Hours */}
+                <div className="flex items-start space-x-4">
+                  <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
                     <FaClock className="h-5 w-5" />
                   </div>
-                  <div>
-                    <h3 className="font-bold text-neutral-900 mb-1">{t('contact.info.hours')}</h3>
-                    <p className="text-neutral-700">
+                  <div className="flex-1">
+                    <h3 className="font-bold text-neutral-900 mb-2">{t('contact.info.hours')}</h3>
+                    <div className="text-neutral-700 leading-relaxed">
                       {t('contact.info.workdays')}<br />
                       {t('contact.info.weekend')}
-                    </p>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* Map */}
-              <div className="rounded-lg overflow-hidden h-80 bg-neutral-100">
+              <div className="mt-8 rounded-lg overflow-hidden h-80 bg-neutral-100">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2518.968631122784!2d5.873553476990072!3d50.86810237165249!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c0c1f8b3d1b8e7%3A0x6d54f9bac5456be3!2sKruisweg%208%2C%206361%20TG%20Nuth%2C%20Netherlands!5e0!3m2!1sen!2sus!4v1649842032426!5m2!1sen!2sus"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.123456789!2d5.8723456!3d50.9123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zS3J1aXN3ZWcgOCwgNjM2MSBURyBOdXRoLCBOZXRoZXJsYW5kcw!5e0!3m2!1sen!2snl!4v1677581082049!5m2!1sen!2snl"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
                   allowFullScreen
                   loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="NIBM Kranen BV Location - Kruisweg 8, Nuth"
                 ></iframe>
               </div>
             </div>

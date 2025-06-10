@@ -3,6 +3,7 @@
 import Script from 'next/script'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { ServiceSchema } from '@/components/ServiceSchema'
 
 export function SEOProvider() {
   const pathname = usePathname()
@@ -131,6 +132,9 @@ export function SEOProvider() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         strategy="afterInteractive"
       />
+
+      {/* Service Schema */}
+      <ServiceSchema />
     </>
   )
 }

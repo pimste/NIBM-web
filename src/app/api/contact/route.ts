@@ -34,7 +34,7 @@ export async function POST(request: Request) {
     // Send email using Resend
     const { data, error } = await resend.emails.send({
       from: 'NIBM Tower Cranes <onboarding@resend.dev>',
-      to: ['pim.elsloo@gmail.com'],
+      to: ['gid.gehlen@nibmtowercranes.com'],
       subject: `New Contact Form: ${formData.subject || 'Website Inquiry'}`,
       html: htmlContent,
     });

@@ -5,8 +5,6 @@ import { useEffect, useState } from 'react'
 import { FaCheckCircle } from 'react-icons/fa'
 import { useLanguage } from '@/context/LanguageContext'
 import dynamic from 'next/dynamic'
-import { Metadata } from 'next'
-import { generatePageMetadata } from '../page-metadata'
 
 // Safely import ClientOnly
 const ClientOnly = dynamic(
@@ -26,58 +24,9 @@ const MotionDiv = dynamic(
   }
 )
 
-// Generate metadata for this page
-export const generateMetadata = async ({
-  params,
-  searchParams,
-}: {
-  params: { slug: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}): Promise<Metadata> {
-  // Define base metadata for this specific page
-  const baseMetadata: Metadata = {
-    title: 'About Us',
-    description: 'Learn about NIBM Tower Cranes, your trusted partner for tower crane sales, rentals, and services since 1995.',
-    openGraph: {
-      title: 'About NIBM Tower Cranes',
-      description: 'Your trusted partner for tower crane sales, rentals, and services since 1995.',
-      url: 'https://www.nibmvb.eu/about',
-      images: [
-        {
-          url: 'https://www.nibmvb.eu/images/about-og-image.jpg',
-          width: 1200,
-          height: 630,
-          alt: 'NIBM Tower Cranes Headquarters'
-        }
-      ]
-    },
-  }
-
-  // Use the utility to generate metadata with canonical URLs
-  return generatePageMetadata(
-    baseMetadata,
-    '/about',
-    'https://www.nibmvb.eu',
-    ['en', 'nl', 'de']
-  )
-}
-
 export default function About() {
-  const languageContext = useLanguage()
+  const { t } = useLanguage()
   const [isClient, setIsClient] = useState(false)
-  
-  // Safe access to the translate function
-  const translate = languageContext?.t
-  
-  // Ensure we always have a translation function even if context fails
-  const t = (key: string) => {
-    try {
-      return translate ? translate(key) || key : key
-    } catch (error) {
-      console.error('Translation error:', error)
-      return key // Fallback to key if translation fails
-    }
-  }
   
   // Handle client-side rendering detection
   useEffect(() => {
@@ -87,71 +36,50 @@ export default function About() {
   const teamMembers = [
     {
       name: 'Gid Gehlen',
-      position: isClient ? t('about.team.ceo') : 'CEO & Founder',
+      position: t('about.team.ceo'),
       image: '/images/optimized/gidgehlen.webp',
-      bio: isClient ? t('about.team.ceo.bio') : '',
+      bio: t('about.team.ceo.bio'),
     }
   ]
 
   const values = [
     {
-      title: isClient ? t('about.values.safety.title') : 'Safety First',
-      description: isClient ? t('about.values.safety.desc') : '',
+      title: t('about.values.safety.title'),
+      description: t('about.values.safety.desc'),
     },
     {
-      title: isClient ? t('about.values.quality.title') : 'Quality & Reliability',
-      description: isClient ? t('about.values.quality.desc') : '',
+      title: t('about.values.quality.title'),
+      description: t('about.values.quality.desc'),
     },
     {
-      title: isClient ? t('about.values.customer.title') : 'Customer Focus',
-      description: isClient ? t('about.values.customer.desc') : '',
+      title: t('about.values.customer.title'),
+      description: t('about.values.customer.desc'),
     },
     {
-      title: isClient ? t('about.values.excellence.title') : 'Technical Excellence',
-      description: isClient ? t('about.values.excellence.desc') : '',
+      title: t('about.values.excellence.title'),
+      description: t('about.values.excellence.desc'),
     },
     {
-      title: isClient ? t('about.values.innovation.title') : 'Innovation',
-      description: isClient ? t('about.values.innovation.desc') : '',
+      title: t('about.values.innovation.title'),
+      description: t('about.values.innovation.desc'),
     },
     {
-      title: isClient ? t('about.values.sustainability.title') : 'Sustainability',
-      description: isClient ? t('about.values.sustainability.desc') : '',
+      title: t('about.values.sustainability.title'),
+      description: t('about.values.sustainability.desc'),
     }
   ]
-
-  // Check if components exist
-  const hasClientOnly = typeof ClientOnly === 'function'
-  const hasMotionDiv = typeof MotionDiv === 'function'
-  
-  // Use fallback content if needed
-  const renderContent = (content: React.ReactNode, fallback: React.ReactNode) => {
-    return hasClientOnly ? (
-      <ClientOnly fallback={fallback}>{content}</ClientOnly>
-    ) : isClient ? content : fallback
-  }
 
   return (
     <>
       <div className="bg-primary py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {renderContent(
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white text-center">
-              About NIBM Tower Cranes
-            </h1>,
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white text-center">
-              {t('about.title')}
-            </h1>
-          )}
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white text-center">
+            {t('about.title')}
+          </h1>
           
-          {renderContent(
-            <p className="text-xl text-white/80 text-center mt-4 max-w-3xl mx-auto">
-              Your trusted partner for tower crane sales, rentals, and services since 1995.
-            </p>,
-            <p className="text-xl text-white/80 text-center mt-4 max-w-3xl mx-auto">
-              {t('about.subtitle')}
-            </p>
-          )}
+          <p className="text-xl text-white/80 text-center mt-4 max-w-3xl mx-auto">
+            {t('about.subtitle')}
+          </p>
         </div>
       </div>
 
@@ -160,41 +88,21 @@ export default function About() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              {renderContent(
-                <h2 className="text-3xl font-bold text-neutral-900 mb-6">
-                  Our Story
-                </h2>,
-                <h2 className="text-3xl font-bold text-neutral-900 mb-6">
-                  {t('about.story.title')}
-                </h2>
-              )}
+              <h2 className="text-3xl font-bold text-neutral-900 mb-6">
+                {t('about.story.title')}
+              </h2>
               
-              {renderContent(
-                <p className="text-neutral-700 mb-4">
-                  NIBM Tower Cranes was founded in 1995 with a simple mission: to provide reliable, high-quality tower cranes and exceptional service to the construction industry. What began as a small rental company has grown into a comprehensive provider of tower crane solutions across Europe.
-                </p>,
-                <p className="text-neutral-700 mb-4">
-                  {t('about.story.p1')}
-                </p>
-              )}
+              <p className="text-neutral-700 mb-4">
+                {t('about.story.p1')}
+              </p>
               
-              {renderContent(
-                <p className="text-neutral-700 mb-4">
-                  Over the past 28 years, we have built a reputation for technical excellence, reliability, and customer-focused service. Our deep understanding of construction projects and their unique challenges has allowed us to develop a full-service approach that addresses all aspects of tower crane operations.
-                </p>,
-                <p className="text-neutral-700 mb-4">
-                  {t('about.story.p2')}
-                </p>
-              )}
+              <p className="text-neutral-700 mb-4">
+                {t('about.story.p2')}
+              </p>
               
-              {renderContent(
-                <p className="text-neutral-700">
-                  Today, NIBM Tower Cranes proudly serves a diverse clientele, from small construction firms to large multinational companies, providing them with the equipment and expertise they need to complete their construction projects safely and efficiently.
-                </p>,
-                <p className="text-neutral-700">
-                  {t('about.story.p3')}
-                </p>
-              )}
+              <p className="text-neutral-700">
+                {t('about.story.p3')}
+              </p>
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden">
               <Image
@@ -220,102 +128,58 @@ export default function About() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="bg-white p-8 rounded-lg shadow-sm">
-              {renderContent(
-                <h2 className="text-2xl font-bold text-neutral-900 mb-4">
-                  Our Mission
-                </h2>,
-                <h2 className="text-2xl font-bold text-neutral-900 mb-4">
-                  {t('about.mission.title')}
-                </h2>
-              )}
+              <h2 className="text-2xl font-bold text-neutral-900 mb-4">
+                {t('about.mission.title')}
+              </h2>
               
-              {renderContent(
-                <p className="text-neutral-700 mb-4">
-                  Our mission is to provide reliable, safe, and efficient tower crane solutions that enable our clients to complete their construction projects successfully. We are committed to:
-                </p>,
-                <p className="text-neutral-700 mb-4">
-                  {t('about.mission.intro')}
-                </p>
-              )}
+              <p className="text-neutral-700 mb-4">
+                {t('about.mission.intro')}
+              </p>
               
               <ul className="space-y-2">
                 <li className="flex items-start">
                   <FaCheckCircle className="text-primary mt-1 mr-2 flex-shrink-0" />
-                  {renderContent(
-                    <span>Offering high-quality tower cranes that meet the specific needs of each project</span>,
-                    <span>{t('about.mission.point1')}</span>
-                  )}
+                  <span>{t('about.mission.point1')}</span>
                 </li>
                 <li className="flex items-start">
                   <FaCheckCircle className="text-primary mt-1 mr-2 flex-shrink-0" />
-                  {renderContent(
-                    <span>Providing expert consultation to help clients select the right equipment</span>,
-                    <span>{t('about.mission.point2')}</span>
-                  )}
+                  <span>{t('about.mission.point2')}</span>
                 </li>
                 <li className="flex items-start">
                   <FaCheckCircle className="text-primary mt-1 mr-2 flex-shrink-0" />
-                  {renderContent(
-                    <span>Ensuring safe and efficient crane operations through comprehensive training and support</span>,
-                    <span>{t('about.mission.point3')}</span>
-                  )}
+                  <span>{t('about.mission.point3')}</span>
                 </li>
                 <li className="flex items-start">
                   <FaCheckCircle className="text-primary mt-1 mr-2 flex-shrink-0" />
-                  {renderContent(
-                    <span>Delivering exceptional service at every stage of the client relationship</span>,
-                    <span>{t('about.mission.point4')}</span>
-                  )}
+                  <span>{t('about.mission.point4')}</span>
                 </li>
               </ul>
             </div>
             <div className="bg-white p-8 rounded-lg shadow-sm">
-              {renderContent(
-                <h2 className="text-2xl font-bold text-neutral-900 mb-4">
-                  Our Vision
-                </h2>,
-                <h2 className="text-2xl font-bold text-neutral-900 mb-4">
-                  {t('about.vision.title')}
-                </h2>
-              )}
+              <h2 className="text-2xl font-bold text-neutral-900 mb-4">
+                {t('about.vision.title')}
+              </h2>
               
-              {renderContent(
-                <p className="text-neutral-700 mb-4">
-                  We envision NIBM Tower Cranes as the preferred partner for tower crane solutions in Europe, recognized for:
-                </p>,
-                <p className="text-neutral-700 mb-4">
-                  {t('about.vision.intro')}
-                </p>
-              )}
+              <p className="text-neutral-700 mb-4">
+                {t('about.vision.intro')}
+              </p>
               
               <ul className="space-y-2">
                 <li className="flex items-start">
                   <FaCheckCircle className="text-primary mt-1 mr-2 flex-shrink-0" />
-                  {renderContent(
-                    <span>Technical excellence and innovation in tower crane operations</span>,
-                    <span>{t('about.vision.point1')}</span>
-                  )}
+                  <span>{t('about.vision.point1')}</span>
                 </li>
                 <li className="flex items-start">
                   <FaCheckCircle className="text-primary mt-1 mr-2 flex-shrink-0" />
-                  {renderContent(
-                    <span>Uncompromising commitment to safety and quality</span>,
-                    <span>{t('about.vision.point2')}</span>
-                  )}
+                  <span>{t('about.vision.point2')}</span>
                 </li>
                 <li className="flex items-start">
                   <FaCheckCircle className="text-primary mt-1 mr-2 flex-shrink-0" />
-                  {renderContent(
-                    <span>Comprehensive service that exceeds client expectations</span>,
-                    <span>{t('about.vision.point3')}</span>
-                  )}
+                  <span>{t('about.vision.point3')}</span>
                 </li>
                 <li className="flex items-start">
                   <FaCheckCircle className="text-primary mt-1 mr-2 flex-shrink-0" />
-                  {renderContent(
-                    <span>Contributing to the advancement of the construction industry through responsible and sustainable practices</span>,
-                    <span>{t('about.vision.point4')}</span>
-                  )}
+                  <span>{t('about.vision.point4')}</span>
                 </li>
               </ul>
             </div>
@@ -326,14 +190,9 @@ export default function About() {
       {/* Our Values */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {renderContent(
-            <h2 className="text-3xl font-bold text-neutral-900 text-center mb-12">
-              Our Core Values
-            </h2>,
-            <h2 className="text-3xl font-bold text-neutral-900 text-center mb-12">
-              {t('about.values.title')}
-            </h2>
-          )}
+          <h2 className="text-3xl font-bold text-neutral-900 text-center mb-12">
+            {t('about.values.title')}
+          </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {values.map((value, index) => (
@@ -360,14 +219,9 @@ export default function About() {
       {/* Meet the Team */}
       <section className="py-16 bg-neutral-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          {renderContent(
-            <h2 className="text-3xl font-bold text-neutral-900 text-center mb-12">
-              Meet the Founder
-            </h2>,
-            <h2 className="text-3xl font-bold text-neutral-900 text-center mb-12">
-              {t('about.team.title')}
-            </h2>
-          )}
+          <h2 className="text-3xl font-bold text-neutral-900 text-center mb-12">
+            {t('about.team.title')}
+          </h2>
           
           <div className="max-w-5xl mx-auto">
             <MotionDiv

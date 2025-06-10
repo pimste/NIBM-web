@@ -8,14 +8,21 @@ const publicFiles = [
   '/sitemap.xml',
   '/images',
   '/assets',
-  '/fonts'
+  '/fonts',
+  '/icon',
+  '/apple-icon',
+  '/manifest',
+  '/site.webmanifest'
 ];
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
-  // Check if the request is for a public file
-  if (publicFiles.some(file => pathname.startsWith(file))) {
+  // Check if the request is for a public file or video file
+  const isPublicFile = publicFiles.some(file => pathname.startsWith(file));
+  const isVideoFile = /\.(mp4|webm|ogg|avi|mov)$/i.test(pathname);
+  
+  if (isPublicFile || isVideoFile) {
     return;
   }
   
@@ -76,5 +83,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image).*)']
+  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)']
 }; 

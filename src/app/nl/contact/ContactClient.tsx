@@ -228,87 +228,116 @@ export default function ContactClient() {
               <h2 className="text-2xl font-bold text-neutral-900 mb-6">
                 {t('contact.info.title')}
               </h2>
-              <div className="bg-neutral-50 p-8 rounded-lg">
-                <div className="space-y-8">
-                  <ClientOnly>
-                    <ProtectedContact>
-                      {/* Company Details */}
-                      <div className="flex items-start">
-                        <FaMapMarkerAlt className="text-primary text-xl mt-1 mr-4" />
-                        <div>
-                          <h3 className="text-lg font-medium text-neutral-900 mb-1">
-                            {t('contact.info.address.title')}
-                          </h3>
-                          <p className="text-neutral-700 mb-1">NIBM Kranen BV</p>
-                          <p className="text-neutral-700">
-                            Oosterhulst 5<br />
-                            3861 MA Nijkerk<br />
-                            Nederland
-                          </p>
+              <div className="space-y-6">
+                {/* Address Card - Full Width */}
+                <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
+                  <div className="flex items-start space-x-4">
+                    <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
+                      <FaMapMarkerAlt className="h-5 w-5" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-lg font-semibold text-neutral-900 mb-2">
+                        {t('contact.info.address.title')}
+                      </h3>
+                      <div className="text-neutral-700 leading-relaxed">
+                        <p className="font-medium mb-1">NIBM Kranen BV</p>
+                        <p>Kruisweg 8</p>
+                        <p>6361 TG Nuth</p>
+                        <p>Nederland</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Phone and Email Cards - Side by Side */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Phone Card */}
+                  <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
+                        <FaPhone className="h-5 w-5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg font-semibold text-neutral-900 mb-2">
+                          {t('contact.info.phone.title')}
+                        </h3>
+                        <ClientOnly>
+                          <ProtectedContact 
+                            type="phone" 
+                            value="+31653206004"
+                            className="text-neutral-700 hover:text-primary transition-colors cursor-pointer"
+                          />
+                        </ClientOnly>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Email Card */}
+                  <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
+                        <FaEnvelope className="h-5 w-5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg font-semibold text-neutral-900 mb-2">
+                          {t('contact.info.email.title')}
+                        </h3>
+                        <div className="min-w-0">
+                          <ClientOnly>
+                            <ProtectedContact 
+                              type="email" 
+                              value="gid.gehlen@nibmtowercranes.com"
+                              className="text-neutral-700 hover:text-primary transition-colors cursor-pointer break-all"
+                            />
+                          </ClientOnly>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
 
-                      {/* Phone */}
-                      <div className="flex items-start">
-                        <FaPhone className="text-primary text-xl mt-1 mr-4" />
-                        <div>
-                          <h3 className="text-lg font-medium text-neutral-900 mb-1">
-                            {t('contact.info.phone.title')}
-                          </h3>
-                          <p className="text-neutral-700">(+31) 6 12 34 56 78</p>
-                        </div>
-                      </div>
-
-                      {/* Email */}
-                      <div className="flex items-start">
-                        <FaEnvelope className="text-primary text-xl mt-1 mr-4" />
-                        <div>
-                          <h3 className="text-lg font-medium text-neutral-900 mb-1">
-                            {t('contact.info.email.title')}
-                          </h3>
-                          <p className="text-neutral-700">info@nibmvb.eu</p>
-                        </div>
-                      </div>
-                    </ProtectedContact>
-                  </ClientOnly>
-
-                  {/* Office Hours */}
-                  <div className="flex items-start">
-                    <FaClock className="text-primary text-xl mt-1 mr-4" />
-                    <div>
-                      <h3 className="text-lg font-medium text-neutral-900 mb-2">
+                {/* Office Hours Card - Full Width */}
+                <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
+                  <div className="flex items-start space-x-4">
+                    <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
+                      <FaClock className="h-5 w-5" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-lg font-semibold text-neutral-900 mb-2">
                         {t('contact.info.hours.title')}
                       </h3>
-                      <ul className="text-neutral-700 space-y-1">
-                        <li className="flex justify-between">
-                          <span>{t('contact.info.hours.monday')}</span>
-                          <span>8:00 - 17:00</span>
-                        </li>
-                        <li className="flex justify-between">
-                          <span>{t('contact.info.hours.tuesday')}</span>
-                          <span>8:00 - 17:00</span>
-                        </li>
-                        <li className="flex justify-between">
-                          <span>{t('contact.info.hours.wednesday')}</span>
-                          <span>8:00 - 17:00</span>
-                        </li>
-                        <li className="flex justify-between">
-                          <span>{t('contact.info.hours.thursday')}</span>
-                          <span>8:00 - 17:00</span>
-                        </li>
-                        <li className="flex justify-between">
-                          <span>{t('contact.info.hours.friday')}</span>
-                          <span>8:00 - 16:00</span>
-                        </li>
-                        <li className="flex justify-between">
-                          <span>{t('contact.info.hours.saturday')}</span>
-                          <span>{t('contact.info.hours.closed')}</span>
-                        </li>
-                        <li className="flex justify-between">
-                          <span>{t('contact.info.hours.sunday')}</span>
-                          <span>{t('contact.info.hours.closed')}</span>
-                        </li>
-                      </ul>
+                      <div className="text-neutral-700 space-y-1 text-sm">
+                        <div className="grid grid-cols-2 gap-4">
+                          <div className="space-y-1">
+                            <div className="flex justify-between">
+                              <span className="font-medium">{t('contact.info.hours.monday')}</span>
+                              <span>8:00 - 17:00</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="font-medium">{t('contact.info.hours.tuesday')}</span>
+                              <span>8:00 - 17:00</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="font-medium">{t('contact.info.hours.wednesday')}</span>
+                              <span>8:00 - 17:00</span>
+                            </div>
+                          </div>
+                          <div className="space-y-1">
+                            <div className="flex justify-between">
+                              <span className="font-medium">{t('contact.info.hours.thursday')}</span>
+                              <span>8:00 - 17:00</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="font-medium">{t('contact.info.hours.friday')}</span>
+                              <span>8:00 - 16:00</span>
+                            </div>
+                            <div className="flex justify-between">
+                              <span className="font-medium text-neutral-500">Weekend</span>
+                              <span className="text-red-600">{t('contact.info.hours.closed')}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -326,14 +355,14 @@ export default function ContactClient() {
           </h2>
           <div className="relative h-96 w-full rounded-lg overflow-hidden">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2453.6834831787557!2d5.488248016193752!3d51.84582967969309!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c70a5c15b9a4b3%3A0x8b9e8f9a0c81eb0c!2sOosterhulst%205%2C%203861%20MA%20Nijkerk!5e0!3m2!1sen!2snl!4v1677581082049!5m2!1sen!2snl"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.123456789!2d5.8723456!3d50.9123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zS3J1aXN3ZWcgOCwgNjM2MSBURyBOdXRoLCBOZXRoZXJsYW5kcw!5e0!3m2!1sen!2snl!4v1677581082049!5m2!1sen!2snl"
               width="100%"
               height="100%"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              title="NIBM Kranen BV Location"
+              title="NIBM Kranen BV Locatie - Kruisweg 8, Nuth"
             ></iframe>
           </div>
         </div>

@@ -1,27 +1,7 @@
 'use client'
 
 import { useLanguage } from '@/context/LanguageContext'
-import { Metadata } from 'next'
-import { generatePageMetadata } from '../../page-metadata'
-
-// Base metadata for cookies page in en language
-const baseMetadata: Metadata = {
-  title: 'NIBM Tower Cranes | Cookies',
-  description: 'Cookies page for NIBM Tower Cranes',
-}
 import { ClientOnly } from '@/components/ClientOnly'
-
-
-// Generate metadata for this page
-export const generateMetadata = async () => {
-  // Use the utility to generate metadata with canonical URLs
-  return generatePageMetadata(
-    baseMetadata,
-    '/en/cookies',
-    'https://www.nibmvb.eu',
-    ['en', 'nl', 'de']
-  )
-}
 
 export default function CookiesPolicy() {
   const { t } = useLanguage()
@@ -59,10 +39,25 @@ export default function CookiesPolicy() {
               We use cookies for the following purposes:
             </p>
             <ul className="list-disc pl-6 mb-6 text-neutral-700">
-              <li><strong>Essential Cookies:</strong> These cookies are necessary for the website to function properly. They enable basic functions like page navigation and access to secure areas of the website.</li>
+              <li><strong>Strictly Necessary Cookies:</strong> These cookies are essential for the website to function properly and cannot be disabled. They include language preference cookies (NEXT_LOCALE) that remember your chosen language (English, Dutch, or German) to ensure the website displays in your preferred language across all pages.</li>
               <li><strong>Performance Cookies:</strong> These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously.</li>
-              <li><strong>Functionality Cookies:</strong> These cookies allow the website to remember choices you make (such as your language preference) and provide enhanced, more personal features.</li>
+              <li><strong>Functionality Cookies:</strong> These cookies allow the website to remember other choices you make and provide enhanced, more personal features.</li>
               <li><strong>Targeting Cookies:</strong> These cookies are used to deliver advertisements more relevant to you and your interests. They are also used to limit the number of times you see an advertisement and help measure the effectiveness of advertising campaigns.</li>
+            </ul>
+
+            <h2 className="text-2xl font-bold text-neutral-900 mb-4">2.1 Strictly Necessary Language Cookies</h2>
+            <p className="text-neutral-700 mb-6">
+              Our website operates in three languages (English, Dutch, and German). To provide you with content in your preferred language, we use strictly necessary cookies that store your language preference. These cookies are essential for the basic functionality of our multilingual website and do not require your consent as they are necessary for the service you have requested.
+            </p>
+            <p className="text-neutral-700 mb-6">
+              <strong>Cookie Details:</strong>
+            </p>
+            <ul className="list-disc pl-6 mb-6 text-neutral-700">
+              <li><strong>Name:</strong> NEXT_LOCALE</li>
+              <li><strong>Purpose:</strong> Stores your language preference (en/nl/de)</li>
+              <li><strong>Duration:</strong> 30 days</li>
+              <li><strong>Type:</strong> Strictly necessary - no consent required</li>
+              <li><strong>Data stored:</strong> Language code only (en, nl, or de)</li>
             </ul>
 
             <h2 className="text-2xl font-bold text-neutral-900 mb-4">3. Types of Cookies We Use</h2>

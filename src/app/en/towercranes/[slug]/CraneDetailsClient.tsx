@@ -8,6 +8,7 @@ import { FaArrowLeft, FaCheck, FaDownload, FaEnvelope, FaInfoCircle, FaPhone, Fa
 import { MotionDiv } from '@/components/MotionWrapper'
 import { useLanguage } from '@/context/LanguageContext'
 import { TowerCraneSchema } from '@/components/TowerCraneSchema'
+import { CraneProductSchema } from '@/components/CraneProductSchema'
 
 // This would be fetched from a CMS or API in a real implementation
 const cranes = [
@@ -427,6 +428,9 @@ export default function CraneDetailsClient() {
           </div>
         </div>
       </section>
+      
+      {/* Structured Data for SEO */}
+      <CraneProductSchema crane={crane} />
     </>
   )
 } 

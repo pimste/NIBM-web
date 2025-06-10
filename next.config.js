@@ -154,12 +154,27 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: '/(.*).(mp4|webm|ogg)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+          {
+            key: 'Content-Type',
+            value: 'video/mp4',
+          },
+        ],
+      },
     ];
   },
   experimental: {
     optimizePackageImports: ['framer-motion', 'react-icons'],
     // Only enable CSS optimization if running in production
     optimizeCss: process.env.NODE_ENV === 'production',
+    scrollRestoration: true,
+    webVitalsAttribution: ['CLS', 'LCP'],
   },
 };
 

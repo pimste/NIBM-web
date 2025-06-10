@@ -62,33 +62,33 @@ export default function ServicesClient() {
   // Services data
   const services = [
     {
-      title: isClient ? t('services.sale.title') : 'Tower Crane Sales',
-      description: isClient ? t('services.sale.desc') : 'We offer a wide range of new and used tower cranes for sale that cater to various construction needs and budgets.',
-      image: '/images/optimized/services/crane-sales.webp',
+      title: isClient ? t('services.rent.title') : 'Tower Crane Rental',
+      description: isClient ? t('services.rent.desc') : 'Comprehensive tower crane rental services with flexible terms and complete support.',
+      image: '/images/optimized/sunset-TC.webp',
       features: [
-        isClient ? t('services.sale.feature1') : 'Extensive selection of crane types and models',
-        isClient ? t('services.sale.feature2') : 'New and used cranes with warranties',
-        isClient ? t('services.sale.feature3') : 'Competitive pricing and financing options',
-        isClient ? t('services.sale.feature4') : 'Technical documentation and certification',
-        isClient ? t('services.sale.feature5') : 'Full after-sales support and spare parts',
+        isClient ? t('services.rent.feature1') : 'Wide range of tower crane models and capacities',
+        isClient ? t('services.rent.feature2') : 'Flexible rental terms and competitive pricing',
+        isClient ? t('services.rent.feature3') : 'Complete technical support and maintenance',
+        isClient ? t('services.rent.feature4') : 'Expert operator training and guidance',
+        isClient ? t('services.rent.feature5') : 'Timely delivery and installation',
       ]
     },
     {
-      title: isClient ? t('services.rent.title') : 'Tower Crane Rental',
-      description: isClient ? t('services.rent.desc') : 'Our rental service provides flexible access to high-quality tower cranes without the full investment of purchasing.',
-      image: '/images/optimized/services/crane-rental.webp',
+      title: isClient ? t('services.sale.title') : 'Tower Crane Sales',
+      description: isClient ? t('services.sale.desc') : 'New and used tower cranes from leading manufacturers with warranty and support.',
+      image: '/images/optimized/Potain-MDT-178_3W.webp',
       features: [
-        isClient ? t('services.rent.feature1') : 'Flexible rental terms (short and long-term)',
-        isClient ? t('services.rent.feature2') : 'Well-maintained and regularly inspected cranes',
-        isClient ? t('services.rent.feature3') : 'Technical support and maintenance included',
-        isClient ? t('services.rent.feature4') : 'Option to switch or upgrade equipment as needed',
-        isClient ? t('services.rent.feature5') : 'Possibility of rent-to-own arrangements',
+        isClient ? t('services.sale.feature1') : 'New and used tower cranes from top manufacturers',
+        isClient ? t('services.sale.feature2') : 'Comprehensive warranty and after-sales support',
+        isClient ? t('services.sale.feature3') : 'Expert consultation on crane selection',
+        isClient ? t('services.sale.feature4') : 'Competitive pricing and financing options',
+        isClient ? t('services.sale.feature5') : 'Complete documentation and certification',
       ]
     },
     {
       title: isClient ? t('services.planning.title') : 'Planning & Consulting',
       description: isClient ? t('services.planning.desc') : 'Expert project planning services to help you select the right tower crane solutions for your construction project.',
-      image: '/images/optimized/services/planning.webp',
+      image: '/images/optimized/helmet1a.webp',
       features: [
         isClient ? t('services.planning.feature1') : 'Site assessment and crane selection consulting',
         isClient ? t('services.planning.feature2') : 'Load capacity and coverage analysis',
@@ -100,7 +100,7 @@ export default function ServicesClient() {
     {
       title: isClient ? t('services.transport.title') : 'Transport & Logistics',
       description: isClient ? t('services.transport.desc') : 'We handle all aspects of crane transportation to your construction site.',
-      image: '/images/optimized/services/transport.webp',
+      image: '/images/optimized/cropped-Top-page2-potain6.webp',
       features: [
         isClient ? t('services.transport.feature1') : 'Specialized transport vehicles and equipment',
         isClient ? t('services.transport.feature2') : 'Route planning and analysis',
@@ -112,7 +112,7 @@ export default function ServicesClient() {
     {
       title: isClient ? t('services.mounting.title') : 'Mounting & Installation',
       description: isClient ? t('services.mounting.desc') : 'Our certified technicians perform professional assembly, installation, and dismantling services.',
-      image: '/images/optimized/services/installation.webp',
+      image: '/images/optimized/sunset-TC-2.webp',
       features: [
         isClient ? t('services.mounting.feature1') : 'Certified installation specialists',
         isClient ? t('services.mounting.feature2') : 'Compliance with all safety regulations',
@@ -124,7 +124,7 @@ export default function ServicesClient() {
     {
       title: isClient ? t('services.training.title') : 'Training & Certification',
       description: isClient ? t('services.training.desc') : 'Comprehensive training programs for crane operators and maintenance personnel.',
-      image: '/images/optimized/services/training.webp',
+      image: '/images/optimized/our-story.webp',
       features: [
         isClient ? t('services.training.feature1') : 'Certified crane operator training',
         isClient ? t('services.training.feature2') : 'Maintenance and inspection training',

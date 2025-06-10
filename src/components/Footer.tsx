@@ -15,7 +15,7 @@ const ClientOnly = dynamic(
 )
 
 export function Footer() {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const { getUrl } = useLanguageUrl();
   
   return (
@@ -41,7 +41,7 @@ export function Footer() {
               />
             </Link>
             <p className="text-neutral-300 mb-6">
-              Specialists in the sale and rental of tower cranes, offering a full-service concept including planning, transport, mounting, inspections, training, and after-sales support.
+              {t('footer.description')}
             </p>
             <div className="flex space-x-4">
               <a 
@@ -79,36 +79,36 @@ export function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Quick Links</h3>
+            <h3 className="text-lg font-bold mb-4">{t('footer.quickLinks')}</h3>
             <ul className="space-y-2">
               <li>
                 <Link href={getUrl('/')} className="text-neutral-300 hover:text-white transition-colors">
-                  Home
+                  {t('nav.home')}
                 </Link>
               </li>
               <li>
                 <Link href={getUrl('/about')} className="text-neutral-300 hover:text-white transition-colors">
-                  About Us
+                  {t('nav.about')}
                 </Link>
               </li>
               <li>
                 <Link href={getUrl('/services')} className="text-neutral-300 hover:text-white transition-colors">
-                  Our Services
+                  {t('nav.services')}
                 </Link>
               </li>
               <li>
                 <Link href={getUrl('/towercranes')} className="text-neutral-300 hover:text-white transition-colors">
-                  Tower Crane Catalog
+                  {t('nav.towercranes')}
                 </Link>
               </li>
               <li>
                 <Link href={getUrl('/technical-info')} className="text-neutral-300 hover:text-white transition-colors">
-                  Technical Information
+                  {t('nav.technical')}
                 </Link>
               </li>
               <li>
                 <Link href={getUrl('/contact')} className="text-neutral-300 hover:text-white transition-colors">
-                  Contact Us
+                  {t('nav.contact')}
                 </Link>
               </li>
             </ul>
@@ -116,36 +116,36 @@ export function Footer() {
 
           {/* Services */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Our Services</h3>
+            <h3 className="text-lg font-bold mb-4">{t('footer.services')}</h3>
             <ul className="space-y-2">
               <li>
                 <Link href={getUrl('/services#sale')} className="text-neutral-300 hover:text-white transition-colors">
-                  Sale of Tower Cranes
+                  {t('services.sale.title')}
                 </Link>
               </li>
               <li>
                 <Link href={getUrl('/services#rent')} className="text-neutral-300 hover:text-white transition-colors">
-                  Rental of Tower Cranes
+                  {t('services.rent.title')}
                 </Link>
               </li>
               <li>
                 <Link href={getUrl('/services#planning')} className="text-neutral-300 hover:text-white transition-colors">
-                  Planning & Consulting
+                  {t('services.planning.title')}
                 </Link>
               </li>
               <li>
                 <Link href={getUrl('/services#transport')} className="text-neutral-300 hover:text-white transition-colors">
-                  Transport & Logistics
+                  {t('services.transport.title')}
                 </Link>
               </li>
               <li>
                 <Link href={getUrl('/services#mounting')} className="text-neutral-300 hover:text-white transition-colors">
-                  Mounting & Installation
+                  {t('services.mounting.title')}
                 </Link>
               </li>
               <li>
                 <Link href={getUrl('/services#training')} className="text-neutral-300 hover:text-white transition-colors">
-                  Training & Certification
+                  {t('services.training.title')}
                 </Link>
               </li>
             </ul>
@@ -153,25 +153,26 @@ export function Footer() {
 
           {/* Contact Information */}
           <div>
-            <h3 className="text-lg font-bold mb-4">Contact Us</h3>
+            <h3 className="text-lg font-bold mb-4">{t('footer.contactUs')}</h3>
             <ClientOnly fallback={
               <ul className="space-y-4">
                 <li className="flex items-start">
                   <FaMapMarkerAlt className="text-primary-300 mt-1 mr-3 flex-shrink-0" aria-hidden="true" />
                   <span className="text-neutral-300">
-                    Kruisweg 8 6361 TG Nuth
+                    {process.env.NEXT_PUBLIC_COMPANY_ADDRESS}<br />
+                    {process.env.NEXT_PUBLIC_COMPANY_POSTAL_CODE} {process.env.NEXT_PUBLIC_COMPANY_CITY}
                   </span>
                 </li>
                 <li className="flex items-center">
                   <FaPhone className="text-primary-300 mr-3 flex-shrink-0" aria-hidden="true" />
                   <span className="text-neutral-300">
-                    +31 6 53206004
+                    {process.env.NEXT_PUBLIC_COMPANY_PHONE}
                   </span>
                 </li>
                 <li className="flex items-center">
                   <FaEnvelope className="text-primary-300 mr-3 flex-shrink-0" aria-hidden="true" />
                   <span className="text-neutral-300">
-                    gid.gehlen@nibmtowercranes.com
+                    {process.env.NEXT_PUBLIC_COMPANY_EMAIL}
                   </span>
                 </li>
               </ul>
@@ -180,13 +181,14 @@ export function Footer() {
                 <li className="flex items-start">
                   <FaMapMarkerAlt className="text-primary-300 mt-1 mr-3 flex-shrink-0" aria-hidden="true" />
                   <span className="text-neutral-300">
-                    Kruisweg 8 6361 TG Nuth
+                    {process.env.NEXT_PUBLIC_COMPANY_ADDRESS}<br />
+                    {process.env.NEXT_PUBLIC_COMPANY_POSTAL_CODE} {process.env.NEXT_PUBLIC_COMPANY_CITY}
                   </span>
                 </li>
                 <li>
                   <ProtectedContact 
                     type="phone" 
-                    value="+31653206004" 
+                    value={process.env.NEXT_PUBLIC_COMPANY_PHONE || "+31653206004"} 
                     className="flex items-center"
                     linkClassName="text-neutral-300 hover:text-white transition-colors"
                     iconClassName="text-primary-300 mr-3 flex-shrink-0"
@@ -195,7 +197,7 @@ export function Footer() {
                 <li>
                   <ProtectedContact 
                     type="email" 
-                    value="gid.gehlen@nibmtowercranes.com" 
+                    value={process.env.NEXT_PUBLIC_COMPANY_EMAIL || "gid.gehlen@nibmtowercranes.com"} 
                     className="flex items-center"
                     linkClassName="text-neutral-300 hover:text-white transition-colors"
                     iconClassName="text-primary-300 mr-3 flex-shrink-0"
@@ -211,17 +213,17 @@ export function Footer() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-neutral-400 text-sm mb-4 md:mb-0">
-                © {new Date().getFullYear()} NIBM Tower Cranes. All rights reserved.
+                © {new Date().getFullYear()} NIBM Tower Cranes. {t('footer.rights')}
               </p>
               <div className="flex space-x-6">
                 <Link href={getUrl('/privacy-policy')} className="text-neutral-400 hover:text-white text-sm transition-colors">
-                  Privacy Policy
+                  {t('footer.privacy')}
                 </Link>
                 <Link href={getUrl('/terms-of-service')} className="text-neutral-400 hover:text-white text-sm transition-colors">
-                  Terms of Service
+                  {t('footer.terms')}
                 </Link>
                 <Link href={getUrl('/cookies')} className="text-neutral-400 hover:text-white text-sm transition-colors">
-                  Cookie Policy
+                  {t('footer.cookies')}
                 </Link>
               </div>
             </div>
