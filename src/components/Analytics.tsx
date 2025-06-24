@@ -16,7 +16,16 @@ export function Analytics() {
     // Listen for consent changes
     const handleConsentChange = () => {
       const newConsent = localStorage.getItem('cookie-consent')
-      setHasConsent(newConsent === 'accepted')
+      const newHasConsent = newConsent === 'accepted'
+      setHasConsent(newHasConsent)
+      
+      // Update consent mode when consent changes
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', {
+          analytics_storage: newHasConsent ? 'granted' : 'denied',
+          ad_storage: newHasConsent ? 'granted' : 'denied'
+        })
+      }
     }
 
     // Listen for storage changes (when user interacts with cookie banner)
@@ -29,29 +38,8 @@ export function Analytics() {
 
   return (
     <>
-      {/* Google Consent Mode Initialization - Load this always */}
-      <Script
-        id="google-consent-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            
-            // Set default consent mode
-            gtag('consent', 'default', {
-              analytics_storage: 'denied',
-              ad_storage: 'denied',
-              wait_for_update: 500
-            });
-            
-            gtag('js', new Date());
-          `,
-        }}
-      />
-
-      {/* Only load Google Analytics if consent is given */}
-      {hasConsent && gtagId && (
+      {/* Google Analytics - Always load the script so Google can detect it */}
+      {gtagId && (
         <>
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${gtagId}`}
@@ -62,12 +50,32 @@ export function Analytics() {
             strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                
+                // Set default consent mode - deny by default
+                gtag('consent', 'default', {
+                  analytics_storage: 'denied',
+                  ad_storage: 'denied',
+                  wait_for_update: 500
+                });
+                
+                gtag('js', new Date());
                 gtag('config', '${gtagId}', {
                   page_title: document.title,
                   page_location: window.location.href,
                   anonymize_ip: true,
                   cookie_flags: 'max-age=7200;secure;samesite=strict'
                 });
+                
+                // Check initial consent and update if already granted
+                const initialConsent = localStorage.getItem('cookie-consent');
+                if (initialConsent === 'accepted') {
+                  gtag('consent', 'update', {
+                    analytics_storage: 'granted',
+                    ad_storage: 'granted'
+                  });
+                }
               `,
             }}
           />
