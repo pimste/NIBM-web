@@ -306,6 +306,7 @@ export default function RootLayout({
     <html lang="en" className={`scroll-smooth ${inter.variable} ${montserrat.variable}`}>
       <head>
         <Preload />
+        <Analytics />
       </head>
       <body 
         suppressHydrationWarning
@@ -326,7 +327,6 @@ export default function RootLayout({
         <LazyLoadScript />
         <ProgressiveImageLoadingScript />
         <ServiceWorkerScript />
-        <Analytics />
         <PerformanceMonitor />
         <SEOOptimizer />
       </body>
