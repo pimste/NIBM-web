@@ -4,7 +4,7 @@ import { join } from 'path'
 
 export async function GET(request: NextRequest) {
   try {
-    const videoPath = join(process.cwd(), 'public', 'test_vid.mp4')
+    const videoPath = join(process.cwd(), 'public', 'videos', 'new_backgroundvid.mp4')
     const videoBuffer = await readFile(videoPath)
     
     return new NextResponse(videoBuffer, {
