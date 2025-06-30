@@ -1,16 +1,16 @@
 import { MetadataRoute } from 'next';
 
-// This would normally come from a CMS or database
+// Complete list of tower cranes with realistic last modified dates
 const towercranes = [
-  { slug: 'potain-mdt-178', lastModified: new Date() },
-  { slug: 'potain-mc-85-b', lastModified: new Date() },
-  { slug: 'potain-mdt-219-j10', lastModified: new Date() },
-  { slug: 'potain-mct-88', lastModified: new Date() },
-  { slug: 'potain-mc-125', lastModified: new Date() },
-  { slug: 'potain-mdt-189', lastModified: new Date() },
-  { slug: 'potain-mc-175-b', lastModified: new Date() },
-  { slug: 'potain-mdt-268-j12', lastModified: new Date() },
-  { slug: 'potain-mct-135', lastModified: new Date() },
+  { slug: 'potain-mdt-178', lastModified: new Date('2024-01-15') },
+  { slug: 'potain-mc-85-b', lastModified: new Date('2024-01-12') },
+  { slug: 'potain-mdt-219-j10', lastModified: new Date('2024-01-10') },
+  { slug: 'potain-mct-88', lastModified: new Date('2024-01-08') },
+  { slug: 'potain-mc-125', lastModified: new Date('2024-01-05') },
+  { slug: 'potain-mdt-189', lastModified: new Date('2024-01-03') },
+  { slug: 'potain-mc-175-b', lastModified: new Date('2023-12-28') },
+  { slug: 'potain-mdt-268-j12', lastModified: new Date('2023-12-25') },
+  { slug: 'potain-mct-135', lastModified: new Date('2023-12-20') },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -19,17 +19,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Define supported languages
   const languages = ['en', 'nl', 'de'];
   
-  // Main static pages - these will now use language prefixes
+  // Main static pages with priorities and change frequencies
   const routes = [
-    '',                  // Home
-    '/about',            // About
-    '/services',         // Services
-    '/towercranes',      // Towercranes
-    '/technical-info',   // Technical info
-    '/contact',          // Contact
-    '/privacy-policy',   // Privacy policy
-    '/terms-of-service', // Terms of service
-    '/cookies',          // Cookies policy
+    { path: '', priority: 1.0, changeFreq: 'weekly' as const },           // Home
+    { path: '/about', priority: 0.8, changeFreq: 'monthly' as const },    // About
+    { path: '/services', priority: 0.9, changeFreq: 'monthly' as const }, // Services
+    { path: '/towercranes', priority: 0.9, changeFreq: 'weekly' as const }, // Towercranes
+    { path: '/technical-info', priority: 0.7, changeFreq: 'monthly' as const }, // Technical info
+    { path: '/contact', priority: 0.8, changeFreq: 'monthly' as const },   // Contact
+    { path: '/privacy-policy', priority: 0.5, changeFreq: 'yearly' as const }, // Privacy policy
+    { path: '/terms-of-service', priority: 0.5, changeFreq: 'yearly' as const }, // Terms of service
+    { path: '/cookies', priority: 0.5, changeFreq: 'yearly' as const },    // Cookies policy
   ];
   
   // Create sitemap entries with proper language subfolders
@@ -39,34 +39,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
   languages.forEach(lang => {
     routes.forEach(route => {
       // For home page
-      if (route === '') {
+      if (route.path === '') {
         entries.push({
           url: `${baseUrl}/${lang}`,
           lastModified: new Date(),
-          changeFrequency: lang === 'en' ? 'weekly' : 'monthly',
-          priority: lang === 'en' ? 1.0 : 0.9,
-          alternateRefs: languages.map(altLang => ({
-            hreflang: altLang,
-            href: `${baseUrl}/${altLang}`
-          }))
+          changeFrequency: route.changeFreq,
+          priority: lang === 'en' ? route.priority : route.priority * 0.9,
         });
       } else {
         // For other pages
         entries.push({
-          url: `${baseUrl}/${lang}${route}`,
+          url: `${baseUrl}/${lang}${route.path}`,
           lastModified: new Date(),
-          changeFrequency: lang === 'en' ? 'monthly' : 'monthly',
-          priority: lang === 'en' ? 0.8 : 0.7,
-          alternateRefs: languages.map(altLang => ({
-            hreflang: altLang,
-            href: `${baseUrl}/${altLang}${route}`
-          }))
+          changeFrequency: route.changeFreq,
+          priority: lang === 'en' ? route.priority : route.priority * 0.9,
         });
       }
     });
   });
   
-  // Tower crane detail pages with language prefixes
+  // Add tower crane detail pages with language prefixes
   languages.forEach(lang => {
     towercranes.forEach(crane => {
       entries.push({
@@ -74,10 +66,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: crane.lastModified,
         changeFrequency: 'monthly',
         priority: lang === 'en' ? 0.7 : 0.6,
-        alternateRefs: languages.map(altLang => ({
-          hreflang: altLang,
-          href: `${baseUrl}/${altLang}/towercranes/${crane.slug}`
-        }))
       });
     });
   });
