@@ -11,6 +11,7 @@ import dynamic from 'next/dynamic'
 import { LangAttributeUpdater } from '@/components/LangAttributeUpdater'
 import { FontFallbacks } from '@/components/FontFallbacks'
 import { Analytics } from '@/components/Analytics'
+import { Analytics as VercelAnalytics } from '@vercel/analytics/next'
 import PerformanceMonitor from '@/components/PerformanceMonitor'
 import SEOOptimizer from '@/components/SEOOptimizer'
 import { LanguageProvider } from '@/context/LanguageContext'
@@ -329,6 +330,7 @@ export default function RootLayout({
         <ServiceWorkerScript />
         <PerformanceMonitor />
         <SEOOptimizer />
+        <VercelAnalytics />
       </body>
     </html>
   )
