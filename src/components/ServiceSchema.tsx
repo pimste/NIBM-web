@@ -32,7 +32,7 @@ export function ServiceSchema() {
           "itemOffered": {
             "@type": "Service",
             "name": "Tower Crane Sales",
-            "description": "We offer a wide range of new and used tower cranes for sale with comprehensive documentation and warranties.",
+            "description": "We offer a wide range of used tower cranes for sale with comprehensive documentation and warranties.",
             "serviceType": "Equipment Sales"
           }
         },
@@ -58,8 +58,8 @@ export function ServiceSchema() {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Operator Training",
-            "description": "Comprehensive training programs for crane operators, focusing on safety protocols and operational efficiency.",
+            "name": "Equipment Assessment & Site Evaluation",
+            "description": "Comprehensive equipment condition assessments and site evaluations to ensure optimal crane selection and safe operations.",
             "serviceType": "Training Service"
           }
         },

@@ -39,8 +39,8 @@ const faqData: Record<string, FAQ[]> = {
       answer: "We offer flexible rental periods from short-term daily rentals to long-term contracts spanning several years. Rental terms are customized based on your project requirements and duration."
     },
     {
-      question: "Do you provide operator training for tower cranes?",
-      answer: "While we focus on crane supply and technical services, we can recommend certified training providers for tower crane operators. We also provide technical orientation for maintenance and safety procedures."
+      question: "Do you provide equipment assessment services for tower cranes?",
+      answer: "Yes, we provide comprehensive equipment condition assessments and site evaluations to ensure optimal crane selection and safe operations. Our expert team evaluates equipment condition, site suitability, load capacity requirements, and safety compliance to provide detailed recommendations for your project needs."
     }
   ],
   nl: [
@@ -75,6 +75,10 @@ const faqData: Record<string, FAQ[]> = {
     {
       question: "Bieden jullie operatortraining voor torenkranen?",
       answer: "Hoewel wij ons richten op kraanlevering en technische diensten, kunnen wij gecertificeerde trainingsaanbieders aanbevelen voor torenkraan operators. Wij verzorgen ook technische oriëntatie voor onderhoud en veiligheidsprocedures."
+    },
+    {
+      question: "Do you offer equipment assessment services?",
+      answer: "Yes, we provide comprehensive equipment assessment and site evaluation services. Our expert team conducts thorough equipment condition assessments, site suitability evaluations, load capacity analysis, and safety compliance assessments to ensure optimal crane selection and safe operations for your construction projects."
     }
   ],
   de: [
@@ -109,6 +113,10 @@ const faqData: Record<string, FAQ[]> = {
     {
       question: "Bieten Sie Bedienerschulung für Turmkräne an?",
       answer: "Obwohl wir uns auf Kranlieferung und technische Services konzentrieren, können wir zertifizierte Schulungsanbieter für Turmkran-Bediener empfehlen. Wir bieten auch technische Einweisung für Wartung und Sicherheitsverfahren."
+    },
+    {
+      question: "Do you offer equipment assessment services?",
+      answer: "Yes, we provide comprehensive equipment assessment and site evaluation services. Our expert team conducts thorough equipment condition assessments, site suitability evaluations, load capacity analysis, and safety compliance assessments to ensure optimal crane selection and safe operations for your construction projects."
     }
   ]
 }
@@ -203,8 +211,8 @@ export const towerCraneFAQs: FAQ[] = [
     answer: "We serve customers across Europe, with primary focus on the Netherlands, Germany, Belgium, and Luxembourg. Our experienced team can handle transport and logistics across these regions."
   },
   {
-    question: "Do you offer operator training?",
-    answer: "Yes, we provide comprehensive operator training programs that focus on safety protocols, operational efficiency, and best practices for tower crane operation. Our certified instructors ensure operators meet all safety standards."
+    question: "Do you offer equipment assessment services?",
+    answer: "Yes, we provide comprehensive equipment assessment and site evaluation services. Our expert team conducts thorough equipment condition assessments, site suitability evaluations, load capacity analysis, and safety compliance assessments to ensure optimal crane selection and safe operations for your construction projects."
   },
   {
     question: "What maintenance services do you provide?",
