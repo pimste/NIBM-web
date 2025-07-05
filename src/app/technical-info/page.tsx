@@ -66,19 +66,19 @@ const faqs = [
   },
   {
     question: 'What safety measures should be in place when operating a tower crane?',
-    answer: 'Safety measures for tower crane operation include proper operator training and certification, regular inspections and maintenance, clear communication protocols, weather monitoring, load management systems, and anti-collision devices. Additionally, ensuring proper foundation and installation, establishing a clear zone around the crane, and implementing comprehensive safety plans are essential. All operators should also be familiar with emergency procedures and follow manufacturer guidelines.',
+    answer: 'Safety measures for tower crane operation include proper maintenance, regular inspections, clear communication protocols, weather monitoring, load management systems, and anti-collision devices. Additionally, ensuring proper foundation and installation, establishing a clear zone around the crane, and implementing comprehensive safety plans are essential. Following manufacturer guidelines and emergency procedures is also crucial.',
   },
   {
     question: 'How often should tower cranes be inspected?',
-    answer: 'Tower cranes should undergo daily visual inspections by the operator before use, weekly more detailed inspections by a competent person, monthly thorough inspections by a qualified technician, and annual comprehensive inspections by certified inspectors. Additionally, after severe weather events or any modifications, special inspections should be conducted. These regular inspections help ensure safe operation and identify potential issues before they become serious problems.',
+    answer: 'Tower cranes should undergo daily visual inspections by qualified personnel before use, weekly more detailed inspections by a competent person, monthly thorough inspections by a qualified technician, and annual comprehensive inspections by certified inspectors. Additionally, after severe weather events or any modifications, special inspections should be conducted. These regular inspections help ensure safe operation and identify potential issues before they become serious problems.',
   },
   {
     question: 'What are the wind speed limits for tower crane operation?',
     answer: 'Tower cranes typically have operational wind speed limits of around 20-25 mph (32-40 km/h) for normal operation. When wind speeds reach approximately 45 mph (72 km/h), cranes should be put into weathervane mode to allow the jib to move freely with the wind. However, these limits can vary based on the specific crane model, load characteristics, and manufacturer guidelines. It\'s essential to follow the specifications provided by the crane manufacturer and consider site-specific conditions when determining safe operating parameters.',
   },
   {
-    question: 'What qualifications are required to operate a tower crane?',
-    answer: 'Tower crane operators need specific certifications and qualifications, which vary by country and region. Generally, operators must complete a recognized training program, pass both written and practical exams, and obtain a certification from an accredited organization. They should also have good depth perception, coordination, and concentration abilities. Additionally, most jurisdictions require regular recertification to ensure operators maintain their skills and knowledge of current safety protocols and technological advancements.',
+    question: 'What maintenance services are available for tower cranes?',
+    answer: 'Professional maintenance services for tower cranes include preventive maintenance programs, regular inspections, parts replacement, emergency repairs, and technical support. These services help ensure optimal performance, extend equipment lifespan, and maintain safety standards. Maintenance schedules should follow manufacturer recommendations and industry best practices.',
   },
 ]
 

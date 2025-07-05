@@ -188,7 +188,7 @@ export default function ContactClient() {
                         <option value="Tower Crane Rental">{t('contact.form.subjects.rental')}</option>
                         <option value="Tower Crane Service">{t('contact.form.subjects.service')}</option>
                         <option value="Tower Crane Parts">{t('contact.form.subjects.parts')}</option>
-                        <option value="Tower Crane Training">{t('contact.form.subjects.training')}</option>
+                        <option value="Equipment Assessment">{t('contact.form.subjects.training')}</option>
                         <option value="Other">{t('contact.form.subjects.other')}</option>
                       </select>
                     </div>
@@ -329,7 +329,7 @@ export default function ContactClient() {
                             </div>
                             <div className="flex justify-between">
                               <span className="font-medium">{t('contact.info.hours.friday')}</span>
-                              <span>8:00 - 16:00</span>
+                              <span>8:00 - 17:00</span>
                             </div>
                             <div className="flex justify-between">
                               <span className="font-medium text-neutral-500">Weekend</span>

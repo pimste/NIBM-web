@@ -35,7 +35,7 @@ export default function About() {
   
   const teamMembers = [
     {
-      name: 'Gid Gehlen',
+      name: 'Egidius (Gid) Gehlen',
       position: t('about.team.ceo'),
       image: '/images/optimized/gidgehlen.webp',
       bio: t('about.team.ceo.bio'),
@@ -248,7 +248,7 @@ export default function About() {
                 </div>
                 <div className="p-8 flex flex-col justify-center">
                   <h3 className="text-2xl font-bold text-neutral-900 mb-2">
-                    Gid Gehlen
+                    Egidius (Gid) Gehlen
                   </h3>
                   <p className="text-primary font-medium text-lg mb-4">
                     {t('about.team.ceo')}
