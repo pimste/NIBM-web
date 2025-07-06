@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
@@ -103,47 +103,83 @@ const cranes = [
 
 export default function CraneDetailsClient() {
   const params = useParams()
-  const slug = params.slug as string
-  const crane = cranes.find(c => c.slug === slug)
   const [activeImage, setActiveImage] = useState(0)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     company: '',
+    subject: '',
     message: '',
+    craneModel: '',
+    inquiryType: 'Crane Inquiry'
   })
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
+
+  const slug = params.slug as string
+  const crane = cranes.find(c => c.slug === slug)
 
   if (!crane) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-neutral-900 mb-4">Tower Crane Not Found</h1>
-          <p className="text-neutral-600 mb-6">The tower crane you are looking for does not exist or has been removed.</p>
-          <Link
-            href="/towercranes"
-            className="inline-flex items-center text-primary hover:text-primary-700 transition-colors"
-          >
-            <FaArrowLeft className="mr-2" /> Back to Available Cranes
-          </Link>
-        </div>
-      </div>
-    )
+    return <div>Crane not found</div>
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Initialize form with crane details
+  useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      craneModel: crane.name,
+      subject: `Inquiry about ${crane.name}`,
+      message: `I'm interested in the ${crane.name} (${crane.year}) and would like more information about:\n\n- Pricing and availability\n- Technical specifications\n- Delivery options\n- Service and support\n\nPlease contact me to discuss further.`
+    }))
+  }, [crane.name, crane.year])
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // In a real implementation, this would send the form data to a server
-    console.log('Form submitted:', formData)
-    setFormSubmitted(true)
+    setIsSubmitting(true)
+    setSubmitError('')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to submit the form. Please try again.')
+      }
+
+      setFormSubmitted(true)
+      // Reset form data but keep crane-specific info
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        subject: `Inquiry about ${crane.name}`,
+        message: `I'm interested in the ${crane.name} (${crane.year}) and would like more information about:\n\n- Pricing and availability\n- Technical specifications\n- Delivery options\n- Service and support\n\nPlease contact me to discuss further.`,
+        craneModel: crane.name,
+        inquiryType: 'Crane Inquiry'
+      })
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      setSubmitError(error instanceof Error ? error.message : 'An unexpected error occurred')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
-      [name]: value,
+      [name]: value
     }))
   }
 
@@ -190,9 +226,9 @@ export default function CraneDetailsClient() {
       <section className="py-12 bg-white">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Image Gallery */}
+            {/* Image Gallery - More Professional Layout */}
             <div>
-              <div className="relative h-96 rounded-lg overflow-hidden mb-4">
+              <div className="relative h-80 rounded-lg overflow-hidden mb-4 shadow-lg">
                 <Image
                   src={crane.gallery[activeImage]}
                   alt={crane.name}
@@ -213,7 +249,7 @@ export default function CraneDetailsClient() {
                   <button
                     key={index}
                     onClick={() => setActiveImage(index)}
-                    className={`relative w-24 h-24 flex-shrink-0 rounded overflow-hidden ${
+                    className={`relative w-20 h-20 flex-shrink-0 rounded overflow-hidden ${
                       activeImage === index ? 'ring-2 ring-primary' : ''
                     }`}
                   >
@@ -285,10 +321,10 @@ export default function CraneDetailsClient() {
 
               <div className="bg-neutral-50 p-6 rounded-lg">
                 <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <FaPhone className="mr-2 text-primary" /> Contact Us About This Crane
+                  <FaPhone className="mr-2 text-primary" /> Quick Contact
                 </h3>
                 <p className="text-neutral-700 mb-4">
-                  Interested in this {crane.name}? Contact our sales team for more information, pricing, or to schedule a viewing.
+                  Need immediate assistance? Call or email us directly.
                 </p>
                 <div className="flex flex-col sm:flex-row sm:space-x-4">
                   <a 
@@ -331,93 +367,147 @@ export default function CraneDetailsClient() {
             </div>
           </div>
 
-          {/* Inquiry Form */}
-          <div className="mt-16 bg-neutral-50 p-8 rounded-lg">
-            <h2 className="text-2xl font-bold text-neutral-900 mb-6">
-              Request More Information
+          {/* Enhanced Contact Form */}
+          <div className="mt-16 bg-gradient-to-r from-primary/5 to-primary/10 p-8 rounded-lg">
+            <h2 className="text-2xl font-bold text-neutral-900 mb-2 flex items-center">
+              <FaEnvelope className="mr-3 text-primary" />
+              Request Information About This Crane
             </h2>
+            <p className="text-neutral-600 mb-6">
+              Fill out the form below and we'll get back to you with detailed information about the {crane.name}.
+            </p>
             
             {formSubmitted ? (
-              <div className="bg-green-50 border border-green-200 text-green-800 p-4 rounded-md">
-                <h3 className="text-lg font-semibold mb-2">Thank You for Your Interest!</h3>
-                <p>We've received your inquiry about the {crane.name}. Our team will get back to you shortly with more information.</p>
+              <div className="bg-green-50 border border-green-200 text-green-800 p-6 rounded-md">
+                <div className="flex items-center">
+                  <FaCheck className="text-green-600 text-xl mr-3" />
+                  <div>
+                    <h3 className="text-lg font-semibold mb-2">Thank You for Your Interest!</h3>
+                    <p>We've received your inquiry about the {crane.name}. Our team will contact you within 24 hours with detailed information.</p>
+                  </div>
+                </div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-neutral-700 mb-1">
-                    Your Name*
+              <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-sm">
+                {submitError && (
+                  <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-md">
+                    <p>{submitError}</p>
+                  </div>
+                )}
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-neutral-700 mb-1">
+                      Your Name*
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-1">
+                      Email Address*
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-neutral-700 mb-1">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="company" className="block text-sm font-medium text-neutral-700 mb-1">
+                      Company Name
+                    </label>
+                    <input
+                      type="text"
+                      id="company"
+                      name="company"
+                      className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                      value={formData.company}
+                      onChange={handleInputChange}
+                      disabled={isSubmitting}
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-6">
+                  <label htmlFor="subject" className="block text-sm font-medium text-neutral-700 mb-1">
+                    Subject*
                   </label>
                   <input
                     type="text"
-                    id="name"
-                    name="name"
+                    id="subject"
+                    name="subject"
                     required
                     className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    value={formData.name}
+                    value={formData.subject}
                     onChange={handleInputChange}
+                    disabled={isSubmitting}
                   />
                 </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-1">
-                    Email Address*
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-neutral-700 mb-1">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="company" className="block text-sm font-medium text-neutral-700 mb-1">
-                    Company Name
-                  </label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    value={formData.company}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="md:col-span-2">
+
+                <div className="mt-6">
                   <label htmlFor="message" className="block text-sm font-medium text-neutral-700 mb-1">
                     Your Message*
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    rows={4}
+                    rows={6}
                     required
                     className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    defaultValue={`I'm interested in the ${crane.name} and would like more information.`}
+                    value={formData.message}
                     onChange={handleInputChange}
+                    disabled={isSubmitting}
                   />
                 </div>
-                <div className="md:col-span-2">
+
+                <div className="mt-6">
                   <button
                     type="submit"
-                    className="bg-primary hover:bg-primary-700 text-white font-medium px-6 py-3 rounded-md transition-colors"
+                    className="bg-primary hover:bg-primary-700 text-white font-medium px-8 py-3 rounded-md transition-colors flex items-center"
+                    disabled={isSubmitting}
                   >
-                    Submit Inquiry
+                    {isSubmitting ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <FaEnvelope className="mr-2" />
+                        Send Inquiry
+                      </>
+                    )}
                   </button>
                 </div>
               </form>
