@@ -24,6 +24,11 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     fetchCranes()
+    
+    // Set up periodic refresh every 30 seconds
+    const interval = setInterval(fetchCranes, 30000)
+    
+    return () => clearInterval(interval)
   }, [])
 
   // Refresh cranes when returning to dashboard
@@ -66,8 +71,10 @@ export default function AdminDashboard() {
     setError(null)
     
     try {
-      const response = await fetch('/api/admin/cranes', {
+      // Add cache-busting parameter to ensure fresh data
+      const response = await fetch(`/api/admin/cranes?_t=${Date.now()}`, {
         credentials: 'include',
+        cache: 'no-store',
         headers: {
           'Cache-Control': 'no-cache',
           'Pragma': 'no-cache'
@@ -137,6 +144,8 @@ export default function AdminDashboard() {
         setCranes(cranes.map(c => 
           c.id === id ? { ...c, isAvailable: !currentStatus } : c
         ))
+        // Refresh data after a short delay to ensure consistency
+        setTimeout(() => fetchCranes(), 500)
       } else if (response.status === 401) {
         router.push('/en/admin/login')
         return
