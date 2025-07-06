@@ -1,5 +1,3 @@
-const withNextIntl = require('next-intl/plugin')();
-
 /** @type {import('next').NextConfig} */
 const withBundleAnalyzer = process.env.ANALYZE === 'true' 
   ? require('@next/bundle-analyzer')()
@@ -63,6 +61,11 @@ const nextConfig = {
         destination: '/towercranes/potain-mct-135',
         permanent: true,
       },
+      {
+        source: '/admin',
+        destination: '/en/admin/login',
+        permanent: true,
+      },
     ];
   },
   images: {
@@ -84,6 +87,7 @@ const nextConfig = {
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     unoptimized: false, // Make sure optimization is enabled
+    domains: ['localhost', 'nibmvb.eu'],
   },
   compress: true,
   poweredByHeader: false,
@@ -167,6 +171,23 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: 'https://nibmvb.eu',
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, PUT, DELETE, OPTIONS, PATCH',
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'Content-Type, Authorization',
+          },
+        ],
+      },
     ];
   },
   experimental: {
@@ -175,7 +196,11 @@ const nextConfig = {
     optimizeCss: process.env.NODE_ENV === 'production',
     scrollRestoration: true,
     webVitalsAttribution: ['CLS', 'LCP'],
+    appDir: true,
+  },
+  env: {
+    CUSTOM_KEY: 'my-value',
   },
 };
 
-module.exports = withNextIntl(withBundleAnalyzer(nextConfig));
+module.exports = withBundleAnalyzer(nextConfig);

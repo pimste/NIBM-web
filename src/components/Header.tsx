@@ -7,20 +7,9 @@ import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaBars, FaTimes, FaPhone, FaEnvelope, FaArrowRight } from 'react-icons/fa'
 import { useLanguage } from '@/context/LanguageContext'
-import dynamic from 'next/dynamic'
 import { ProtectedContact } from './ProtectedContact'
-
-// Dynamically import the LanguageSwitcher with fallback
-const LanguageSwitcher = dynamic(
-  () => import('./LanguageSwitcher').then(mod => mod.LanguageSwitcher),
-  { ssr: false, loading: () => null }
-)
-
-// Dynamically import ClientOnly with fallback
-const ClientOnly = dynamic(
-  () => import('./ClientOnly').then(mod => mod.ClientOnly),
-  { ssr: false, loading: () => null }
-)
+import { LanguageSwitcher } from './LanguageSwitcher'
+import { ClientOnly } from './ClientOnly'
 
 // Instead of hardcoded paths, create a function to get language-aware URLs
 const getLanguageAwareUrl = (path: string, language: string) => {
@@ -100,11 +89,7 @@ export function Header() {
               <div className="flex space-x-4 items-center">
                 <Link href="/technical-info#faq" className="text-xs hover:text-secondary transition-colors">{t('topbar.faq')}</Link>
                 <div className="ml-4">
-                  {typeof LanguageSwitcher === 'function' ? (
-                    <LanguageSwitcher />
-                  ) : (
-                    <div className="w-6 h-6 rounded-full bg-primary-800"></div>
-                  )}
+                  <LanguageSwitcher />
                 </div>
               </div>
             </div>
@@ -243,11 +228,7 @@ export function Header() {
                   </Link>
                   <div className="flex items-center">
                     <div className="mr-4">
-                      {typeof LanguageSwitcher === 'function' ? (
-                        <LanguageSwitcher />
-                      ) : (
-                        <div className="w-6 h-6 rounded-full bg-primary-800"></div>
-                      )}
+                      <LanguageSwitcher />
                     </div>
                     <button
                       type="button"

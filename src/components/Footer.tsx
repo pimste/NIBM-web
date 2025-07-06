@@ -3,16 +3,10 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { FaFacebook, FaLinkedin, FaInstagram, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
-import dynamic from 'next/dynamic'
 import { ProtectedContact } from './ProtectedContact'
 import { useLanguage } from '@/context/LanguageContext'
 import { useLanguageUrl } from '@/hooks/useLanguageUrl'
-
-// Dynamically import ClientOnly with fallback
-const ClientOnly = dynamic(
-  () => import('./ClientOnly').then(mod => mod.ClientOnly),
-  { ssr: false, loading: () => null }
-)
+import { ClientOnly } from './ClientOnly'
 
 export function Footer() {
   const { language, t } = useLanguage();

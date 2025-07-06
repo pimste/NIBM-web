@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Crane {
+  id                Int      @id @default(autoincrement())
+  name              String
+  slug              String   @unique
+  model             String
+  year              Int
+  type              String
+  condition         String
+  serialNumber      String   @unique
+  maxCapacity       String
+  maxJibLength      String
+  maxHeight         String
+  counterJibLength  String
+  towerType         String
+  cabinType         String
+  hoistSpeed        String
+  trolleySpeed      String
+  slewing           String
+  powerRequirements String
+  description       String   @db.Text
+  features          Json     // Store as JSON array
+  images            Json     // Store image URLs as JSON array
+  brochureUrl       String?
+  isAvailable       Boolean  @default(true)
+  status            String   @default("available") // available, sold, coming-soon
+  category          String   // sale, rental
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("cranes")
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  email     String   @unique
+  createdAt DateTime @default(now())
+  
+  @@map("admins")
+}

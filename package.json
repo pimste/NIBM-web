@@ -1,5 +1,5 @@
 {
-  "name": "website",
+  "name": "nibm-web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,24 +7,28 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "analyze": "ANALYZE=true next build",
-    "optimize-images": "node scripts/optimize-images.js",
-    "convert-to-webp": "node scripts/convert-to-webp.js",
-    "update-image-refs": "node scripts/update-image-references.js",
-    "optimize-for-web": "node scripts/optimize-for-web.js",
-    "prebuild": "npm run optimize-for-web && npm run update-image-refs"
+    "postinstall": "prisma generate",
+    "db:deploy": "node scripts/deploy-db.js",
+    "db:manage": "node scripts/db-manager.js",
+    "db:connect": "node scripts/connect-db.js",
+    "db:studio": "prisma studio",
+    "db:push": "prisma db push",
+    "db:migrate": "prisma migrate dev",
+    "db:reset": "prisma migrate reset"
   },
   "dependencies": {
     "@fontsource/inter": "^5.0.8",
     "@fontsource/montserrat": "^5.0.8",
     "@heroicons/react": "^2.2.0",
+    "@prisma/client": "^6.11.1",
     "@vercel/analytics": "^1.5.0",
+    "bcrypt": "^5.1.1",
     "cookies-next": "4.3.0",
-    "critters": "^0.0.23",
     "framer-motion": "^10.16.4",
     "next": "^14.2.26",
-    "next-intl": "^4.0.2",
     "next-seo": "^6.1.0",
+    "pg": "^8.16.3",
+    "prisma": "^6.11.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.12.0",
@@ -34,16 +38,21 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.2.26",
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20.9.0",
+    "@types/pg": "^8.15.4",
     "@types/react": "18.3.20",
     "@types/react-dom": "^18.2.15",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.53.0",
     "eslint-config-next": "^14.2.26",
-    "glob": "^11.0.1",
     "postcss": "^8.4.31",
     "sharp": "^0.33.2",
     "tailwindcss": "^3.4.17",
+    "tsx": "^4.20.3",
     "typescript": "5.8.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

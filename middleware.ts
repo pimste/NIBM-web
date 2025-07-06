@@ -19,7 +19,12 @@ const publicFiles = [
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
-  // Explicit favicon handling - exclude ALL favicon-related requests
+  // FIRST: Handle API routes - no i18n processing needed
+  if (pathname.startsWith('/api')) {
+    return NextResponse.next();
+  }
+  
+  // SECOND: Handle static files and assets - no i18n processing needed
   if (
     pathname === '/favicon.ico' ||
     pathname === '/favicon.png' ||
@@ -35,12 +40,12 @@ export function middleware(request: NextRequest) {
     pathname === '/sitemap.xml' ||
     pathname === '/site.webmanifest' ||
     pathname === '/sw.js' ||
-    pathname.includes('/_next') ||
-    pathname.startsWith('/api')
+    pathname.includes('/_next')
   ) {
     return NextResponse.next();
   }
-  
+
+  // THIRD: Handle i18n for all other routes (including admin routes)
   // Get locale from cookie first (prioritize this over URL)
   const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
   
@@ -124,6 +129,39 @@ export function middleware(request: NextRequest) {
       maxAge: 60 * 60 * 24 * 30, // 30 days
       path: '/'
     });
+    
+    // FOURTH: Handle admin route protection after i18n processing
+    // Check if this is an admin route (after locale prefix)
+    const pathWithoutLocale = pathname.replace(`/${existingLocale}`, '');
+    if (pathWithoutLocale.startsWith('/admin')) {
+      // Allow login page
+      if (pathWithoutLocale === '/admin/login') {
+        return response;
+      }
+      
+      // Check for admin session for all other admin routes
+      const sessionCookie = request.cookies.get('admin-session');
+      if (!sessionCookie?.value) {
+        return NextResponse.redirect(new URL(`/${existingLocale}/admin/login`, request.url));
+      }
+      
+      // Validate session
+      try {
+        const session = JSON.parse(Buffer.from(sessionCookie.value, 'base64').toString());
+        if (session.exp < Date.now()) {
+          // Session expired, redirect to login
+          const redirectResponse = NextResponse.redirect(new URL(`/${existingLocale}/admin/login`, request.url));
+          redirectResponse.cookies.delete('admin-session');
+          return redirectResponse;
+        }
+      } catch {
+        // Invalid session, redirect to login
+        const redirectResponse = NextResponse.redirect(new URL(`/${existingLocale}/admin/login`, request.url));
+        redirectResponse.cookies.delete('admin-session');
+        return redirectResponse;
+      }
+    }
+    
     return response;
   }
   
@@ -131,8 +169,8 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Match all paths except static files, images, and API routes
+  // Match all paths - we'll handle exclusions in the function itself
   matcher: [
-    '/((?!_next/static|_next/image|_next/data|favicon.ico|favicon.png|apple-touch-icon.png|nibm-favicon.avif|icon.png|icon.avif|apple-icon.png|robots.txt|sitemap.xml|site.webmanifest|sw.js|images|assets|fonts|api).*)'
+    '/((?!_next/static|_next/image|_next/data|favicon.ico|favicon.png|apple-touch-icon.png|nibm-favicon.avif|icon.png|icon.avif|apple-icon.png|robots.txt|sitemap.xml|site.webmanifest|sw.js|images|assets|fonts).*)'
   ]
 }; 

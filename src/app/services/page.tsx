@@ -7,7 +7,6 @@ import { useLanguage } from '@/context/LanguageContext'
 import { ClientOnly } from '@/components/ClientOnly'
 import { MotionDiv } from '@/components/MotionWrapper'
 import { useEffect, useState } from 'react'
-import { useTranslations } from 'next-intl'
 import { useIsClient } from '@/hooks/useIsClient'
 
 export default function Services() {

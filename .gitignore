@@ -44,3 +44,5 @@ next-env.d.ts
 src/email_automation.py
 *.pyc
 __pycache__/
+
+/src/generated/prisma

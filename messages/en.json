@@ -30,5 +30,40 @@
       "message": "Message",
       "submit": "Send Message"
     }
+  },
+  "towercranes": {
+    "page": {
+      "title": "Available Tower Cranes"
+    },
+    "filter": {
+      "title": "Filter Tower Cranes",
+      "searchPlaceholder": "Search cranes...",
+      "all": "All",
+      "status": "Status",
+      "type": "Type",
+      "category": "Category"
+    },
+    "status": {
+      "available": "Available",
+      "sold": "Sold",
+      "comingsoon": "Coming Soon"
+    },
+    "type": {
+      "flattop": "Flat Top",
+      "topslewing": "Top Slewing"
+    },
+    "category": {
+      "sale": "For Sale",
+      "rental": "For Rental"
+    },
+    "crane": {
+      "year": "Year",
+      "type": "Type",
+      "maxCapacity": "Max Capacity",
+      "maxJibLength": "Max Jib Length"
+    },
+    "viewDetails": "View Details",
+    "noCranesFound": "No tower cranes found matching your criteria.",
+    "noCranesFoundSuggestion": "Try adjusting your filters or search terms."
   }
 } 

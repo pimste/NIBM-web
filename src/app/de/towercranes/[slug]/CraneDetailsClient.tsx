@@ -9,104 +9,33 @@ import { MotionDiv } from '@/components/MotionWrapper'
 import { useLanguage } from '@/context/LanguageContext'
 import { TowerCraneSchema } from '@/components/TowerCraneSchema'
 
-// This would be fetched from a CMS or API in a real implementation
-const cranes = [
-  {
-    id: 1,
-    name: 'Potain MDT 178',
-    slug: 'potain-mdt-178', // SEO-friendly slug
-    image: '/images/optimized/Potain-MDT-178_3W.webp',
-    gallery: [
-      '/images/optimized/Potain-MDT-178_3W.webp',
-      '/images/optimized/cropped-Top-page2-potain6.webp',
-    ],
-    status: 'Verfügbar',
-    year: 2019,
-    maxCapacity: '8 Tonnen',
-    maxJibLength: '60 Meter',
-    maxHeight: '64,9 Meter',
-    type: 'Flat Top',
-    category: 'Verkauf',
-    description: 'Der Potain MDT 178 ist ein vielseitiger Obendreher-Turmkran, der für einfachen Transport, Montage und Bedienung konzipiert wurde. Er bietet hervorragende Hubkapazitäten und Reichweite, was ihn ideal für eine Vielzahl von Bauprojekten macht.',
-    specifications: {
-      manufacturer: 'Potain',
-      model: 'MDT 178',
-      yearOfManufacture: 2019,
-      serialNumber: 'MDT178-2019-0123',
-      condition: 'Ausgezeichnet',
-      maxCapacity: '8 Tonnen',
-      maxJibLength: '60 Meter',
-      maxHeight: '64,9 Meter',
-      counterJibLength: '17,6 Meter',
-      towerType: 'K-Typ Mastsektionen',
-      cabinType: 'Vision Kabine mit Klimaanlage',
-      powerRequirements: '380-480V, 50/60Hz, 3-phasig',
-      hoistSpeed: '0-80 m/min',
-      trolleySpeed: '0-60 m/min',
-      slewing: '0-0,8 U/min',
-    },
-    features: [
-      'Hochleistungswinde mit Frequenzsteuerung',
-      'Automatisches Schmiersystem',
-      'Anti-Kollisions-System',
-      'Fernüberwachungsmöglichkeit',
-      'Energierückgewinnungssystem',
-      'Verstellbare Frequenzantriebe',
-      'Transportachsen inklusive',
-      'Vollständige Dokumentation und Zertifikate',
-    ],
-  },
-  {
-    id: 2,
-    name: 'Potain MC 85 B',
-    slug: 'potain-mc-85-b', // SEO-friendly slug
-    image: '/images/optimized/cropped-Top-page2-potain6.webp',
-    gallery: [
-      '/images/optimized/cropped-Top-page2-potain6.webp',
-      '/images/optimized/Potain-MDT-178_3W.webp',
-    ],
-    status: 'Verfügbar',
-    year: 2020,
-    maxCapacity: '5 Tonnen',
-    maxJibLength: '52 Meter',
-    maxHeight: '42,5 Meter',
-    type: 'Obendreher',
-    category: 'Vermietung',
-    description: 'Der Potain MC 85 B ist ein zuverlässiger Obendreher-Turmkran, der für mittelgroße Bauprojekte geeignet ist. Mit seinem kompakten Design und seiner ausgezeichneten Leistung bietet er eine effektive Hebelösung mit minimalen Betriebskosten.',
-    specifications: {
-      manufacturer: 'Potain',
-      model: 'MC 85 B',
-      yearOfManufacture: 2020,
-      serialNumber: 'MC85B-2020-0456',
-      condition: 'Ausgezeichnet',
-      maxCapacity: '5 Tonnen',
-      maxJibLength: '52 Meter',
-      maxHeight: '42,5 Meter',
-      counterJibLength: '15,2 Meter',
-      towerType: 'H-Typ Mastsektionen',
-      cabinType: 'Standardkabine mit Heizung',
-      powerRequirements: '380-480V, 50/60Hz, 3-phasig',
-      hoistSpeed: '0-70 m/min',
-      trolleySpeed: '0-50 m/min',
-      slewing: '0-0,7 U/min',
-    },
-    features: [
-      'Hochleistungswinde',
-      'Sicherheitsverriegelungssystem',
-      'Windgeschwindigkeitsüberwachung',
-      'Überlastschutz',
-      'Ferndiagnose',
-      'Energieeffiziente Motoren',
-      'Verzinkte Komponenten für längere Lebensdauer',
-      'Vollständige Dokumentation und Zertifikate',
-    ],
-  },
-]
+// Define the Crane interface to match the API response
+interface Crane {
+  id: number
+  name: string
+  slug: string
+  image: string
+  gallery?: string[]
+  status: 'available' | 'sold' | 'comingsoon'
+  year: number
+  maxCapacity: string
+  maxJibLength: string
+  maxHeight: string
+  type: 'flattop' | 'topslewing'
+  category: 'sale' | 'rental'
+  description?: string
+  specifications?: any
+  features?: string[]
+}
 
 export default function CraneDetailsClient() {
   const params = useParams()
   const slug = params.slug as string
-  const crane = cranes.find(c => c.slug === slug)
+  const { t } = useLanguage()
+  
+  const [crane, setCrane] = useState<Crane | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [activeImage, setActiveImage] = useState(0)
   const [formData, setFormData] = useState({
     name: '',
@@ -117,7 +46,85 @@ export default function CraneDetailsClient() {
   })
   const [formSubmitted, setFormSubmitted] = useState(false)
 
-  if (!crane) {
+  useEffect(() => {
+    const fetchCrane = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+        
+        const response = await fetch(`/api/cranes/${slug}`)
+        if (!response.ok) {
+          if (response.status === 404) {
+            setError('Crane not found')
+          } else {
+            throw new Error('Failed to fetch crane')
+          }
+          return
+        }
+        
+        const data = await response.json()
+        setCrane(data)
+      } catch (err) {
+        console.error('Error fetching crane:', err)
+        setError('Failed to load crane details')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (slug) {
+      fetchCrane()
+    }
+  }, [slug])
+
+  // Helper functions for translations
+  const getStatusText = (status: string) => {
+    switch (status) {
+      case 'available':
+        return t('towercranes.status.available')
+      case 'sold':
+        return t('towercranes.status.sold')
+      case 'comingsoon':
+        return t('towercranes.status.comingsoon')
+      default:
+        return status
+    }
+  }
+
+  const getTypeText = (type: string) => {
+    switch (type) {
+      case 'flattop':
+        return t('towercranes.type.flattop')
+      case 'topslewing':
+        return t('towercranes.type.topslewing')
+      default:
+        return type
+    }
+  }
+
+  const getCategoryText = (category: string) => {
+    switch (category) {
+      case 'sale':
+        return t('towercranes.category.sale')
+      case 'rental':
+        return t('towercranes.category.rental')
+      default:
+        return category
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-neutral-600">Lade Krandetails...</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error || !crane) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -154,15 +161,18 @@ export default function CraneDetailsClient() {
   const craneUrl = `${siteUrl}/de/towercranes/${crane.slug}`
   const manufacturer = crane.specifications?.manufacturer || 'Potain'
   const model = crane.specifications?.model || crane.name
-  const condition = crane.category === 'Verkauf' ? 'NewCondition' : 'UsedCondition'
-  const availability = crane.status === 'Verfügbar' ? 'InStock' : 'OutOfStock'
+  const condition = crane.category === 'sale' ? 'NewCondition' : 'UsedCondition'
+  const availability = crane.status === 'available' ? 'InStock' : 'OutOfStock'
+
+  // Prepare gallery images
+  const galleryImages = crane.gallery && crane.gallery.length > 0 ? crane.gallery : [crane.image]
 
   return (
     <>
       <TowerCraneSchema
         name={crane.name}
-        description={crane.description}
-        image={`${siteUrl}${crane.gallery[0]}`}
+        description={crane.description || ''}
+        image={`${siteUrl}${crane.image}`}
         manufacturer={manufacturer}
         model={model}
         sku={crane.specifications?.serialNumber}
@@ -196,234 +206,179 @@ export default function CraneDetailsClient() {
             <div>
               <div className="relative h-96 rounded-lg overflow-hidden mb-4">
                 <Image
-                  src={crane.gallery[activeImage]}
+                  src={galleryImages[activeImage]}
                   alt={crane.name}
                   fill
                   className="object-cover"
+                  priority
                 />
-                <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-medium ${
-                  crane.status === 'Verfügbar' ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800'
-                }`}>
-                  {crane.status}
-                </div>
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                  {crane.category === 'Verkauf' ? 'Zum Verkauf' : 'Zur Miete'}
-                </div>
               </div>
-              <div className="flex space-x-2 overflow-x-auto pb-2">
-                {crane.gallery.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveImage(index)}
-                    className={`relative w-24 h-24 flex-shrink-0 rounded overflow-hidden ${
-                      activeImage === index ? 'ring-2 ring-primary' : ''
-                    }`}
-                  >
-                    <Image
-                      src={image}
-                      alt={`${crane.name} - Bild ${index + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
-              <div className="flex justify-between mt-4">
-                <button
-                  className="flex items-center text-primary hover:text-primary-700 transition-colors"
-                  onClick={() => window.print()}
-                >
-                  <FaPrint className="mr-2" /> Details drucken
-                </button>
-                <button
-                  className="flex items-center text-primary hover:text-primary-700 transition-colors"
-                >
-                  <FaDownload className="mr-2" /> Broschüre herunterladen
-                </button>
-              </div>
-            </div>
-
-            {/* Crane Information */}
-            <div>
-              <h2 className="text-2xl font-bold text-neutral-900 mb-4">
-                {crane.name}
-              </h2>
-              <p className="text-neutral-700 mb-6">
-                {crane.description}
-              </p>
-
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div className="bg-neutral-50 p-4 rounded-lg">
-                  <h3 className="text-lg font-semibold mb-2">Baujahr</h3>
-                  <p className="text-neutral-700">{crane.year}</p>
-                </div>
-                <div className="bg-neutral-50 p-4 rounded-lg">
-                  <h3 className="text-lg font-semibold mb-2">Typ</h3>
-                  <p className="text-neutral-700">{crane.type}</p>
-                </div>
-                <div className="bg-neutral-50 p-4 rounded-lg">
-                  <h3 className="text-lg font-semibold mb-2">Max. Kapazität</h3>
-                  <p className="text-neutral-700">{crane.maxCapacity}</p>
-                </div>
-                <div className="bg-neutral-50 p-4 rounded-lg">
-                  <h3 className="text-lg font-semibold mb-2">Max. Auslegerlänge</h3>
-                  <p className="text-neutral-700">{crane.maxJibLength}</p>
-                </div>
-              </div>
-
-              <div className="bg-neutral-50 p-6 rounded-lg mb-8">
-                <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <FaInfoCircle className="mr-2 text-primary" /> Hauptmerkmale
-                </h3>
-                <ul className="space-y-2">
-                  {crane.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <FaCheck className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </li>
+              
+              {galleryImages.length > 1 && (
+                <div className="flex space-x-2 overflow-x-auto">
+                  {galleryImages.map((image, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setActiveImage(index)}
+                      className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-colors ${
+                        activeImage === index ? 'border-primary' : 'border-neutral-200'
+                      }`}
+                    >
+                      <Image
+                        src={image}
+                        alt={`${crane.name} ${index + 1}`}
+                        width={80}
+                        height={80}
+                        className="object-cover w-full h-full"
+                      />
+                    </button>
                   ))}
-                </ul>
-              </div>
-
-              <div className="bg-neutral-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <FaPhone className="mr-2 text-primary" /> Kontaktieren Sie uns bezüglich dieses Krans
-                </h3>
-                <p className="text-neutral-700 mb-4">
-                  Interessiert an diesem {crane.name}? Kontaktieren Sie unser Verkaufsteam für weitere Informationen, Preise oder um einen Besichtigungstermin zu vereinbaren.
-                </p>
-                <div className="flex flex-col sm:flex-row sm:space-x-4">
-                  <a 
-                    href="tel:+31123456789" 
-                    className="flex items-center justify-center bg-primary hover:bg-primary-700 text-white font-medium px-6 py-3 rounded-md transition-colors mb-3 sm:mb-0"
-                  >
-                    <FaPhone className="mr-2" /> Rufen Sie uns an
-                  </a>
-                  <a 
-                    href="mailto:gid.gehlen@nibmtowercranes.com" 
-                    className="flex items-center justify-center border border-primary text-primary hover:bg-primary hover:text-white font-medium px-6 py-3 rounded-md transition-colors"
-                  >
-                    <FaEnvelope className="mr-2" /> E-Mail senden
-                  </a>
                 </div>
-              </div>
+              )}
             </div>
-          </div>
 
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold text-neutral-900 mb-6">
-              Technische Spezifikationen
-            </h2>
-            <div className="bg-white border border-neutral-200 rounded-lg overflow-hidden">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                {Object.entries(crane.specifications).map(([key, value], index) => (
-                  <div 
-                    key={key} 
-                    className={`p-4 ${
-                      index % 2 === 0 ? 'bg-white' : 'bg-neutral-50'
-                    } border-b border-neutral-200`}
-                  >
-                    <div className="text-sm text-neutral-500 mb-1">
-                      {key.replace(/([A-Z])/g, ' $1').replace(/^./, (str) => str.toUpperCase())}
-                    </div>
-                    <div className="font-medium">{value}</div>
+            {/* Crane Details */}
+            <div>
+              <div className="mb-6">
+                <div className="flex items-center space-x-4 mb-4">
+                  <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${
+                    crane.status === 'available' 
+                      ? 'bg-green-100 text-green-800' 
+                      : crane.status === 'comingsoon'
+                      ? 'bg-yellow-100 text-yellow-800'
+                      : 'bg-red-100 text-red-800'
+                  }`}>
+                    {getStatusText(crane.status)}
+                  </span>
+                  <span className="text-primary font-medium">{getCategoryText(crane.category)}</span>
+                </div>
+                
+                <h2 className="text-2xl font-bold text-neutral-900 mb-4">{crane.name}</h2>
+                
+                {crane.description && (
+                  <p className="text-neutral-600 mb-6">{crane.description}</p>
+                )}
+              </div>
+
+              {/* Specifications */}
+              <div className="bg-neutral-50 rounded-lg p-6 mb-6">
+                <h3 className="text-lg font-semibold text-neutral-900 mb-4">Technische Daten</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <span className="text-sm text-neutral-500">Baujahr:</span>
+                    <span className="block font-medium">{crane.year}</span>
                   </div>
-                ))}
+                  <div>
+                    <span className="text-sm text-neutral-500">Typ:</span>
+                    <span className="block font-medium">{getTypeText(crane.type)}</span>
+                  </div>
+                  <div>
+                    <span className="text-sm text-neutral-500">Max. Tragkraft:</span>
+                    <span className="block font-medium">{crane.maxCapacity}</span>
+                  </div>
+                  <div>
+                    <span className="text-sm text-neutral-500">Max. Ausladung:</span>
+                    <span className="block font-medium">{crane.maxJibLength}</span>
+                  </div>
+                  <div>
+                    <span className="text-sm text-neutral-500">Max. Hakenhöhe:</span>
+                    <span className="block font-medium">{crane.maxHeight}</span>
+                  </div>
+                  {crane.specifications?.manufacturer && (
+                    <div>
+                      <span className="text-sm text-neutral-500">Hersteller:</span>
+                      <span className="block font-medium">{crane.specifications.manufacturer}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Features */}
+              {crane.features && crane.features.length > 0 && (
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-neutral-900 mb-4">Ausstattung</h3>
+                  <ul className="space-y-2">
+                    {crane.features.map((feature, index) => (
+                      <li key={index} className="flex items-center">
+                        <FaCheck className="text-green-600 mr-2 flex-shrink-0" />
+                        <span className="text-neutral-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Contact Form */}
+              <div className="bg-primary-50 rounded-lg p-6">
+                <h3 className="text-lg font-semibold text-neutral-900 mb-4">
+                  <FaEnvelope className="inline mr-2" />
+                  Anfrage senden
+                </h3>
+                
+                {formSubmitted ? (
+                  <div className="text-center py-4">
+                    <FaCheck className="text-green-600 text-2xl mx-auto mb-2" />
+                    <p className="text-green-600 font-medium">Vielen Dank für Ihre Anfrage!</p>
+                    <p className="text-neutral-600 text-sm">Wir werden uns in Kürze bei Ihnen melden.</p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="Ihr Name"
+                        value={formData.name}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      />
+                      <input
+                        type="email"
+                        name="email"
+                        placeholder="Ihre E-Mail"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <input
+                        type="tel"
+                        name="phone"
+                        placeholder="Telefonnummer"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      />
+                      <input
+                        type="text"
+                        name="company"
+                        placeholder="Firma"
+                        value={formData.company}
+                        onChange={handleInputChange}
+                        className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                      />
+                    </div>
+                    <textarea
+                      name="message"
+                      placeholder="Ihre Nachricht"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      rows={4}
+                      className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    />
+                    <button
+                      type="submit"
+                      className="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-700 transition-colors"
+                    >
+                      Anfrage senden
+                    </button>
+                  </form>
+                )}
               </div>
             </div>
-          </div>
-
-          {/* Inquiry Form */}
-          <div className="mt-16 bg-neutral-50 p-8 rounded-lg">
-            <h2 className="text-2xl font-bold text-neutral-900 mb-6">
-              Weitere Informationen anfordern
-            </h2>
-            
-            {formSubmitted ? (
-              <div className="bg-green-50 border border-green-200 text-green-800 p-4 rounded-md">
-                <h3 className="text-lg font-semibold mb-2">Vielen Dank für Ihr Interesse!</h3>
-                <p>Wir haben Ihre Anfrage zum {crane.name} erhalten. Unser Team wird sich in Kürze mit weiteren Informationen bei Ihnen melden.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-neutral-700 mb-1">
-                    Ihr Name*
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-neutral-700 mb-1">
-                    E-Mail-Adresse*
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-neutral-700 mb-1">
-                    Telefonnummer
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="company" className="block text-sm font-medium text-neutral-700 mb-1">
-                    Firmenname
-                  </label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    value={formData.company}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="md:col-span-2">
-                  <label htmlFor="message" className="block text-sm font-medium text-neutral-700 mb-1">
-                    Ihre Nachricht*
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    required
-                    className="w-full px-4 py-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    defaultValue={`Ich interessiere mich für den ${crane.name} und möchte weitere Informationen.`}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="md:col-span-2">
-                  <button
-                    type="submit"
-                    className="bg-primary hover:bg-primary-700 text-white font-medium px-6 py-3 rounded-md transition-colors"
-                  >
-                    Anfrage absenden
-                  </button>
-                </div>
-              </form>
-            )}
           </div>
         </div>
       </section>
