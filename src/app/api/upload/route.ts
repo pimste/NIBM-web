@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile } from 'fs/promises'
-import { join } from 'path'
 import { requireAuth } from '@/lib/auth'
+import { supabase } from '@/lib/supabase'
 
 export async function POST(request: NextRequest) {
   try {
@@ -39,6 +38,7 @@ export async function POST(request: NextRequest) {
 
     console.log('Upload API: Processing file:', file.name, 'Size:', file.size, 'Type:', file.type)
 
+    // Convert file to buffer
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
 
@@ -47,21 +47,31 @@ export async function POST(request: NextRequest) {
     const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_')
     const filename = `${timestamp}_${originalName}`
     
-    // Save to public/images directory
-    const path = join(process.cwd(), 'public', 'images', filename)
-    console.log('Upload API: Saving file to:', path)
+    console.log('Upload API: Uploading to Supabase storage:', filename)
     
-    try {
-      await writeFile(path, buffer)
-      console.log('Upload API: File saved successfully')
-    } catch (writeError) {
-      console.error('Upload API: Error writing file:', writeError)
-      return NextResponse.json({ error: 'Failed to save file' }, { status: 500 })
+    // Upload to Supabase storage
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from('crane-images')
+      .upload(filename, buffer, {
+        contentType: file.type,
+        upsert: false
+      })
+
+    if (uploadError) {
+      console.error('Upload API: Supabase upload error:', uploadError)
+      return NextResponse.json({ error: 'Failed to upload file to storage', details: uploadError.message }, { status: 500 })
     }
 
-    // Return the URL
-    const imageUrl = `/images/${filename}`
-    console.log('Upload API: Returning URL:', imageUrl)
+    console.log('Upload API: File uploaded successfully to Supabase:', uploadData.path)
+
+    // Get public URL
+    const { data: publicUrlData } = supabase.storage
+      .from('crane-images')
+      .getPublicUrl(uploadData.path)
+
+    const imageUrl = publicUrlData.publicUrl
+    console.log('Upload API: Returning public URL:', imageUrl)
+    
     return NextResponse.json({ url: imageUrl })
   } catch (error) {
     console.error('Upload API: Unexpected error:', error)

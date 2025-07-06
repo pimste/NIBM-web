@@ -79,6 +79,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'fsdzgbwxpwbsnjmdnhxy.supabase.co',
+      },
     ],
     deviceSizes: [320, 640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
