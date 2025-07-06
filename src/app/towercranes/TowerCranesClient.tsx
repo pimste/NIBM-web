@@ -308,7 +308,7 @@ export default function TowerCranesClient() {
                         <div className="flex items-center justify-between">
                           <span className="text-primary font-medium">{getCategoryText(crane.category)}</span>
                           <Link
-                            href={`/en/towercranes/${crane.slug}`}
+                            href={`/towercranes/${crane.slug}`}
                             className="inline-flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary-700 transition-colors"
                           >
                             {t('towercranes.viewDetails')}

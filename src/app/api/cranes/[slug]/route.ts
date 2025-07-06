@@ -45,7 +45,13 @@ export async function GET(
       }
     }
     
-    return NextResponse.json(transformedCrane)
+    return NextResponse.json(transformedCrane, {
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    })
   } catch (error) {
     console.error('Error fetching crane:', error)
     return NextResponse.json(

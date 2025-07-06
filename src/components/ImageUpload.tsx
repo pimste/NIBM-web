@@ -26,6 +26,7 @@ export default function ImageUpload({ images, onChange, maxImages = 5, label = "
       const response = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
+        credentials: 'include'
       })
 
       if (response.ok) {

@@ -38,7 +38,14 @@ export async function GET() {
       }
     }))
     
-    return NextResponse.json(transformedCranes)
+    // Add cache control headers to prevent caching
+    return NextResponse.json(transformedCranes, {
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache',
+        'Expires': '0'
+      }
+    })
   } catch (error) {
     console.error('Error fetching cranes:', error)
     return NextResponse.json(
