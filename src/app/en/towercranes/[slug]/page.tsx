@@ -11,6 +11,25 @@ const CraneDetailsClient = dynamic(
   }
 )
 
+// Static crane slugs for build-time generation
+const staticCraneSlugs = [
+  'potain-mdt-178',
+  'potain-mc-85-b',
+  'potain-mdt-219-j10',
+  'potain-mct-88',
+  'potain-mc-125',
+  'potain-mdt-189',
+  'potain-mc-175-b',
+  'potain-mdt-268-j12',
+  'potain-mct-135'
+]
+
+export async function generateStaticParams() {
+  return staticCraneSlugs.map((slug) => ({
+    slug: slug,
+  }))
+}
+
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   return generateTowerCraneMetadata({ params })
 }

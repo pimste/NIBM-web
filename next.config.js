@@ -196,7 +196,6 @@ const nextConfig = {
     optimizeCss: process.env.NODE_ENV === 'production',
     scrollRestoration: true,
     webVitalsAttribution: ['CLS', 'LCP'],
-    appDir: true,
   },
   env: {
     CUSTOM_KEY: 'my-value',

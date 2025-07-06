@@ -1,72 +1,87 @@
 import { Metadata } from 'next'
-import { generatePageMetadata } from '../../../page-metadata'
 
-// Find crane by slug helper function - fetch from API
-async function findCraneBySlug(slug: string) {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/cranes/${slug}`, {
-      cache: 'no-store' // Ensure fresh data for metadata generation
-    })
-    
-    if (!response.ok) {
-      return null
-    }
-    
-    const crane = await response.json()
-    return crane
-  } catch (error) {
-    console.error('Error fetching crane for metadata:', error)
-    return null
+// Static crane data for metadata generation
+const staticCraneData: { [key: string]: any } = {
+  'potain-mdt-178': {
+    name: 'Potain MDT 178',
+    model: 'MDT 178',
+    year: 2018,
+    description: 'High-performance tower crane with excellent lifting capacity'
+  },
+  'potain-mc-85-b': {
+    name: 'Potain MC 85 B',
+    model: 'MC 85 B',
+    year: 2019,
+    description: 'Reliable tower crane for medium-scale construction projects'
+  },
+  'potain-mdt-219-j10': {
+    name: 'Potain MDT 219 J10',
+    model: 'MDT 219 J10',
+    year: 2020,
+    description: 'Advanced tower crane with superior reach and capacity'
+  },
+  'potain-mct-88': {
+    name: 'Potain MCT 88',
+    model: 'MCT 88',
+    year: 2017,
+    description: 'Compact tower crane ideal for urban construction'
+  },
+  'potain-mc-125': {
+    name: 'Potain MC 125',
+    model: 'MC 125',
+    year: 2021,
+    description: 'Versatile tower crane for various construction applications'
+  },
+  'potain-mdt-189': {
+    name: 'Potain MDT 189',
+    model: 'MDT 189',
+    year: 2019,
+    description: 'Robust tower crane with excellent performance characteristics'
+  },
+  'potain-mc-175-b': {
+    name: 'Potain MC 175 B',
+    model: 'MC 175 B',
+    year: 2020,
+    description: 'Heavy-duty tower crane for large construction projects'
+  },
+  'potain-mdt-268-j12': {
+    name: 'Potain MDT 268 J12',
+    model: 'MDT 268 J12',
+    year: 2022,
+    description: 'State-of-the-art tower crane with maximum efficiency'
+  },
+  'potain-mct-135': {
+    name: 'Potain MCT 135',
+    model: 'MCT 135',
+    year: 2021,
+    description: 'High-capacity tower crane for demanding construction tasks'
   }
 }
 
-export async function generateTowerCraneMetadata(
-  { params }: { params: { slug: string } }
-): Promise<Metadata> {
-  // Get crane data from API
-  const crane = await findCraneBySlug(params.slug)
+export async function generateTowerCraneMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const crane = staticCraneData[params.slug]
   
   if (!crane) {
     return {
-      title: 'Tower Crane Not Found | NIBM Tower Cranes',
-      description: 'The requested tower crane could not be found.'
-    }
-  }
-  
-  // Create base metadata for this crane
-  const baseMetadata: Metadata = {
-    title: `${crane.name} - ${crane.type === 'flattop' ? 'Flat Top' : 'Top Slewing'} Tower Crane`,
-    description: crane.description || `The ${crane.name} is a ${crane.type === 'flattop' ? 'flat-top' : 'top-slewing'} tower crane with ${crane.maxCapacity} capacity. ${crane.category === 'sale' ? 'Available for sale' : 'Available for rental'}.`,
-    keywords: `${crane.name}, tower crane, ${crane.type === 'flattop' ? 'Flat Top' : 'Top Slewing'}, crane for ${crane.category}, construction equipment, ${crane.maxCapacity} capacity, ${crane.maxJibLength} jib length`,
-    openGraph: {
-      title: `${crane.name} - ${crane.type === 'flattop' ? 'Flat Top' : 'Top Slewing'} Tower Crane | NIBM Tower Cranes`,
-      description: crane.description || `The ${crane.name} is a premium ${crane.type === 'flattop' ? 'flat-top' : 'top-slewing'} tower crane with exceptional capacity. It's designed for the most demanding construction projects.`,
-      url: `https://www.nibmvb.eu/towercranes/${crane.slug}`,
-      type: 'website',
-      images: [
-        {
-          url: `http://localhost:3000${crane.image}`,
-          width: 1200,
-          height: 630,
-          alt: crane.name
-        }
-      ]
-    },
-    twitter: {
-      card: 'summary_large_image',
-      site: '@nibmvb',
-      creator: '@nibmvb',
-      title: 'NIBM Tower Cranes | Professional Tower Crane Solutions',
-      description: 'Expert tower crane sales, rentals, and services for construction projects of any scale. Full-service support from planning to dismantling.',
-      images: ['http://localhost:3000/images/optimized/cropped-Top-page2-potain6.webp']
+      title: 'Tower Crane - NIBM',
+      description: 'Professional tower crane services and equipment',
     }
   }
 
-  // Use the utility to generate metadata with canonical URLs
-  return generatePageMetadata(
-    baseMetadata,
-    `/towercranes/${params.slug}`,
-    'https://www.nibmvb.eu',
-    ['en', 'nl', 'de']
-  )
+  return {
+    title: `${crane.name} - Tower Crane Details | NIBM`,
+    description: `${crane.description}. Model: ${crane.model}, Year: ${crane.year}. Professional tower crane services by NIBM.`,
+    keywords: `tower crane, ${crane.name}, ${crane.model}, construction equipment, NIBM`,
+    openGraph: {
+      title: `${crane.name} - NIBM`,
+      description: crane.description,
+      type: 'website',
+      siteName: 'NIBM - Tower Crane Services',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${crane.name} - NIBM`,
+      description: crane.description,
+    },
+  }
 } 
