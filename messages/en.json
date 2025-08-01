@@ -31,6 +31,20 @@
       "submit": "Send Message"
     }
   },
+  "cranes": {
+    "title": "Featured Tower Cranes",
+    "subtitle": "Discover our available tower cranes ready for your next project",
+    "available": "Available",
+    "comingSoon": "Coming Soon",
+    "year": "Year",
+    "type": "Type",
+    "maxCapacity": "Max Capacity",
+    "maxHeight": "Max Height",
+    "viewDetails": "View Details",
+    "viewAll": "View All Cranes",
+    "noAvailableCranes": "Oops! Our cranes are playing hide and seek! 🏗️",
+    "noAvailableCranesSubtitle": "They're probably out lifting something heavy. Check back soon!"
+  },
   "towercranes": {
     "page": {
       "title": "Available Tower Cranes"

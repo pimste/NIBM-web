@@ -59,79 +59,43 @@ export default function ServicesClient() {
     ) : isClient ? content : fallback
   }
 
-  // Services data
+  // Services data with fallback content
   const services = [
     {
-      title: isClient ? t('services.rent.title') : 'Tower Crane Rental',
-      description: isClient ? t('services.rent.desc') : 'Comprehensive tower crane rental services with flexible terms and complete support.',
-      image: '/images/optimized/sunset-TC.webp',
-      features: [
-        isClient ? t('services.rent.feature1') : 'Wide range of tower crane models and capacities',
-        isClient ? t('services.rent.feature2') : 'Flexible rental terms and competitive pricing',
-        isClient ? t('services.rent.feature3') : 'Complete technical support and maintenance',
-        isClient ? t('services.rent.feature4') : 'Expert operator training and guidance',
-        isClient ? t('services.rent.feature5') : 'Timely delivery and installation',
-      ]
-    },
-    {
-      title: isClient ? t('services.sale.title') : 'Tower Crane Sales',
-      description: isClient ? t('services.sale.desc') : 'New and used tower cranes from leading manufacturers with warranty and support.',
+      titleKey: 'services.sale.title',
+      titleFallback: 'Tower Crane Sales',
+      descKey: 'services.sale.desc',
+      descFallback: 'New and used tower cranes from leading manufacturers with warranty and support.',
       image: '/images/optimized/Potain-MDT-178_3W.webp',
-      features: [
-        isClient ? t('services.sale.feature1') : 'New and used tower cranes from top manufacturers',
-        isClient ? t('services.sale.feature2') : 'Comprehensive warranty and after-sales support',
-        isClient ? t('services.sale.feature3') : 'Expert consultation on crane selection',
-        isClient ? t('services.sale.feature4') : 'Competitive pricing and financing options',
-        isClient ? t('services.sale.feature5') : 'Complete documentation and certification',
-      ]
+      featureKeys: ['services.sale.feature1', 'services.sale.feature2', 'services.sale.feature3', 'services.sale.feature4'],
+      featureFallbacks: ['New and used tower cranes from top manufacturers', 'Comprehensive warranty and after-sales support', 'Expert consultation on crane selection', 'Competitive pricing and financing options']
     },
     {
-      title: isClient ? t('services.planning.title') : 'Planning & Consulting',
-      description: isClient ? t('services.planning.desc') : 'Expert project planning services to help you select the right tower crane solutions for your construction project.',
-      image: '/images/optimized/helmet1a.webp',
-      features: [
-        isClient ? t('services.planning.feature1') : 'Site assessment and crane selection consulting',
-        isClient ? t('services.planning.feature2') : 'Load capacity and coverage analysis',
-        isClient ? t('services.planning.feature3') : 'Regulatory compliance guidance',
-        isClient ? t('services.planning.feature4') : 'Cost optimization strategies',
-        isClient ? t('services.planning.feature5') : 'Project timeline planning',
-      ]
+      titleKey: 'services.rent.title',
+      titleFallback: 'Equipment Assessment & Evaluation',
+      descKey: 'services.rent.desc',
+      descFallback: 'Comprehensive technical inspections of crane condition and construction site evaluations.',
+      image: '/images/optimized/sunset-TC.webp',
+      featureKeys: ['services.rent.feature1', 'services.rent.feature2', 'services.rent.feature3', 'services.rent.feature4', 'services.rent.feature5'],
+      featureFallbacks: ['Detailed equipment condition assessments', 'Construction site evaluation for optimal crane selection', 'Safety compliance and operational assessments', 'Detailed reporting and recommendations', 'Request a customized quote']
     },
     {
-      title: isClient ? t('services.transport.title') : 'Transport & Logistics',
-      description: isClient ? t('services.transport.desc') : 'We handle all aspects of crane transportation to your construction site.',
+      titleKey: 'services.transport.title',
+      titleFallback: 'Transport & Logistics',
+      descKey: 'services.transport.desc',
+      descFallback: 'We handle the complete transport of your crane.',
       image: '/images/optimized/cropped-Top-page2-potain6.webp',
-      features: [
-        isClient ? t('services.transport.feature1') : 'Specialized transport vehicles and equipment',
-        isClient ? t('services.transport.feature2') : 'Route planning and analysis',
-        isClient ? t('services.transport.feature3') : 'Permit acquisition and compliance',
-        isClient ? t('services.transport.feature4') : 'Experienced transport team',
-        isClient ? t('services.transport.feature5') : 'Insurance coverage during transport',
-      ]
+      featureKeys: ['services.transport.feature4', 'services.transport.feature5'],
+      featureFallbacks: ['Experienced transport team', 'Insurance coverage during transport']
     },
     {
-      title: isClient ? t('services.mounting.title') : 'Mounting & Installation',
-      description: isClient ? t('services.mounting.desc') : 'Our certified technicians perform professional assembly, installation, and dismantling services.',
+      titleKey: 'services.mounting.title',
+      titleFallback: 'Mounting & Installation',
+      descKey: 'services.mounting.desc',
+      descFallback: 'We have professional assemblers for assembly and disassembly.',
       image: '/images/optimized/sunset-TC-2.webp',
-      features: [
-        isClient ? t('services.mounting.feature1') : 'Certified installation specialists',
-        isClient ? t('services.mounting.feature2') : 'Compliance with all safety regulations',
-        isClient ? t('services.mounting.feature3') : 'Thorough testing and commissioning',
-        isClient ? t('services.mounting.feature4') : 'Efficient dismantling services',
-        isClient ? t('services.mounting.feature5') : 'Comprehensive documentation',
-      ]
-    },
-    {
-      title: isClient ? t('services.training.title') : 'Training & Certification',
-      description: isClient ? t('services.training.desc') : 'Comprehensive training programs for crane operators and maintenance personnel.',
-      image: '/images/optimized/our-story.webp',
-      features: [
-        isClient ? t('services.training.feature1') : 'Certified crane operator training',
-        isClient ? t('services.training.feature2') : 'Maintenance and inspection training',
-        isClient ? t('services.training.feature3') : 'Safety protocols and best practices',
-        isClient ? t('services.training.feature4') : 'Hands-on and theoretical instruction',
-        isClient ? t('services.training.feature5') : 'Certification and documentation',
-      ]
+      featureKeys: ['services.mounting.feature2', 'services.mounting.feature3', 'services.mounting.feature4', 'services.mounting.feature5'],
+      featureFallbacks: ['Compliance with all safety regulations', 'Inspection before commissioning', 'Efficient dismantling services', 'Comprehensive documentation']
     }
   ];
 
@@ -140,12 +104,22 @@ export default function ServicesClient() {
       {/* Hero Section */}
       <div className="bg-primary py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white">
-            {isClient ? t('services.page.title') : 'Our Services'}
-          </h1>
-          <p className="text-xl text-white/80 mt-4 max-w-3xl mx-auto">
-            {isClient ? t('services.page.subtitle') : 'From crane selection and delivery to installation and training, we offer a complete solution for all your tower crane needs.'}
-          </p>
+          {renderContent(
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white">
+              {t('services.page.title')}
+            </h1>,
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-white">
+              Our Services
+            </h1>
+          )}
+          {renderContent(
+            <p className="text-xl text-white/80 mt-4 max-w-3xl mx-auto">
+              {t('services.page.subtitle')}
+            </p>,
+            <p className="text-xl text-white/80 mt-4 max-w-3xl mx-auto">
+              From crane selection and delivery to installation and training, we offer a complete solution for all your tower crane needs.
+            </p>
+          )}
         </div>
       </div>
 
@@ -153,12 +127,22 @@ export default function ServicesClient() {
       <section className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl font-bold text-neutral-900 mb-6">
-              {isClient ? t('services.overview.title') : 'Comprehensive Tower Crane Solutions'}
-            </h2>
-            <p className="text-lg text-neutral-700">
-              {isClient ? t('services.overview.desc') : 'NIBM Tower Cranes offers a full range of services to meet all your tower crane needs. Our integrated approach ensures that every aspect of your crane requirements is handled with expertise and attention to detail.'}
-            </p>
+            {renderContent(
+              <h2 className="text-3xl font-bold text-neutral-900 mb-6">
+                {t('services.overview.title')}
+              </h2>,
+              <h2 className="text-3xl font-bold text-neutral-900 mb-6">
+                Comprehensive Tower Crane Solutions
+              </h2>
+            )}
+            {renderContent(
+              <p className="text-lg text-neutral-700">
+                {t('services.overview.desc')}
+              </p>,
+              <p className="text-lg text-neutral-700">
+                NIBM Tower Cranes offers a full range of services to meet all your tower crane needs. Our integrated approach ensures that every aspect of your crane requirements is handled with expertise and attention to detail.
+              </p>
+            )}
           </div>
 
           {/* Service Process Steps */}
@@ -167,34 +151,64 @@ export default function ServicesClient() {
               <div className="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-5">
                 <span className="text-primary font-bold text-2xl">1</span>
               </div>
-              <h3 className="text-xl font-bold text-neutral-900 mb-2">
-                {isClient ? t('services.step1.title') : 'Consultation'}
-              </h3>
-              <p className="text-neutral-700">
-                {isClient ? t('services.step1.desc') : 'We begin with a thorough consultation to understand your specific project requirements and challenges.'}
-              </p>
+              {renderContent(
+                <h3 className="text-xl font-bold text-neutral-900 mb-2">
+                  {t('services.step1.title')}
+                </h3>,
+                <h3 className="text-xl font-bold text-neutral-900 mb-2">
+                  Consultation
+                </h3>
+              )}
+              {renderContent(
+                <p className="text-neutral-700">
+                  {t('services.step1.desc')}
+                </p>,
+                <p className="text-neutral-700">
+                  We begin with a thorough consultation to understand your specific project requirements and challenges.
+                </p>
+              )}
             </div>
             <div className="text-center">
               <div className="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-5">
                 <span className="text-primary font-bold text-2xl">2</span>
               </div>
-              <h3 className="text-xl font-bold text-neutral-900 mb-2">
-                {isClient ? t('services.step2.title') : 'Implementation'}
-              </h3>
-              <p className="text-neutral-700">
-                {isClient ? t('services.step2.desc') : 'Our team handles everything from crane selection and delivery to installation and testing.'}
-              </p>
+              {renderContent(
+                <h3 className="text-xl font-bold text-neutral-900 mb-2">
+                  {t('services.step2.title')}
+                </h3>,
+                <h3 className="text-xl font-bold text-neutral-900 mb-2">
+                  Implementation
+                </h3>
+              )}
+              {renderContent(
+                <p className="text-neutral-700">
+                  {t('services.step2.desc')}
+                </p>,
+                <p className="text-neutral-700">
+                  Our team handles everything from crane selection and delivery to installation and testing.
+                </p>
+              )}
             </div>
             <div className="text-center">
               <div className="w-20 h-20 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-5">
                 <span className="text-primary font-bold text-2xl">3</span>
               </div>
-              <h3 className="text-xl font-bold text-neutral-900 mb-2">
-                {isClient ? t('services.step3.title') : 'Support'}
-              </h3>
-              <p className="text-neutral-700">
-                {isClient ? t('services.step3.desc') : 'We provide ongoing support, maintenance, and training throughout your project\'s duration.'}
-              </p>
+              {renderContent(
+                <h3 className="text-xl font-bold text-neutral-900 mb-2">
+                  {t('services.step3.title')}
+                </h3>,
+                <h3 className="text-xl font-bold text-neutral-900 mb-2">
+                  Support
+                </h3>
+              )}
+              {renderContent(
+                <p className="text-neutral-700">
+                  {t('services.step3.desc')}
+                </p>,
+                <p className="text-neutral-700">
+                  We provide ongoing support, maintenance, and training throughout your project's duration.
+                </p>
+              )}
             </div>
           </div>
 
@@ -211,7 +225,7 @@ export default function ServicesClient() {
                   <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                     <Image
                       src={service.image}
-                      alt={service.title}
+                      alt={service.titleFallback}
                       width={800}
                       height={600}
                       className="object-cover w-full h-full"
@@ -224,20 +238,38 @@ export default function ServicesClient() {
                   </div>
                 </div>
                 <div className={`lg:col-span-7 ${index % 2 === 1 ? 'lg:order-1' : 'lg:order-2'}`}>
-                  <h3 className="text-2xl font-bold text-neutral-900 mb-4">
-                    {service.title}
-                  </h3>
-                  <p className="text-neutral-700 mb-6">
-                    {service.description}
-                  </p>
-                  <h4 className="text-lg font-semibold text-neutral-900 mb-3">
-                    {isClient ? t('services.features') : 'Key Features:'}
-                  </h4>
+                  {renderContent(
+                    <h3 className="text-2xl font-bold text-neutral-900 mb-4">
+                      {t(service.titleKey)}
+                    </h3>,
+                    <h3 className="text-2xl font-bold text-neutral-900 mb-4">
+                      {service.titleFallback}
+                    </h3>
+                  )}
+                  {renderContent(
+                    <p className="text-neutral-700 mb-6">
+                      {t(service.descKey)}
+                    </p>,
+                    <p className="text-neutral-700 mb-6">
+                      {service.descFallback}
+                    </p>
+                  )}
+                  {renderContent(
+                    <h4 className="text-lg font-semibold text-neutral-900 mb-3">
+                      {t('services.features')}
+                    </h4>,
+                    <h4 className="text-lg font-semibold text-neutral-900 mb-3">
+                      Key Features:
+                    </h4>
+                  )}
                   <ul className="space-y-2 mb-6">
-                    {service.features.map((feature, featureIndex) => (
+                    {service.featureKeys.map((featureKey, featureIndex) => (
                       <li key={featureIndex} className="flex items-start">
                         <FaCheckCircle className="text-primary mt-1 mr-2 flex-shrink-0" />
-                        <span>{feature}</span>
+                        {renderContent(
+                          <span>{t(featureKey)}</span>,
+                          <span>{service.featureFallbacks[featureIndex]}</span>
+                        )}
                       </li>
                     ))}
                   </ul>
@@ -245,7 +277,10 @@ export default function ServicesClient() {
                     href="/contact"
                     className="inline-flex items-center font-medium text-primary hover:text-primary-dark transition-colors"
                   >
-                    {isClient ? t('services.learnMore') : 'Learn More About This Service'}
+                    {renderContent(
+                      t('services.learnMore'),
+                      'Learn More About This Service'
+                    )}
                     <MdArrowOutward className="ml-1" />
                   </Link>
                 </div>
@@ -259,17 +294,30 @@ export default function ServicesClient() {
       <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-lg shadow-sm p-8 md:p-12 text-center max-w-4xl mx-auto">
-            <h2 className="text-2xl font-bold text-neutral-900 mb-4">
-              {isClient ? t('services.cta.title') : 'Ready to Discuss Your Tower Crane Needs?'}
-            </h2>
-            <p className="text-neutral-700 mb-8 max-w-2xl mx-auto">
-              {isClient ? t('services.cta.desc') : 'Our team of experts is ready to help you find the perfect solution for your construction project.'}
-            </p>
+            {renderContent(
+              <h2 className="text-2xl font-bold text-neutral-900 mb-4">
+                {t('services.cta.title')}
+              </h2>,
+              <h2 className="text-2xl font-bold text-neutral-900 mb-4">
+                Ready to Discuss Your Tower Crane Needs?
+              </h2>
+            )}
+            {renderContent(
+              <p className="text-neutral-700 mb-8 max-w-2xl mx-auto">
+                {t('services.cta.desc')}
+              </p>,
+              <p className="text-neutral-700 mb-8 max-w-2xl mx-auto">
+                Our team of experts is ready to help you find the perfect solution for your construction project.
+              </p>
+            )}
             <Link
               href="/contact"
               className="inline-block px-6 py-3 bg-primary text-white rounded-md font-medium hover:bg-primary-dark transition-colors"
             >
-              {isClient ? t('services.discuss') : 'Discuss Your Project With Us'}
+              {renderContent(
+                t('services.discuss'),
+                'Discuss Your Project With Us'
+              )}
             </Link>
           </div>
         </div>

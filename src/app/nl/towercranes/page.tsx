@@ -7,7 +7,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
   // Define base metadata for tower cranes page
   const baseMetadata: Metadata = {
     title: 'Torenkraan Catalogus | NIBM Tower Cranes',
-    description: 'Bekijk onze complete catalogus van torenkranen die beschikbaar zijn voor verkoop en verhuur, inclusief Potain-modellen met gedetailleerde specificaties.',
+    description: 'Bekijk onze complete catalogus van torenkranen die beschikbaar zijn voor verkoop, inclusief Potain-modellen met gedetailleerde specificaties.',
     openGraph: {
       title: 'Torenkraan Catalogus | NIBM Tower Cranes',
       description: 'Ontdek onze selectie van premium torenkranen met gedetailleerde specificaties en beschikbaarheidsstatus.',

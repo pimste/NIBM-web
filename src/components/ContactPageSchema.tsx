@@ -37,7 +37,7 @@ export function ContactPageSchema({
     '@id': `${siteUrl}${pathname}#contactpage`,
     url: `${siteUrl}${pathname}`,
     name: 'Contact NIBM Tower Cranes',
-    description: 'Contact us for tower crane sales, rentals, and services',
+            description: 'Contact us for tower crane sales and services',
     provider: {
       '@type': 'LocalBusiness',
       '@id': `${siteUrl}/#business`,

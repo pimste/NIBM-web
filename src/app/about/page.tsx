@@ -106,7 +106,7 @@ export default function About() {
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden">
               <Image
-                src="/images/optimized/our-story-2.webp"
+                src="/images/manitowoc-potain-about.webp"
                 alt="NIBM Tower Cranes story"
                 width={500}
                 height={500}
@@ -253,12 +253,18 @@ export default function About() {
                   <p className="text-primary font-medium text-lg mb-4">
                     {t('about.team.ceo')}
                   </p>
-                  <p className="text-neutral-700 mb-4">
-                    {t('about.team.ceo.bio')}
-                  </p>
-                  <p className="text-neutral-700">
-                    {t('about.team.ceo.bio2')}
-                  </p>
+                  <ClientOnly fallback={
+                    <div className="space-y-4">
+                      <p className="text-neutral-700">Loading biography...</p>
+                    </div>
+                  }>
+                    <p className="text-neutral-700 mb-4">
+                      {t('about.team.ceo.bio')}
+                    </p>
+                    <p className="text-neutral-700">
+                      {t('about.team.ceo.bio2')}
+                    </p>
+                  </ClientOnly>
                 </div>
               </div>
             </MotionDiv>

@@ -1,0 +1,328 @@
+{
+  "date": "2025-07-25",
+  "summary": {
+    "totalTasks": 6,
+    "successfulTasks": 6,
+    "errors": 0,
+    "warnings": 0
+  },
+  "tasks": [
+    {
+      "name": "Content Generation",
+      "status": "completed",
+      "details": "Generated 3 pages",
+      "data": [
+        {
+          "keyword": "tower crane installation",
+          "url": "/en/howto/tower-crane-installation",
+          "wordCount": 693,
+          "generated": "2025-07-25T11:09:06.516Z"
+        },
+        {
+          "keyword": "crane safety regulations",
+          "url": "/en/informational/crane-safety-regulations",
+          "wordCount": 835,
+          "generated": "2025-07-25T11:09:06.516Z"
+        },
+        {
+          "keyword": "construction equipment rental",
+          "url": "/en/commercial/construction-equipment-rental",
+          "wordCount": 930,
+          "generated": "2025-07-25T11:09:06.516Z"
+        }
+      ]
+    },
+    {
+      "name": "A/B Testing",
+      "status": "completed",
+      "details": "Created 6 A/B tests",
+      "data": [
+        {
+          "type": "meta_description",
+          "page": "/en",
+          "variations": [
+            "Professional tower crane services from NIBM - Expert solutions for construction",
+            "🏗️ Tower Crane Experts | NIBM Construction Equipment - Get Quote Today",
+            "NIBM Tower Cranes - Netherlands' Leading Construction Equipment Provider"
+          ],
+          "testId": "meta_1753441746516"
+        },
+        {
+          "type": "headline",
+          "page": "/en",
+          "variations": [
+            "Professional Tower Crane Solutions",
+            "🚀 Expert Tower Crane Services",
+            "[PROVEN] Tower Crane Equipment",
+            "2024: Leading Crane Solutions",
+            "Tower Crane Experts - Limited Time Offer!"
+          ],
+          "testId": "headline_1753441746516"
+        },
+        {
+          "type": "meta_description",
+          "page": "/en/services",
+          "variations": [
+            "Professional tower crane services from NIBM - Expert solutions for construction",
+            "🏗️ Tower Crane Experts | NIBM Construction Equipment - Get Quote Today",
+            "NIBM Tower Cranes - Netherlands' Leading Construction Equipment Provider"
+          ],
+          "testId": "meta_1753441746516"
+        },
+        {
+          "type": "headline",
+          "page": "/en/services",
+          "variations": [
+            "Professional Tower Crane Solutions",
+            "🚀 Expert Tower Crane Services",
+            "[PROVEN] Tower Crane Equipment",
+            "2024: Leading Crane Solutions",
+            "Tower Crane Experts - Limited Time Offer!"
+          ],
+          "testId": "headline_1753441746516"
+        },
+        {
+          "type": "meta_description",
+          "page": "/en/towercranes",
+          "variations": [
+            "Professional tower crane services from NIBM - Expert solutions for construction",
+            "🏗️ Tower Crane Experts | NIBM Construction Equipment - Get Quote Today",
+            "NIBM Tower Cranes - Netherlands' Leading Construction Equipment Provider"
+          ],
+          "testId": "meta_1753441746516"
+        },
+        {
+          "type": "headline",
+          "page": "/en/towercranes",
+          "variations": [
+            "Professional Tower Crane Solutions",
+            "🚀 Expert Tower Crane Services",
+            "[PROVEN] Tower Crane Equipment",
+            "2024: Leading Crane Solutions",
+            "Tower Crane Experts - Limited Time Offer!"
+          ],
+          "testId": "headline_1753441746516"
+        }
+      ]
+    },
+    {
+      "name": "TF-IDF Optimization",
+      "status": "completed",
+      "details": "Optimized 3 pages",
+      "data": [
+        {
+          "page": "/en/towercranes",
+          "analysis": {
+            "primaryKeywords": [
+              "tower crane",
+              "construction",
+              "safety"
+            ],
+            "lsiKeywords": [
+              "heavy machinery",
+              "building equipment",
+              "crane operator"
+            ],
+            "optimizationScore": 93,
+            "recommendations": [
+              "Add more semantic keywords related to construction",
+              "Improve keyword density for \"tower crane safety\"",
+              "Include LSI terms: heavy lifting, construction equipment"
+            ]
+          }
+        },
+        {
+          "page": "/en/services",
+          "analysis": {
+            "primaryKeywords": [
+              "tower crane",
+              "construction",
+              "safety"
+            ],
+            "lsiKeywords": [
+              "heavy machinery",
+              "building equipment",
+              "crane operator"
+            ],
+            "optimizationScore": 87,
+            "recommendations": [
+              "Add more semantic keywords related to construction",
+              "Improve keyword density for \"tower crane safety\"",
+              "Include LSI terms: heavy lifting, construction equipment"
+            ]
+          }
+        },
+        {
+          "page": "/en/safety",
+          "analysis": {
+            "primaryKeywords": [
+              "tower crane",
+              "construction",
+              "safety"
+            ],
+            "lsiKeywords": [
+              "heavy machinery",
+              "building equipment",
+              "crane operator"
+            ],
+            "optimizationScore": 85,
+            "recommendations": [
+              "Add more semantic keywords related to construction",
+              "Improve keyword density for \"tower crane safety\"",
+              "Include LSI terms: heavy lifting, construction equipment"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cannibalization Check",
+      "status": "completed",
+      "details": "Found 2 conflicts, auto-resolved 1",
+      "data": {
+        "conflicts": [
+          {
+            "keyword": "tower crane",
+            "conflictingPages": [
+              "/en/towercranes",
+              "/en/services"
+            ],
+            "severity": "medium",
+            "recommendation": "Add canonical tag from services to towercranes page"
+          },
+          {
+            "keyword": "crane rental",
+            "conflictingPages": [
+              "/en/services",
+              "/en/rental"
+            ],
+            "severity": "low",
+            "recommendation": "Differentiate content focus between pages"
+          }
+        ],
+        "autoResolved": [
+          {
+            "conflict": "crane rental",
+            "action": "canonical_added",
+            "details": "Differentiate content focus between pages",
+            "timestamp": "2025-07-25T11:09:06.516Z"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Internal Linking",
+      "status": "completed",
+      "details": "Updated links on 4 pages",
+      "data": [
+        {
+          "page": "/en/towercranes",
+          "suggestions": [
+            {
+              "anchor": "tower crane safety",
+              "target": "/en/safety",
+              "relevance": 0.85
+            },
+            {
+              "anchor": "crane rental services",
+              "target": "/en/services",
+              "relevance": 0.78
+            },
+            {
+              "anchor": "construction equipment",
+              "target": "/en/towercranes",
+              "relevance": 0.72
+            }
+          ]
+        },
+        {
+          "page": "/en/services",
+          "suggestions": [
+            {
+              "anchor": "tower crane safety",
+              "target": "/en/safety",
+              "relevance": 0.85
+            },
+            {
+              "anchor": "crane rental services",
+              "target": "/en/services",
+              "relevance": 0.78
+            },
+            {
+              "anchor": "construction equipment",
+              "target": "/en/towercranes",
+              "relevance": 0.72
+            }
+          ]
+        },
+        {
+          "page": "/en/safety",
+          "suggestions": [
+            {
+              "anchor": "tower crane safety",
+              "target": "/en/safety",
+              "relevance": 0.85
+            },
+            {
+              "anchor": "crane rental services",
+              "target": "/en/services",
+              "relevance": 0.78
+            },
+            {
+              "anchor": "construction equipment",
+              "target": "/en/towercranes",
+              "relevance": 0.72
+            }
+          ]
+        },
+        {
+          "page": "/en/technical-info",
+          "suggestions": [
+            {
+              "anchor": "tower crane safety",
+              "target": "/en/safety",
+              "relevance": 0.85
+            },
+            {
+              "anchor": "crane rental services",
+              "target": "/en/services",
+              "relevance": 0.78
+            },
+            {
+              "anchor": "construction equipment",
+              "target": "/en/towercranes",
+              "relevance": 0.72
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Performance Monitoring",
+      "status": "completed",
+      "details": "Monitored performance metrics",
+      "data": {
+        "metrics": {
+          "coreWebVitals": {
+            "lcp": 2131.3945155961555,
+            "fid": 26.970963074583977,
+            "cls": 0.08995218517325383
+          },
+          "seoScore": 96,
+          "lighthouse": {
+            "performance": 98,
+            "seo": 85,
+            "accessibility": 93,
+            "bestPractices": 86
+          }
+        },
+        "issues": []
+      }
+    }
+  ],
+  "errors": [],
+  "recommendations": [
+    "Continue daily automation routine",
+    "Review A/B test results weekly"
+  ]
+}

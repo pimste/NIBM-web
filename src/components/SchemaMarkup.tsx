@@ -115,7 +115,7 @@ export function SchemaMarkup({
         '@id': `${siteUrl}/#website`,
         url: siteUrl,
         name: companyName,
-        description: 'Specialists in the sale and rental of tower cranes',
+        description: 'Specialists in the sale of tower cranes',
         publisher: {
           '@id': `${siteUrl}/#business`
         },

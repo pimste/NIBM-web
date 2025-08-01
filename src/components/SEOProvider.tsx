@@ -26,7 +26,7 @@ export function SEOProvider() {
       "width": 160,
       "height": 50
     },
-    "description": "NIBM Tower Cranes specializes in the sale and rental of tower cranes, offering comprehensive services including planning, transport, mounting, inspections, and after-sales support.",
+          "description": "NIBM Tower Cranes specializes in the sale of tower cranes, offering comprehensive services including planning, transport, mounting, inspections, and after-sales support.",
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+31 6 53206004",

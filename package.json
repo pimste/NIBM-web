@@ -42,6 +42,7 @@
   "devDependencies": {
     "@next/bundle-analyzer": "^14.2.26",
     "@types/bcrypt": "^5.0.2",
+    "@types/csv-parse": "^1.1.12",
     "@types/node": "^20.9.0",
     "@types/pg": "^8.15.4",
     "@types/react": "18.3.20",

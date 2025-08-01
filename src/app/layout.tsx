@@ -275,7 +275,7 @@ export const metadata: Metadata = {
     url: 'https://www.nibmvb.eu/',
     siteName: 'NIBM Tower Cranes',
     title: 'NIBM Tower Cranes | Professional Tower Crane Solutions',
-    description: 'Expert tower crane sales, rentals, and services for construction projects of any scale. Full-service support from planning to dismantling.',
+            description: 'Expert tower crane sales and services for construction projects of any scale. Full-service support from planning to dismantling.',
     images: [{
       url: '/images/optimized/cropped-Top-page2-potain6.webp',
       width: 1200,
@@ -288,7 +288,7 @@ export const metadata: Metadata = {
     site: '@nibmvb',
     creator: '@nibmvb',
     title: 'NIBM Tower Cranes | Professional Tower Crane Solutions',
-    description: 'Expert tower crane sales, rentals, and services for construction projects of any scale. Full-service support from planning to dismantling.',
+            description: 'Expert tower crane sales and services for construction projects of any scale. Full-service support from planning to dismantling.',
     images: ['/images/optimized/cropped-Top-page2-potain6.webp'],
   },
   manifest: '/site.webmanifest',

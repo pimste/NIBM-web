@@ -73,7 +73,8 @@ export function LanguageSwitcher() {
     if (lang !== language) {
       console.log(`Changing language from ${language} to ${lang}`);
       
-      // Set cookie for language preference
+      // Clear existing cookie first, then set new one
+      document.cookie = `NEXT_LOCALE=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT`;
       document.cookie = `NEXT_LOCALE=${lang}; path=/; max-age=${30 * 24 * 60 * 60}`;
       
       // Parse the current pathname to properly update the URL
@@ -104,8 +105,10 @@ export function LanguageSwitcher() {
       
       console.log(`Redirecting to: ${newPath}`);
       
-      // Navigate to the new URL
-      window.location.href = newPath;
+      // Navigate to the new URL with a small delay to ensure cookie is set
+      setTimeout(() => {
+        window.location.href = newPath;
+      }, 100);
     }
     setIsOpen(false);
   }

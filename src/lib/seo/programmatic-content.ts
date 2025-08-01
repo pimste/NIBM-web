@@ -129,6 +129,9 @@ export class ProgrammaticContentGenerator {
     const { keyword, targetLanguage } = keywordData
     const slug = this.generateSlug(keyword)
     
+    // Generate CTA content based on language and intent
+    const ctaContent = this.generateCTAContent(keywordData)
+    
     const mdxContent = `---
 title: "${template.title}"
 description: "${template.metaDescription}"
@@ -193,6 +196,32 @@ ${template.sections.map(section => `
             <h2 className="text-2xl font-semibold mb-6">Frequently Asked Questions</h2>
             <AutoFAQ items={faqData} />
           </section>
+
+          <!-- Automatic Call-to-Action Section -->
+          <section className="mt-16 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-8 border border-blue-200">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-gray-900 mb-4">${ctaContent.title}</h2>
+              <p className="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">${ctaContent.description}</p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a 
+                  href="/${targetLanguage}/towercranes" 
+                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl"
+                >
+                  ${ctaContent.towerCranesButton}
+                </a>
+                
+                <a 
+                  href="/${targetLanguage}/contact" 
+                  className="inline-flex items-center px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-lg hover:shadow-xl"
+                >
+                  ${ctaContent.contactButton}
+                </a>
+              </div>
+              
+              <p className="text-sm text-gray-600 mt-6">${ctaContent.subtext}</p>
+            </div>
+          </section>
         </div>
       </div>
     </main>
@@ -250,6 +279,37 @@ ${template.sections.map(section => `
   }
 
   // Helper methods
+  private generateCTAContent(keywordData: KeywordData) {
+    const { targetLanguage } = keywordData
+    const keyword = keywordData.keyword
+
+    const templates = {
+      en: {
+        title: `Ready to start your ${keyword} project?`,
+        description: `At NIBM Tower Cranes, we are committed to delivering exceptional ${keyword} solutions that meet your unique needs. Whether you're planning a new construction site or upgrading existing equipment, our team of experts is here to guide you through every step of the process.`,
+        towerCranesButton: 'View Tower Cranes',
+        contactButton: 'Contact Us',
+        subtext: 'We offer competitive pricing and a 100% satisfaction guarantee.'
+      },
+      nl: {
+        title: `Klaar om uw ${keyword} project te start?`,
+        description: `Bij NIBM Tower Cranes zijn we gewaarborgd om uitstekende ${keyword} oplossingen te leveren die aan uw unieke behoeften voldoen. Of u nu een nieuw bouwproject aan het plannen bent of uw bestaande uitrusting wilt upgraden, ons team van experts staat klaar om u te helpen bij elke stap van het proces.`,
+        towerCranesButton: 'Bekijk Torenkranen',
+        contactButton: 'Neem Contact Op',
+        subtext: 'Wij bieden concurrerende prijzen en een 100% tevredenheidsgarantie.'
+      },
+      de: {
+        title: `Bereit, Ihr ${keyword} Projekt zu starten?`,
+        description: `Bei NIBM Tower Cranes sind wir dazu verpflichtet, hervorragende ${keyword} Lösungen zu liefern, die Ihren spezifischen Anforderungen gerecht werden. Ob Sie ein neues Bauvorhaben planen oder Ihre bestehende Ausrüstung upgraden, unser Experten-Team steht Ihnen bei jedem Schritt des Prozesses zur Seite.`,
+        towerCranesButton: 'Türkenkranen anschauen',
+        contactButton: 'Kontaktieren Sie uns',
+        subtext: 'Wir bieten wettbewerbsfähige Preise und eine 100% Zufriedenheitsgarantie.'
+      }
+    }
+
+    return templates[targetLanguage as keyof typeof templates] || templates.en
+  }
+
   private generateTitle(keyword: string, contentType: string, language: string): string {
     const templates = {
       en: {

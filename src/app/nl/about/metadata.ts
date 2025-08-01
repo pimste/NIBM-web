@@ -5,10 +5,10 @@ export async function generateMetadata(): Promise<Metadata> {
   // Define base metadata for this specific page
   const baseMetadata: Metadata = {
     title: 'Over Ons | NIBM Tower Cranes',
-    description: 'Leer over NIBM Tower Cranes, uw betrouwbare partner voor verkoop, verhuur en diensten van torenkranen sinds 1995.',
+    description: 'Leer over NIBM Tower Cranes, uw betrouwbare partner voor verkoop en diensten van torenkranen sinds 1996.',
     openGraph: {
       title: 'Over NIBM Tower Cranes',
-      description: 'Uw betrouwbare partner voor verkoop, verhuur en diensten van torenkranen sinds 1995.',
+      description: 'Uw betrouwbare partner voor verkoop en diensten van torenkranen sinds 1996.',
       url: 'https://www.nibmvb.eu/nl/about',
       images: [
         {

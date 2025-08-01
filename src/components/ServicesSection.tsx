@@ -1,6 +1,6 @@
 'use client'
 
-import { FaTruckMoving, FaTools, FaClipboardCheck, FaHardHat, FaCogs, FaHandshake } from 'react-icons/fa'
+import { FaTruckMoving, FaTools, FaClipboardCheck, FaHardHat, FaCogs, FaHandshake, FaQuoteLeft, FaProjectDiagram } from 'react-icons/fa'
 import { AnimatedElement } from './AnimatedElement'
 import { useLanguage } from '@/context/LanguageContext'
 
@@ -10,7 +10,7 @@ function ServicesSection() {
   const services = [
     {
       key: 'rental',
-      icon: FaTruckMoving,
+      icon: FaClipboardCheck,
       titleKey: 'services.rental',
       descriptionKey: 'services.rental.desc',
     },
@@ -28,19 +28,20 @@ function ServicesSection() {
     },
     {
       key: 'consulting',
-      icon: FaClipboardCheck,
+      icon: FaHandshake,
       titleKey: 'services.consulting',
       descriptionKey: 'services.consulting.desc',
     },
     {
-      key: 'training',
-      icon: FaHardHat,
-      titleKey: 'services.training',
-      descriptionKey: 'services.training.desc',
+      key: 'quote',
+      icon: FaQuoteLeft,
+      titleKey: 'services.quote',
+      descriptionKey: 'services.quote.desc',
+      isQuote: true,
     },
     {
       key: 'planning',
-      icon: FaHandshake,
+      icon: FaProjectDiagram,
       titleKey: 'services.planning',
       descriptionKey: 'services.planning.desc',
     },
@@ -62,15 +63,15 @@ function ServicesSection() {
           {services.map((service, index) => (
             <AnimatedElement
               key={service.key}
-              className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow"
+              className={`${service.isQuote ? 'bg-neutral-50 border-2 border-primary' : 'bg-white'} rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow`}
               animationVariant="fadeIn"
               delay={index * 0.1}
             >
               <div className="flex items-center mb-4">
-                <service.icon className="h-8 w-8 text-primary mr-3" aria-hidden="true" />
+                <service.icon className={`h-8 w-8 ${service.isQuote ? 'text-primary' : 'text-primary'} mr-3`} aria-hidden="true" />
                 <h3 className="text-xl font-bold text-neutral-900">{t(service.titleKey)}</h3>
               </div>
-              <p className="text-neutral-700">{t(service.descriptionKey)}</p>
+              <p className={`${service.isQuote ? 'text-neutral-800 font-medium italic' : 'text-neutral-700'}`}>{t(service.descriptionKey)}</p>
             </AnimatedElement>
           ))}
         </div>

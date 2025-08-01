@@ -8,8 +8,8 @@ import { generatePageMetadata } from '../page-metadata'
 export const generateMetadata = async (): Promise<Metadata> => {
   // Define base metadata for home page
   const baseMetadata: Metadata = {
-    title: 'NIBM Tower Cranes | Spezialisten für Verkauf und Vermietung von Turmkranen',
-    description: 'NIBM Tower Cranes ist spezialisiert auf den Verkauf und die Vermietung von Turmkranen mit kompletten Servicelösungen von der Planung bis zur laufenden Unterstützung.',
+    title: 'NIBM Tower Cranes | Spezialisten für Verkauf von Turmkranen',
+    description: 'NIBM Tower Cranes ist spezialisiert auf den Verkauf von Turmkranen mit kompletten Servicelösungen von der Planung bis zur laufenden Unterstützung.',
   }
 
   // Use the utility to generate metadata with canonical URLs
@@ -32,7 +32,7 @@ const DynamicFeaturedCranes = dynamic(() => import('@/components/FeaturedCranes'
 
 const DynamicServicesSection = dynamic(() => import('@/components/ServicesSection'), {
   loading: () => <LoadingFallback />,
-  ssr: true
+  ssr: false
 })
 
 const DynamicTestimonialsSection = dynamic(() => import('@/components/TestimonialsSection'), {

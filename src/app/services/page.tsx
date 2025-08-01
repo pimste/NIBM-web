@@ -24,12 +24,11 @@ export default function Services() {
         isClient ? t('services.sale.feature2') : '',
         isClient ? t('services.sale.feature3') : '',
         isClient ? t('services.sale.feature4') : '',
-        isClient ? t('services.sale.feature5') : '',
-      ],
+      ].filter(Boolean),
     },
     {
       id: 'rent',
-      title: isClient ? t('services.rent.title') : 'Tower Crane Rental',
+      title: isClient ? t('services.rent.title') : 'Equipment Assessment & Evaluation',
       description: isClient ? t('services.rent.desc') : '',
       image: '/images/optimized/cropped-Top-page2-potain6.webp',
       features: [
@@ -38,20 +37,7 @@ export default function Services() {
         isClient ? t('services.rent.feature3') : '',
         isClient ? t('services.rent.feature4') : '',
         isClient ? t('services.rent.feature5') : '',
-      ],
-    },
-    {
-      id: 'planning',
-      title: isClient ? t('services.planning.title') : 'Planning & Consulting',
-      description: isClient ? t('services.planning.desc') : '',
-      image: '/images/optimized/helmet1a.webp',
-      features: [
-        isClient ? t('services.planning.feature1') : '',
-        isClient ? t('services.planning.feature2') : '',
-        isClient ? t('services.planning.feature3') : '',
-        isClient ? t('services.planning.feature4') : '',
-        isClient ? t('services.planning.feature5') : '',
-      ],
+      ].filter(Boolean),
     },
     {
       id: 'transport',
@@ -59,12 +45,9 @@ export default function Services() {
       description: isClient ? t('services.transport.desc') : '',
       image: '/images/optimized/sunset-TC.webp',
       features: [
-        isClient ? t('services.transport.feature1') : '',
-        isClient ? t('services.transport.feature2') : '',
-        isClient ? t('services.transport.feature3') : '',
         isClient ? t('services.transport.feature4') : '',
         isClient ? t('services.transport.feature5') : '',
-      ],
+      ].filter(Boolean),
     },
     {
       id: 'mounting',
@@ -72,13 +55,12 @@ export default function Services() {
       description: isClient ? t('services.mounting.desc') : '',
       image: '/images/optimized/sunset-TC-2.webp',
       features: [
-        isClient ? t('services.mounting.feature1') : '',
         isClient ? t('services.mounting.feature2') : '',
         isClient ? t('services.mounting.feature3') : '',
         isClient ? t('services.mounting.feature4') : '',
         isClient ? t('services.mounting.feature5') : '',
-      ],
-    },
+      ].filter(Boolean),
+    }
   ]
 
   return (

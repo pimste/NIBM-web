@@ -8,8 +8,8 @@ import { generatePageMetadata } from '../page-metadata'
 export const generateMetadata = async (): Promise<Metadata> => {
   // Define base metadata for home page
   const baseMetadata: Metadata = {
-    title: 'NIBM Tower Cranes | Specialists in the sale and rental of tower cranes',
-    description: 'NIBM Tower Cranes specializes in the sale and rental of tower cranes, with full-service solutions from planning to ongoing support.',
+    title: 'NIBM Tower Cranes | Specialists in the sale of tower cranes',
+    description: 'NIBM Tower Cranes specializes in the sale of tower cranes, with full-service solutions from planning to ongoing support.',
   }
 
   // Use the utility to generate metadata with canonical URLs
@@ -32,7 +32,7 @@ const DynamicFeaturedCranes = dynamic(() => import('@/components/FeaturedCranes'
 
 const DynamicServicesSection = dynamic(() => import('@/components/ServicesSection'), {
   loading: () => <LoadingFallback />,
-  ssr: true
+  ssr: false
 })
 
 const DynamicTestimonialsSection = dynamic(() => import('@/components/TestimonialsSection'), {

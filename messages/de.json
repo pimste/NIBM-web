@@ -30,5 +30,19 @@
       "message": "Nachricht",
       "submit": "Nachricht Senden"
     }
+  },
+  "cranes": {
+    "title": "Ausgewählte Turmkrane",
+    "subtitle": "Entdecken Sie unsere verfügbaren Turmkrane bereit für Ihr nächstes Projekt",
+    "available": "Verfügbar",
+    "comingSoon": "Demnächst Verfügbar",
+    "year": "Jahr",
+    "type": "Typ",
+    "maxCapacity": "Max Kapazität",
+    "maxHeight": "Max Höhe",
+    "viewDetails": "Details Anzeigen",
+    "viewAll": "Alle Krane Anzeigen",
+    "noAvailableCranes": "Hoppla! Unsere Krane spielen Verstecken! 🏗️",
+    "noAvailableCranesSubtitle": "Sie heben wahrscheinlich irgendwo schwere Dinge. Schauen Sie bald wieder vorbei!"
   }
 } 

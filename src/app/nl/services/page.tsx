@@ -7,7 +7,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
   // Define base metadata for services page
   const baseMetadata: Metadata = {
     title: 'Onze Diensten | NIBM Tower Cranes',
-    description: 'Ontdek ons uitgebreide aanbod van torenkraandiensten inclusief verkoop, verhuur, installatie, onderhoud en operatortraining.',
+    description: 'Ontdek ons uitgebreide aanbod van torenkraandiensten inclusief verkoop, installatie, onderhoud en operatortraining.',
     openGraph: {
       title: 'Torenkraan Diensten van NIBM',
       description: 'Complete torenkraanoplossingen voor uw bouwprojecten, van selectie en levering tot installatie en ondersteuning.',

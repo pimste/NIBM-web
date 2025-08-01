@@ -1,0 +1,250 @@
+{
+  "timestamp": "2025-07-25T11:18:58.659Z",
+  "tasks": [
+    {
+      "name": "Monthly Content Generation",
+      "status": "completed",
+      "details": "Generated 10 pages",
+      "data": [
+        {
+          "keyword": "tower crane rental quote",
+          "searchVolume": 1500,
+          "category": "rental"
+        },
+        {
+          "keyword": "tower crane rental netherlands",
+          "searchVolume": 1200,
+          "category": "rental"
+        },
+        {
+          "keyword": "tower crane for sale netherlands",
+          "searchVolume": 1100,
+          "category": "sale"
+        },
+        {
+          "keyword": "tower crane installation cost",
+          "searchVolume": 900,
+          "category": "installation"
+        },
+        {
+          "keyword": "tower crane safety guidelines",
+          "searchVolume": 800,
+          "category": "safety"
+        },
+        {
+          "keyword": "potain mdt 178 specifications",
+          "searchVolume": 600,
+          "category": "specifications"
+        },
+        {
+          "keyword": "tower crane maintenance schedule",
+          "searchVolume": 500,
+          "category": "maintenance"
+        },
+        {
+          "keyword": "tower crane operator training",
+          "searchVolume": 400,
+          "category": "training"
+        },
+        {
+          "keyword": "tower crane load capacity chart",
+          "searchVolume": 300,
+          "category": "specifications"
+        },
+        {
+          "keyword": "tower crane dismantling service",
+          "searchVolume": 200,
+          "category": "services"
+        }
+      ]
+    },
+    {
+      "name": "Monthly A/B Testing",
+      "status": "completed",
+      "details": "Created 8 new tests",
+      "data": [
+        {
+          "type": "meta_description",
+          "page": "/en",
+          "variations": [
+            "Professional tower crane services from NIBM - Expert solutions for construction",
+            "🏗️ Tower Crane Experts | NIBM Construction Equipment - Get Quote Today",
+            "NIBM Tower Cranes - Netherlands' Leading Construction Equipment Provider"
+          ],
+          "testId": "meta_1753442338679__en"
+        },
+        {
+          "type": "headline",
+          "page": "/en",
+          "variations": [
+            "Professional Tower Crane Solutions",
+            "🚀 Expert Tower Crane Services",
+            "[PROVEN] Tower Crane Equipment",
+            "2024: Leading Crane Solutions",
+            "Tower Crane Experts - Limited Time Offer!"
+          ],
+          "testId": "headline_1753442338679__en"
+        },
+        {
+          "type": "meta_description",
+          "page": "/en/services",
+          "variations": [
+            "Professional tower crane services from NIBM - Expert solutions for construction",
+            "🏗️ Tower Crane Experts | NIBM Construction Equipment - Get Quote Today",
+            "NIBM Tower Cranes - Netherlands' Leading Construction Equipment Provider"
+          ],
+          "testId": "meta_1753442338679__en_services"
+        },
+        {
+          "type": "headline",
+          "page": "/en/services",
+          "variations": [
+            "Professional Tower Crane Solutions",
+            "🚀 Expert Tower Crane Services",
+            "[PROVEN] Tower Crane Equipment",
+            "2024: Leading Crane Solutions",
+            "Tower Crane Experts - Limited Time Offer!"
+          ],
+          "testId": "headline_1753442338679__en_services"
+        },
+        {
+          "type": "meta_description",
+          "page": "/en/towercranes",
+          "variations": [
+            "Professional tower crane services from NIBM - Expert solutions for construction",
+            "🏗️ Tower Crane Experts | NIBM Construction Equipment - Get Quote Today",
+            "NIBM Tower Cranes - Netherlands' Leading Construction Equipment Provider"
+          ],
+          "testId": "meta_1753442338679__en_towercranes"
+        },
+        {
+          "type": "headline",
+          "page": "/en/towercranes",
+          "variations": [
+            "Professional Tower Crane Solutions",
+            "🚀 Expert Tower Crane Services",
+            "[PROVEN] Tower Crane Equipment",
+            "2024: Leading Crane Solutions",
+            "Tower Crane Experts - Limited Time Offer!"
+          ],
+          "testId": "headline_1753442338679__en_towercranes"
+        },
+        {
+          "type": "meta_description",
+          "page": "/en/contact",
+          "variations": [
+            "Professional tower crane services from NIBM - Expert solutions for construction",
+            "🏗️ Tower Crane Experts | NIBM Construction Equipment - Get Quote Today",
+            "NIBM Tower Cranes - Netherlands' Leading Construction Equipment Provider"
+          ],
+          "testId": "meta_1753442338679__en_contact"
+        },
+        {
+          "type": "headline",
+          "page": "/en/contact",
+          "variations": [
+            "Professional Tower Crane Solutions",
+            "🚀 Expert Tower Crane Services",
+            "[PROVEN] Tower Crane Equipment",
+            "2024: Leading Crane Solutions",
+            "Tower Crane Experts - Limited Time Offer!"
+          ],
+          "testId": "headline_1753442338679__en_contact"
+        }
+      ]
+    },
+    {
+      "name": "Content Optimization",
+      "status": "completed",
+      "details": "Optimized 0 pages",
+      "data": {
+        "optimizedPages": 0
+      }
+    },
+    {
+      "name": "Performance Review",
+      "status": "completed",
+      "details": "Performance metrics reviewed",
+      "data": {
+        "coreWebVitals": {
+          "lcp": 2100,
+          "fid": 25,
+          "cls": 0.08
+        },
+        "seoScore": 95,
+        "lighthouse": {
+          "performance": 98,
+          "seo": 87
+        }
+      }
+    }
+  ],
+  "errors": [
+    {
+      "task": "content_generation",
+      "keyword": "tower crane rental quote",
+      "error": "The \"path\" argument must be of type string. Received undefined",
+      "timestamp": "2025-07-25T11:18:58.676Z"
+    },
+    {
+      "task": "content_generation",
+      "keyword": "tower crane rental netherlands",
+      "error": "The \"path\" argument must be of type string. Received undefined",
+      "timestamp": "2025-07-25T11:18:58.676Z"
+    },
+    {
+      "task": "content_generation",
+      "keyword": "tower crane for sale netherlands",
+      "error": "The \"path\" argument must be of type string. Received undefined",
+      "timestamp": "2025-07-25T11:18:58.677Z"
+    },
+    {
+      "task": "content_generation",
+      "keyword": "tower crane installation cost",
+      "error": "The \"path\" argument must be of type string. Received undefined",
+      "timestamp": "2025-07-25T11:18:58.677Z"
+    },
+    {
+      "task": "content_generation",
+      "keyword": "tower crane safety guidelines",
+      "error": "The \"path\" argument must be of type string. Received undefined",
+      "timestamp": "2025-07-25T11:18:58.677Z"
+    },
+    {
+      "task": "content_generation",
+      "keyword": "potain mdt 178 specifications",
+      "error": "The \"path\" argument must be of type string. Received undefined",
+      "timestamp": "2025-07-25T11:18:58.677Z"
+    },
+    {
+      "task": "content_generation",
+      "keyword": "tower crane maintenance schedule",
+      "error": "The \"path\" argument must be of type string. Received undefined",
+      "timestamp": "2025-07-25T11:18:58.677Z"
+    },
+    {
+      "task": "content_generation",
+      "keyword": "tower crane operator training",
+      "error": "The \"path\" argument must be of type string. Received undefined",
+      "timestamp": "2025-07-25T11:18:58.678Z"
+    },
+    {
+      "task": "content_generation",
+      "keyword": "tower crane load capacity chart",
+      "error": "The \"path\" argument must be of type string. Received undefined",
+      "timestamp": "2025-07-25T11:18:58.678Z"
+    },
+    {
+      "task": "content_generation",
+      "keyword": "tower crane dismantling service",
+      "error": "The \"path\" argument must be of type string. Received undefined",
+      "timestamp": "2025-07-25T11:18:58.678Z"
+    }
+  ],
+  "summary": {
+    "contentGenerated": 0,
+    "testsCreated": 8,
+    "pagesOptimized": 0,
+    "issuesResolved": 0
+  }
+}

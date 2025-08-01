@@ -1,0 +1,11 @@
+keyword,searchVolume,difficulty,intent,category,relatedKeywords,language,contentType
+tower crane rental netherlands,1200,45,transactional,rental,"tower crane hire,construction crane,potain crane",en,cluster
+tower crane safety guidelines,800,35,informational,safety,"crane safety,construction safety,OSHA guidelines",en,howto
+potain mdt 178 specifications,600,40,informational,specifications,"potain crane,technical specs,load capacity",en,comparison
+tower crane installation cost,900,50,transactional,installation,"crane setup,installation price,project cost",en,comparison
+tower crane maintenance schedule,500,30,informational,maintenance,"crane maintenance,preventive maintenance,service schedule",en,howto
+tower crane for sale netherlands,1100,55,transactional,sale,"used crane,potain for sale,crane purchase",en,cluster
+tower crane operator training,400,25,informational,training,"crane operator,certification,safety training",en,howto
+tower crane load capacity chart,300,20,informational,specifications,"load chart,capacity table,technical data",en,comparison
+tower crane rental quote,1500,60,transactional,rental,"crane quote,rental price,project estimate",en,comparison
+tower crane dismantling service,200,40,transactional,services,"crane removal,dismantling cost,project completion",en,cluster 
