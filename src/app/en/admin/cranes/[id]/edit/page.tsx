@@ -156,12 +156,26 @@ export default function EditCrane() {
     setError('')
 
     try {
-      // Filter out empty strings from arrays
+      // Filter out empty strings from arrays, but keep uploaded files
       const cleanedData = {
         ...formData,
         features: formData.features.filter(f => f.trim() !== ''),
-        images: formData.images.filter(i => i.trim() !== '')
+        images: formData.images.filter(i => {
+          // Keep uploaded files (starting with /images/) even if they appear empty
+          if (i.startsWith('/images/')) return true
+          // Filter out empty URLs
+          return i.trim() !== ''
+        })
       }
+
+      // Ensure we have at least one image or set to empty array
+      if (cleanedData.images.length === 0) {
+        cleanedData.images = []
+      }
+
+      console.log('Submitting crane update:', cleanedData)
+      console.log('Images before submission:', formData.images)
+      console.log('Cleaned images:', cleanedData.images)
 
       const response = await fetch(`/api/admin/cranes/${craneId}`, {
         method: 'PUT',
@@ -172,13 +186,20 @@ export default function EditCrane() {
         credentials: 'include'
       })
 
+      console.log('Response status:', response.status)
+      console.log('Response ok:', response.ok)
+
       if (response.ok) {
+        const result = await response.json()
+        console.log('Update successful:', result)
         router.push('/en/admin/dashboard')
       } else {
         const data = await response.json()
+        console.error('Update failed:', data)
         setError(data.error || 'Failed to update crane')
       }
     } catch (error) {
+      console.error('Network error:', error)
       setError('Network error. Please try again.')
     } finally {
       setSaving(false)

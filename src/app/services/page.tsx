@@ -16,49 +16,49 @@ export default function Services() {
   const services = [
     {
       id: 'sale',
-      title: isClient ? t('services.sale.title') : 'Tower Crane Sales',
-      description: isClient ? t('services.sale.desc') : '',
+      title: t('services.sale.title') || 'Tower Crane Sales',
+      description: t('services.sale.desc') || 'Looking for a reliable tower crane? We have a wide selection available, from compact models to heavy cranes for large projects.',
       image: '/images/optimized/Potain-MDT-178_3W.webp',
       features: [
-        isClient ? t('services.sale.feature1') : '',
-        isClient ? t('services.sale.feature2') : '',
-        isClient ? t('services.sale.feature3') : '',
-        isClient ? t('services.sale.feature4') : '',
+        t('services.sale.feature1') || 'Large selection of different brands and types',
+        t('services.sale.feature2') || 'All cranes fully inspected and tested',
+        t('services.sale.feature3') || 'Flexible financing options',
+        t('services.sale.feature4') || 'Free advice and project guidance',
       ].filter(Boolean),
     },
     {
       id: 'rent',
-      title: isClient ? t('services.rent.title') : 'Equipment Assessment & Evaluation',
-      description: isClient ? t('services.rent.desc') : '',
+      title: t('services.rent.title') || 'Tower Crane Rental',
+      description: t('services.rent.desc') || 'For shorter projects or when you\'re not sure which crane you need yet. Rent a tower crane that perfectly fits your project.',
       image: '/images/optimized/cropped-Top-page2-potain6.webp',
       features: [
-        isClient ? t('services.rent.feature1') : '',
-        isClient ? t('services.rent.feature2') : '',
-        isClient ? t('services.rent.feature3') : '',
-        isClient ? t('services.rent.feature4') : '',
-        isClient ? t('services.rent.feature5') : '',
+        t('services.rent.feature1') || 'Short and long term rental possible',
+        t('services.rent.feature2') || 'Fast delivery and installation',
+        t('services.rent.feature3') || 'Including maintenance and service',
+        t('services.rent.feature4') || 'Flexible contracts without hidden costs',
+        t('services.rent.feature5') || '24/7 technical support',
       ].filter(Boolean),
     },
     {
       id: 'transport',
-      title: isClient ? t('services.transport.title') : 'Transport & Logistics',
-      description: isClient ? t('services.transport.desc') : '',
+      title: t('services.transport.title') || 'Transport & Logistics',
+      description: t('services.transport.desc') || 'We handle the entire transport of your tower crane, from our storage to your construction site. No hassle, everything is handled professionally.',
       image: '/images/optimized/sunset-TC.webp',
       features: [
-        isClient ? t('services.transport.feature4') : '',
-        isClient ? t('services.transport.feature5') : '',
+        t('services.transport.feature4') || 'Complete transport planning and execution',
+        t('services.transport.feature5') || 'Special permits and route planning',
       ].filter(Boolean),
     },
     {
       id: 'mounting',
-      title: isClient ? t('services.mounting.title') : 'Mounting & Installation',
-      description: isClient ? t('services.mounting.desc') : '',
+      title: t('services.mounting.title') || 'Mounting & Installation',
+      description: t('services.mounting.desc') || 'Our experienced installers ensure your tower crane is safely and correctly installed. We work quickly and efficiently so your project doesn\'t come to a standstill.',
       image: '/images/optimized/sunset-TC-2.webp',
       features: [
-        isClient ? t('services.mounting.feature2') : '',
-        isClient ? t('services.mounting.feature3') : '',
-        isClient ? t('services.mounting.feature4') : '',
-        isClient ? t('services.mounting.feature5') : '',
+        t('services.mounting.feature2') || 'Experienced installers with all certifications',
+        t('services.mounting.feature3') || 'Fast and safe installation',
+        t('services.mounting.feature4') || 'Comprehensive safety checks',
+        t('services.mounting.feature5') || 'Training for your team included',
       ].filter(Boolean),
     }
   ]
@@ -79,7 +79,7 @@ export default function Services() {
           
           <ClientOnly fallback={
             <p className="text-xl text-white/80 text-center mt-4 max-w-3xl mx-auto">
-              From crane selection and delivery to installation and training, we offer a complete solution for all your tower crane needs.
+              From crane selection to installation - we handle everything for your project
             </p>
           }>
             <p className="text-xl text-white/80 text-center mt-4 max-w-3xl mx-auto">
@@ -95,7 +95,7 @@ export default function Services() {
           <div className="text-center mb-16">
             <ClientOnly fallback={
               <h2 className="text-3xl font-bold text-neutral-900 mb-4">
-                Comprehensive Tower Crane Solutions
+                Complete Tower Crane Solutions
               </h2>
             }>
               <h2 className="text-3xl font-bold text-neutral-900 mb-4">
@@ -105,7 +105,7 @@ export default function Services() {
             
             <ClientOnly fallback={
               <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
-                NIBM Tower Cranes offers a full range of services to meet all your tower crane needs. Our integrated approach ensures that every aspect of your crane requirements is handled with expertise and attention to detail.
+                We handle everything for your tower crane project. From advice to installation - no hassle, everything is handled professionally.
               </p>
             }>
               <p className="text-lg text-neutral-600 max-w-3xl mx-auto">
@@ -125,7 +125,7 @@ export default function Services() {
               
               <ClientOnly fallback={
                 <p className="text-neutral-700">
-                  We begin with a thorough consultation to understand your specific project requirements and challenges.
+                  We start with a good conversation to understand exactly what you need for your project.
                 </p>
               }>
                 <p className="text-neutral-700">
@@ -144,7 +144,7 @@ export default function Services() {
               
               <ClientOnly fallback={
                 <p className="text-neutral-700">
-                  Our team handles everything from crane selection and delivery to installation and testing.
+                  Our team handles everything: from crane selection and delivery to installation and testing.
                 </p>
               }>
                 <p className="text-neutral-700">
@@ -163,7 +163,7 @@ export default function Services() {
               
               <ClientOnly fallback={
                 <p className="text-neutral-700">
-                  We provide ongoing support, maintenance, and training throughout your project's duration.
+                  We stay available for maintenance, training and support throughout your entire project.
                 </p>
               }>
                 <p className="text-neutral-700">
@@ -188,10 +188,7 @@ export default function Services() {
       </section>
 
       {/* Individual Services */}
-      <ClientOnly fallback={
-        <div>Loading services...</div>
-      }>
-        {services.map((service, index) => (
+      {services.map((service, index) => (
           <section 
             key={service.id} 
             id={service.id}
@@ -201,93 +198,86 @@ export default function Services() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 {/* Image (switches sides based on index) */}
                 {index % 2 === 0 ? (
-                  <ClientOnly>
-                    <MotionDiv
-                      className="relative h-96 rounded-lg overflow-hidden"
-                      initial={{ opacity: 0, x: -50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6 }}
-                      viewport={{ once: true }}
-                    >
-                      <Image
-                        src={service.image}
-                        alt={service.title}
-                        width={800}
-                        height={600}
-                        className="object-cover w-full h-full"
-                        quality={75}
-                        loading={index === 0 ? "eager" : "lazy"}
-                        placeholder="blur"
-                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
-                      />
-                    </MotionDiv>
-                  </ClientOnly>
-                ) : null}
-
-                {/* Content */}
-                <ClientOnly>
                   <MotionDiv
-                    initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                    className="relative h-96 rounded-lg overflow-hidden"
+                    initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                   >
-                    <h2 className="text-3xl font-bold text-neutral-900 mb-4">
-                      {service.title}
-                    </h2>
-                    <p className="text-lg text-neutral-700 mb-6">
-                      {service.description}
-                    </p>
-                    <h3 className="text-xl font-semibold text-neutral-900 mb-3">
-                      {t('services.features')}
-                    </h3>
-                    <ul className="space-y-2 mb-6">
-                      {service.features.map((feature, i) => (
-                        <li key={i} className="flex items-start">
-                          <span className="text-primary mr-2">•</span>
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <Link
-                      href={`/contact?subject=${encodeURIComponent(service.title)}`}
-                      className="inline-flex items-center text-primary hover:text-primary-700 font-medium transition-colors"
-                    >
-                      {t('services.learnMore')}
-                      <FaArrowRight className="ml-2" />
-                    </Link>
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      width={800}
+                      height={600}
+                      className="object-cover w-full h-full"
+                      quality={75}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      placeholder="blur"
+                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
+                    />
                   </MotionDiv>
-                </ClientOnly>
+                ) : null}
+
+                {/* Content */}
+                <MotionDiv
+                  initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl font-bold text-neutral-900 mb-4">
+                    {service.title}
+                  </h2>
+                  <p className="text-lg text-neutral-700 mb-6">
+                    {service.description}
+                  </p>
+                  <h3 className="text-xl font-semibold text-neutral-900 mb-3">
+                    {t('services.features')}
+                  </h3>
+                  <ul className="space-y-2 mb-6">
+                    {service.features.map((feature, i) => (
+                      <li key={i} className="flex items-start">
+                        <span className="text-primary mr-2">•</span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    href={`/contact?subject=${encodeURIComponent(service.title)}`}
+                    className="inline-flex items-center text-primary hover:text-primary-700 font-medium transition-colors"
+                  >
+                    {t('services.learnMore')}
+                    <FaArrowRight className="ml-2" />
+                  </Link>
+                </MotionDiv>
 
                 {/* Image (switches sides based on index) */}
                 {index % 2 !== 0 ? (
-                  <ClientOnly>
-                    <MotionDiv
-                      className="relative h-96 rounded-lg overflow-hidden"
-                      initial={{ opacity: 0, x: 50 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.6 }}
-                      viewport={{ once: true }}
-                    >
-                      <Image
-                        src={service.image}
-                        alt={service.title}
-                        width={800}
-                        height={600}
-                        className="object-cover w-full h-full"
-                        quality={75}
-                        loading={index === 0 ? "eager" : "lazy"}
-                        placeholder="blur"
-                        blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
-                      />
-                    </MotionDiv>
-                  </ClientOnly>
+                  <MotionDiv
+                    className="relative h-96 rounded-lg overflow-hidden"
+                    initial={{ opacity: 0, x: 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                  >
+                    <Image
+                      src={service.image}
+                      alt={service.title}
+                      width={800}
+                      height={600}
+                      className="object-cover w-full h-full"
+                      quality={75}
+                      loading={index === 0 ? "eager" : "lazy"}
+                      placeholder="blur"
+                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
+                    />
+                  </MotionDiv>
                 ) : null}
               </div>
             </div>
           </section>
         ))}
-      </ClientOnly>
 
       {/* CTA Section */}
       <section className="py-16 bg-primary">
@@ -295,7 +285,7 @@ export default function Services() {
           <div className="text-center">
             <ClientOnly fallback={
               <h2 className="text-3xl font-bold text-white mb-6">
-                Ready to Discuss Your Tower Crane Needs?
+                Ready to discuss your tower crane needs?
               </h2>
             }>
               <h2 className="text-3xl font-bold text-white mb-6">

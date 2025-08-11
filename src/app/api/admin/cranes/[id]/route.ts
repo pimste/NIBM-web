@@ -37,9 +37,13 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
+    console.log('PUT request received for crane ID:', params.id)
+    
     await requireAuth()
+    console.log('Authentication successful')
     
     const body = await request.json()
+    console.log('Request body:', JSON.stringify(body, null, 2))
     
     // Generate slug from name if name changed
     const slug = body.name
@@ -49,42 +53,52 @@ export async function PUT(
       .replace(/-+/g, '-')
       .trim()
     
+    console.log('Generated slug:', slug)
+    
     // Ensure features and images are arrays
     const features = Array.isArray(body.features) ? body.features : []
     const images = Array.isArray(body.images) ? body.images : []
+    
+    console.log('Features:', features)
+    console.log('Images:', images)
+    
+    const updateData = {
+      name: body.name,
+      slug,
+      model: body.model,
+      year: parseInt(body.year),
+      type: body.type,
+      condition: body.condition,
+      serialNumber: body.serialNumber,
+      maxCapacity: body.maxCapacity,
+      maxJibLength: body.maxJibLength,
+      maxHeight: body.maxHeight,
+      counterJibLength: body.counterJibLength,
+      towerType: body.towerType,
+      cabinType: body.cabinType,
+      hoistSpeed: body.hoistSpeed,
+      trolleySpeed: body.trolleySpeed,
+      slewing: body.slewing,
+      powerRequirements: body.powerRequirements,
+      description: body.description,
+      features,
+      images,
+      brochureUrl: body.brochureUrl || null,
+      isAvailable: body.isAvailable ?? true,
+      status: body.status || 'available',
+      category: body.category
+    }
+    
+    console.log('Update data:', JSON.stringify(updateData, null, 2))
     
     const crane = await prisma.crane.update({
       where: {
         id: parseInt(params.id)
       },
-      data: {
-        name: body.name,
-        slug,
-        model: body.model,
-        year: parseInt(body.year),
-        type: body.type,
-        condition: body.condition,
-        serialNumber: body.serialNumber,
-        maxCapacity: body.maxCapacity,
-        maxJibLength: body.maxJibLength,
-        maxHeight: body.maxHeight,
-        counterJibLength: body.counterJibLength,
-        towerType: body.towerType,
-        cabinType: body.cabinType,
-        hoistSpeed: body.hoistSpeed,
-        trolleySpeed: body.trolleySpeed,
-        slewing: body.slewing,
-        powerRequirements: body.powerRequirements,
-        description: body.description,
-        features,
-        images,
-        brochureUrl: body.brochureUrl || null,
-        isAvailable: body.isAvailable ?? true,
-        status: body.status || 'available',
-        category: body.category
-      }
+      data: updateData
     })
     
+    console.log('Crane updated successfully:', crane.id)
     return NextResponse.json(crane)
   } catch (error) {
     console.error('Error updating crane:', error)
@@ -96,8 +110,14 @@ export async function PUT(
       )
     }
     
+    // Log more details about the error
+    if (error instanceof Error) {
+      console.error('Error message:', error.message)
+      console.error('Error stack:', error.stack)
+    }
+    
     return NextResponse.json(
-      { error: 'Failed to update crane' },
+      { error: 'Failed to update crane', details: error instanceof Error ? error.message : 'Unknown error' },
       { status: 500 }
     )
   }
