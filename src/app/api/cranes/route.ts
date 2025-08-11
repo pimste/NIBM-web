@@ -70,6 +70,28 @@ export async function POST(request: NextRequest) {
       .replace(/-+/g, '-')
       .trim()
     
+    // Check if slug already exists
+    const existingCraneWithSlug = await prisma.crane.findUnique({
+      where: { slug }
+    })
+    
+    if (existingCraneWithSlug) {
+      return NextResponse.json({ 
+        error: 'A crane with this name already exists. Please choose a different name.' 
+      }, { status: 400 })
+    }
+    
+    // Check if serial number already exists
+    const existingCraneWithSerial = await prisma.crane.findUnique({
+      where: { serialNumber: body.serialNumber }
+    })
+    
+    if (existingCraneWithSerial) {
+      return NextResponse.json({ 
+        error: 'A crane with this serial number already exists. Please use a different serial number.' 
+      }, { status: 400 })
+    }
+    
     // Ensure features and images are arrays
     const features = Array.isArray(body.features) ? body.features : []
     const images = Array.isArray(body.images) ? body.images : []
@@ -112,6 +134,20 @@ export async function POST(request: NextRequest) {
         { error: 'Unauthorized' },
         { status: 401 }
       )
+    }
+    
+    // Handle Prisma unique constraint violations
+    if (error instanceof Error && error.message.includes('Unique constraint failed')) {
+      if (error.message.includes('slug')) {
+        return NextResponse.json({ 
+          error: 'A crane with this name already exists. Please choose a different name.' 
+        }, { status: 400 })
+      }
+      if (error.message.includes('serialNumber')) {
+        return NextResponse.json({ 
+          error: 'A crane with this serial number already exists. Please use a different serial number.' 
+        }, { status: 400 })
+      }
     }
     
     return NextResponse.json(

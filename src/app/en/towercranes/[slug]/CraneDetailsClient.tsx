@@ -7,97 +7,24 @@ import { useParams } from 'next/navigation'
 import { FaArrowLeft, FaCheck, FaDownload, FaEnvelope, FaInfoCircle, FaPhone, FaPrint } from 'react-icons/fa'
 import { TowerCraneSchema } from '@/components/TowerCraneSchema'
 
-// This would be fetched from a CMS or API in a real implementation
-const cranes = [
-  {
-    id: 1,
-    name: 'Potain MDT 178',
-    slug: 'potain-mdt-178',
-    gallery: [
-      '/images/optimized/Potain-MDT-178_3W.webp',
-      '/images/optimized/cropped-Top-page2-potain6.webp',
-    ],
-    status: 'Available',
-    year: 2019,
-    maxCapacity: '8 tons',
-    maxJibLength: '60 meters',
-    maxHeight: '64.9 meters',
-    type: 'Flat Top',
-    category: 'Sale',
-    description: 'The Potain MDT 178 is a versatile flat top tower crane designed for ease of transport, assembly, and operation. It offers excellent lift capacities and reach, making it ideal for a wide range of construction projects.',
-    specifications: {
-      manufacturer: 'Potain',
-      model: 'MDT 178',
-      yearOfManufacture: 2019,
-      serialNumber: 'MDT178-2019-0123',
-      condition: 'Excellent',
-      maxCapacity: '8 tons',
-      maxJibLength: '60 meters',
-      maxHeight: '64.9 meters',
-      counterJibLength: '17.6 meters',
-      towerType: 'K-type mast sections',
-      cabinType: 'Vision cab with air conditioning',
-      powerRequirements: '380-480V, 50/60Hz, 3-phase',
-      hoistSpeed: '0-80 m/min',
-      trolleySpeed: '0-60 m/min',
-      slewing: '0-0.8 rpm',
-    },
-    features: [
-      'High-performance winch with frequency control',
-      'Automated greasing system',
-      'Anti-collision system',
-      'Remote monitoring capability',
-      'Energy recuperation system',
-      'Adjustable frequency drives',
-      'Transport axles included',
-      'Full documentation and certificates',
-    ],
-  },
-  {
-    id: 2,
-    name: 'Potain MC 85 B',
-    slug: 'potain-mc-85-b',
-    gallery: [
-      '/images/optimized/cropped-Top-page2-potain6.webp',
-      '/images/optimized/Potain-MDT-178_3W.webp',
-    ],
-    status: 'Available',
-    year: 2020,
-    maxCapacity: '5 tons',
-    maxJibLength: '52 meters',
-    maxHeight: '42.5 meters',
-    type: 'Top Slewing',
-    category: 'Rental',
-    description: 'The Potain MC 85 B is a reliable top-slewing tower crane suitable for medium-sized construction projects. With its compact design and excellent performance, it provides an effective lifting solution with minimal operational costs.',
-    specifications: {
-      manufacturer: 'Potain',
-      model: 'MC 85 B',
-      yearOfManufacture: 2020,
-      serialNumber: 'MC85B-2020-0456',
-      condition: 'Excellent',
-      maxCapacity: '5 tons',
-      maxJibLength: '52 meters',
-      maxHeight: '42.5 meters',
-      counterJibLength: '15.2 meters',
-      towerType: 'H-type mast sections',
-      cabinType: 'Standard cab with heating',
-      powerRequirements: '380-480V, 50/60Hz, 3-phase',
-      hoistSpeed: '0-70 m/min',
-      trolleySpeed: '0-50 m/min',
-      slewing: '0-0.7 rpm',
-    },
-    features: [
-      'High-performance winch',
-      'Safety lock system',
-      'Wind speed monitoring',
-      'Overload protection',
-      'Remote diagnostics',
-      'Energy-efficient motors',
-      'Galvanized components for longer life',
-      'Full documentation and certificates',
-    ],
-  },
-]
+// Define the Crane interface to match the API response
+interface Crane {
+  id: number
+  name: string
+  slug: string
+  image: string
+  gallery?: string[]
+  status: 'available' | 'sold' | 'comingsoon'
+  year: number
+  maxCapacity: string
+  maxJibLength: string
+  maxHeight: string
+  type: 'flattop' | 'topslewing'
+  category: 'sale' | 'rental'
+  description?: string
+  specifications?: any
+  features?: string[]
+}
 
 interface CraneDetailsClientProps {
   slug: string
@@ -105,6 +32,9 @@ interface CraneDetailsClientProps {
 
 export default function CraneDetailsClient({ slug }: CraneDetailsClientProps) {
   const [mounted, setMounted] = useState(false)
+  const [crane, setCrane] = useState<Crane | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [activeImage, setActiveImage] = useState(0)
   const [formData, setFormData] = useState({
     name: '',
@@ -120,11 +50,41 @@ export default function CraneDetailsClient({ slug }: CraneDetailsClientProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
 
-  const crane = cranes.find(c => c.slug === slug)
-
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  // Fetch crane data from API
+  useEffect(() => {
+    const fetchCrane = async () => {
+      try {
+        setLoading(true)
+        setError(null)
+        
+        const response = await fetch(`/api/cranes/${slug}`)
+        if (!response.ok) {
+          if (response.status === 404) {
+            setError('Crane not found')
+          } else {
+            throw new Error('Failed to fetch crane')
+          }
+          return
+        }
+        
+        const data = await response.json()
+        setCrane(data)
+      } catch (err) {
+        console.error('Error fetching crane:', err)
+        setError('Failed to load crane details')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    if (slug) {
+      fetchCrane()
+    }
+  }, [slug])
 
   // Initialize form with crane details
   useEffect(() => {
@@ -192,7 +152,18 @@ export default function CraneDetailsClient({ slug }: CraneDetailsClientProps) {
     return <div>Loading...</div>
   }
 
-  if (!crane) {
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-neutral-900 mb-4">Loading Crane Details...</h1>
+          <p className="text-neutral-600">Please wait while we fetch the crane information.</p>
+        </div>
+      </div>
+    )
+  }
+
+  if (error || !crane) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -213,7 +184,7 @@ export default function CraneDetailsClient({ slug }: CraneDetailsClientProps) {
   const siteUrl = 'https://www.nibmvb.eu'
   const manufacturer = crane.specifications?.manufacturer || 'NIBM'
   const model = crane.specifications?.model || crane.name
-  const availability = crane.status === 'Available' ? 'InStock' : 'OutOfStock'
+  const availability = crane.status === 'available' ? 'InStock' : 'OutOfStock'
   const condition = crane.specifications?.condition || 'Used'
   const craneUrl = `${siteUrl}/en/towercranes/${crane.slug}`
 
@@ -222,7 +193,7 @@ export default function CraneDetailsClient({ slug }: CraneDetailsClientProps) {
       <TowerCraneSchema
         name={crane.name}
         description={crane.description}
-        image={`${siteUrl}${crane.gallery[0]}`}
+        image={crane.image}
         manufacturer={manufacturer}
         model={model}
         sku={crane.specifications?.serialNumber}
@@ -256,38 +227,40 @@ export default function CraneDetailsClient({ slug }: CraneDetailsClientProps) {
             <div>
               <div className="relative h-80 rounded-lg overflow-hidden mb-4 shadow-lg">
                 <Image
-                  src={crane.gallery[activeImage]}
+                  src={crane.gallery && crane.gallery.length > 0 ? crane.gallery[activeImage] : crane.image}
                   alt={crane.name}
                   fill
                   className="object-cover"
                 />
                 <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-sm font-medium ${
-                  crane.status === 'Available' ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800'
+                  crane.status === 'available' ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800'
                 }`}>
                   {crane.status}
                 </div>
                 <div className="absolute top-4 left-4 px-3 py-1 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
-                  {crane.category === 'Sale' ? 'For Sale' : 'For Rent'}
+                  {crane.category === 'sale' ? 'For Sale' : 'For Rent'}
                 </div>
               </div>
-              <div className="flex space-x-2 overflow-x-auto pb-2">
-                {crane.gallery.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveImage(index)}
-                    className={`relative w-20 h-20 flex-shrink-0 rounded overflow-hidden ${
-                      activeImage === index ? 'ring-2 ring-primary' : ''
-                    }`}
-                  >
-                    <Image
-                      src={image}
-                      alt={`${crane.name} - Image ${index + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
+              {crane.gallery && crane.gallery.length > 1 && (
+                <div className="flex space-x-2 overflow-x-auto pb-2">
+                  {crane.gallery.map((image, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setActiveImage(index)}
+                      className={`relative w-20 h-20 flex-shrink-0 rounded overflow-hidden ${
+                        activeImage === index ? 'ring-2 ring-primary' : ''
+                      }`}
+                    >
+                      <Image
+                        src={image}
+                        alt={`${crane.name} - Image ${index + 1}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
               <div className="flex justify-between mt-4">
                 <button
                   className="flex items-center text-primary hover:text-primary-700 transition-colors"
@@ -329,54 +302,44 @@ export default function CraneDetailsClient({ slug }: CraneDetailsClientProps) {
                   <h3 className="text-lg font-semibold mb-2">Max Jib Length</h3>
                   <p className="text-neutral-700">{crane.maxJibLength}</p>
                 </div>
-              </div>
-
-              <div className="bg-neutral-50 p-6 rounded-lg mb-8">
-                <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <FaInfoCircle className="mr-2 text-primary" /> Key Features
-                </h3>
-                <ul className="space-y-2">
-                  {crane.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <FaCheck className="text-green-500 mt-1 mr-2 flex-shrink-0" />
-                      <span>{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="bg-neutral-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold mb-4 flex items-center">
-                  <FaPhone className="mr-2 text-primary" /> Quick Contact
-                </h3>
-                <p className="text-neutral-700 mb-4">
-                  Need immediate assistance? Call or email us directly.
-                </p>
-                <div className="flex flex-col sm:flex-row sm:space-x-4">
-                  <a 
-                    href="tel:+31123456789" 
-                    className="flex items-center justify-center bg-primary hover:bg-primary-700 text-white font-medium px-6 py-3 rounded-md transition-colors mb-3 sm:mb-0"
-                  >
-                    <FaPhone className="mr-2" /> Call Us
-                  </a>
-                  <a 
-                    href="mailto:gid.gehlen@nibmtowercranes.com" 
-                    className="flex items-center justify-center border border-primary text-primary hover:bg-primary hover:text-white font-medium px-6 py-3 rounded-md transition-colors"
-                  >
-                    <FaEnvelope className="mr-2" /> Email Us
-                  </a>
+                <div className="bg-neutral-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-semibold mb-2">Max Height</h3>
+                  <p className="text-neutral-700">{crane.maxHeight}</p>
+                </div>
+                <div className="bg-neutral-50 p-4 rounded-lg">
+                  <h3 className="text-lg font-semibold mb-2">Category</h3>
+                  <p className="text-neutral-700">{crane.category === 'sale' ? 'For Sale' : 'For Rent'}</p>
                 </div>
               </div>
+
+              {/* Features Section */}
+              {crane.features && crane.features.length > 0 && (
+                <div className="mb-8">
+                  <h3 className="text-xl font-bold text-neutral-900 mb-4">Key Features</h3>
+                  <ul className="space-y-2">
+                    {crane.features.map((feature, index) => (
+                      <li key={index} className="flex items-start">
+                        <FaCheck className="text-green-500 mt-1 mr-2 flex-shrink-0" />
+                        <span className="text-neutral-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
+        </div>
+      </section>
 
+      <section className="py-12 bg-neutral-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mt-16">
             <h2 className="text-2xl font-bold text-neutral-900 mb-6">
               Technical Specifications
             </h2>
             <div className="bg-white border border-neutral-200 rounded-lg overflow-hidden">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                {Object.entries(crane.specifications).map(([key, value], index) => (
+                {Object.entries(crane.specifications || {}).map(([key, value], index) => (
                   <div 
                     key={key} 
                     className={`p-4 ${
