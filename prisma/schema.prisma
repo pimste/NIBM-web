@@ -22,7 +22,7 @@ model Crane {
   year              Int
   type              String
   condition         String
-  serialNumber      String   @unique
+  serialNumber      String
   maxCapacity       String
   maxJibLength      String
   maxHeight         String

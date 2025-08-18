@@ -39,35 +39,33 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json()
     
-    // Generate slug from name
-    const slug = body.name
+    // Generate unique slug from name
+    let slug = body.name
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
       .trim()
     
-    // Check if slug already exists
-    const existingCraneWithSlug = await prisma.crane.findUnique({
-      where: { slug }
-    })
-    
-    if (existingCraneWithSlug) {
-      return NextResponse.json({ 
-        error: 'A crane with this name already exists. Please choose a different name.' 
-      }, { status: 400 })
+    // Check if slug already exists and make it unique if needed
+    let counter = 1
+    let uniqueSlug = slug
+    while (true) {
+      const existingCraneWithSlug = await prisma.crane.findUnique({
+        where: { slug: uniqueSlug }
+      })
+      
+      if (!existingCraneWithSlug) {
+        break
+      }
+      
+      uniqueSlug = `${slug}-${counter}`
+      counter++
     }
     
-    // Check if serial number already exists
-    const existingCraneWithSerial = await prisma.crane.findUnique({
-      where: { serialNumber: body.serialNumber }
-    })
+    slug = uniqueSlug
     
-    if (existingCraneWithSerial) {
-      return NextResponse.json({ 
-        error: 'A crane with this serial number already exists. Please use a different serial number.' 
-      }, { status: 400 })
-    }
+
     
     // Ensure features and images are arrays
     const features = Array.isArray(body.features) ? body.features : []
@@ -116,11 +114,6 @@ export async function POST(request: NextRequest) {
       if (error.message.includes('slug')) {
         return NextResponse.json({ 
           error: 'A crane with this name already exists. Please choose a different name.' 
-        }, { status: 400 })
-      }
-      if (error.message.includes('serialNumber')) {
-        return NextResponse.json({ 
-          error: 'A crane with this serial number already exists. Please use a different serial number.' 
         }, { status: 400 })
       }
     }

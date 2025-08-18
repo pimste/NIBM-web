@@ -185,7 +185,7 @@ export default function NewCrane() {
 
               <div>
                 <label htmlFor="serialNumber" className="block text-sm font-medium text-gray-700 mb-2">
-                  Serial Number *
+                  Serial Number
                 </label>
                 <input
                   type="text"
@@ -193,7 +193,6 @@ export default function NewCrane() {
                   name="serialNumber"
                   value={formData.serialNumber}
                   onChange={handleInputChange}
-                  required
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
               </div>
@@ -487,7 +486,7 @@ export default function NewCrane() {
             <ImageUpload
               images={formData.images}
               onChange={(images) => setFormData(prev => ({ ...prev, images }))}
-              maxImages={10}
+              maxImages={20}
               label="Crane Images"
             />
           </div>

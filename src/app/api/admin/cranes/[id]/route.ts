@@ -45,13 +45,34 @@ export async function PUT(
     const body = await request.json()
     console.log('Request body:', JSON.stringify(body, null, 2))
     
-    // Generate slug from name if name changed
-    const slug = body.name
+    // Generate unique slug from name if name changed
+    let slug = body.name
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, '')
       .replace(/\s+/g, '-')
       .replace(/-+/g, '-')
       .trim()
+    
+    // Check if slug already exists (excluding current crane) and make it unique if needed
+    let counter = 1
+    let uniqueSlug = slug
+    while (true) {
+      const existingCraneWithSlug = await prisma.crane.findFirst({
+        where: { 
+          slug: uniqueSlug,
+          id: { not: parseInt(params.id) }
+        }
+      })
+      
+      if (!existingCraneWithSlug) {
+        break
+      }
+      
+      uniqueSlug = `${slug}-${counter}`
+      counter++
+    }
+    
+    slug = uniqueSlug
     
     console.log('Generated slug:', slug)
     
