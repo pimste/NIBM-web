@@ -23,7 +23,7 @@ function FeaturedCranes() {
   const [hoveredCrane, setHoveredCrane] = useState<number | null>(null)
   const [cranes, setCranes] = useState<Crane[]>([])
   const [loading, setLoading] = useState(true)
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   
   useEffect(() => {
     const fetchCranes = async () => {
@@ -92,7 +92,7 @@ function FeaturedCranes() {
                 <p className="text-neutral-600 mb-8">
                   {t('cranes.noAvailableCranesSubtitle')}
                 </p>
-                <Link href="/towercranes" className="btn-primary">
+                <Link href={`/${language}/towercranes`} className="btn-primary">
                   {t('cranes.viewAll')}
                 </Link>
               </div>
@@ -163,7 +163,7 @@ function FeaturedCranes() {
             
             <div className="text-center mt-12">
               <AnimatedElement>
-                <Link href="/towercranes" className="btn-secondary">
+                <Link href={`/${language}/towercranes`} className="btn-secondary">
                   {t('cranes.viewAll')}
                 </Link>
               </AnimatedElement>
