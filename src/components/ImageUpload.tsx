@@ -16,12 +16,13 @@ interface ImageItem {
   isUploaded?: boolean
 }
 
-export default function ImageUpload({ images, onChange, maxImages = 5, label = "Images" }: ImageUploadProps) {
+export default function ImageUpload({ images, onChange, maxImages = 20, label = "Images" }: ImageUploadProps) {
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState('')
 
   // Debug logging
   console.log('ImageUpload component - images:', images)
+  console.log('ImageUpload component - maxImages:', maxImages)
   console.log('ImageUpload component - images with /images/:', images.filter(img => img.startsWith('/images/')))
 
   const handleFileUpload = async (file: File) => {
@@ -97,7 +98,7 @@ export default function ImageUpload({ images, onChange, maxImages = 5, label = "
   return (
     <div>
       <label className="block text-sm font-medium text-gray-700 mb-2">
-        {label}
+        {label} ({images.length}/{maxImages})
       </label>
       
       {error && (
@@ -175,17 +176,15 @@ export default function ImageUpload({ images, onChange, maxImages = 5, label = "
             </span>
           </label>
 
-          {/* Add Empty URL Input - only show if no uploaded files */}
-          {!images.some(img => img.startsWith('/images/')) && (
-            <button
-              type="button"
-              onClick={handleAddEmpty}
-              className="flex items-center px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
-            >
-              <FaPlus className="mr-2" />
-              <span className="text-sm">Add URL Field</span>
-            </button>
-          )}
+          {/* Add Empty URL Input - always show if under max limit */}
+          <button
+            type="button"
+            onClick={handleAddEmpty}
+            className="flex items-center px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors"
+          >
+            <FaPlus className="mr-2" />
+            <span className="text-sm">Add URL Field</span>
+          </button>
         </div>
       )}
 

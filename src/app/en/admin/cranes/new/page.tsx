@@ -72,11 +72,16 @@ export default function NewCrane() {
     setError('')
 
     try {
-      // Filter out empty strings from arrays
+      // Filter out empty strings from arrays, but keep uploaded files
       const cleanedData = {
         ...formData,
         features: formData.features.filter(f => f.trim() !== ''),
-        images: formData.images.filter(i => i.trim() !== '')
+        images: formData.images.filter(i => {
+          // Keep uploaded files (starting with /images/) even if they appear empty
+          if (i.startsWith('/images/')) return true
+          // Filter out empty URLs
+          return i.trim() !== ''
+        })
       }
 
       const response = await fetch('/api/admin/cranes', {
