@@ -31,9 +31,9 @@ function FeaturedCranes() {
         const response = await fetch('/api/cranes')
         if (response.ok) {
           const allCranes = await response.json()
-          // Filter for only available cranes
+          // Filter for only available cranes and take only the first 3
           const availableCranes = allCranes.filter((crane: Crane) => crane.status === 'available')
-          setCranes(availableCranes)
+          setCranes(availableCranes.slice(0, 3))
         } else {
           console.error('Failed to fetch cranes')
           setCranes([])
