@@ -30,13 +30,16 @@ export default function TestWidgetPage() {
         <div className="bg-gray-50 p-6 rounded-lg">
           <h2 className="text-xl font-semibold mb-4">Keystone Widget</h2>
           <div id="keystone-widget-container">
-            <script 
-              src="https://www.usekeystone.app/api/widget.js?customer=c48181ab-2928-48e7-954d-ce5cb39685f7&settings=%7B%22theme%22%3A%22light%22%2C%22showPrice%22%3Atrue%2C%22showStatus%22%3Atrue%2C%22maxItems%22%3A10%2C%22defaultCategory%22%3A%22all%22%2C%22hidePoweredBy%22%3Afalse%7D"
-              async
-            />
+            {/* Widget content will be inserted here by the script */}
           </div>
         </div>
       </div>
+      
+      {/* Script should be placed here, outside any containers */}
+      <script 
+        src="https://www.usekeystone.app/api/widget.js?customer=c48181ab-2928-48e7-954d-ce5cb39685f7&settings=%7B%22theme%22%3A%22light%22%2C%22showPrice%22%3Atrue%2C%22showStatus%22%3Atrue%2C%22maxItems%22%3A10%2C%22defaultCategory%22%3A%22all%22%2C%22hidePoweredBy%22%3Afalse%7D"
+        async
+      />
     </main>
   )
 }
