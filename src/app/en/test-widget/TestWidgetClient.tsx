@@ -10,6 +10,13 @@ export default function TestWidgetClient() {
       return
     }
 
+    // Find the container where we want to place the widget
+    const container = document.getElementById('keystone-widget-container')
+    if (!container) {
+      console.error('Widget container not found')
+      return
+    }
+
     // Create and load the widget script
     const script = document.createElement('script')
     script.src = 'https://www.usekeystone.app/api/widget.js?customer=c48181ab-2928-48e7-954d-ce5cb39685f7&settings=%7B%22theme%22%3A%22light%22%2C%22showPrice%22%3Atrue%2C%22showStatus%22%3Atrue%2C%22maxItems%22%3A10%2C%22defaultCategory%22%3A%22all%22%2C%22hidePoweredBy%22%3Afalse%7D'
@@ -25,13 +32,19 @@ export default function TestWidgetClient() {
       console.log('Keystone widget script loaded successfully')
     }
     
-    // Append to document head
-    document.head.appendChild(script)
+    // Append the script directly to the container
+    // The widget script will insert itself as a sibling to the script tag
+    container.appendChild(script)
     
     // Cleanup function
     return () => {
       if (script.parentNode) {
         script.parentNode.removeChild(script)
+      }
+      // Also remove any widget that might have been created
+      const widget = document.getElementById('keystone-widget')
+      if (widget && widget.parentNode) {
+        widget.parentNode.removeChild(widget)
       }
     }
   }, [])
@@ -47,7 +60,7 @@ export default function TestWidgetClient() {
         <div className="bg-gray-50 p-6 rounded-lg">
           <h2 className="text-xl font-semibold mb-4">Keystone Widget</h2>
           <div id="keystone-widget-container">
-            {/* Widget content will be inserted here by the script */}
+            {/* Widget script will be inserted here and widget will appear as sibling */}
           </div>
         </div>
       </div>
