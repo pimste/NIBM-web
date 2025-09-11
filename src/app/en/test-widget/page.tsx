@@ -18,6 +18,8 @@ export const generateMetadata = async (): Promise<Metadata> => {
   )
 }
 
+import Script from 'next/script'
+
 export default function TestWidgetPage() {
   return (
     <main className="min-h-screen bg-white">
@@ -35,10 +37,11 @@ export default function TestWidgetPage() {
         </div>
       </div>
       
-      {/* Script should be placed here, outside any containers */}
-      <script 
+      <Script
         src="https://www.usekeystone.app/api/widget.js?customer=c48181ab-2928-48e7-954d-ce5cb39685f7&settings=%7B%22theme%22%3A%22light%22%2C%22showPrice%22%3Atrue%2C%22showStatus%22%3Atrue%2C%22maxItems%22%3A10%2C%22defaultCategory%22%3A%22all%22%2C%22hidePoweredBy%22%3Afalse%7D"
-        async
+        strategy="afterInteractive"
+        onLoad={() => console.log('Keystone widget script loaded')}
+        onError={() => console.error('Failed to load Keystone widget script')}
       />
     </main>
   )
