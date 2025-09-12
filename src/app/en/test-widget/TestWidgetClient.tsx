@@ -19,7 +19,7 @@ export default function TestWidgetClient() {
 
     // Create and load the widget script
     const script = document.createElement('script')
-    script.src = 'https://www.usekeystone.app/api/widget.js?customer=c48181ab-2928-48e7-954d-ce5cb39685f7&settings=%7B%22theme%22%3A%22light%22%2C%22showPrice%22%3Atrue%2C%22showStatus%22%3Atrue%2C%22maxItems%22%3A10%2C%22defaultCategory%22%3A%22all%22%2C%22hidePoweredBy%22%3Afalse%7D'
+    script.src = 'https://www.usekeystone.app/api/widget.js?customer=a19bed71-7e3f-4def-b6a0-384a55eb38f3&settings=%7B%22theme%22%3A%22light%22%2C%22showPrice%22%3Atrue%2C%22showStatus%22%3Atrue%2C%22maxItems%22%3A10%2C%22defaultCategory%22%3A%22all%22%2C%22hidePoweredBy%22%3Afalse%7D'
     script.async = true
     script.defer = true
     
