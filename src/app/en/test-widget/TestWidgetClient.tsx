@@ -19,7 +19,7 @@ export default function TestWidgetClient() {
 
     // Create and load the widget script
     const script = document.createElement('script')
-    script.src = 'https://www.usekeystone.app/api/widget.js?customer=a19bed71-7e3f-4def-b6a0-384a55eb38f3&settings=%7B%22theme%22%3A%22light%22%2C%22showPrice%22%3Atrue%2C%22showStatus%22%3Atrue%2C%22maxItems%22%3A10%2C%22defaultCategory%22%3A%22all%22%2C%22hidePoweredBy%22%3Afalse%7D'
+    script.src = 'https://www.usekeystone.app/api/widget.js?customer=a19bed71-7e3f-4def-b6a0-384a55eb38f3&settings=%7B%22theme%22%3A%22light%22%2C%22showPrice%22%3Atrue%2C%22showStatus%22%3Atrue%2C%22maxItems%22%3A10%2C%22defaultCategory%22%3A%22all%22%2C%22language%22%3A%22nl%22%2C%22colors%22%3A%7B%22primaryColor%22%3A%22%232563eb%22%2C%22secondaryColor%22%3A%22%231f2937%22%2C%22textColor%22%3A%22%231f2937%22%2C%22backgroundColor%22%3A%22%23ffffff%22%7D%2C%22logo%22%3A%22https%3A%2F%2Fmutvlrzdjvsmpxadqbsd.supabase.co%2Fstorage%2Fv1%2Fobject%2Fpublic%2Fcustomer-assets%2F92a651a5-b690-4877-aed3-0753c3793604%2Flogo.jpg%22%2C%22hidePoweredBy%22%3Atrue%7D&language=nl'
     script.async = true
     script.defer = true
     
