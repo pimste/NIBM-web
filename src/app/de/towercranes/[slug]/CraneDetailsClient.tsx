@@ -17,7 +17,7 @@ interface Crane {
   image: string
   gallery?: string[]
   status: 'available' | 'sold' | 'comingsoon'
-  year: number
+  year: number | null
   maxCapacity: string
   maxJibLength: string
   maxHeight: string
@@ -266,7 +266,7 @@ export default function CraneDetailsClient() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <span className="text-sm text-neutral-500">Baujahr:</span>
-                    <span className="block font-medium">{crane.year}</span>
+                    <span className="block font-medium">{crane.year ?? '-'}</span>
                   </div>
                   <div>
                     <span className="text-sm text-neutral-500">Typ:</span>

@@ -14,7 +14,7 @@ export default function NewCrane() {
   const [formData, setFormData] = useState({
     name: '',
     model: '',
-    year: new Date().getFullYear(),
+    year: new Date().getFullYear().toString(),
     type: 'topslewing',
     condition: 'excellent',
     serialNumber: '',
@@ -173,19 +173,19 @@ export default function NewCrane() {
 
               <div>
                 <label htmlFor="year" className="block text-sm font-medium text-gray-700 mb-2">
-                  Year *
+                  Year
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   id="year"
                   name="year"
                   value={formData.year}
                   onChange={handleInputChange}
-                  required
-                  min="1990"
-                  max="2030"
+                  placeholder="Enter year or '-' for unknown"
+                  pattern="^-?[0-9]{0,4}$|^-$"
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                 />
+                <p className="mt-1 text-xs text-gray-500">Enter a year (e.g., 2020) or "-" if unknown</p>
               </div>
 
               <div>

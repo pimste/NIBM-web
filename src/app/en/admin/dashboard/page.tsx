@@ -9,7 +9,7 @@ interface Crane {
   id: number
   name: string
   model: string
-  year: number
+  year: number | null
   status: string
   category: string
   isAvailable: boolean
@@ -316,7 +316,7 @@ export default function AdminDashboard() {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">{crane.model}</div>
-                        <div className="text-sm text-gray-500">{crane.year}</div>
+                        <div className="text-sm text-gray-500">{crane.year ?? '-'}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         {getStatusBadge(crane.status)}

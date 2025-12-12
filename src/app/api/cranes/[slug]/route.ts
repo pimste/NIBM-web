@@ -29,7 +29,7 @@ export async function GET(
       specifications: {
         manufacturer: 'Potain', // Default manufacturer
         model: crane.model,
-        yearOfManufacture: crane.year,
+        yearOfManufacture: crane.year ?? '-',
         serialNumber: crane.serialNumber,
         condition: crane.condition,
         maxCapacity: crane.maxCapacity,

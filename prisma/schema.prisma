@@ -19,7 +19,7 @@ model Crane {
   name              String
   slug              String   @unique
   model             String
-  year              Int
+  year              Int?
   type              String
   condition         String
   serialNumber      String

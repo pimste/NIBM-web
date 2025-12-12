@@ -15,7 +15,7 @@ interface Crane {
   image: string
   gallery?: string[]
   status: 'available' | 'sold' | 'comingsoon'
-  year: number
+  year: number | null
   maxCapacity: string
   maxJibLength: string
   maxHeight: string
@@ -93,7 +93,7 @@ export default function CraneDetailsClient({ slug }: CraneDetailsClientProps) {
         ...prev,
         craneModel: crane.name,
         subject: `Inquiry about ${crane.name}`,
-        message: `I'm interested in the ${crane.name} (${crane.year}) and would like more information about:\n\n- Pricing and availability\n- Technical specifications\n- Delivery options\n- Service and support\n\nPlease contact me to discuss further.`
+        message: `I'm interested in the ${crane.name} (${crane.year ?? '-'}) and would like more information about:\n\n- Pricing and availability\n- Technical specifications\n- Delivery options\n- Service and support\n\nPlease contact me to discuss further.`
       }))
     }
   }, [crane?.name, crane?.year])
@@ -127,7 +127,7 @@ export default function CraneDetailsClient({ slug }: CraneDetailsClientProps) {
           phone: '',
           company: '',
           subject: `Inquiry about ${crane.name}`,
-          message: `I'm interested in the ${crane.name} (${crane.year}) and would like more information about:\n\n- Pricing and availability\n- Technical specifications\n- Delivery options\n- Service and support\n\nPlease contact me to discuss further.`,
+          message: `I'm interested in the ${crane.name} (${crane.year ?? '-'}) and would like more information about:\n\n- Pricing and availability\n- Technical specifications\n- Delivery options\n- Service and support\n\nPlease contact me to discuss further.`,
           craneModel: crane.name,
           inquiryType: 'Crane Inquiry'
         })
@@ -288,7 +288,7 @@ export default function CraneDetailsClient({ slug }: CraneDetailsClientProps) {
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="bg-neutral-50 p-4 rounded-lg">
                   <h3 className="text-lg font-semibold mb-2">Year</h3>
-                  <p className="text-neutral-700">{crane.year}</p>
+                  <p className="text-neutral-700">{crane.year ?? '-'}</p>
                 </div>
                 <div className="bg-neutral-50 p-4 rounded-lg">
                   <h3 className="text-lg font-semibold mb-2">Type</h3>

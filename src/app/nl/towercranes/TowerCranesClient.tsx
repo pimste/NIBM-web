@@ -21,7 +21,7 @@ interface Crane {
   slug: string
   image: string
   status: 'available' | 'sold' | 'comingsoon'
-  year: number
+  year: number | null
   maxCapacity: string
   maxJibLength: string
   maxHeight: string
@@ -282,7 +282,7 @@ export default function TowerCranesClient() {
                         <div className="grid grid-cols-2 gap-4 mb-4 text-sm">
                           <div>
                             <span className="text-neutral-500">{t('towercranes.crane.year')}:</span>
-                            <span className="ml-2 font-medium">{crane.year}</span>
+                            <span className="ml-2 font-medium">{crane.year ?? '-'}</span>
                           </div>
                           <div>
                             <span className="text-neutral-500">{t('towercranes.crane.type')}:</span>

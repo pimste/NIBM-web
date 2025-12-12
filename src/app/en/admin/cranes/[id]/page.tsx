@@ -9,7 +9,7 @@ interface Crane {
   id: number
   name: string
   model: string
-  year: number
+  year: number | null
   type: string
   condition: string
   serialNumber: string
@@ -124,7 +124,7 @@ export default function ViewCrane() {
               </Link>
               <div>
                 <h1 className="text-2xl font-bold text-gray-900">{crane.name}</h1>
-                <p className="text-gray-600">{crane.model} • {crane.year}</p>
+                <p className="text-gray-600">{crane.model} • {crane.year ?? '-'}</p>
               </div>
             </div>
             <div className="flex items-center space-x-3">

@@ -350,7 +350,7 @@ export default function TowerCranes() {
                     <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-4">
                       <div className="text-sm">
                         <span className="text-neutral-500">{t('towercranes.crane.year')}:</span>{' '}
-                        <span className="font-medium">{crane.year}</span>
+                        <span className="font-medium">{crane.year ?? '-'}</span>
                       </div>
                       <div className="text-sm">
                         <span className="text-neutral-500">{t('towercranes.crane.type')}:</span>{' '}

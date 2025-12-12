@@ -70,7 +70,7 @@ export async function generateTowerCraneMetadata({ params }: { params: { slug: s
 
   return {
     title: `${crane.name} - Tower Crane Details | NIBM`,
-    description: `${crane.description}. Model: ${crane.model}, Year: ${crane.year}. Professional tower crane services by NIBM.`,
+    description: `${crane.description}. Model: ${crane.model}, Year: ${crane.year ?? '-'}. Professional tower crane services by NIBM.`,
     keywords: `tower crane, ${crane.name}, ${crane.model}, construction equipment, NIBM`,
     openGraph: {
       title: `${crane.name} - NIBM`,

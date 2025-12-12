@@ -87,7 +87,7 @@ export async function PUT(
       name: body.name,
       slug,
       model: body.model,
-      year: parseInt(body.year),
+      year: body.year === '-' || body.year === '' ? null : parseInt(body.year),
       type: body.type,
       condition: body.condition,
       serialNumber: body.serialNumber,
