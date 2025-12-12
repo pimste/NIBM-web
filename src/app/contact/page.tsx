@@ -238,19 +238,38 @@ export default function Contact() {
                 {t('contact.info.title')}
               </h2>
               <div className="bg-neutral-50 p-6 rounded-lg space-y-6">
-                {/* Address */}
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
-                    <FaMapMarkerAlt className="h-5 w-5" />
+                {/* Addresses - Side by Side */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Netherlands Address */}
+                  <div className="flex items-start space-x-4">
+                    <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
+                      <FaMapMarkerAlt className="h-5 w-5" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-neutral-900 mb-2">Office Address Netherlands</h3>
+                      <address className="not-italic text-neutral-700 leading-relaxed">
+                        NIBM Kranen BV<br />
+                        Kruisweg 8<br />
+                        6361 TG Nuth<br />
+                        Nederland
+                      </address>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-neutral-900 mb-2">{t('contact.info.address')}</h3>
-                    <address className="not-italic text-neutral-700 leading-relaxed">
-                      NIBM Kranen BV<br />
-                      Kruisweg 8<br />
-                      6361 TG Nuth<br />
-                      Nederland
-                    </address>
+
+                  {/* Israel Address */}
+                  <div className="flex items-start space-x-4">
+                    <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
+                      <FaMapMarkerAlt className="h-5 w-5" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="font-bold text-neutral-900 mb-2">Office Address Israel</h3>
+                      <address className="not-italic text-neutral-700 leading-relaxed">
+                        Chanan Trading<br />
+                        Kidron 8 Str<br />
+                        Alfi -Menashe 4485100<br />
+                        Israel
+                      </address>
+                    </div>
                   </div>
                 </div>
 
@@ -261,12 +280,26 @@ export default function Contact() {
                   </div>
                   <div className="flex-1">
                     <h3 className="font-bold text-neutral-900 mb-2">{t('contact.info.contact')}</h3>
-                    <ProtectedContact 
-                      type="phone" 
-                      value="+31653206004" 
-                      className="text-neutral-700 hover:text-primary transition-colors"
-                      iconClassName="hidden"
-                    />
+                    <div className="space-y-2">
+                      <div>
+                        <ProtectedContact 
+                          type="phone" 
+                          value="+31653206004" 
+                          className="text-neutral-700 hover:text-primary transition-colors"
+                          iconClassName="hidden"
+                        />
+                        <span className="text-neutral-600 text-sm ml-2">(Gid)</span>
+                      </div>
+                      <div>
+                        <ProtectedContact 
+                          type="phone" 
+                          value="+972505339298" 
+                          className="text-neutral-700 hover:text-primary transition-colors"
+                          iconClassName="hidden"
+                        />
+                        <span className="text-neutral-600 text-sm ml-2">(Chanan)</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -277,12 +310,22 @@ export default function Contact() {
                   </div>
                   <div className="flex-1">
                     <h3 className="font-bold text-neutral-900 mb-2">{t('contact.info.email')}</h3>
-                    <ProtectedContact 
-                      type="email" 
-                      value="gid.gehlen@nibmtowercranes.com" 
-                      className="text-neutral-700 hover:text-primary transition-colors"
-                      iconClassName="hidden"
-                    />
+                    <div className="space-y-2">
+                      <ProtectedContact 
+                        type="email" 
+                        value="gid.gehlen@nibmtowercranes.com" 
+                        className="text-neutral-700 hover:text-primary transition-colors"
+                        iconClassName="hidden"
+                      />
+                      <div>
+                        <ProtectedContact 
+                          type="email" 
+                          value="chanan@chanan-trading.com" 
+                          className="text-neutral-700 hover:text-primary transition-colors"
+                          iconClassName="hidden"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
 

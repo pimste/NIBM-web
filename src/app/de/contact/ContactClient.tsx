@@ -229,21 +229,44 @@ export default function ContactClient() {
                 {t('contact.info.title')}
               </h2>
               <div className="space-y-6">
-                {/* Address Card - Full Width */}
-                <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
-                      <FaMapMarkerAlt className="h-5 w-5" />
+                {/* Address Cards - Side by Side */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Netherlands Address */}
+                  <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
+                        <FaMapMarkerAlt className="h-5 w-5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg font-semibold text-neutral-900 mb-2">
+                          Büroadresse Niederlande
+                        </h3>
+                        <div className="text-neutral-700 leading-relaxed">
+                          <p className="font-medium mb-1">NIBM Kranen BV</p>
+                          <p>Kruisweg 8</p>
+                          <p>6361 TG Nuth</p>
+                          <p>Niederlande</p>
+                        </div>
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-lg font-semibold text-neutral-900 mb-2">
-                        {t('contact.info.address.title')}
-                      </h3>
-                      <div className="text-neutral-700 leading-relaxed">
-                        <p className="font-medium mb-1">NIBM Kranen BV</p>
-                        <p>Kruisweg 8</p>
-                        <p>6361 TG Nuth</p>
-                        <p>Nederland</p>
+                  </div>
+
+                  {/* Israel Address */}
+                  <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
+                        <FaMapMarkerAlt className="h-5 w-5" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-lg font-semibold text-neutral-900 mb-2">
+                          Büroadresse Israel
+                        </h3>
+                        <div className="text-neutral-700 leading-relaxed">
+                          <p className="font-medium mb-1">Chanan Trading</p>
+                          <p>Kidron 8 Str</p>
+                          <p>Alfi -Menashe 4485100</p>
+                          <p>Israel</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -261,13 +284,28 @@ export default function ContactClient() {
                         <h3 className="text-lg font-semibold text-neutral-900 mb-2">
                           {t('contact.info.phone.title')}
                         </h3>
-                        <ClientOnly>
-                          <ProtectedContact 
-                            type="phone" 
-                            value="+31653206004"
-                            className="text-neutral-700 hover:text-primary transition-colors cursor-pointer"
-                          />
-                        </ClientOnly>
+                        <div className="space-y-2">
+                          <div className="flex items-center">
+                            <ClientOnly>
+                              <ProtectedContact 
+                                type="phone" 
+                                value="+31653206004"
+                                className="text-neutral-700 hover:text-primary transition-colors cursor-pointer"
+                              />
+                            </ClientOnly>
+                            <span className="text-neutral-600 text-sm ml-2">(Gid)</span>
+                          </div>
+                          <div className="flex items-center">
+                            <ClientOnly>
+                              <ProtectedContact 
+                                type="phone" 
+                                value="+972505339298"
+                                className="text-neutral-700 hover:text-primary transition-colors cursor-pointer"
+                              />
+                            </ClientOnly>
+                            <span className="text-neutral-600 text-sm ml-2">(Chanan)</span>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -282,7 +320,7 @@ export default function ContactClient() {
                         <h3 className="text-lg font-semibold text-neutral-900 mb-2">
                           {t('contact.info.email.title')}
                         </h3>
-                        <div className="min-w-0">
+                        <div className="min-w-0 space-y-2">
                           <ClientOnly>
                             <ProtectedContact 
                               type="email" 
@@ -290,6 +328,15 @@ export default function ContactClient() {
                               className="text-neutral-700 hover:text-primary transition-colors cursor-pointer break-all"
                             />
                           </ClientOnly>
+                          <div>
+                            <ClientOnly>
+                              <ProtectedContact 
+                                type="email" 
+                                value="chanan@chanan-trading.com"
+                                className="text-neutral-700 hover:text-primary transition-colors cursor-pointer break-all"
+                              />
+                            </ClientOnly>
+                          </div>
                         </div>
                       </div>
                     </div>
