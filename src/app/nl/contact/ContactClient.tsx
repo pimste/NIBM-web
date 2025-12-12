@@ -228,7 +228,7 @@ export default function ContactClient() {
               <h2 className="text-2xl font-bold text-neutral-900 mb-6">
                 {t('contact.info.title')}
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Office Information Netherlands */}
                 <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
                   <h3 className="text-lg font-semibold text-neutral-900 mb-4">
@@ -279,7 +279,7 @@ export default function ContactClient() {
                           <ProtectedContact 
                             type="email" 
                             value="gid.gehlen@nibmtowercranes.com"
-                            className="text-neutral-700 hover:text-primary transition-colors cursor-pointer break-all"
+                            className="text-neutral-700 hover:text-primary transition-colors cursor-pointer break-all text-sm"
                           />
                         </ClientOnly>
                       </div>
@@ -337,7 +337,7 @@ export default function ContactClient() {
                           <ProtectedContact 
                             type="email" 
                             value="chanan@chanan-trading.com"
-                            className="text-neutral-700 hover:text-primary transition-colors cursor-pointer break-all"
+                            className="text-neutral-700 hover:text-primary transition-colors cursor-pointer break-all text-sm"
                           />
                         </ClientOnly>
                       </div>
