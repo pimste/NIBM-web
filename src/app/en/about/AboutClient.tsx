@@ -143,10 +143,6 @@ export default function AboutClient() {
                 </li>
                 <li className="flex items-start">
                   <FaCheckCircle className="text-primary mt-1 mr-2 flex-shrink-0" />
-                  <span>{t('about.mission.point2')}</span>
-                </li>
-                <li className="flex items-start">
-                  <FaCheckCircle className="text-primary mt-1 mr-2 flex-shrink-0" />
                   <span>{t('about.mission.point3')}</span>
                 </li>
                 <li className="flex items-start">

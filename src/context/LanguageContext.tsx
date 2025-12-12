@@ -95,7 +95,7 @@ export const translations: Record<Language, Record<string, string>> = {
     'about.team.title': 'Meet the Founder',
     'about.team.ceo': 'CEO & Founder',
     'about.team.ceo.bio': 'With nearly 40 years of experience in the construction and crane industry, Egidius (Gid) Gehlen began his career in 1986 as Sales Manager at NIBM bouw en wegenbouw machines. His career progression included roles as Branch Head, Managing Director, and Vice President of NIBM Kraan en Lifttechniek, which was the Potain importer for the Netherlands and Belgium for 45 years.',
-    'about.team.ceo.bio2': 'From 1998 to 2013, he served as President and 50% shareholder of NIBM Verenigde Bedrijven Group, overseeing multiple companies including Toyota industrial equipment, tunneling equipment, and crane technology. After representing NFT LLC in Europe (2013-2015), he became Managing Director of NIBM Towercranes BV in 2016, bringing his extensive technical knowledge and commitment to customer satisfaction to tower crane solutions.',
+    'about.team.ceo.bio2': 'From 1998 to 2013, he served as President and 50% shareholder of NIBM Verenigde Bedrijven Group, overseeing multiple companies including Toyota industrial equipment, Herrenknecht tunneling equipment Benelux, and crane technology. After representing NFT LLC in Europe (2013-2015), he became Managing Director of NIBM Towercranes BV in 2016, bringing his extensive technical knowledge and commitment to customer satisfaction to tower crane solutions.',
     'about.team.technical': 'Technical Director',
     'about.team.technical.bio': 'Emma brings 15 years of engineering expertise to NIBM, ensuring all tower cranes meet the highest technical and safety standards.',
     'about.team.operations': 'Operations Manager',

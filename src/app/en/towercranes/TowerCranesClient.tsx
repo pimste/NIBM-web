@@ -84,11 +84,6 @@ export default function TowerCranesClient() {
 
   useEffect(() => {
     fetchCranes()
-    
-    // Set up periodic refresh every 30 seconds
-    const interval = setInterval(fetchCranes, 30000)
-    
-    return () => clearInterval(interval)
   }, [fetchCranes])
   
   const filteredCranes = cranes.filter((crane) => {
