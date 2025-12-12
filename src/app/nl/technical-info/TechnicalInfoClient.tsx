@@ -87,6 +87,15 @@ const technicalDocuments: Array<{
     category: 'Operaties',
     url: '/technical docs/Pdka_02_19_EN Fixing angels K.pdf',
   },
+  {
+    id: 9,
+    title: 'Elektronische Catalogus - Torenkraan Specificaties',
+    description: 'Uitgebreide elektronische catalogus met gedetailleerde specificaties, technische gegevens en productinformatie voor torenkraan componenten en systemen.',
+    fileSize: '506 MB',
+    fileType: 'PDF',
+    category: 'Specificaties',
+    url: '/technical docs/e_catalog_en14439_c25_d25_937-2.pdf',
+  },
 ]
 
 // Dutch FAQs about tower cranes

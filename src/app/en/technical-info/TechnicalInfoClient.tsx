@@ -87,6 +87,15 @@ const technicalDocuments: Array<{
     category: 'Operations',
     url: '/technical docs/Pdka_02_19_EN Fixing angels K.pdf',
   },
+  {
+    id: 9,
+    title: 'Electronic Catalog - Tower Crane Specifications',
+    description: 'Comprehensive electronic catalog containing detailed specifications, technical data, and product information for tower crane components and systems.',
+    fileSize: '506 MB',
+    fileType: 'PDF',
+    category: 'Specifications',
+    url: '/technical docs/e_catalog_en14439_c25_d25_937-2.pdf',
+  },
 ]
 
 // English FAQs about tower cranes

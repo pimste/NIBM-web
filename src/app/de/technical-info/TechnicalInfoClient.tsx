@@ -87,6 +87,15 @@ const technicalDocuments: Array<{
     category: 'Betrieb',
     url: '/technical docs/Pdka_02_19_EN Fixing angels K.pdf',
   },
+  {
+    id: 9,
+    title: 'Elektronischer Katalog - Turmkran Spezifikationen',
+    description: 'Umfassender elektronischer Katalog mit detaillierten Spezifikationen, technischen Daten und Produktinformationen für Turmkran Komponenten und Systeme.',
+    fileSize: '506 MB',
+    fileType: 'PDF',
+    category: 'Spezifikationen',
+    url: '/technical docs/e_catalog_en14439_c25_d25_937-2.pdf',
+  },
 ]
 
 // German FAQs about tower cranes
