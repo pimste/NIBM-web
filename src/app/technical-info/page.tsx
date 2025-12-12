@@ -94,7 +94,7 @@ const technicalDocuments: Array<{
     fileSize: '506 MB',
     fileType: 'PDF',
     category: 'Specifications',
-    url: '/technical docs/e_catalog_en14439_c25_d25_937-2.pdf',
+    url: 'https://a5db2zzmd8pkwmho.public.blob.vercel-storage.com/e_catalog_en14439_c25_d25_937-2-gecomprimeerd.pdf',
   },
 ]
 
