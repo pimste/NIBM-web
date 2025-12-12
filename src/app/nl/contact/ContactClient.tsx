@@ -230,7 +230,7 @@ export default function ContactClient() {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 {/* Office Information Netherlands */}
-                <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
+                <div className="bg-white p-8 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
                   <h3 className="text-lg font-semibold text-neutral-900 mb-4">
                     Kantoorinformatie Nederland
                   </h3>
@@ -274,12 +274,12 @@ export default function ContactClient() {
                       <div className="bg-primary rounded-full p-2 text-white flex-shrink-0 mt-1">
                         <FaEnvelope className="h-4 w-4" />
                       </div>
-                      <div className="flex-1 min-w-0">
+                      <div className="flex-1 min-w-0 overflow-hidden">
                         <ClientOnly>
                           <ProtectedContact 
                             type="email" 
                             value="gid.gehlen@nibmtowercranes.com"
-                            className="text-neutral-700 hover:text-primary transition-colors cursor-pointer break-all text-sm"
+                            className="text-neutral-700 hover:text-primary transition-colors cursor-pointer text-sm whitespace-nowrap"
                           />
                         </ClientOnly>
                       </div>
@@ -288,7 +288,7 @@ export default function ContactClient() {
                 </div>
 
                 {/* Office Information Israel */}
-                <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
+                <div className="bg-white p-8 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
                   <h3 className="text-lg font-semibold text-neutral-900 mb-4">
                     Kantoorinformatie Israël
                   </h3>
@@ -332,12 +332,12 @@ export default function ContactClient() {
                       <div className="bg-primary rounded-full p-2 text-white flex-shrink-0 mt-1">
                         <FaEnvelope className="h-4 w-4" />
                       </div>
-                      <div className="flex-1 min-w-0">
+                      <div className="flex-1 min-w-0 overflow-hidden">
                         <ClientOnly>
                           <ProtectedContact 
                             type="email" 
                             value="chanan@chanan-trading.com"
-                            className="text-neutral-700 hover:text-primary transition-colors cursor-pointer break-all text-sm"
+                            className="text-neutral-700 hover:text-primary transition-colors cursor-pointer text-sm whitespace-nowrap"
                           />
                         </ClientOnly>
                       </div>
