@@ -6,51 +6,86 @@ import { FaDownload, FaPlus, FaMinus, FaFileAlt, FaExternalLinkAlt } from 'react
 import { useLanguage } from '@/context/LanguageContext'
 
 // Dutch technical documents
-const technicalDocuments = [
+const technicalDocuments: Array<{
+  id: number
+  title: string
+  description: string
+  fileSize: string
+  fileType: string
+  category: string
+  url: string
+}> = [
   {
     id: 1,
-    title: 'Torenkraan Veiligheidsrichtlijnen',
-    description: 'Uitgebreide veiligheidsrichtlijnen voor het werken met torenkranen.',
-    fileSize: '2.4 MB',
+    title: 'K Masten - Technische Documentatie',
+    description: 'Uitgebreide technische documentatie voor K masten, inclusief specificaties, installatiehandleidingen en onderhoudsprocedures.',
+    fileSize: '10.0 MB',
     fileType: 'PDF',
-    category: 'Veiligheid',
-    url: '#',
+    category: 'Specificaties',
+    url: '/technical docs/02GP_534_2022_07-1_EN_K masts.pdf',
   },
   {
     id: 2,
-    title: 'Potain MDT 178 Technische Specificaties',
-    description: 'Gedetailleerde specificaties en technische gegevens voor de Potain MDT 178 torenkraan.',
-    fileSize: '3.1 MB',
+    title: 'Telescoop Toren Secties T 41, T 61, T 851',
+    description: 'Gedetailleerde technische specificaties en installatiehandleidingen voor telescoop toren secties T 41, T 61 en T 851.',
+    fileSize: '11 MB',
     fileType: 'PDF',
     category: 'Specificaties',
-    url: '#',
+    url: '/technical docs/02GP_631_2019_04_EN_Telescoping T 41-T 61-T 851 (2).pdf',
   },
   {
     id: 3,
-    title: 'Checklist voor Inspectie voor Gebruik',
-    description: 'Checklist voor het inspecteren van torenkranen voordat ze in gebruik worden genomen.',
+    title: 'K Masten Nieuwe Generatie',
+    description: 'Technische documentatie voor de nieuwe generatie K masten, inclusief ontwerpkenmerken, specificaties en installatieprocedures.',
     fileSize: '1.2 MB',
     fileType: 'PDF',
-    category: 'Operaties',
-    url: '#',
+    category: 'Specificaties',
+    url: '/technical docs/02FP_173_2017_03_EN_K Masts New Generation.pdf',
   },
   {
     id: 4,
-    title: 'Torenkraan Onderhoudsschema',
-    description: 'Aanbevolen onderhoudsschema voor verschillende typen torenkranen.',
-    fileSize: '1.8 MB',
+    title: 'K Masten Montagehandleiding',
+    description: 'Montage- en installatiehandleiding voor K masten, met procedures voor correcte montage en veiligheidsvereisten.',
+    fileSize: '1.2 MB',
     fileType: 'PDF',
-    category: 'Onderhoud',
-    url: '#',
+    category: 'Operaties',
+    url: '/technical docs/H19-032-E - K Masts ages_EN.pdf',
   },
   {
     id: 5,
-    title: 'Laadcapaciteitsdiagrammen - Potain MC Serie',
-    description: 'Laadcapaciteitsdiagrammen voor de torenkranen uit de Potain MC-serie.',
-    fileSize: '4.2 MB',
+    title: 'Verankeringsframes',
+    description: 'Uitgebreide handleiding voor verankeringsframes voor torenkranen, inclusief installatieprocedures, veiligheidsvereisten en technische specificaties.',
+    fileSize: '3.6 MB',
     fileType: 'PDF',
-    category: 'Specificaties',
-    url: '#',
+    category: 'Veiligheid',
+    url: '/technical docs/Anchorage frames.pdf',
+  },
+  {
+    id: 6,
+    title: 'Verankeringsframe Types',
+    description: 'Documentatie over verschillende soorten verankeringsframes, hun toepassingen en installatiehandleidingen.',
+    fileSize: '771 KB',
+    fileType: 'PDF',
+    category: 'Veiligheid',
+    url: '/technical docs/Anchoring frane Types .pdf .pdf',
+  },
+  {
+    id: 7,
+    title: 'CCS Driver Documentatie',
+    description: 'Technische documentatie voor de CCS (Kraanbesturingssysteem) driver, inclusief bedieningsprocedures en troubleshooting handleiding.',
+    fileSize: '3.2 MB',
+    fileType: 'PDF',
+    category: 'Operaties',
+    url: '/technical docs/CCS driver.pdf',
+  },
+  {
+    id: 8,
+    title: 'Bevestigingshoeken voor K Masten',
+    description: 'Installatiehandleiding voor bevestigingshoeken gebruikt met K masten, inclusief correcte positionering en montage-instructies.',
+    fileSize: '136 KB',
+    fileType: 'PDF',
+    category: 'Operaties',
+    url: '/technical docs/Pdka_02_19_EN Fixing angels K.pdf',
   },
 ]
 
@@ -237,54 +272,6 @@ export default function TechnicalInfoClient() {
                   )}
                 </div>
               ))}
-            </div>
-          </div>
-
-          {/* Additional Resources */}
-          <div className="mt-16">
-            <h2 className="text-3xl font-bold text-neutral-900 mb-8">
-              Extra Hulpbronnen
-            </h2>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-neutral-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-neutral-900 mb-3">
-                  Industrienormen
-                </h3>
-                <p className="text-neutral-700 mb-4">
-                  Bekijk relevante industrienormen en regelgeving met betrekking tot het gebruik van torenkranen.
-                </p>
-                <Link href="#" className="text-primary hover:text-primary-700 flex items-center transition-colors">
-                  <span>Normen bekijken</span>
-                  <FaExternalLinkAlt className="ml-2 h-3 w-3" />
-                </Link>
-              </div>
-
-              <div className="bg-neutral-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-neutral-900 mb-3">
-                  Instructievideo's
-                </h3>
-                <p className="text-neutral-700 mb-4">
-                  Bekijk instructievideo's over de bediening, het onderhoud en de veiligheid van torenkranen.
-                </p>
-                <Link href="#" className="text-primary hover:text-primary-700 flex items-center transition-colors">
-                  <span>Video's bekijken</span>
-                  <FaExternalLinkAlt className="ml-2 h-3 w-3" />
-                </Link>
-              </div>
-
-              <div className="bg-neutral-50 p-6 rounded-lg">
-                <h3 className="text-xl font-bold text-neutral-900 mb-3">
-                  Technische Ondersteuning
-                </h3>
-                <p className="text-neutral-700 mb-4">
-                  Heb je gespecialiseerde technische ondersteuning nodig? Ons expertteam staat voor je klaar.
-                </p>
-                <Link href="/nl/contact" className="text-primary hover:text-primary-700 flex items-center transition-colors">
-                  <span>Contact opnemen</span>
-                  <FaExternalLinkAlt className="ml-2 h-3 w-3" />
-                </Link>
-              </div>
             </div>
           </div>
         </div>

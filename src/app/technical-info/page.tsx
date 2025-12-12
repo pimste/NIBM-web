@@ -5,52 +5,87 @@ import Link from 'next/link'
 import { FaDownload, FaPlus, FaMinus, FaFileAlt, FaExternalLinkAlt } from 'react-icons/fa'
 import { useLanguage } from '@/context/LanguageContext'
 
-// Example technical documents
-const technicalDocuments = [
+// Technical documents
+const technicalDocuments: Array<{
+  id: number
+  title: string
+  description: string
+  fileSize: string
+  fileType: string
+  category: string
+  url: string
+}> = [
   {
     id: 1,
-    title: 'Tower Crane Safety Guidelines',
-    description: 'Comprehensive safety guidelines for tower crane operations.',
-    fileSize: '2.4 MB',
+    title: 'K Masts - Technical Documentation',
+    description: 'Comprehensive technical documentation for K masts, including specifications, installation guidelines, and maintenance procedures.',
+    fileSize: '10.0 MB',
     fileType: 'PDF',
-    category: 'Safety',
-    url: '#',
+    category: 'Specifications',
+    url: '/technical docs/02GP_534_2022_07-1_EN_K masts.pdf',
   },
   {
     id: 2,
-    title: 'Potain MDT 178 Technical Specifications',
-    description: 'Detailed specifications and technical data for the Potain MDT 178 tower crane.',
-    fileSize: '3.1 MB',
+    title: 'Telescoping Tower Sections T 41, T 61, T 851',
+    description: 'Detailed technical specifications and installation guidelines for telescoping tower sections T 41, T 61, and T 851.',
+    fileSize: '11 MB',
     fileType: 'PDF',
     category: 'Specifications',
-    url: '#',
+    url: '/technical docs/02GP_631_2019_04_EN_Telescoping T 41-T 61-T 851 (2).pdf',
   },
   {
     id: 3,
-    title: 'Pre-operation Inspection Checklist',
-    description: 'Checklist for inspecting tower cranes before operation.',
+    title: 'K Masts New Generation',
+    description: 'Technical documentation for the new generation of K masts, including design features, specifications, and installation procedures.',
     fileSize: '1.2 MB',
     fileType: 'PDF',
-    category: 'Operations',
-    url: '#',
+    category: 'Specifications',
+    url: '/technical docs/02FP_173_2017_03_EN_K Masts New Generation.pdf',
   },
   {
     id: 4,
-    title: 'Tower Crane Maintenance Schedule',
-    description: 'Recommended maintenance schedule for different types of tower cranes.',
-    fileSize: '1.8 MB',
+    title: 'K Masts Assembly Guide',
+    description: 'Assembly and installation guide for K masts, covering proper assembly procedures and safety requirements.',
+    fileSize: '1.2 MB',
     fileType: 'PDF',
-    category: 'Maintenance',
-    url: '#',
+    category: 'Operations',
+    url: '/technical docs/H19-032-E - K Masts ages_EN.pdf',
   },
   {
     id: 5,
-    title: 'Load Capacity Charts - Potain MC Series',
-    description: 'Load capacity charts for the Potain MC series tower cranes.',
-    fileSize: '4.2 MB',
+    title: 'Anchorage Frames',
+    description: 'Comprehensive guide to anchorage frames for tower cranes, including installation procedures, safety requirements, and technical specifications.',
+    fileSize: '3.6 MB',
     fileType: 'PDF',
-    category: 'Specifications',
-    url: '#',
+    category: 'Safety',
+    url: '/technical docs/Anchorage frames.pdf',
+  },
+  {
+    id: 6,
+    title: 'Anchoring Frame Types',
+    description: 'Documentation covering different types of anchoring frames, their applications, and installation guidelines.',
+    fileSize: '771 KB',
+    fileType: 'PDF',
+    category: 'Safety',
+    url: '/technical docs/Anchoring frane Types .pdf .pdf',
+  },
+  {
+    id: 7,
+    title: 'CCS Driver Documentation',
+    description: 'Technical documentation for the CCS (Crane Control System) driver, including operation procedures and troubleshooting guide.',
+    fileSize: '3.2 MB',
+    fileType: 'PDF',
+    category: 'Operations',
+    url: '/technical docs/CCS driver.pdf',
+  },
+  {
+    id: 8,
+    title: 'Fixing Angles for K Masts',
+    description: 'Installation guide for fixing angles used with K masts, including proper positioning and assembly instructions.',
+    fileSize: '136 KB',
+    fileType: 'PDF',
+    category: 'Operations',
+    url: '/technical docs/Pdka_02_19_EN Fixing angels K.pdf',
   },
 ]
 
@@ -260,59 +295,6 @@ export default function TechnicalInfo() {
         </div>
       </section>
 
-      {/* Additional Resources */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-neutral-900 mb-8 text-center">
-            {t('technical.additionalResources')}
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <div className="bg-neutral-50 p-6 rounded-lg">
-              <h3 className="text-xl font-bold text-neutral-900 mb-4">
-                {t('technical.industryStandards')}
-              </h3>
-              <p className="text-neutral-700 mb-4">
-                {t('technical.industryStandards.desc')}
-              </p>
-              <a 
-                href="#" 
-                className="inline-flex items-center text-primary hover:text-primary-700 font-medium"
-              >
-                {t('technical.viewStandards')} <FaExternalLinkAlt className="ml-2 h-3 w-3" />
-              </a>
-            </div>
-            <div className="bg-neutral-50 p-6 rounded-lg">
-              <h3 className="text-xl font-bold text-neutral-900 mb-4">
-                {t('technical.educationalVideos')}
-              </h3>
-              <p className="text-neutral-700 mb-4">
-                {t('technical.educationalVideos.desc')}
-              </p>
-              <a 
-                href="#" 
-                className="inline-flex items-center text-primary hover:text-primary-700 font-medium"
-              >
-                {t('technical.watchVideos')} <FaExternalLinkAlt className="ml-2 h-3 w-3" />
-              </a>
-            </div>
-            <div className="bg-neutral-50 p-6 rounded-lg">
-              <h3 className="text-xl font-bold text-neutral-900 mb-4">
-                {t('technical.techSupport')}
-              </h3>
-              <p className="text-neutral-700 mb-4">
-                {t('technical.techSupport.desc')}
-              </p>
-              <Link
-                href="/contact?subject=Technical%20Support"
-                className="inline-flex items-center text-primary hover:text-primary-700 font-medium"
-              >
-                {t('technical.contactSupport')} <FaExternalLinkAlt className="ml-2 h-3 w-3" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
     </>
   )
 } 
