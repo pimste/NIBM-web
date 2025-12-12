@@ -96,6 +96,24 @@ const technicalDocuments: Array<{
     category: 'Spezifikationen',
     url: 'https://a5db2zzmd8pkwmho.public.blob.vercel-storage.com/e_catalog_en14439_c25_d25_937-2-gecomprimeerd.pdf',
   },
+  {
+    id: 10,
+    title: 'Stahldrahtseil Berechnungstool - Kran Konfiguration',
+    description: 'Interaktives Excel-Tool zur Berechnung und Auswahl geeigneter Stahldrahtseile basierend auf Krantyp, Auslegerlänge und Hakenhöhe. Geben Sie Ihre spezifischen Kranparameter ein, um die richtigen Stahldrahtseil-Spezifikationen für Ihre Anwendung zu bestimmen.',
+    fileSize: '1.5 MB',
+    fileType: 'XLSX',
+    category: 'Betrieb',
+    url: '/technical docs/Cables metalliques _ Wire ropes (24).xlsx',
+  },
+  {
+    id: 11,
+    title: 'Technische Dokumentationssammlung',
+    description: 'Umfassende zusammengefügte technische Dokumentation mit wesentlichen Turmkran-Spezifikationen, Installationsrichtlinien und Betriebsverfahren in einem konsolidierten Format für einfache Referenz.',
+    fileSize: '845 KB',
+    fileType: 'PDF',
+    category: 'Spezifikationen',
+    url: '/technical docs/ilovepdf_merged.pdf',
+  },
 ]
 
 // German FAQs about tower cranes

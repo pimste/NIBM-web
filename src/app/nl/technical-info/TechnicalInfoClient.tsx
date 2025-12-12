@@ -96,6 +96,24 @@ const technicalDocuments: Array<{
     category: 'Specificaties',
     url: 'https://a5db2zzmd8pkwmho.public.blob.vercel-storage.com/e_catalog_en14439_c25_d25_937-2-gecomprimeerd.pdf',
   },
+  {
+    id: 10,
+    title: 'Staalkabel Berekeningstool - Kraan Configuratie',
+    description: 'Interactieve Excel tool voor het berekenen en selecteren van geschikte staalkabels op basis van kraantype, giek lengte en haakhoogte. Vul uw specifieke kraanparameters in om de juiste staalkabel specificaties voor uw toepassing te bepalen.',
+    fileSize: '1.5 MB',
+    fileType: 'XLSX',
+    category: 'Operaties',
+    url: '/technical docs/Cables metalliques _ Wire ropes (24).xlsx',
+  },
+  {
+    id: 11,
+    title: 'Technische Documentatie Collectie',
+    description: 'Uitgebreide samengevoegde technische documentatie met essentiële torenkraan specificaties, installatiehandleidingen en operationele procedures in een geconsolideerd formaat voor eenvoudige referentie.',
+    fileSize: '845 KB',
+    fileType: 'PDF',
+    category: 'Specificaties',
+    url: '/technical docs/ilovepdf_merged.pdf',
+  },
 ]
 
 // Dutch FAQs about tower cranes

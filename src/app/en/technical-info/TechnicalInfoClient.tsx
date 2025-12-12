@@ -96,6 +96,24 @@ const technicalDocuments: Array<{
     category: 'Specifications',
     url: 'https://a5db2zzmd8pkwmho.public.blob.vercel-storage.com/e_catalog_en14439_c25_d25_937-2-gecomprimeerd.pdf',
   },
+  {
+    id: 10,
+    title: 'Wire Ropes Calculation Tool - Crane Configuration',
+    description: 'Interactive Excel tool for calculating and selecting appropriate wire ropes based on crane type, jib length, and hook height. Fill in your specific crane parameters to determine the correct wire rope specifications for your application.',
+    fileSize: '1.5 MB',
+    fileType: 'XLSX',
+    category: 'Operations',
+    url: '/technical docs/Cables metalliques _ Wire ropes (24).xlsx',
+  },
+  {
+    id: 11,
+    title: 'Technical Documentation Collection',
+    description: 'Comprehensive merged technical documentation containing essential tower crane specifications, installation guidelines, and operational procedures in a consolidated format for easy reference.',
+    fileSize: '845 KB',
+    fileType: 'PDF',
+    category: 'Specifications',
+    url: '/technical docs/ilovepdf_merged.pdf',
+  },
 ]
 
 // English FAQs about tower cranes
