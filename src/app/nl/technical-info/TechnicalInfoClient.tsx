@@ -82,7 +82,7 @@ const technicalDocuments: Array<{
     id: 8,
     title: 'Bevestigingshoeken voor K Masten',
     description: 'Installatiehandleiding voor bevestigingshoeken gebruikt met K masten, inclusief correcte positionering en montage-instructies.',
-    fileSize: '136 KB',
+    fileSize: '218 KB',
     fileType: 'PDF',
     category: 'Operaties',
     url: '/technical docs/Pdka_02_19_EN Fixing angels K.pdf',
@@ -99,7 +99,7 @@ const technicalDocuments: Array<{
   {
     id: 10,
     title: 'Staalkabel Berekeningstool - Kraan Configuratie',
-    description: 'Interactieve Excel tool voor het berekenen en selecteren van geschikte staalkabels op basis van kraantype, giek lengte en haakhoogte. Vul uw specifieke kraanparameters in om de juiste staalkabel specificaties voor uw toepassing te bepalen.',
+    description: 'Interactieve Excel tool voor het berekenen en selecteren van geschikte staalkabels op basis van kraantype, giek lengte en haakhoogte. <strong>Vul uw specifieke kraanparameters in om de juiste staalkabel specificaties voor uw toepassing te bepalen.</strong>',
     fileSize: '1.5 MB',
     fileType: 'XLSX',
     category: 'Operaties',
@@ -107,7 +107,7 @@ const technicalDocuments: Array<{
   },
   {
     id: 11,
-    title: 'Technische Documentatie Collectie',
+    title: 'Technische Documentatie Collectie V60A',
     description: 'Uitgebreide samengevoegde technische documentatie met essentiële torenkraan specificaties, installatiehandleidingen en operationele procedures in een geconsolideerd formaat voor eenvoudige referentie.',
     fileSize: '845 KB',
     fileType: 'PDF',
@@ -252,9 +252,7 @@ export default function TechnicalInfoClient() {
                           <h3 className="text-lg font-bold text-neutral-900 mb-2">
                             {doc.title}
                           </h3>
-                          <p className="text-neutral-700 text-sm mb-3">
-                            {doc.description}
-                          </p>
+                          <p className="text-neutral-700 text-sm mb-3" dangerouslySetInnerHTML={{ __html: doc.description }} />
                           <p className="text-neutral-500 text-xs">
                             {doc.fileType} • {doc.fileSize}
                           </p>

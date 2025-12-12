@@ -82,7 +82,7 @@ const technicalDocuments: Array<{
     id: 8,
     title: 'Fixing Angles for K Masts',
     description: 'Installation guide for fixing angles used with K masts, including proper positioning and assembly instructions.',
-    fileSize: '136 KB',
+    fileSize: '218 KB',
     fileType: 'PDF',
     category: 'Operations',
     url: '/technical docs/Pdka_02_19_EN Fixing angels K.pdf',
@@ -99,7 +99,7 @@ const technicalDocuments: Array<{
   {
     id: 10,
     title: 'Wire Ropes Calculation Tool - Crane Configuration',
-    description: 'Interactive Excel tool for calculating and selecting appropriate wire ropes based on crane type, jib length, and hook height. Fill in your specific crane parameters to determine the correct wire rope specifications for your application.',
+    description: 'Interactive Excel tool for calculating and selecting appropriate wire ropes based on crane type, jib length, and hook height. <strong>Fill in your specific crane parameters to determine the correct wire rope specifications for your application.</strong>',
     fileSize: '1.5 MB',
     fileType: 'XLSX',
     category: 'Operations',
@@ -107,7 +107,7 @@ const technicalDocuments: Array<{
   },
   {
     id: 11,
-    title: 'Technical Documentation Collection',
+    title: 'Technical Documentation Collection V60A',
     description: 'Comprehensive merged technical documentation containing essential tower crane specifications, installation guidelines, and operational procedures in a consolidated format for easy reference.',
     fileSize: '845 KB',
     fileType: 'PDF',
@@ -252,9 +252,7 @@ export default function TechnicalInfo() {
                           <h3 className="text-lg font-bold text-neutral-900 mb-2">
                             {doc.title}
                           </h3>
-                          <p className="text-neutral-700 text-sm mb-3">
-                            {doc.description}
-                          </p>
+                          <p className="text-neutral-700 text-sm mb-3" dangerouslySetInnerHTML={{ __html: doc.description }} />
                           <p className="text-neutral-500 text-xs">
                             {doc.fileType} • {doc.fileSize}
                           </p>

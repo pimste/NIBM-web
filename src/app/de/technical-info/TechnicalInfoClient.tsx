@@ -82,7 +82,7 @@ const technicalDocuments: Array<{
     id: 8,
     title: 'Befestigungswinkel für K Masten',
     description: 'Installationsanleitung für Befestigungswinkel, die mit K Masten verwendet werden, einschließlich ordnungsgemäßer Positionierung und Montageanweisungen.',
-    fileSize: '136 KB',
+    fileSize: '218 KB',
     fileType: 'PDF',
     category: 'Betrieb',
     url: '/technical docs/Pdka_02_19_EN Fixing angels K.pdf',
@@ -99,7 +99,7 @@ const technicalDocuments: Array<{
   {
     id: 10,
     title: 'Stahldrahtseil Berechnungstool - Kran Konfiguration',
-    description: 'Interaktives Excel-Tool zur Berechnung und Auswahl geeigneter Stahldrahtseile basierend auf Krantyp, Auslegerlänge und Hakenhöhe. Geben Sie Ihre spezifischen Kranparameter ein, um die richtigen Stahldrahtseil-Spezifikationen für Ihre Anwendung zu bestimmen.',
+    description: 'Interaktives Excel-Tool zur Berechnung und Auswahl geeigneter Stahldrahtseile basierend auf Krantyp, Auslegerlänge und Hakenhöhe. <strong>Geben Sie Ihre spezifischen Kranparameter ein, um die richtigen Stahldrahtseil-Spezifikationen für Ihre Anwendung zu bestimmen.</strong>',
     fileSize: '1.5 MB',
     fileType: 'XLSX',
     category: 'Betrieb',
@@ -107,7 +107,7 @@ const technicalDocuments: Array<{
   },
   {
     id: 11,
-    title: 'Technische Dokumentationssammlung',
+    title: 'Technische Dokumentationssammlung V60A',
     description: 'Umfassende zusammengefügte technische Dokumentation mit wesentlichen Turmkran-Spezifikationen, Installationsrichtlinien und Betriebsverfahren in einem konsolidierten Format für einfache Referenz.',
     fileSize: '845 KB',
     fileType: 'PDF',
@@ -252,9 +252,7 @@ export default function TechnicalInfoClient() {
                           <h3 className="text-lg font-bold text-neutral-900 mb-2">
                             {doc.title}
                           </h3>
-                          <p className="text-neutral-700 text-sm mb-3">
-                            {doc.description}
-                          </p>
+                          <p className="text-neutral-700 text-sm mb-3" dangerouslySetInnerHTML={{ __html: doc.description }} />
                           <p className="text-neutral-500 text-xs">
                             {doc.fileType} • {doc.fileSize}
                           </p>
