@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaClock } from 'react-icons/fa'
+import { FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa'
 import { useLanguage } from '@/context/LanguageContext'
 import { ClientOnly } from '@/components/ClientOnly'
 import { MotionDiv } from '@/components/MotionWrapper'
@@ -237,87 +237,108 @@ export default function Contact() {
               <h2 className="text-2xl font-bold text-neutral-900 mb-6">
                 {t('contact.info.title')}
               </h2>
-              <div className="bg-neutral-50 p-6 rounded-lg space-y-6">
-                {/* Addresses - Side by Side */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Netherlands Address */}
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
-                      <FaMapMarkerAlt className="h-5 w-5" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-bold text-neutral-900 mb-2">Office Address Netherlands</h3>
-                      <address className="not-italic text-neutral-700 leading-relaxed">
-                        NIBM Kranen BV<br />
-                        Kruisweg 8<br />
-                        6361 TG Nuth<br />
-                        Nederland
-                      </address>
-                    </div>
-                  </div>
-
-                  {/* Israel Address */}
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
-                      <FaMapMarkerAlt className="h-5 w-5" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-bold text-neutral-900 mb-2">Office Address Israel</h3>
-                      <address className="not-italic text-neutral-700 leading-relaxed">
-                        Chanan Trading<br />
-                        Kidron 8 Str<br />
-                        Alfi -Menashe 4485100<br />
-                        Israel
-                      </address>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Phone */}
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
-                    <FaPhone className="h-5 w-5" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-neutral-900 mb-2">{t('contact.info.contact')}</h3>
-                    <div className="space-y-2">
-                      <div>
-                        <ProtectedContact 
-                          type="phone" 
-                          value="+31653206004" 
-                          className="text-neutral-700 hover:text-primary transition-colors"
-                          iconClassName="hidden"
-                        />
-                        <span className="text-neutral-600 text-sm ml-2">(Gid)</span>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Office Information Netherlands */}
+                <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
+                  <h3 className="text-lg font-semibold text-neutral-900 mb-4">
+                    Office Information Netherlands
+                  </h3>
+                  <div className="space-y-4">
+                    {/* Address */}
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-primary rounded-full p-2 text-white flex-shrink-0 mt-1">
+                        <FaMapMarkerAlt className="h-4 w-4" />
                       </div>
-                      <div>
+                      <div className="flex-1 min-w-0">
+                        <address className="not-italic text-neutral-700 leading-relaxed">
+                          NIBM Kranen BV<br />
+                          Kruisweg 8<br />
+                          6361 TG Nuth<br />
+                          Nederland
+                        </address>
+                      </div>
+                    </div>
+
+                    {/* Phone */}
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-primary rounded-full p-2 text-white flex-shrink-0 mt-1">
+                        <FaPhone className="h-4 w-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center">
+                          <ProtectedContact 
+                            type="phone" 
+                            value="+31653206004" 
+                            className="text-neutral-700 hover:text-primary transition-colors"
+                            iconClassName="hidden"
+                          />
+                          <span className="text-neutral-600 text-sm ml-2">(Gid)</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Email */}
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-primary rounded-full p-2 text-white flex-shrink-0 mt-1">
+                        <FaEnvelope className="h-4 w-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
                         <ProtectedContact 
-                          type="phone" 
-                          value="+972505339298" 
+                          type="email" 
+                          value="gid.gehlen@nibmtowercranes.com" 
                           className="text-neutral-700 hover:text-primary transition-colors"
                           iconClassName="hidden"
                         />
-                        <span className="text-neutral-600 text-sm ml-2">(Chanan)</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Email */}
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
-                    <FaEnvelope className="h-5 w-5" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-neutral-900 mb-2">{t('contact.info.email')}</h3>
-                    <div className="space-y-2">
-                      <ProtectedContact 
-                        type="email" 
-                        value="gid.gehlen@nibmtowercranes.com" 
-                        className="text-neutral-700 hover:text-primary transition-colors"
-                        iconClassName="hidden"
-                      />
-                      <div>
+                {/* Office Information Israel */}
+                <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
+                  <h3 className="text-lg font-semibold text-neutral-900 mb-4">
+                    Office Information Israel
+                  </h3>
+                  <div className="space-y-4">
+                    {/* Address */}
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-primary rounded-full p-2 text-white flex-shrink-0 mt-1">
+                        <FaMapMarkerAlt className="h-4 w-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <address className="not-italic text-neutral-700 leading-relaxed">
+                          Chanan Trading<br />
+                          Kidron 8 Str<br />
+                          Alfi -Menashe 4485100<br />
+                          Israel
+                        </address>
+                      </div>
+                    </div>
+
+                    {/* Phone */}
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-primary rounded-full p-2 text-white flex-shrink-0 mt-1">
+                        <FaPhone className="h-4 w-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center">
+                          <ProtectedContact 
+                            type="phone" 
+                            value="+972505339298" 
+                            className="text-neutral-700 hover:text-primary transition-colors"
+                            iconClassName="hidden"
+                          />
+                          <span className="text-neutral-600 text-sm ml-2">(Chanan)</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Email */}
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-primary rounded-full p-2 text-white flex-shrink-0 mt-1">
+                        <FaEnvelope className="h-4 w-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
                         <ProtectedContact 
                           type="email" 
                           value="chanan@chanan-trading.com" 
@@ -325,20 +346,6 @@ export default function Contact() {
                           iconClassName="hidden"
                         />
                       </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Office Hours */}
-                <div className="flex items-start space-x-4">
-                  <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
-                    <FaClock className="h-5 w-5" />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-bold text-neutral-900 mb-2">{t('contact.info.hours')}</h3>
-                    <div className="text-neutral-700 leading-relaxed">
-                      {t('contact.info.workdays')}<br />
-                      {t('contact.info.weekend')}
                     </div>
                   </div>
                 </div>

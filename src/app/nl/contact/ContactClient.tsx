@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { FaEnvelope, FaMapMarkerAlt, FaPhone, FaClock } from 'react-icons/fa'
+import { FaEnvelope, FaMapMarkerAlt, FaPhone } from 'react-icons/fa'
 import { useLanguage } from '@/context/LanguageContext'
 import { ClientOnly } from '@/components/ClientOnly'
 import { MotionDiv } from '@/components/MotionWrapper'
@@ -228,19 +228,19 @@ export default function ContactClient() {
               <h2 className="text-2xl font-bold text-neutral-900 mb-6">
                 {t('contact.info.title')}
               </h2>
-              <div className="space-y-6">
-                {/* Address Cards - Side by Side */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Netherlands Address */}
-                  <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
-                    <div className="flex items-start space-x-4">
-                      <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
-                        <FaMapMarkerAlt className="h-5 w-5" />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Office Information Netherlands */}
+                <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
+                  <h3 className="text-lg font-semibold text-neutral-900 mb-4">
+                    Kantoorinformatie Nederland
+                  </h3>
+                  <div className="space-y-4">
+                    {/* Address */}
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-primary rounded-full p-2 text-white flex-shrink-0 mt-1">
+                        <FaMapMarkerAlt className="h-4 w-4" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-lg font-semibold text-neutral-900 mb-2">
-                          Kantooradres Nederland
-                        </h3>
                         <div className="text-neutral-700 leading-relaxed">
                           <p className="font-medium mb-1">NIBM Kranen BV</p>
                           <p>Kruisweg 8</p>
@@ -249,18 +249,56 @@ export default function ContactClient() {
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Israel Address */}
-                  <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
-                    <div className="flex items-start space-x-4">
-                      <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
-                        <FaMapMarkerAlt className="h-5 w-5" />
+                    {/* Phone */}
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-primary rounded-full p-2 text-white flex-shrink-0 mt-1">
+                        <FaPhone className="h-4 w-4" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-lg font-semibold text-neutral-900 mb-2">
-                          Kantooradres Israël
-                        </h3>
+                        <div className="flex items-center">
+                          <ClientOnly>
+                            <ProtectedContact 
+                              type="phone" 
+                              value="+31653206004"
+                              className="text-neutral-700 hover:text-primary transition-colors cursor-pointer"
+                            />
+                          </ClientOnly>
+                          <span className="text-neutral-600 text-sm ml-2">(Gid)</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Email */}
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-primary rounded-full p-2 text-white flex-shrink-0 mt-1">
+                        <FaEnvelope className="h-4 w-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <ClientOnly>
+                          <ProtectedContact 
+                            type="email" 
+                            value="gid.gehlen@nibmtowercranes.com"
+                            className="text-neutral-700 hover:text-primary transition-colors cursor-pointer break-all"
+                          />
+                        </ClientOnly>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Office Information Israel */}
+                <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
+                  <h3 className="text-lg font-semibold text-neutral-900 mb-4">
+                    Kantoorinformatie Israël
+                  </h3>
+                  <div className="space-y-4">
+                    {/* Address */}
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-primary rounded-full p-2 text-white flex-shrink-0 mt-1">
+                        <FaMapMarkerAlt className="h-4 w-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
                         <div className="text-neutral-700 leading-relaxed">
                           <p className="font-medium mb-1">Chanan Trading</p>
                           <p>Kidron 8 Str</p>
@@ -269,121 +307,39 @@ export default function ContactClient() {
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
 
-                {/* Phone and Email Cards - Side by Side */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Phone Card */}
-                  <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
-                    <div className="flex items-start space-x-4">
-                      <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
-                        <FaPhone className="h-5 w-5" />
+                    {/* Phone */}
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-primary rounded-full p-2 text-white flex-shrink-0 mt-1">
+                        <FaPhone className="h-4 w-4" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <h3 className="text-lg font-semibold text-neutral-900 mb-2">
-                          {t('contact.info.phone.title')}
-                        </h3>
-                        <div className="space-y-2">
-                          <div className="flex items-center">
-                            <ClientOnly>
-                              <ProtectedContact 
-                                type="phone" 
-                                value="+31653206004"
-                                className="text-neutral-700 hover:text-primary transition-colors cursor-pointer"
-                              />
-                            </ClientOnly>
-                            <span className="text-neutral-600 text-sm ml-2">(Gid)</span>
-                          </div>
-                          <div className="flex items-center">
-                            <ClientOnly>
-                              <ProtectedContact 
-                                type="phone" 
-                                value="+972505339298"
-                                className="text-neutral-700 hover:text-primary transition-colors cursor-pointer"
-                              />
-                            </ClientOnly>
-                            <span className="text-neutral-600 text-sm ml-2">(Chanan)</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Email Card */}
-                  <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
-                    <div className="flex items-start space-x-4">
-                      <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
-                        <FaEnvelope className="h-5 w-5" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-lg font-semibold text-neutral-900 mb-2">
-                          {t('contact.info.email.title')}
-                        </h3>
-                        <div className="min-w-0 space-y-2">
+                        <div className="flex items-center">
                           <ClientOnly>
                             <ProtectedContact 
-                              type="email" 
-                              value="gid.gehlen@nibmtowercranes.com"
-                              className="text-neutral-700 hover:text-primary transition-colors cursor-pointer break-all"
+                              type="phone" 
+                              value="+972505339298"
+                              className="text-neutral-700 hover:text-primary transition-colors cursor-pointer"
                             />
                           </ClientOnly>
-                          <div>
-                            <ClientOnly>
-                              <ProtectedContact 
-                                type="email" 
-                                value="chanan@chanan-trading.com"
-                                className="text-neutral-700 hover:text-primary transition-colors cursor-pointer break-all"
-                              />
-                            </ClientOnly>
-                          </div>
+                          <span className="text-neutral-600 text-sm ml-2">(Chanan)</span>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
 
-                {/* Office Hours Card - Full Width */}
-                <div className="bg-white p-6 rounded-lg border border-neutral-200 hover:shadow-md transition-shadow">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-primary rounded-full p-3 text-white flex-shrink-0">
-                      <FaClock className="h-5 w-5" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-lg font-semibold text-neutral-900 mb-2">
-                        {t('contact.info.hours.title')}
-                      </h3>
-                      <div className="text-neutral-700 space-y-1 text-sm">
-                        <div className="grid grid-cols-2 gap-4">
-                          <div className="space-y-1">
-                            <div className="flex justify-between">
-                              <span className="font-medium">{t('contact.info.hours.monday')}</span>
-                              <span>8:00 - 17:00</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="font-medium">{t('contact.info.hours.tuesday')}</span>
-                              <span>8:00 - 17:00</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="font-medium">{t('contact.info.hours.wednesday')}</span>
-                              <span>8:00 - 17:00</span>
-                            </div>
-                          </div>
-                          <div className="space-y-1">
-                            <div className="flex justify-between">
-                              <span className="font-medium">{t('contact.info.hours.thursday')}</span>
-                              <span>8:00 - 17:00</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="font-medium">{t('contact.info.hours.friday')}</span>
-                              <span>8:00 - 17:00</span>
-                            </div>
-                            <div className="flex justify-between">
-                              <span className="font-medium text-neutral-500">Weekend</span>
-                              <span className="text-red-600">{t('contact.info.hours.closed')}</span>
-                            </div>
-                          </div>
-                        </div>
+                    {/* Email */}
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-primary rounded-full p-2 text-white flex-shrink-0 mt-1">
+                        <FaEnvelope className="h-4 w-4" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <ClientOnly>
+                          <ProtectedContact 
+                            type="email" 
+                            value="chanan@chanan-trading.com"
+                            className="text-neutral-700 hover:text-primary transition-colors cursor-pointer break-all"
+                          />
+                        </ClientOnly>
                       </div>
                     </div>
                   </div>
