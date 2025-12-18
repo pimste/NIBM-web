@@ -27,6 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/towercranes', priority: 0.9, changeFreq: 'weekly' as const }, // Towercranes
     { path: '/technical-info', priority: 0.7, changeFreq: 'monthly' as const }, // Technical info
     { path: '/contact', priority: 0.8, changeFreq: 'monthly' as const },   // Contact
+    { path: '/blog', priority: 0.8, changeFreq: 'weekly' as const },        // Blog (hidden from menu, SEO only)
     { path: '/privacy-policy', priority: 0.5, changeFreq: 'yearly' as const }, // Privacy policy
     { path: '/terms-of-service', priority: 0.5, changeFreq: 'yearly' as const }, // Terms of service
     { path: '/cookies', priority: 0.5, changeFreq: 'yearly' as const },    // Cookies policy

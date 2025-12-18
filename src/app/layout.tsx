@@ -219,7 +219,7 @@ export const metadata: Metadata = {
     template: '%s | NIBM Tower Cranes',
   },
   description:
-    'NIBM Tower Cranes offers services in sale, rental, transport, assembly, technical support, repairs and maintenance of tower cranes.',
+    'NIBM Tower Cranes specializes in professional tower crane sales, rental, installation, and maintenance services across Europe. Expert solutions for construction projects with offices in Netherlands and Israel. Trusted partner since 1996.',
   keywords: [
     'tower cranes',
     'crane rental',
@@ -271,11 +271,12 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    locale: 'en_NL',
+    locale: 'en_US',
+    alternateLocale: ['nl_NL', 'de_DE'],
     url: 'https://www.nibmvb.eu/',
     siteName: 'NIBM Tower Cranes',
     title: 'NIBM Tower Cranes | Professional Tower Crane Solutions',
-            description: 'Expert tower crane sales and services for construction projects of any scale. Full-service support from planning to dismantling.',
+    description: 'Expert tower crane sales and services for construction projects of any scale. Full-service support from planning to dismantling.',
     images: [{
       url: '/images/optimized/cropped-Top-page2-potain6.webp',
       width: 1200,

@@ -121,23 +121,44 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     }
   }
   
+  // Create a comprehensive description
+  const fullDescription = `${crane.description} Available for ${crane.category.toLowerCase()}. Maximum capacity: ${crane.maxCapacity}, maximum jib length: ${crane.maxJibLength}. Professional tower crane solutions from NIBM.`
+  
   return {
-    title: `${crane.name} - ${crane.type} Tower Crane | NIBM Tower Cranes`,
-    description: `${crane.description.substring(0, 157)}...`,
-    keywords: `${crane.name}, tower crane, ${crane.type}, ${crane.category === 'Sale' ? 'crane for sale' : 'crane rental'}, construction equipment, ${crane.maxCapacity} capacity, ${crane.maxJibLength} jib length`,
+    title: `${crane.name} - ${crane.type} Tower Crane ${crane.category === 'Sale' ? 'For Sale' : 'For Rent'} | NIBM`,
+    description: fullDescription.length > 160 ? fullDescription.substring(0, 157) + '...' : fullDescription,
+    keywords: [
+      `${crane.name}`,
+      'tower crane',
+      `${crane.type.toLowerCase()} tower crane`,
+      crane.category === 'Sale' ? 'tower crane for sale' : 'tower crane rental',
+      'construction equipment',
+      `${crane.maxCapacity} capacity tower crane`,
+      `${crane.maxJibLength} jib tower crane`,
+      'Potain tower crane',
+      'NIBM tower cranes',
+    ],
     alternates: {
-      canonical: `/towercranes/${crane.slug}`,
+      canonical: `/en/towercranes/${crane.slug}`,
     },
     openGraph: {
-      title: `${crane.name} - ${crane.type} Tower Crane | NIBM Tower Cranes`,
-      description: crane.description,
+      title: `${crane.name} - ${crane.type} Tower Crane ${crane.category === 'Sale' ? 'For Sale' : 'For Rent'} | NIBM`,
+      description: fullDescription,
+      url: `https://www.nibmvb.eu/en/towercranes/${crane.slug}`,
+      type: 'product',
       images: [{
-        url: crane.image,
+        url: `https://www.nibmvb.eu${crane.image}`,
         width: 1200,
         height: 630,
-        alt: crane.name,
+        alt: `${crane.name} - ${crane.type} Tower Crane`,
       }],
-    }
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${crane.name} - ${crane.type} Tower Crane ${crane.category === 'Sale' ? 'For Sale' : 'For Rent'}`,
+      description: crane.description,
+      images: [`https://www.nibmvb.eu${crane.image}`],
+    },
   }
 }
 
