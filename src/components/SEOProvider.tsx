@@ -63,11 +63,13 @@ export function SEOProvider() {
   };
 
   // Structured data for BreadcrumbList
-  const breadcrumbSchema = {
+  // Only generate breadcrumbs if not on homepage
+  const breadcrumbItems = generateBreadcrumbs(pathname)
+  const breadcrumbSchema = breadcrumbItems.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": generateBreadcrumbs(pathname)
-  };
+    "itemListElement": breadcrumbItems
+  } : null;
 
   // Structured data for Local Business
   const localBusinessSchema = {
@@ -176,12 +178,14 @@ export function SEOProvider() {
       />
 
       {/* Breadcrumb Structured Data */}
-      <Script
-        id="breadcrumb-schema"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-        strategy="afterInteractive"
-      />
+      {breadcrumbSchema && (
+        <Script
+          id="breadcrumb-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+          strategy="afterInteractive"
+        />
+      )}
 
       {/* Local Business Structured Data */}
       <Script
@@ -207,23 +211,39 @@ export function SEOProvider() {
 
 // Helper function to generate breadcrumbs from pathname
 function generateBreadcrumbs(pathname) {
-  if (!pathname) return [];
+  if (!pathname || pathname === '/' || pathname === '') return [];
 
   const paths = pathname.split('/').filter(Boolean);
-  let accumPath = '';
-
-  // Always start with home
+  
+  // Don't generate breadcrumbs for homepage
+  if (paths.length === 0) return [];
+  
+  // Check if first segment is a language code
+  const supportedLanguages = ['en', 'nl', 'de'];
+  const isFirstSegmentLanguage = supportedLanguages.includes(paths[0]);
+  const language = isFirstSegmentLanguage ? paths[0] : 'en';
+  
+  // Don't generate breadcrumbs if only language segment (homepage)
+  if (isFirstSegmentLanguage && paths.length === 1) return [];
+  
+  // Build path with language prefix
+  let accumPath = `/${language}`;
+  
+  // Always start with home (with language prefix)
   const breadcrumbs = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://www.nibmvb.eu/"
+      "item": `https://www.nibmvb.eu/${language}`
     }
   ];
 
+  // Process content segments (skip language prefix)
+  const contentSegments = isFirstSegmentLanguage ? paths.slice(1) : paths;
+  
   // Create a readable name from each path segment
-  paths.forEach((path, index) => {
+  contentSegments.forEach((path, index) => {
     accumPath += '/' + path;
     
     // Format the path segment into a readable name

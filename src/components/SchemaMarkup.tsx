@@ -37,32 +37,55 @@ export function SchemaMarkup({
     segments = segments.slice(1)
   }
   
-  // Generate breadcrumb items
-  const breadcrumbItems = segments.map((segment, index) => {
-    // Format the segment for display (replace hyphens with spaces and capitalize)
-    const name = segment
-      .split('-')
-      .map(part => part.charAt(0).toUpperCase() + part.slice(1))
-      .join(' ')
-    
-    // Create the URL for this breadcrumb (include all segments up to this one)
-    const url = `${siteUrl}/${segments.slice(0, index + 1).join('/')}`
-    
-    return {
-      '@type': 'ListItem',
-      position: index + 2, // +2 because we have Home at position 1
-      name,
-      item: url
-    }
-  })
+  // Determine language from pathname
+  const supportedLanguages = ['en', 'nl', 'de']
+  const isFirstSegmentLanguage = segments.length > 0 && supportedLanguages.includes(segments[0])
+  const language = isFirstSegmentLanguage ? segments[0] : 'en'
+  const contentSegments = isFirstSegmentLanguage ? segments.slice(1) : segments
   
-  // Add Home as the first breadcrumb
-  breadcrumbItems.unshift({
-    '@type': 'ListItem',
-    position: 1,
-    name: 'Home',
-    item: siteUrl
-  })
+  // Don't generate breadcrumbs if only language segment (homepage)
+  if (isFirstSegmentLanguage && contentSegments.length === 0) {
+    // No breadcrumbs needed
+  } else if (contentSegments.length > 0) {
+    // Generate breadcrumb items
+    const breadcrumbItems = []
+    
+    // Add Home as the first breadcrumb (with language prefix)
+    breadcrumbItems.push({
+      '@type': 'ListItem',
+      position: 1,
+      name: 'Home',
+      item: `${siteUrl}/${language}`
+    })
+    
+    // Build path with language prefix
+    let accumPath = `/${language}`
+    
+    // Generate breadcrumb items for content segments
+    contentSegments.forEach((segment, index) => {
+      accumPath += '/' + segment
+      
+      // Format the segment for display (replace hyphens with spaces and capitalize)
+      const name = segment
+        .split('-')
+        .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(' ')
+      
+      breadcrumbItems.push({
+        '@type': 'ListItem',
+        position: index + 2, // +2 because we have Home at position 1
+        name,
+        item: `${siteUrl}${accumPath}`
+      })
+    })
+    
+    // Add breadcrumbs to schema
+    schemaData['@graph'].push({
+      '@type': 'BreadcrumbList',
+      '@id': `${siteUrl}${pathname}#breadcrumb`,
+      itemListElement: breadcrumbItems
+    })
+  }
   
   // Create the schema.org JSON-LD
   const schemaData = {
@@ -124,14 +147,6 @@ export function SchemaMarkup({
     ]
   }
   
-  // Add breadcrumbs only if we're not on the homepage
-  if (segments.length > 0) {
-    schemaData['@graph'].push({
-      '@type': 'BreadcrumbList',
-      '@id': `${siteUrl}${pathname}#breadcrumb`,
-      itemListElement: breadcrumbItems
-    })
-  }
   
   return (
     <Script id="schema-org" type="application/ld+json" strategy="afterInteractive">
