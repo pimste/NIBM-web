@@ -13,7 +13,7 @@ const blogPosts: { [key: string]: {
   'potain-mdt-178-vs-mc-85-b-comparison': {
     title: 'Potain MDT 178 vs MC 85 B: Which Tower Crane is Right for Your Construction Project?',
     description: 'Compare Potain MDT 178 and MC 85 B tower cranes. Understand the differences between flat-top and top-slewing designs, capacity, jib length, and which model suits your construction project requirements.',
-    date: '2024-01-15',
+    date: '2025-12-01',
     content: (
       <>
         <p className="text-lg text-neutral-700 mb-6">
@@ -113,7 +113,7 @@ const blogPosts: { [key: string]: {
   'potain-mdt-series-specifications-guide': {
     title: 'Potain MDT Series Specifications: Complete Guide to Flat-Top Tower Cranes',
     description: 'Comprehensive guide to Potain MDT series flat-top tower cranes. Learn about MDT 178, MDT 189, MDT 219 J10, and MDT 268 J12 specifications, capacities, jib lengths, and technical features.',
-    date: '2024-01-20',
+    date: '2025-12-05',
     content: (
       <>
         <p className="text-lg text-neutral-700 mb-6">
@@ -246,7 +246,7 @@ const blogPosts: { [key: string]: {
   'how-to-choose-right-potain-tower-crane': {
     title: 'How to Choose the Right Potain Tower Crane: Capacity, Jib Length, and Project Requirements',
     description: 'Learn how to select the right Potain tower crane for your construction project. Understand capacity requirements, jib length calculations, project specifications, and key selection factors.',
-    date: '2024-01-25',
+    date: '2025-12-10',
     content: (
       <>
         <p className="text-lg text-neutral-700 mb-6">
@@ -420,7 +420,7 @@ const blogPosts: { [key: string]: {
   'potain-mc-vs-mdt-vs-mct-series-differences': {
     title: 'Potain MC vs MDT vs MCT Series: Understanding the Differences and Best Use Cases',
     description: 'Compare Potain MC, MDT, and MCT tower crane series. Learn the differences between top-slewing and flat-top designs, capacity ranges, and which series suits different construction project types.',
-    date: '2024-01-30',
+    date: '2025-12-15',
     content: (
       <>
         <p className="text-lg text-neutral-700 mb-6">

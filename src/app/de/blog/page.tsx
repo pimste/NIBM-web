@@ -8,25 +8,25 @@ const blogPosts = [
     slug: 'potain-mdt-178-vs-mc-85-b-comparison',
     title: 'Potain MDT 178 vs MC 85 B: Welcher Turmkran Passt zu Ihrem Bauprojekt?',
     description: 'Vergleichen Sie Potain MDT 178 und MC 85 B Turmkrane. Verstehen Sie die Unterschiede zwischen Flachdach- und Oberschwenk-Konstruktionen, Kapazität, Auslegerlänge und welches Modell zu Ihren Bauprojektanforderungen passt.',
-    date: '2024-01-15',
+    date: '2025-12-01',
   },
   {
     slug: 'potain-mdt-series-specifications-guide',
     title: 'Potain MDT Serie Spezifikationen: Vollständiger Leitfaden für Flachdach-Turmkrane',
     description: 'Umfassender Leitfaden für Potain MDT Serie Flachdach-Turmkrane. Erfahren Sie mehr über MDT 178, MDT 189, MDT 219 J10 und MDT 268 J12 Spezifikationen, Kapazitäten, Auslegerlängen und technische Merkmale.',
-    date: '2024-01-20',
+    date: '2025-12-05',
   },
   {
     slug: 'how-to-choose-right-potain-tower-crane',
     title: 'Wie Wählt Man den Richtigen Potain Turmkran: Kapazität, Auslegerlänge und Projektanforderungen',
     description: 'Erfahren Sie, wie Sie den richtigen Potain Turmkran für Ihr Bauprojekt auswählen. Verstehen Sie Kapazitätsanforderungen, Auslegerlängenberechnungen, Projektspezifikationen und wichtige Auswahlfaktoren.',
-    date: '2024-01-25',
+    date: '2025-12-10',
   },
   {
     slug: 'potain-mc-vs-mdt-vs-mct-series-differences',
     title: 'Potain MC vs MDT vs MCT Serie: Unterschiede Verstehen und Beste Anwendungsfälle',
     description: 'Vergleichen Sie Potain MC, MDT und MCT Turmkran-Serien. Lernen Sie die Unterschiede zwischen Oberschwenk- und Flachdach-Konstruktionen, Kapazitätsbereiche und welche Serie für verschiedene Bauprojekttypen geeignet ist.',
-    date: '2024-01-30',
+    date: '2025-12-15',
   },
 ]
 

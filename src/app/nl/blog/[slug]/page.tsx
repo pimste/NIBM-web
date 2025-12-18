@@ -12,7 +12,7 @@ const blogPosts: { [key: string]: {
   'potain-mdt-178-vs-mc-85-b-comparison': {
     title: 'Potain MDT 178 vs MC 85 B: Welke Torenkraan Past bij Uw Bouwproject?',
     description: 'Vergelijk Potain MDT 178 en MC 85 B torenkranen. Begrijp de verschillen tussen platte bovenkant en bovenkant draaiende ontwerpen, capaciteit, gieklengte en welk model geschikt is voor uw bouwproject.',
-    date: '2024-01-15',
+    date: '2025-12-01',
     content: (
       <>
         <p className="text-lg text-neutral-700 mb-6">
@@ -62,7 +62,7 @@ const blogPosts: { [key: string]: {
   'potain-mdt-series-specifications-guide': {
     title: 'Potain MDT Serie Specificaties: Complete Gids voor Platte Bovenkant Torenkranen',
     description: 'Uitgebreide gids voor Potain MDT serie platte bovenkant torenkranen. Leer over MDT 178, MDT 189, MDT 219 J10 en MDT 268 J12 specificaties, capaciteiten, gieklengtes en technische kenmerken.',
-    date: '2024-01-20',
+    date: '2025-12-05',
     content: (
       <>
         <p className="text-lg text-neutral-700 mb-6">
@@ -113,7 +113,7 @@ const blogPosts: { [key: string]: {
   'how-to-choose-right-potain-tower-crane': {
     title: 'Hoe Kiest U de Juiste Potain Torenkraan: Capaciteit, Gieklengte en Projectvereisten',
     description: 'Leer hoe u de juiste Potain torenkraan selecteert voor uw bouwproject. Begrijp capaciteitsvereisten, gieklengte berekeningen, project specificaties en belangrijke selectiefactoren.',
-    date: '2024-01-25',
+    date: '2025-12-10',
     content: (
       <>
         <p className="text-lg text-neutral-700 mb-6">
@@ -146,7 +146,7 @@ const blogPosts: { [key: string]: {
   'potain-mc-vs-mdt-vs-mct-series-differences': {
     title: 'Potain MC vs MDT vs MCT Serie: Verschillen Begrijpen en Beste Toepassingen',
     description: 'Vergelijk Potain MC, MDT en MCT torenkraan series. Leer de verschillen tussen bovenkant draaiende en platte bovenkant ontwerpen, capaciteitsbereiken en welke serie geschikt is voor verschillende bouwprojecttypen.',
-    date: '2024-01-30',
+    date: '2025-12-15',
     content: (
       <>
         <p className="text-lg text-neutral-700 mb-6">
