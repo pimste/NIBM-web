@@ -21,7 +21,7 @@ export function ContactPageSchema({
   addressLocality = 'Nuth',
   postalCode = '6361 TG',
   addressCountry = 'Netherlands',
-  telephone = '+31653206004',
+  telephone = '+31 6 53206004',
   email = 'gid.gehlen@nibmtowercranes.com'
 }: ContactPageSchemaProps) {
   const pathname = usePathname() || ''
@@ -50,7 +50,32 @@ export function ContactPageSchema({
       telephone: telephone,
       email: email,
       contactType: 'customer service',
-      areaServed: ['Netherlands', 'Germany', 'Belgium', 'Europe'],
+      areaServed: [
+        {
+          '@type': 'Country',
+          name: 'Netherlands'
+        },
+        {
+          '@type': 'Country',
+          name: 'Germany'
+        },
+        {
+          '@type': 'Country',
+          name: 'Belgium'
+        },
+        {
+          '@type': 'GeoCircle',
+          geoMidpoint: {
+            '@type': 'GeoCoordinates',
+            latitude: 50.8951,
+            longitude: 5.8952
+          },
+          geoRadius: {
+            '@type': 'Distance',
+            name: 'Europe'
+          }
+        }
+      ],
       availableLanguage: ['English', 'Dutch', 'German'],
       address: {
         '@type': 'PostalAddress',

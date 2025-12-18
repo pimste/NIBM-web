@@ -9,7 +9,7 @@ export const generateMetadata = async (): Promise<Metadata> => {
   // Define base metadata for home page
   const baseMetadata: Metadata = {
     title: 'NIBM Tower Cranes | Professional Tower Crane Sales, Rental & Services',
-    description: 'NIBM Tower Cranes specializes in professional tower crane sales, rental, installation, and maintenance services across Europe. Expert Potain tower crane solutions for construction projects. Offices in Netherlands and Israel. Trusted partner since 1996.',
+    description: 'NIBM Tower Cranes specializes in professional tower crane sales, rental, installation, and maintenance services in Netherlands, Germany, Belgium, and across Europe. Based in Nuth, Limburg, we provide expert Potain tower crane solutions for construction projects. Offices in Netherlands and Israel. Trusted partner since 1996.',
     openGraph: {
       title: 'NIBM Tower Cranes | Professional Tower Crane Solutions',
       description: 'Expert tower crane sales, rental, installation, and maintenance services across Europe. Professional Potain tower crane solutions for your construction projects.',

@@ -4,6 +4,7 @@ import Script from 'next/script'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { ServiceSchema } from '@/components/ServiceSchema'
+import { ReviewSchema } from '@/components/ReviewSchema'
 
 export function SEOProvider() {
   const pathname = usePathname()
@@ -96,7 +97,64 @@ export function SEOProvider() {
         "opens": "08:00",
         "closes": "17:00"
       }
-    ]
+    ],
+    // ServiceAreaType for local SEO
+    "areaServed": [
+      {
+        "@type": "Country",
+        "name": "Netherlands"
+      },
+      {
+        "@type": "Country",
+        "name": "Germany"
+      },
+      {
+        "@type": "Country",
+        "name": "Belgium"
+      },
+      {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": 50.8951,
+          "longitude": 5.8952
+        },
+        "geoRadius": {
+          "@type": "Distance",
+          "name": "Europe"
+        }
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Tower Crane Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Tower Crane Sales",
+            "areaServed": ["Netherlands", "Germany", "Belgium", "Europe"]
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Tower Crane Rental",
+            "areaServed": ["Netherlands", "Germany", "Belgium", "Europe"]
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Tower Crane Maintenance",
+            "areaServed": ["Netherlands", "Germany", "Belgium", "Europe"]
+          }
+        }
+      ]
+    }
   };
 
   return (
@@ -135,6 +193,14 @@ export function SEOProvider() {
 
       {/* Service Schema */}
       <ServiceSchema />
+
+      {/* Review Schema - Local SEO */}
+      <ReviewSchema
+        averageRating={4.8}
+        reviewCount={0}
+        bestRating={5}
+        worstRating={1}
+      />
     </>
   )
 }

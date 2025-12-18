@@ -22,7 +22,7 @@ export function SchemaMarkup({
   addressLocality = 'Nuth',
   postalCode = '6361 TG',
   addressCountry = 'Netherlands',
-  telephone = '+31653206004',
+  telephone = '+31 6 53206004',
   email = 'gid.gehlen@nibmtowercranes.com',
   siteUrl = 'https://www.nibmvb.eu'
 }: SchemaMarkupProps) {

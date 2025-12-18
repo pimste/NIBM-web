@@ -5,7 +5,7 @@ export async function generateMetadata(): Promise<Metadata> {
   // Define base metadata for this specific page
   const baseMetadata: Metadata = {
     title: 'About Us | NIBM Tower Cranes - Your Trusted Tower Crane Partner Since 1996',
-    description: 'Learn about NIBM Tower Cranes, your trusted partner for tower crane sales and services since 1996. With offices in Netherlands and Israel, we provide expert tower crane solutions across Europe. Discover our history, mission, and commitment to excellence.',
+    description: 'Learn about NIBM Tower Cranes, your trusted partner for tower crane sales and services since 1996. Based in Nuth, Limburg, Netherlands, with offices in Netherlands and Israel, we provide expert tower crane solutions across Europe. Discover our history, mission, and commitment to excellence.',
     openGraph: {
       title: 'About NIBM Tower Cranes - Your Trusted Partner Since 1996',
       description: 'Your trusted partner for tower crane sales and services since 1996. Expert solutions across Europe with offices in Netherlands and Israel.',
