@@ -2,18 +2,21 @@ import { Metadata } from 'next'
 import { generatePageMetadata } from '../../../page-metadata'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { ArticleSchema } from '@/components/ArticleSchema'
 
-// Blog posts data
+// Blog posts data with related posts
 const blogPosts: { [key: string]: { 
   title: string
   description: string
   date: string
   content: React.ReactNode
+  relatedPosts?: string[]
 } } = {
   'potain-mdt-178-vs-mc-85-b-comparison': {
     title: 'Potain MDT 178 vs MC 85 B: Which Tower Crane is Right for Your Construction Project?',
     description: 'Compare Potain MDT 178 and MC 85 B tower cranes. Understand the differences between flat-top and top-slewing designs, capacity, jib length, and which model suits your construction project requirements.',
     date: '2025-12-01',
+    relatedPosts: ['potain-mdt-series-specifications-guide', 'how-to-choose-right-potain-tower-crane', 'potain-mc-vs-mdt-vs-mct-series-differences'],
     content: (
       <>
         <p className="text-lg text-neutral-700 mb-6">
@@ -107,6 +110,17 @@ const blogPosts: { [key: string]: {
         <p className="text-neutral-700 mb-6">
           The choice between Potain MDT 178 and MC 85 B depends on your specific project requirements. The MDT 178 offers greater capacity and reach, making it suitable for larger projects, while the MC 85 B provides reliable performance for medium-scale construction needs. Evaluate your project's lifting requirements, site constraints, and operational preferences to make an informed decision.
         </p>
+        <p className="text-neutral-700 mb-6">
+          For more information about these models, visit our{' '}
+          <Link href="/en/towercranes/potain-mdt-178" className="text-primary hover:underline font-medium">
+            Potain MDT 178 product page
+          </Link>
+          {' '}or our{' '}
+          <Link href="/en/towercranes/potain-mc-85-b" className="text-primary hover:underline font-medium">
+            Potain MC 85 B product page
+          </Link>
+          .
+        </p>
       </>
     ),
   },
@@ -114,6 +128,7 @@ const blogPosts: { [key: string]: {
     title: 'Potain MDT Series Specifications: Complete Guide to Flat-Top Tower Cranes',
     description: 'Comprehensive guide to Potain MDT series flat-top tower cranes. Learn about MDT 178, MDT 189, MDT 219 J10, and MDT 268 J12 specifications, capacities, jib lengths, and technical features.',
     date: '2025-12-05',
+    relatedPosts: ['potain-mdt-178-vs-mc-85-b-comparison', 'how-to-choose-right-potain-tower-crane', 'potain-mc-vs-mdt-vs-mct-series-differences'],
     content: (
       <>
         <p className="text-lg text-neutral-700 mb-6">
@@ -240,6 +255,18 @@ const blogPosts: { [key: string]: {
         <p className="text-neutral-700 mb-6">
           The Potain MDT series offers a comprehensive range of flat-top tower cranes suitable for various construction applications. From the versatile MDT 178 to the high-capacity MDT 268 J12, these models provide construction professionals with options to match their specific project requirements. Understanding the specifications and capabilities of each model enables informed decision-making for construction projects.
         </p>
+        <p className="text-neutral-700 mb-6">
+          Explore our available MDT series models:{' '}
+          <Link href="/en/towercranes/potain-mdt-178" className="text-primary hover:underline font-medium">MDT 178</Link>
+          {', '}
+          <Link href="/en/towercranes/potain-mdt-189" className="text-primary hover:underline font-medium">MDT 189</Link>
+          {', '}
+          <Link href="/en/towercranes/potain-mdt-219-j10" className="text-primary hover:underline font-medium">MDT 219 J10</Link>
+          {', and '}
+          <Link href="/en/towercranes/potain-mdt-268-j12" className="text-primary hover:underline font-medium">MDT 268 J12</Link>
+          {'. '}
+          <Link href="/en/towercranes" className="text-primary hover:underline font-medium">View all available tower cranes</Link>.
+        </p>
       </>
     ),
   },
@@ -247,6 +274,7 @@ const blogPosts: { [key: string]: {
     title: 'How to Choose the Right Potain Tower Crane: Capacity, Jib Length, and Project Requirements',
     description: 'Learn how to select the right Potain tower crane for your construction project. Understand capacity requirements, jib length calculations, project specifications, and key selection factors.',
     date: '2025-12-10',
+    relatedPosts: ['potain-mdt-178-vs-mc-85-b-comparison', 'potain-mdt-series-specifications-guide', 'potain-mc-vs-mdt-vs-mct-series-differences'],
     content: (
       <>
         <p className="text-lg text-neutral-700 mb-6">
@@ -414,6 +442,11 @@ const blogPosts: { [key: string]: {
         <p className="text-neutral-700 mb-6">
           Choosing the right Potain tower crane requires careful analysis of capacity requirements, jib length needs, and project-specific factors. By systematically evaluating these elements and consulting load charts, construction professionals can select cranes that meet their project requirements while maintaining safety margins and operational efficiency. Always consult with qualified professionals to ensure proper crane selection and installation planning.
         </p>
+        <p className="text-neutral-700 mb-6">
+          Browse our{' '}
+          <Link href="/en/towercranes" className="text-primary hover:underline font-medium">complete tower crane catalog</Link>
+          {' '}to find the right model for your project, or contact us for expert guidance on crane selection.
+        </p>
       </>
     ),
   },
@@ -421,6 +454,7 @@ const blogPosts: { [key: string]: {
     title: 'Potain MC vs MDT vs MCT Series: Understanding the Differences and Best Use Cases',
     description: 'Compare Potain MC, MDT, and MCT tower crane series. Learn the differences between top-slewing and flat-top designs, capacity ranges, and which series suits different construction project types.',
     date: '2025-12-15',
+    relatedPosts: ['potain-mdt-178-vs-mc-85-b-comparison', 'potain-mdt-series-specifications-guide', 'how-to-choose-right-potain-tower-crane'],
     content: (
       <>
         <p className="text-lg text-neutral-700 mb-6">
@@ -638,6 +672,24 @@ const blogPosts: { [key: string]: {
         <p className="text-neutral-700 mb-6">
           The Potain MC, MDT, and MCT series each serve distinct construction needs. MC series provides reliable top-slewing performance for medium projects, MDT series offers high-capacity flat-top solutions for large projects, and MCT series delivers compact flat-top options for space-constrained sites. Understanding these differences enables construction professionals to select the most appropriate series based on project requirements, site conditions, and operational needs.
         </p>
+        <p className="text-neutral-700 mb-6">
+          Explore our available models: MC series including{' '}
+          <Link href="/en/towercranes/potain-mc-85-b" className="text-primary hover:underline font-medium">MC 85 B</Link>
+          {', '}
+          <Link href="/en/towercranes/potain-mc-125" className="text-primary hover:underline font-medium">MC 125</Link>
+          {', and '}
+          <Link href="/en/towercranes/potain-mc-175-b" className="text-primary hover:underline font-medium">MC 175 B</Link>
+          {'; MDT series including '}
+          <Link href="/en/towercranes/potain-mdt-178" className="text-primary hover:underline font-medium">MDT 178</Link>
+          {' and '}
+          <Link href="/en/towercranes/potain-mdt-189" className="text-primary hover:underline font-medium">MDT 189</Link>
+          {'; and MCT series including '}
+          <Link href="/en/towercranes/potain-mct-88" className="text-primary hover:underline font-medium">MCT 88</Link>
+          {' and '}
+          <Link href="/en/towercranes/potain-mct-135" className="text-primary hover:underline font-medium">MCT 135</Link>
+          {'. '}
+          <Link href="/en/towercranes" className="text-primary hover:underline font-medium">View all available tower cranes</Link>.
+        </p>
       </>
     ),
   },
@@ -701,27 +753,87 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <article className="bg-white py-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <header className="mb-8">
-            <h1 className="text-4xl font-bold text-neutral-900 mb-4">
-              {post.title}
-            </h1>
-            <time className="text-neutral-500 text-sm">
-              {new Date(post.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </time>
-          </header>
-          
-          <div className="prose prose-lg max-w-none text-neutral-700">
-            {post.content}
+    <>
+      <ArticleSchema
+        title={post.title}
+        description={post.description}
+        date={post.date}
+        url={`https://www.nibmvb.eu/en/blog/${params.slug}`}
+      />
+      <article className="bg-white py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <header className="mb-8">
+              <h1 className="text-4xl font-bold text-neutral-900 mb-4">
+                {post.title}
+              </h1>
+              <time className="text-neutral-500 text-sm">
+                {new Date(post.date).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+            </header>
+            
+            <div className="prose prose-lg max-w-none text-neutral-700">
+              {post.content}
+            </div>
+
+            {/* Author Bio Section - E-E-A-T */}
+            <div className="mt-12 pt-8 border-t border-neutral-200">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0">
+                  <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center text-white text-xl font-bold">
+                    NG
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-neutral-900 mb-2">NIBM Tower Cranes</h3>
+                  <p className="text-neutral-700 text-sm mb-2">
+                    Expert tower crane specialists with over 25 years of experience in sales, rental, and maintenance. 
+                    Our team provides professional guidance on tower crane selection, specifications, and project planning 
+                    for construction projects across Europe.
+                  </p>
+                  <p className="text-neutral-600 text-sm">
+                    <Link href="/en/about" className="text-primary hover:underline">Learn more about our expertise</Link>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Related Articles Section - Topical Authority */}
+            {post.relatedPosts && post.relatedPosts.length > 0 && (
+              <div className="mt-12 pt-8 border-t border-neutral-200">
+                <h2 className="text-2xl font-bold text-neutral-900 mb-6">Related Articles</h2>
+                <div className="grid md:grid-cols-3 gap-6">
+                  {post.relatedPosts.map((relatedSlug) => {
+                    const relatedPost = blogPosts[relatedSlug]
+                    if (!relatedPost) return null
+                    return (
+                      <Link
+                        key={relatedSlug}
+                        href={`/en/blog/${relatedSlug}`}
+                        className="block p-4 border border-neutral-200 rounded-lg hover:border-primary hover:shadow-md transition-all group"
+                      >
+                        <h3 className="text-lg font-semibold text-neutral-900 mb-2 group-hover:text-primary transition-colors">
+                          {relatedPost.title}
+                        </h3>
+                        <p className="text-sm text-neutral-600 line-clamp-2">
+                          {relatedPost.description}
+                        </p>
+                        <span className="text-primary text-sm font-medium mt-2 inline-block group-hover:underline">
+                          Read more →
+                        </span>
+                      </Link>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </>
   )
 }

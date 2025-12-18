@@ -64,6 +64,16 @@ export function generatePageMetadata(
     alternates[lang] = `${siteUrl}${alternatePath}`
   })
   
+  // Add x-default pointing to English version (best practice for international SEO)
+  let defaultPath = ''
+  const pathWithoutLang = hasLangPrefix 
+    ? '/' + pathSegments.slice(1).join('/')
+    : pathname
+  if (pathWithoutLang && pathWithoutLang !== '/') {
+    defaultPath = pathWithoutLang
+  }
+  alternates['x-default'] = `${siteUrl}${defaultPath}`
+  
   return {
     ...baseMetadata,
     alternates: {
