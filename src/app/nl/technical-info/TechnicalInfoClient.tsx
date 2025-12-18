@@ -114,6 +114,24 @@ const technicalDocuments: Array<{
     category: 'Specificaties',
     url: '/technical docs/ilovepdf_merged.pdf',
   },
+  {
+    id: 12,
+    title: 'Bevestigingshoeken P 63A / P 800B en R 63A / R 800C - Verbeterde Haakhoogtes voor 2m Masten',
+    description: 'Nieuw aanbod van bevestigingshoeken voor masten met een doorsnede van 2m (K600) en 2.45m (K800). Bevat P 63A / P 800B (niet-herbruikbaar) en R 63A / R 800C (herbruikbaar) versies. Deze versterkte bevestigingshoeken verbeteren aanzienlijk de haakhoogtes van kranen op 2m masten, vooral wanneer gecombineerd met de nieuwe KRM 6410B versterkte mast.',
+    fileSize: '306 KB',
+    fileType: 'PDF',
+    category: 'Specificaties',
+    url: '/technical docs/ Fixing angles P 63A:P 800 and R 63A:R 800C.pdf',
+  },
+  {
+    id: 13,
+    title: 'KRM 6410B Mast Sectie - Versterkte 10m Sectie voor 2m Masten',
+    description: 'Nieuwe 10m versterkte, monoblock, niet-telescoop mast sectie voor 2m (K600) type masten. Lengte: 10m, Gewicht: 7.100 kg. Ontwikkeld samen met de nieuwe ZX 640 kruisvormige basis en nieuwe bevestigingshoeken. In combinatie met nieuwe bases verbetert het de haakhoogtes van kranen op 2m masten. Kan twee 5m mast secties of één 10m mast sectie van lagere sterkte vervangen.',
+    fileSize: '467 KB',
+    fileType: 'PDF',
+    category: 'Specificaties',
+    url: '/technical docs/Special towersection KRM 6410B.pdf',
+  },
 ]
 
 // Dutch FAQs about tower cranes

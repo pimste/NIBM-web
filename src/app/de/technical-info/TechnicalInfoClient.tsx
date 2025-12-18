@@ -114,6 +114,24 @@ const technicalDocuments: Array<{
     category: 'Spezifikationen',
     url: '/technical docs/ilovepdf_merged.pdf',
   },
+  {
+    id: 12,
+    title: 'Befestigungswinkel P 63A / P 800B und R 63A / R 800C - Verbesserte Hakenhöhen für 2m Masten',
+    description: 'Neues Befestigungswinkel-Angebot für Masten mit 2m (K600) und 2.45m (K800) Querschnitt. Enthält P 63A / P 800B (nicht wiederverwendbar) und R 63A / R 800C (wiederverwendbar) Versionen. Diese verstärkten Befestigungswinkel verbessern erheblich die Hakenhöhen von Kränen auf 2m Masten, insbesondere in Verbindung mit dem neuen KRM 6410B verstärkten Mast.',
+    fileSize: '306 KB',
+    fileType: 'PDF',
+    category: 'Spezifikationen',
+    url: '/technical docs/ Fixing angles P 63A:P 800 and R 63A:R 800C.pdf',
+  },
+  {
+    id: 13,
+    title: 'KRM 6410B Mast Sektion - Verstärkte 10m Sektion für 2m Masten',
+    description: 'Neue 10m verstärkte, monoblock, nicht-teleskopierbare Mast Sektion für 2m (K600) Typ Masten. Länge: 10m, Gewicht: 7.100 kg. Entwickelt zusammen mit der neuen ZX 640 kreuzförmigen Basis und neuen Befestigungswinkeln. In Kombination mit neuen Basen verbessert es die Hakenhöhen von Kränen auf 2m Masten. Kann zwei 5m Mast Sektionen oder eine 10m Mast Sektion geringerer Festigkeit ersetzen.',
+    fileSize: '467 KB',
+    fileType: 'PDF',
+    category: 'Spezifikationen',
+    url: '/technical docs/Special towersection KRM 6410B.pdf',
+  },
 ]
 
 // German FAQs about tower cranes

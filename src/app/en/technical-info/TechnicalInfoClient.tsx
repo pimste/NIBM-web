@@ -114,6 +114,24 @@ const technicalDocuments: Array<{
     category: 'Specifications',
     url: '/technical docs/ilovepdf_merged.pdf',
   },
+  {
+    id: 12,
+    title: 'Fixing Angles P 63A / P 800B and R 63A / R 800C - Enhanced Hook Heights for 2m Masts',
+    description: 'New fixing angle offer for 2m (K600) and 2.45m (K800) cross-section masts. Includes P 63A / P 800B (non-reusable) and R 63A / R 800C (reusable) versions. These reinforced fixing angles significantly improve hook heights of cranes on 2m masts, especially when associated with the new KRM 6410B reinforced mast.',
+    fileSize: '306 KB',
+    fileType: 'PDF',
+    category: 'Specifications',
+    url: '/technical docs/ Fixing angles P 63A:P 800 and R 63A:R 800C.pdf',
+  },
+  {
+    id: 13,
+    title: 'KRM 6410B Mast Section - Reinforced 10m Section for 2m Masts',
+    description: 'New 10m reinforced, monoblock, non-telescoping mast section for 2m (K600) type masts. Length: 10m, Weight: 7,100 kg. Developed alongside the new ZX 640 cross-shaped base and new fixing angles. Combined with new bases, it improves hook heights of cranes on 2m masts. Can replace two 5m mast sections or one 10m mast section of lower strength.',
+    fileSize: '467 KB',
+    fileType: 'PDF',
+    category: 'Specifications',
+    url: '/technical docs/Special towersection KRM 6410B.pdf',
+  },
 ]
 
 // English FAQs about tower cranes
