@@ -54,11 +54,6 @@ const DynamicServicesSection = dynamic(() => import('@/components/ServicesSectio
   ssr: false
 })
 
-const DynamicTestimonialsSection = dynamic(() => import('@/components/TestimonialsSection'), {
-  loading: () => <LoadingFallback />,
-  ssr: true
-})
-
 const DynamicCtaSection = dynamic(() => import('@/components/CtaSection'), {
   loading: () => <LoadingFallback />,
   ssr: true
@@ -70,7 +65,6 @@ export default function EnglishHome() {
       <HeroSection />
       <DynamicFeaturedCranes />
       <DynamicServicesSection />
-      <DynamicTestimonialsSection />
       <DynamicCtaSection />
     </main>
   )
