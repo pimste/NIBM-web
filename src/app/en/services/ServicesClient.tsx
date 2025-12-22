@@ -75,7 +75,7 @@ export default function ServicesClient() {
       titleFallback: 'Equipment Assessment & Evaluation',
       descKey: 'services.rent.desc',
       descFallback: 'Comprehensive technical inspections of crane condition and construction site evaluations.',
-      image: '/images/optimized/sunset-TC.webp',
+      image: '/images/optimized/8e29c1f0b76a140fef41adb8099f60e7c49c22f52d.webp',
       featureKeys: ['services.rent.feature1', 'services.rent.feature2', 'services.rent.feature3', 'services.rent.feature4', 'services.rent.feature5'],
       featureFallbacks: ['Detailed equipment condition assessments', 'Construction site evaluation for optimal crane selection', 'Safety compliance and operational assessments', 'Detailed reporting and recommendations', 'Request a customized quote']
     },
@@ -93,7 +93,7 @@ export default function ServicesClient() {
       titleFallback: 'Mounting & Installation',
       descKey: 'services.mounting.desc',
       descFallback: 'We have professional assemblers for assembly and disassembly.',
-      image: '/images/optimized/sunset-TC-2.webp',
+      image: '/images/optimized/potain.62cee7692598b.webp',
       featureKeys: ['services.mounting.feature2', 'services.mounting.feature3', 'services.mounting.feature4', 'services.mounting.feature5'],
       featureFallbacks: ['Compliance with all safety regulations', 'Inspection before commissioning', 'Efficient dismantling services', 'Comprehensive documentation']
     }

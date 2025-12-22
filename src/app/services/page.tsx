@@ -43,7 +43,7 @@ export default function Services() {
       id: 'transport',
       title: t('services.transport.title') || 'Transport & Logistics',
       description: t('services.transport.desc') || 'We handle the entire transport of your tower crane, from our storage to your construction site. No hassle, everything is handled professionally.',
-      image: '/images/optimized/sunset-TC.webp',
+      image: '/images/optimized/8e29c1f0b76a140fef41adb8099f60e7c49c22f52d.webp',
       features: [
         t('services.transport.feature4') || 'Complete transport planning and execution',
         t('services.transport.feature5') || 'Special permits and route planning',
@@ -53,7 +53,7 @@ export default function Services() {
       id: 'mounting',
       title: t('services.mounting.title') || 'Mounting & Installation',
       description: t('services.mounting.desc') || 'Our experienced installers ensure your tower crane is safely and correctly installed. We work quickly and efficiently so your project doesn\'t come to a standstill.',
-      image: '/images/optimized/sunset-TC-2.webp',
+      image: '/images/optimized/potain.62cee7692598b.webp',
       features: [
         t('services.mounting.feature2') || 'Experienced installers with all certifications',
         t('services.mounting.feature3') || 'Fast and safe installation',
