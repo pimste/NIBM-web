@@ -2,29 +2,118 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const defaultLocale = 'en';
 const supportedLocales = ['en', 'nl', 'de'];
-const publicFiles = [
-  '/favicon.ico',
-  '/favicon.png',
-  '/apple-touch-icon.png',
-  '/nibm-favicon.avif',
-  '/robots.txt',
-  '/sitemap.xml',
-  '/site.webmanifest',
-  '/sw.js',
-  '/images',
-  '/assets',
-  '/fonts'
+
+// Known spam referrers to block
+const SPAM_REFERRERS = [
+  'mysticforge.top',
+  'neonflux.top',
+  'quantumforge.top',
+  'cyberflux.top',
+  'digitalforge.top',
+  'techflux.top',
+  'webforge.top',
+  'netforge.top',
+  'cloudforge.top',
+  'dataforge.top',
 ];
+
+// Suspicious user agents to block (generic terms like 'bot' are checked after legitimate bots)
+const SUSPICIOUS_USER_AGENTS = [
+  'curl',
+  'wget',
+  'python-requests',
+  'python-urllib',
+  'scrapy',
+  'scraper',
+  'headless',
+  'phantomjs',
+  'selenium',
+  'playwright',
+  'puppeteer',
+  'httpie',
+  'postman',
+  'insomnia',
+];
+
+// Legitimate search engine bots to allow
+const LEGITIMATE_BOTS = [
+  'googlebot',
+  'bingbot',
+  'slurp', // Yahoo
+  'duckduckbot',
+  'baiduspider',
+  'yandexbot',
+  'sogou',
+  'exabot',
+  'facebot',
+  'ia_archiver', // Internet Archive
+  'applebot',
+  'facebookexternalhit',
+  'twitterbot',
+  'linkedinbot',
+  'whatsapp',
+  'telegrambot',
+  'discordbot',
+];
+
+/**
+ * Check if the request is from a bot that should be blocked
+ */
+function isBlockedBot(request: NextRequest): boolean {
+  const userAgent = request.headers.get('user-agent')?.toLowerCase() || '';
+  const referer = request.headers.get('referer')?.toLowerCase() || '';
+  
+  // Check for spam referrers
+  if (referer) {
+    const isSpamReferrer = SPAM_REFERRERS.some((spam) => referer.includes(spam));
+    if (isSpamReferrer) {
+      return true;
+    }
+  }
+  
+  // If no user agent, likely a bot
+  if (!userAgent) {
+    return true;
+  }
+  
+  // Check if it's a legitimate bot (allow these)
+  const isLegitimateBot = LEGITIMATE_BOTS.some((bot) => userAgent.includes(bot));
+  if (isLegitimateBot) {
+    return false;
+  }
+  
+  // Check for suspicious user agents
+  const isSuspicious = SUSPICIOUS_USER_AGENTS.some((suspicious) => 
+    userAgent.includes(suspicious)
+  );
+  
+  return isSuspicious;
+}
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
-  // FIRST: Handle API routes - no i18n processing needed
+  // FIRST: Handle API routes - no i18n processing needed, but still check bots
+  // API routes have their own rate limiting, but we still block obvious spam bots
   if (pathname.startsWith('/api')) {
+    // Only block obvious spam referrers on API routes, allow everything else
+    // (legitimate API calls from automated systems should work)
+    const referer = request.headers.get('referer')?.toLowerCase() || '';
+    if (referer) {
+      const isSpamReferrer = SPAM_REFERRERS.some((spam) => referer.includes(spam));
+      if (isSpamReferrer) {
+        return new NextResponse('Forbidden', { status: 403 });
+      }
+    }
     return NextResponse.next();
   }
   
-  // SECOND: Handle static files and assets - no i18n processing needed
+  // SECOND: Block spam bots early for page routes to reduce edge function invocations
+  if (isBlockedBot(request)) {
+    return new NextResponse('Forbidden', { status: 403 });
+  }
+  
+  // THIRD: Handle static files and assets - no i18n processing needed
   if (
     pathname === '/favicon.ico' ||
     pathname === '/favicon.png' ||
@@ -45,7 +134,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // THIRD: Handle i18n for all other routes (including admin routes)
+  // FOURTH: Handle i18n for all other routes (including admin routes)
   // Get locale from cookie first (prioritize this over URL)
   const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
   
@@ -130,7 +219,7 @@ export function middleware(request: NextRequest) {
       path: '/'
     });
     
-    // FOURTH: Handle admin route protection after i18n processing
+    // FIFTH: Handle admin route protection after i18n processing
     // Check if this is an admin route (after locale prefix)
     const pathWithoutLocale = pathname.replace(`/${existingLocale}`, '');
     if (pathWithoutLocale.startsWith('/admin')) {
@@ -169,8 +258,20 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Match all paths - we'll handle exclusions in the function itself
+  // Optimized matcher: exclude static files to reduce edge function executions
+  // Only processes actual page requests, not static assets
   matcher: [
-    '/((?!_next/static|_next/image|_next/data|favicon.ico|favicon.png|apple-touch-icon.png|nibm-favicon.avif|icon.png|icon.avif|apple-icon.png|robots.txt|sitemap.xml|site.webmanifest|sw.js|images|assets|fonts).*)'
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes - handled separately in middleware)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - _next/data (data files)
+     * - favicon, icons, and other static files
+     * - images, videos, fonts, and other assets
+     * - robots.txt, sitemap.xml, and other public files
+     * - Files with static extensions (images, fonts, videos, etc.)
+     */
+    '/((?!api|_next/static|_next/image|_next/data|favicon.ico|favicon.png|apple-touch-icon.png|nibm-favicon.avif|icon.png|icon.avif|apple-icon.png|robots.txt|sitemap.xml|site.webmanifest|sw.js|images|assets|fonts|videos|.*\\.(jpg|jpeg|png|gif|webp|avif|svg|ico|woff|woff2|ttf|eot|otf|mp4|webm|mov|avi|pdf|zip|json|xml|txt|css|js|map)).*)'
   ]
 }; 

@@ -1,29 +1,15 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { isRateLimited, getClientIP } from '@/lib/rateLimit';
 
 // Initialize Resend with environment variable - with fallback for build time
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
-// Rate limiting (simple in-memory store)
-const rateLimitMap = new Map();
-const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
-const RATE_LIMIT_MAX_REQUESTS = 5; // 5 requests per minute
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const userRequests = rateLimitMap.get(ip) || [];
-  
-  // Remove old requests outside the window
-  const validRequests = userRequests.filter((time: number) => now - time < RATE_LIMIT_WINDOW);
-  
-  if (validRequests.length >= RATE_LIMIT_MAX_REQUESTS) {
-    return true;
-  }
-  
-  validRequests.push(now);
-  rateLimitMap.set(ip, validRequests);
-  return false;
-}
+// Rate limiting: 5 requests per 15 minutes per IP
+const RATE_LIMIT_CONFIG = {
+  maxRequests: 5,
+  windowMs: 15 * 60 * 1000, // 15 minutes
+};
 
 function validateEmail(email: string): boolean {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -46,11 +32,10 @@ export async function POST(request: Request) {
     }
 
     // Get client IP for rate limiting
-    const forwarded = request.headers.get('x-forwarded-for');
-    const ip = forwarded ? forwarded.split(',')[0] : 'unknown';
+    const ip = getClientIP(request);
     
     // Check rate limiting
-    if (isRateLimited(ip)) {
+    if (isRateLimited(ip, 'contact', RATE_LIMIT_CONFIG)) {
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },
         { status: 429 }
