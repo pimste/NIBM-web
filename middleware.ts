@@ -33,6 +33,17 @@ const SUSPICIOUS_USER_AGENTS = [
   'httpie',
   'postman',
   'insomnia',
+  'go-http-client',
+  'java/',
+  'okhttp',
+  'apache-httpclient',
+  'rest-client',
+  'httpclient',
+  'axios',
+  'node-fetch',
+  'got',
+  'request',
+  'urllib',
 ];
 
 // Legitimate search engine bots to allow
@@ -58,10 +69,12 @@ const LEGITIMATE_BOTS = [
 
 /**
  * Check if the request is from a bot that should be blocked
+ * @param isAssetPath - If true, be more aggressive in blocking (for asset scraping)
  */
-function isBlockedBot(request: NextRequest): boolean {
+function isBlockedBot(request: NextRequest, isAssetPath: boolean = false): boolean {
   const userAgent = request.headers.get('user-agent')?.toLowerCase() || '';
   const referer = request.headers.get('referer')?.toLowerCase() || '';
+  const accept = request.headers.get('accept')?.toLowerCase() || '';
   
   // Check for spam referrers
   if (referer) {
@@ -82,6 +95,28 @@ function isBlockedBot(request: NextRequest): boolean {
     return false;
   }
   
+  // For asset paths, be more aggressive
+  if (isAssetPath) {
+    // Block if user agent contains generic bot terms (unless it's a legitimate bot)
+    if (
+      (userAgent.includes('bot') || 
+       userAgent.includes('crawler') || 
+       userAgent.includes('spider') ||
+       userAgent.includes('scraper')) &&
+      !isLegitimateBot
+    ) {
+      return true;
+    }
+    
+    // Block if Accept header is missing or suspicious (bots often have minimal Accept headers)
+    if (!accept || accept === '*/*' || accept === 'image/*') {
+      // But allow if it looks like a real browser
+      if (!userAgent.includes('mozilla') && !userAgent.includes('chrome') && !userAgent.includes('safari')) {
+        return true;
+      }
+    }
+  }
+  
   // Check for suspicious user agents
   const isSuspicious = SUSPICIOUS_USER_AGENTS.some((suspicious) => 
     userAgent.includes(suspicious)
@@ -93,7 +128,36 @@ function isBlockedBot(request: NextRequest): boolean {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
-  // FIRST: Handle API routes - no i18n processing needed, but still check bots
+  // FIRST: Aggressively block bots from static assets (images, videos, fonts, etc.)
+  // This is critical because bots scrape these heavily and bypass browser cache
+  const isAssetPath =
+    pathname.startsWith('/images/') ||
+    pathname.startsWith('/videos/') ||
+    pathname.startsWith('/fonts/') ||
+    pathname.startsWith('/assets/') ||
+    pathname === '/favicon.ico' ||
+    pathname === '/favicon.png' ||
+    pathname === '/apple-touch-icon.png' ||
+    pathname === '/robots.txt' ||
+    pathname === '/sitemap.xml' ||
+    pathname === '/site.webmanifest' ||
+    /\.(jpg|jpeg|png|gif|webp|avif|svg|ico|woff|woff2|ttf|eot|otf|mp4|webm|mov|avi|pdf|zip)$/i.test(pathname);
+  
+  if (isAssetPath) {
+    // For assets, be more aggressive - block any suspicious bot
+    if (isBlockedBot(request, true)) {
+      return new NextResponse('Forbidden', { 
+        status: 403,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      });
+    }
+    // Allow legitimate bots and browsers to pass through
+    return NextResponse.next();
+  }
+  
+  // SECOND: Handle API routes - no i18n processing needed, but still check bots
   // API routes have their own rate limiting, but we still block obvious spam bots
   if (pathname.startsWith('/api')) {
     // Only block obvious spam referrers on API routes, allow everything else
@@ -108,12 +172,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
   
-  // SECOND: Block spam bots early for page routes to reduce edge function invocations
-  if (isBlockedBot(request)) {
+  // THIRD: Block spam bots early for page routes to reduce edge function invocations
+  if (isBlockedBot(request, false)) {
     return new NextResponse('Forbidden', { status: 403 });
   }
   
-  // THIRD: Handle static files and assets - no i18n processing needed
+  // FOURTH: Handle static files and assets - no i18n processing needed
   if (
     pathname === '/favicon.ico' ||
     pathname === '/favicon.png' ||
@@ -134,7 +198,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // FOURTH: Handle i18n for all other routes (including admin routes)
+  // FIFTH: Handle i18n for all other routes (including admin routes)
   // Get locale from cookie first (prioritize this over URL)
   const cookieLocale = request.cookies.get('NEXT_LOCALE')?.value;
   
@@ -219,7 +283,7 @@ export function middleware(request: NextRequest) {
       path: '/'
     });
     
-    // FIFTH: Handle admin route protection after i18n processing
+    // SIXTH: Handle admin route protection after i18n processing
     // Check if this is an admin route (after locale prefix)
     const pathWithoutLocale = pathname.replace(`/${existingLocale}`, '');
     if (pathWithoutLocale.startsWith('/admin')) {
@@ -258,20 +322,19 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Optimized matcher: exclude static files to reduce edge function executions
-  // Only processes actual page requests, not static assets
+  // IMPORTANT: We now process asset paths to block bots, but exclude Next.js internal files
+  // This allows us to block bots from /images/, /videos/, etc. while still excluding _next/*
   matcher: [
     /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes - handled separately in middleware)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - _next/data (data files)
-     * - favicon, icons, and other static files
-     * - images, videos, fonts, and other assets
-     * - robots.txt, sitemap.xml, and other public files
-     * - Files with static extensions (images, fonts, videos, etc.)
+     * Match:
+     * - Asset paths (images, videos, fonts, etc.) - to block bots
+     * - API routes - to block spam referrers
+     * - Page routes - for i18n and bot blocking
+     * 
+     * Exclude:
+     * - _next/static, _next/image, _next/data (Next.js internal)
+     * - sw.js (service worker)
      */
-    '/((?!api|_next/static|_next/image|_next/data|favicon.ico|favicon.png|apple-touch-icon.png|nibm-favicon.avif|icon.png|icon.avif|apple-icon.png|robots.txt|sitemap.xml|site.webmanifest|sw.js|images|assets|fonts|videos|.*\\.(jpg|jpeg|png|gif|webp|avif|svg|ico|woff|woff2|ttf|eot|otf|mp4|webm|mov|avi|pdf|zip|json|xml|txt|css|js|map)).*)'
+    '/((?!_next/static|_next/image|_next/data|sw.js).*)'
   ]
 }; 
