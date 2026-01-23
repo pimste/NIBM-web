@@ -73,20 +73,44 @@ export default function HeroSection() {
             </p>
           </AnimatedElement>
           
-          <AnimatedElement className="flex flex-col sm:flex-row justify-center gap-4">
+          <AnimatedElement className="flex flex-col sm:flex-row justify-center gap-4 mb-4">
             <Link
               href={getUrl('/towercranes')}
               className="relative overflow-hidden group bg-primary hover:bg-primary-600 text-white font-medium px-8 py-4 rounded-md transition-all duration-300 shadow-lg hover:shadow-primary/30 border border-transparent hover:border-white/10"
-              aria-label="Browse our tower crane catalog"
+              aria-label="View available tower cranes"
             >
               <span className="relative z-10">{t('hero.cta1')}</span>
             </Link>
             <Link
               href={getUrl('/contact')}
               className="relative overflow-hidden group bg-secondary hover:bg-secondary-600 text-white font-medium px-8 py-4 rounded-md transition-all duration-300 shadow-lg hover:shadow-secondary/30 border border-transparent hover:border-white/10"
-              aria-label="Contact us for a quote on tower cranes"
+              aria-label="Request a quote on tower cranes"
             >
               <span className="relative z-10">{t('hero.cta2')}</span>
+            </Link>
+            <Link
+              href={getUrl('/contact')}
+              className="relative overflow-hidden group bg-amber-500 hover:bg-amber-600 text-white font-medium px-8 py-4 rounded-md transition-all duration-300 shadow-lg hover:shadow-amber-500/30 border border-transparent hover:border-white/10"
+              aria-label="Get a free quote"
+            >
+              <span className="relative z-10">{t('hero.cta3')}</span>
+            </Link>
+          </AnimatedElement>
+          <AnimatedElement className="flex flex-wrap justify-center gap-4 text-sm">
+            <Link
+              href={`${getUrl('/towercranes')}?category=sale`}
+              className="text-white hover:text-amber-400 underline transition-colors"
+              aria-label="View cranes for sale"
+            >
+              {t('hero.linkSale')}
+            </Link>
+            <span className="text-white/60">|</span>
+            <Link
+              href={`${getUrl('/towercranes')}?category=rental`}
+              className="text-white hover:text-amber-400 underline transition-colors"
+              aria-label="View rental cranes"
+            >
+              {t('hero.linkRental')}
             </Link>
           </AnimatedElement>
         </div>

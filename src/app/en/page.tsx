@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import HeroSection from '@/components/HeroSection'
 import { Metadata } from 'next'
 import { generatePageMetadata } from '../page-metadata'
+import { HomepageSchema } from '@/components/HomepageSchema'
 
 // Generate metadata for this page
 export const generateMetadata = async (): Promise<Metadata> => {
@@ -59,10 +60,17 @@ const DynamicCtaSection = dynamic(() => import('@/components/CtaSection'), {
   ssr: true
 })
 
-export default function EnglishHome() {
+const DynamicPopularCraneLinks = dynamic(() => import('@/components/PopularCraneLinks'), {
+  loading: () => null,
+  ssr: false
+})
+
+export default async function EnglishHome() {
   return (
     <main>
+      <HomepageSchema language="en" />
       <HeroSection />
+      <DynamicPopularCraneLinks />
       <DynamicFeaturedCranes />
       <DynamicServicesSection />
       <DynamicCtaSection />

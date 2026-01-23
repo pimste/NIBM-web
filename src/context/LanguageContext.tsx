@@ -37,8 +37,11 @@ export const translations: Record<Language, Record<string, string>> = {
     'hero.title1': 'Elevating Construction',
     'hero.title2': 'To New Heights',
     'hero.subtitle': 'NIBM Tower Cranes specializes in the sale of tower cranes, with full-service solutions from planning to ongoing support.',
-    'hero.cta1': 'Explore Our Tower Cranes',
+    'hero.cta1': 'View Available Cranes',
     'hero.cta2': 'Request a Quote',
+    'hero.cta3': 'Get Free Quote',
+    'hero.linkSale': 'View Cranes for Sale',
+    'hero.linkRental': 'View Rental Cranes',
     'hero.scroll': 'Scroll Down',
     
     // Services Section
@@ -58,6 +61,9 @@ export const translations: Record<Language, Record<string, string>> = {
     'services.planning.desc': 'Strategic advisory services for project planning to determine optimal crane solutions for your construction project.',
     'services.quote': 'Our Philosophy',
     'services.quote.desc': '"Excellence in construction begins with the right foundation and the right tools." - This principle guides everything we do at NIBM Tower Cranes.',
+    'services.viewCranes': 'View Available Cranes',
+    'services.viewSaleCranes': 'View Cranes for Sale',
+    'services.viewRentalCranes': 'View Rental Cranes',
     
     // About Page
     'about.title': 'About NIBM Tower Cranes',
@@ -344,8 +350,11 @@ export const translations: Record<Language, Record<string, string>> = {
     'hero.title1': 'Bouwprojecten naar',
     'hero.title2': 'Nieuwe Hoogten',
     'hero.subtitle': 'NIBM Torenkranen is gespecialiseerd in de verkoop van torenkranen, met full-service oplossingen van planning tot doorlopende ondersteuning.',
-    'hero.cta1': 'Bekijk Onze Torenkranen',
+    'hero.cta1': 'Bekijk Beschikbare Kranen',
     'hero.cta2': 'Offerte Aanvragen',
+    'hero.cta3': 'Gratis Offerte',
+    'hero.linkSale': 'Bekijk Kranen Te Koop',
+    'hero.linkRental': 'Bekijk Huurkranen',
     'hero.scroll': 'Scroll Omlaag',
     
     // Services Section
@@ -365,6 +374,9 @@ export const translations: Record<Language, Record<string, string>> = {
     'services.planning.desc': 'Strategisch advies in verband met projectplanning om de optimale kraanoplossingen voor uw bouwproject te bepalen.',
     'services.quote': 'Onze Filosofie',
     'services.quote.desc': '"Excellentie in de bouw begint met de juiste fundering en de juiste hulpmiddelen." - Dit principe stuurt alles wat we doen bij NIBM Tower Cranes.',
+    'services.viewCranes': 'Bekijk Beschikbare Kranen',
+    'services.viewSaleCranes': 'Bekijk Kranen Te Koop',
+    'services.viewRentalCranes': 'Bekijk Huurkranen',
     
     // About Page
     'about.title': 'Over NIBM Tower Cranes',
@@ -653,8 +665,11 @@ export const translations: Record<Language, Record<string, string>> = {
     'hero.title1': 'Bauprojekte auf',
     'hero.title2': 'Neue Höhen',
     'hero.subtitle': 'NIBM Turmkrane ist spezialisiert auf den Verkauf von Turmkranen, mit Full-Service-Lösungen von der Planung bis zur laufenden Unterstützung.',
-    'hero.cta1': 'Unsere Turmkrane Entdecken',
+    'hero.cta1': 'Verfügbare Krane Anzeigen',
     'hero.cta2': 'Angebot Anfordern',
+    'hero.cta3': 'Kostenloses Angebot',
+    'hero.linkSale': 'Krane Zum Verkauf',
+    'hero.linkRental': 'Mietkrane Anzeigen',
     'hero.scroll': 'Nach Unten Scrollen',
     
     // Services Section
@@ -674,6 +689,9 @@ export const translations: Record<Language, Record<string, string>> = {
     'services.planning.desc': 'Strategische Projektplanungsdienste zur Bestimmung der optimalen Kranlösungen für Ihren Bauzeitplan.',
     'services.quote': 'Unsere Philosophie',
     'services.quote.desc': '"Exzellenz im Bauwesen beginnt mit dem richtigen Fundament und den richtigen Werkzeugen." - Dieses Prinzip leitet alles, was wir bei NIBM Tower Cranes tun.',
+    'services.viewCranes': 'Verfügbare Krane Anzeigen',
+    'services.viewSaleCranes': 'Krane Zum Verkauf',
+    'services.viewRentalCranes': 'Mietkrane Anzeigen',
     
     // About Page
     'about.title': 'Über NIBM Turmkrane',

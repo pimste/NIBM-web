@@ -13,7 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { path: '', priority: 1.0, changeFreq: 'weekly' as const },           // Home
       { path: '/about', priority: 0.8, changeFreq: 'monthly' as const },    // About
       { path: '/services', priority: 0.9, changeFreq: 'monthly' as const }, // Services
-      { path: '/towercranes', priority: 0.9, changeFreq: 'weekly' as const }, // Towercranes
+      { path: '/towercranes', priority: 0.95, changeFreq: 'weekly' as const }, // Towercranes - Increased priority for conversion pages
       { path: '/technical-info', priority: 0.7, changeFreq: 'monthly' as const }, // Technical info
       { path: '/contact', priority: 0.8, changeFreq: 'monthly' as const },   // Contact
       { path: '/blog', priority: 0.8, changeFreq: 'weekly' as const },        // Blog
@@ -63,19 +63,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       });
 
       // Add tower crane detail pages with language prefixes
+      // Increased priority for crane pages to improve discoverability
       languages.forEach(lang => {
         cranes.forEach(crane => {
           // Determine priority based on category and freshness
           const daysSinceUpdate = (Date.now() - crane.updatedAt.getTime()) / (1000 * 60 * 60 * 24);
           const isRecent = daysSinceUpdate < 30;
+          // Increased priority: 0.85 for English (up from 0.8), 0.75 for other languages (up from 0.7)
+          // This helps search engines prioritize these conversion pages
           const priority = lang === 'en' 
-            ? (isRecent ? 0.8 : 0.7)
-            : (isRecent ? 0.7 : 0.6);
+            ? (isRecent ? 0.85 : 0.85) // Keep high priority for all English crane pages
+            : (isRecent ? 0.75 : 0.75); // Keep high priority for all other language crane pages
 
           entries.push({
             url: `${baseUrl}/${lang}/towercranes/${crane.slug}`,
             lastModified: crane.updatedAt,
-            changeFrequency: isRecent ? 'weekly' : 'monthly',
+            // More frequent changeFrequency for crane pages to signal active inventory
+            changeFrequency: isRecent ? 'weekly' : 'weekly', // Changed from monthly to weekly
             priority,
           });
         });
