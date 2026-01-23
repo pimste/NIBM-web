@@ -322,8 +322,8 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // IMPORTANT: We now process asset paths to block bots, but exclude Next.js internal files
-  // This allows us to block bots from /images/, /videos/, etc. while still excluding _next/*
+  // Optimized matcher to reduce middleware invocations
+  // We still process asset paths for bot blocking, but exclude more Next.js internal paths
   matcher: [
     /*
      * Match:
@@ -332,9 +332,11 @@ export const config = {
      * - Page routes - for i18n and bot blocking
      * 
      * Exclude:
-     * - _next/static, _next/image, _next/data (Next.js internal)
+     * - _next/static, _next/image, _next/data (Next.js internal - already cached)
+     * - _next/webpack, _next/chunks (build artifacts)
      * - sw.js (service worker)
+     * - Static file extensions that are handled by CDN (but we still need to check for bot blocking)
      */
-    '/((?!_next/static|_next/image|_next/data|sw.js).*)'
+    '/((?!_next/static|_next/image|_next/data|_next/webpack|_next/chunks|sw\\.js|.*\\.(js|css|map)$).*)'
   ]
 }; 

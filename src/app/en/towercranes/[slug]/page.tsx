@@ -1,6 +1,10 @@
 import { Metadata } from 'next'
 import { generateTowerCraneMetadata } from './metadata'
 import dynamic from 'next/dynamic'
+import { prisma } from '@/lib/prisma'
+
+// Enable ISR - revalidate every 5 minutes
+export const revalidate = 300
 
 // Disable SSR to avoid hydration issues
 const CraneDetailsClient = dynamic(
@@ -11,23 +15,26 @@ const CraneDetailsClient = dynamic(
   }
 )
 
-// Static crane slugs for build-time generation
-const staticCraneSlugs = [
-  'potain-mdt-178',
-  'potain-mc-85-b',
-  'potain-mdt-219-j10',
-  'potain-mct-88',
-  'potain-mc-125',
-  'potain-mdt-189',
-  'potain-mc-175-b',
-  'potain-mdt-268-j12',
-  'potain-mct-135'
-]
-
+// Generate static params from database
 export async function generateStaticParams() {
-  return staticCraneSlugs.map((slug) => ({
-    slug: slug,
-  }))
+  try {
+    const cranes = await prisma.crane.findMany({
+      where: {
+        isAvailable: true
+      },
+      select: {
+        slug: true
+      }
+    })
+    
+    return cranes.map((crane) => ({
+      slug: crane.slug,
+    }))
+  } catch (error) {
+    console.error('Error fetching crane slugs for static generation:', error)
+    // Fallback to empty array if database query fails
+    return []
+  }
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {

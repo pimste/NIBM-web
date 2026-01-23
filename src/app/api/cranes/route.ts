@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { requireAuth } from '@/lib/auth'
 
+// Enable caching for GET requests - revalidate every 5 minutes
+export const revalidate = 300
+
 // GET /api/cranes - Fetch all cranes (public API - only show available ones)
 export async function GET() {
   try {
@@ -38,12 +41,11 @@ export async function GET() {
       }
     }))
     
-    // Add cache control headers to prevent caching
+    // Add cache control headers with stale-while-revalidate strategy
     return NextResponse.json(transformedCranes, {
       headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0'
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+        'Vary': 'Accept'
       }
     })
   } catch (error) {

@@ -1,6 +1,25 @@
 import { Metadata } from 'next'
+import { prisma } from '@/lib/prisma'
 
-// This would be fetched from a CMS or API in a real implementation
+// Fetch cranes from database for static generation
+async function getCranes() {
+  try {
+    const cranes = await prisma.crane.findMany({
+      where: {
+        isAvailable: true
+      },
+      select: {
+        slug: true
+      }
+    })
+    return cranes
+  } catch (error) {
+    console.error('Error fetching cranes for static generation:', error)
+    return []
+  }
+}
+
+// Legacy hardcoded data (kept for fallback, but not used)
 const cranes = [
   {
     id: 1,
@@ -141,9 +160,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 }
 
-// Generate static paths for all cranes
+// Generate static paths for all cranes from database
 export async function generateStaticParams() {
-  return cranes.map(crane => ({ slug: crane.slug }))
+  const dbCranes = await getCranes()
+  return dbCranes.map(crane => ({ slug: crane.slug }))
 }
 
 export default function CraneDetailLayout({ children }: Props) {

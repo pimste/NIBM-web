@@ -39,18 +39,26 @@ type FilterState = {
   category: string
 }
 
-export default function TowerCranesClient() {
+interface TowerCranesClientProps {
+  initialCranes?: Crane[]
+}
+
+export default function TowerCranesClient({ initialCranes = [] }: TowerCranesClientProps) {
   // Use language for translations and filtering
   const { t, language } = useLanguage()
   const [mounted, setMounted] = useState(false)
-  const [cranes, setCranes] = useState<Crane[]>([])
-  const [loading, setLoading] = useState(true)
+  const [cranes, setCranes] = useState<Crane[]>(initialCranes)
+  const [loading, setLoading] = useState(initialCranes.length === 0)
   const [error, setError] = useState<string | null>(null)
   
   // Set mounted state once on client
   useEffect(() => {
     setMounted(true)
-  }, [])
+    // If we have initial data, we're not loading
+    if (initialCranes.length > 0) {
+      setLoading(false)
+    }
+  }, [initialCranes])
 
   const [filters, setFilters] = useState<FilterState>({
     status: 'all',
@@ -59,7 +67,7 @@ export default function TowerCranesClient() {
   })
   const [searchTerm, setSearchTerm] = useState('')
 
-  // Fetch cranes from API
+  // Fetch cranes from API (only if no initial data provided)
   const fetchCranes = useCallback(async () => {
     try {
       setLoading(true)
@@ -80,9 +88,12 @@ export default function TowerCranesClient() {
     }
   }, [])
 
+  // Only fetch if we don't have initial data
   useEffect(() => {
-    fetchCranes()
-  }, [fetchCranes])
+    if (initialCranes.length === 0) {
+      fetchCranes()
+    }
+  }, [fetchCranes, initialCranes.length])
 
   const handleFilterChange = (filterType: keyof FilterState, value: string) => {
     setFilters((prev) => ({

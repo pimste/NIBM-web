@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
+// Enable caching for GET requests - revalidate every 5 minutes
+export const revalidate = 300
+
 // GET /api/cranes/[slug] - Fetch single crane by slug (public API - only show available ones)
 export async function GET(
   request: NextRequest,
@@ -47,9 +50,8 @@ export async function GET(
     
     return NextResponse.json(transformedCrane, {
       headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0'
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+        'Vary': 'Accept'
       }
     })
   } catch (error) {

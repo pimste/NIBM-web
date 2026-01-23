@@ -64,10 +64,8 @@ export default function TowerCranesClient() {
       setLoading(true)
       setError(null)
       
-      // Add cache-busting parameter to ensure fresh data
-      const response = await fetch(`/api/cranes?_t=${Date.now()}`, {
-        cache: 'no-store'
-      })
+      // Fetch cranes from API (caching handled by API route)
+      const response = await fetch('/api/cranes')
       if (!response.ok) {
         throw new Error('Failed to fetch cranes')
       }

@@ -1,6 +1,10 @@
 import { Metadata } from 'next'
 import { generatePageMetadata } from '../../page-metadata'
 import TowerCranesClient from './TowerCranesClient'
+import { prisma } from '@/lib/prisma'
+
+// Enable ISR - revalidate every 5 minutes
+export const revalidate = 300
 
 // Generate metadata for this page
 export const generateMetadata = async (): Promise<Metadata> => {
@@ -38,6 +42,48 @@ export const generateMetadata = async (): Promise<Metadata> => {
   )
 }
 
-export default function TowerCranes() {
-  return <TowerCranesClient />
+// Fetch cranes data on the server
+async function getCranes() {
+  try {
+    const cranes = await prisma.crane.findMany({
+      where: {
+        isAvailable: true
+      },
+      orderBy: {
+        createdAt: 'desc'
+      }
+    })
+    
+    // Transform the data to match frontend expectations
+    return cranes.map(crane => ({
+      ...crane,
+      image: Array.isArray(crane.images) && crane.images.length > 0 ? crane.images[0] : '/images/placeholder-crane.jpg',
+      gallery: Array.isArray(crane.images) ? crane.images : [],
+      specifications: {
+        manufacturer: 'Potain',
+        model: crane.model,
+        yearOfManufacture: crane.year ?? '-',
+        serialNumber: crane.serialNumber,
+        condition: crane.condition,
+        maxCapacity: crane.maxCapacity,
+        maxJibLength: crane.maxJibLength,
+        maxHeight: crane.maxHeight,
+        counterJibLength: crane.counterJibLength,
+        towerType: crane.towerType,
+        cabinType: crane.cabinType,
+        powerRequirements: crane.powerRequirements,
+        hoistSpeed: crane.hoistSpeed,
+        trolleySpeed: crane.trolleySpeed,
+        slewing: crane.slewing,
+      }
+    }))
+  } catch (error) {
+    console.error('Error fetching cranes:', error)
+    return []
+  }
+}
+
+export default async function TowerCranes() {
+  const cranes = await getCranes()
+  return <TowerCranesClient initialCranes={cranes} />
 } 
