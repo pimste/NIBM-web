@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
@@ -103,7 +103,7 @@ export default function TowerCranesClient({ initialCranes = [] }: TowerCranesCli
   }
 
   // Helper functions for status, type, and category text
-  const getStatusText = (status: string) => {
+  const getStatusText = useCallback((status: string) => {
     switch (status) {
       case 'available':
         return t('towercranes.status.available')
@@ -114,9 +114,9 @@ export default function TowerCranesClient({ initialCranes = [] }: TowerCranesCli
       default:
         return status
     }
-  }
+  }, [t])
 
-  const getTypeText = (type: string) => {
+  const getTypeText = useCallback((type: string) => {
     switch (type) {
       case 'flattop':
         return t('towercranes.type.flattop')
@@ -125,9 +125,9 @@ export default function TowerCranesClient({ initialCranes = [] }: TowerCranesCli
       default:
         return type
     }
-  }
+  }, [t])
 
-  const getCategoryText = (category: string) => {
+  const getCategoryText = useCallback((category: string) => {
     switch (category) {
       case 'sale':
         return t('towercranes.category.sale')
@@ -136,18 +136,20 @@ export default function TowerCranesClient({ initialCranes = [] }: TowerCranesCli
       default:
         return category
     }
-  }
+  }, [t])
   
-  const filteredCranes = cranes.filter((crane) => {
-    const matchesStatus = filters.status === 'all' || crane.status === filters.status
-    const matchesType = filters.type === 'all' || crane.type === filters.type
-    const matchesCategory = filters.category === 'all' || crane.category === filters.category
-    const matchesSearch = searchTerm === '' || 
-      crane.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      getTypeText(crane.type).toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCranes = useMemo(() => {
+    return cranes.filter((crane) => {
+      const matchesStatus = filters.status === 'all' || crane.status === filters.status
+      const matchesType = filters.type === 'all' || crane.type === filters.type
+      const matchesCategory = filters.category === 'all' || crane.category === filters.category
+      const matchesSearch = searchTerm === '' || 
+        crane.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+        getTypeText(crane.type).toLowerCase().includes(searchTerm.toLowerCase())
 
-    return matchesStatus && matchesType && matchesCategory && matchesSearch
-  })
+      return matchesStatus && matchesType && matchesCategory && matchesSearch
+    })
+  }, [cranes, filters, searchTerm, getTypeText])
 
   return (
     <>
