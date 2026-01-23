@@ -85,17 +85,6 @@ export default function TowerCranesClient() {
   useEffect(() => {
     fetchCranes()
   }, [fetchCranes])
-  
-  const filteredCranes = cranes.filter((crane) => {
-    const matchesStatus = filters.status === 'all' || crane.status === filters.status
-    const matchesType = filters.type === 'all' || crane.type === filters.type
-    const matchesCategory = filters.category === 'all' || crane.category === filters.category
-    const matchesSearch = searchTerm === '' || 
-      crane.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-      getTypeText(crane.type).toLowerCase().includes(searchTerm.toLowerCase())
-
-    return matchesStatus && matchesType && matchesCategory && matchesSearch
-  })
 
   const handleFilterChange = (filterType: keyof FilterState, value: string) => {
     setFilters((prev) => ({
@@ -139,6 +128,17 @@ export default function TowerCranesClient() {
         return category
     }
   }
+  
+  const filteredCranes = cranes.filter((crane) => {
+    const matchesStatus = filters.status === 'all' || crane.status === filters.status
+    const matchesType = filters.type === 'all' || crane.type === filters.type
+    const matchesCategory = filters.category === 'all' || crane.category === filters.category
+    const matchesSearch = searchTerm === '' || 
+      crane.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+      getTypeText(crane.type).toLowerCase().includes(searchTerm.toLowerCase())
+
+    return matchesStatus && matchesType && matchesCategory && matchesSearch
+  })
 
   return (
     <>
