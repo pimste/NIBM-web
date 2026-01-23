@@ -88,13 +88,6 @@ export default function HeroSection() {
             >
               <span className="relative z-10">{t('hero.cta2')}</span>
             </Link>
-            <Link
-              href={getUrl('/contact')}
-              className="relative overflow-hidden group bg-amber-500 hover:bg-amber-600 text-white font-medium px-8 py-4 rounded-md transition-all duration-300 shadow-lg hover:shadow-amber-500/30 border border-transparent hover:border-white/10"
-              aria-label="Get a free quote"
-            >
-              <span className="relative z-10">{t('hero.cta3')}</span>
-            </Link>
           </AnimatedElement>
           <AnimatedElement className="flex flex-wrap justify-center gap-4 text-sm">
             <Link
