@@ -26,6 +26,7 @@ interface Crane {
   description?: string
   specifications?: any
   features?: string[]
+  brochureUrl?: string
 }
 
 export default function CraneDetailsClient() {
@@ -235,6 +236,31 @@ export default function CraneDetailsClient() {
                   ))}
                 </div>
               )}
+              <div className="flex justify-between mt-4">
+                <button
+                  className="flex items-center text-primary hover:text-primary-700 transition-colors"
+                  onClick={() => window.print()}
+                >
+                  <FaPrint className="mr-2" /> Details Drucken
+                </button>
+                {crane.brochureUrl ? (
+                  <a
+                    href={crane.brochureUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-primary hover:text-primary-700 transition-colors"
+                  >
+                    <FaDownload className="mr-2" /> Broschüre Herunterladen
+                  </a>
+                ) : (
+                  <button
+                    className="flex items-center text-primary hover:text-primary-700 transition-colors opacity-50 cursor-not-allowed"
+                    disabled
+                  >
+                    <FaDownload className="mr-2" /> Broschüre Herunterladen
+                  </button>
+                )}
+              </div>
             </div>
 
             {/* Crane Details */}

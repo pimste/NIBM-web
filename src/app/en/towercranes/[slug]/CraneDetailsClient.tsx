@@ -24,6 +24,7 @@ interface Crane {
   description?: string
   specifications?: any
   features?: string[]
+  brochureUrl?: string
 }
 
 interface CraneDetailsClientProps {
@@ -268,11 +269,23 @@ export default function CraneDetailsClient({ slug }: CraneDetailsClientProps) {
                 >
                   <FaPrint className="mr-2" /> Print Details
                 </button>
-                <button
-                  className="flex items-center text-primary hover:text-primary-700 transition-colors"
-                >
-                  <FaDownload className="mr-2" /> Download Brochure
-                </button>
+                {crane.brochureUrl ? (
+                  <a
+                    href={crane.brochureUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center text-primary hover:text-primary-700 transition-colors"
+                  >
+                    <FaDownload className="mr-2" /> Download Brochure
+                  </a>
+                ) : (
+                  <button
+                    className="flex items-center text-primary hover:text-primary-700 transition-colors opacity-50 cursor-not-allowed"
+                    disabled
+                  >
+                    <FaDownload className="mr-2" /> Download Brochure
+                  </button>
+                )}
               </div>
             </div>
 
