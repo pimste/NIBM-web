@@ -6,6 +6,9 @@ import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { FaArrowLeft, FaCheck, FaDownload, FaEnvelope, FaInfoCircle, FaPhone, FaPrint } from 'react-icons/fa'
 import { TowerCraneSchema } from '@/components/TowerCraneSchema'
+import { ContextualLinks } from '@/components/ContextualLinks'
+import Script from 'next/script'
+import { generateInquirySchema } from '@/lib/seo/inquiry-schema'
 
 // Define the Crane interface to match the API response
 interface Crane {
@@ -189,6 +192,19 @@ export default function CraneDetailsClient({ slug }: CraneDetailsClientProps) {
   const condition = crane.specifications?.condition || 'Used'
   const craneUrl = `${siteUrl}/en/towercranes/${crane.slug}`
 
+  // Generate inquiry-optimized schema
+  const inquirySchemas = generateInquirySchema({
+    craneName: crane.name,
+    craneModel: model,
+    category: crane.category as 'sale' | 'rental',
+    availability: availability === 'InStock' ? 'InStock' : 'OutOfStock',
+    url: craneUrl,
+    image: crane.image,
+    description: crane.description || '',
+    phone: '+31 6 53206004',
+    email: 'gid.gehlen@nibmtowercranes.com'
+  })
+
   return (
     <>
       <TowerCraneSchema
@@ -204,6 +220,17 @@ export default function CraneDetailsClient({ slug }: CraneDetailsClientProps) {
         condition={condition}
         url={craneUrl}
       />
+      
+      {/* Inquiry-optimized schema for conversions */}
+      {inquirySchemas.map((schema, index) => (
+        <Script
+          key={`inquiry-schema-${index}`}
+          id={`inquiry-schema-${index}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          strategy="afterInteractive"
+        />
+      ))}
 
       <div className="bg-primary py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -297,6 +324,18 @@ export default function CraneDetailsClient({ slug }: CraneDetailsClientProps) {
               <p className="text-neutral-700 mb-6">
                 {crane.description}
               </p>
+
+              {/* Contextual Internal Links */}
+              {crane.description && (
+                <div className="mb-6">
+                  <ContextualLinks
+                    content={crane.description}
+                    keywords={[crane.name, crane.model, 'tower crane', 'construction equipment']}
+                    maxLinks={3}
+                    className="mt-4"
+                  />
+                </div>
+              )}
 
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="bg-neutral-50 p-4 rounded-lg">

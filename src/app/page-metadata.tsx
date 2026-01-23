@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { enhanceMetadataWithSEO } from '@/lib/seo/content-optimizer'
 
 /**
  * Helper function that generates metadata with canonical URLs
@@ -8,13 +9,17 @@ import { Metadata } from 'next'
  * @param pathname - current path
  * @param siteUrl - base URL of the site
  * @param languages - supported languages
+ * @param content - optional page content for TF-IDF optimization
+ * @param targetKeywords - optional target keywords for SEO optimization
  * @returns Metadata object with canonical and alternate URLs
  */
 export function generatePageMetadata(
   baseMetadata: Metadata = {},
   pathname: string = '',
   siteUrl: string = 'https://www.nibmvb.eu',
-  languages: string[] = ['en', 'nl', 'de']
+  languages: string[] = ['en', 'nl', 'de'],
+  content?: string,
+  targetKeywords?: string[]
 ): Metadata {
   // Extract the path segments
   const pathSegments = pathname.split('/').filter(Boolean)
@@ -74,11 +79,22 @@ export function generatePageMetadata(
   }
   alternates['x-default'] = `${siteUrl}${defaultPath}`
   
-  return {
+  let enhancedMetadata: Metadata = {
     ...baseMetadata,
     alternates: {
       canonical: canonicalUrl,
       languages: alternates
     }
   }
+
+  // Enhance metadata with TF-IDF analysis if content and keywords are provided
+  if (content && targetKeywords && targetKeywords.length > 0) {
+    enhancedMetadata = enhanceMetadataWithSEO(
+      enhancedMetadata,
+      content,
+      targetKeywords
+    )
+  }
+  
+  return enhancedMetadata
 } 

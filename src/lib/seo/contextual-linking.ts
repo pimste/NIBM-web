@@ -554,6 +554,24 @@ export class ContextualLinkingEngine {
     ])
   }
 
+  /**
+   * Load pages from relevance matrix
+   */
+  async loadPagesFromRelevanceMatrix(): Promise<void> {
+    try {
+      const { linkRelevanceMatrix } = await import('./link-relevance-matrix')
+      await linkRelevanceMatrix.buildMatrix()
+      
+      const pages = linkRelevanceMatrix.getAllPagesAsInternalLinks()
+      pages.forEach(page => this.addPage(page))
+      
+      console.log(`Loaded ${pages.length} pages from relevance matrix`)
+    } catch (error) {
+      console.error('Error loading pages from relevance matrix:', error)
+      this.loadExistingPages()
+    }
+  }
+
   private loadExistingPages(): void {
     // Initialize with existing site pages
     const defaultPages: InternalLink[] = [
@@ -578,11 +596,11 @@ export class ContextualLinkingEngine {
         authority: 0.9
       },
       {
-        url: '/en/safety',
-        title: 'Safety Protocols',
-        description: 'Comprehensive safety measures for tower crane operations',
-        keywords: ['safety', 'protocols', 'tower crane', 'regulations'],
-        category: 'safety',
+        url: '/en/about',
+        title: 'About NIBM',
+        description: 'Learn about NIBM Tower Cranes',
+        keywords: ['about', 'company', 'NIBM'],
+        category: 'about',
         language: 'en',
         lastUpdated: new Date(),
         authority: 0.7

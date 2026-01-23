@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
+import { generateAltTag, AltTagOptions } from '@/lib/seo/alt-tag-generator';
 
 interface ImageOptimizedProps {
   src: string;
@@ -18,6 +19,11 @@ interface ImageOptimizedProps {
   blurDataURL?: string;
   objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
   loading?: 'lazy' | 'eager';
+  // SEO enhancement options
+  seoOptimize?: boolean;
+  primaryKeyword?: string;
+  imageType?: 'crane' | 'construction' | 'service' | 'general';
+  context?: string;
 }
 
 export const ImageOptimized: React.FC<ImageOptimizedProps> = ({
@@ -34,10 +40,29 @@ export const ImageOptimized: React.FC<ImageOptimizedProps> = ({
   blurDataURL,
   objectFit = 'cover',
   loading = 'lazy',
+  seoOptimize = false,
+  primaryKeyword,
+  imageType = 'general',
+  context,
   ...props
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
+
+  // Generate optimized alt tag if SEO optimization is enabled
+  const optimizedAlt = React.useMemo(() => {
+    if (seoOptimize && primaryKeyword) {
+      const options: AltTagOptions = {
+        primaryKeyword,
+        context,
+        imageType,
+        includeBrand: true,
+        maxLength: 125
+      };
+      return generateAltTag(options);
+    }
+    return alt;
+  }, [seoOptimize, primaryKeyword, context, imageType, alt]);
 
   const handleLoad = () => {
     setIsLoading(false);
@@ -88,7 +113,7 @@ export const ImageOptimized: React.FC<ImageOptimizedProps> = ({
       )}
       <Image
         src={src}
-        alt={alt}
+        alt={optimizedAlt}
         width={fill ? undefined : width}
         height={fill ? undefined : height}
         fill={fill}
@@ -110,8 +135,8 @@ export const ImageOptimized: React.FC<ImageOptimizedProps> = ({
         {...props}
       />
     </div>
-  );
-};
+  )
+}
 
 // Utility function to generate blur data URL
 export const generateBlurDataURL = (width: number, height: number): string => {

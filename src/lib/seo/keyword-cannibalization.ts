@@ -634,11 +634,58 @@ export class KeywordCannibalizationDetector {
     }
   }
 
+  /**
+   * Load pages from database (cranes, blog posts, etc.)
+   */
+  async loadPagesFromDatabase(): Promise<void> {
+    try {
+      // Dynamic import to avoid circular dependencies
+      const { prisma } = await import('@/lib/prisma')
+      
+      // Load cranes
+      const cranes = await prisma.crane.findMany({
+        where: { isAvailable: true },
+        select: {
+          slug: true,
+          name: true,
+          description: true,
+          model: true,
+          updatedAt: true
+        }
+      })
+
+      cranes.forEach(crane => {
+        const keywords = [
+          'tower crane',
+          crane.name,
+          crane.model,
+          'construction equipment',
+          'Potain tower crane'
+        ]
+
+        this.addPage({
+          url: `/en/towercranes/${crane.slug}`,
+          title: `${crane.name} - Tower Crane | NIBM`,
+          metaDescription: crane.description || '',
+          h1: crane.name,
+          keywords,
+          content: crane.description || '',
+          language: 'en',
+          lastUpdated: crane.updatedAt
+        })
+      })
+
+      console.log(`Loaded ${cranes.length} cranes for cannibalization detection`)
+    } catch (error) {
+      console.error('Error loading pages from database:', error)
+    }
+  }
+
   private loadExistingPages(): void {
     // Initialize with sample pages for demonstration
     const samplePages: PageKeywordData[] = [
       {
-        url: '/en/tower-cranes',
+        url: '/en/towercranes',
         title: 'Tower Cranes - NIBM Construction Equipment',
         metaDescription: 'Professional tower cranes for construction projects',
         h1: 'Tower Cranes',
@@ -650,12 +697,12 @@ export class KeywordCannibalizationDetector {
         currentRanking: 5
       },
       {
-        url: '/en/crane-rental',
-        title: 'Crane Rental Services - NIBM',
-        metaDescription: 'Tower crane rental services for construction projects',
-        h1: 'Crane Rental Services',
-        keywords: ['crane rental', 'tower crane rental', 'construction equipment rental'],
-        content: 'Our crane rental services provide reliable tower cranes...',
+        url: '/en/services',
+        title: 'Crane Services - NIBM',
+        metaDescription: 'Tower crane services for construction projects',
+        h1: 'Crane Services',
+        keywords: ['crane services', 'tower crane services', 'construction services'],
+        content: 'Our crane services provide reliable tower cranes...',
         language: 'en',
         lastUpdated: new Date(),
         searchVolume: 800,

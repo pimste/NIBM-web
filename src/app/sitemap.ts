@@ -1,27 +1,7 @@
 import { MetadataRoute } from 'next';
+import { prisma } from '@/lib/prisma';
 
-// Complete list of tower cranes with realistic last modified dates
-const towercranes = [
-  { slug: 'potain-mdt-178', lastModified: new Date('2024-01-15') },
-  { slug: 'potain-mc-85-b', lastModified: new Date('2024-01-12') },
-  { slug: 'potain-mdt-219-j10', lastModified: new Date('2024-01-10') },
-  { slug: 'potain-mct-88', lastModified: new Date('2024-01-08') },
-  { slug: 'potain-mc-125', lastModified: new Date('2024-01-05') },
-  { slug: 'potain-mdt-189', lastModified: new Date('2024-01-03') },
-  { slug: 'potain-mc-175-b', lastModified: new Date('2023-12-28') },
-  { slug: 'potain-mdt-268-j12', lastModified: new Date('2023-12-25') },
-  { slug: 'potain-mct-135', lastModified: new Date('2023-12-20') },
-];
-
-// Blog posts list
-const blogPosts = [
-  { slug: 'potain-mdt-178-vs-mc-85-b-comparison', lastModified: new Date('2025-12-01') },
-  { slug: 'potain-mdt-series-specifications-guide', lastModified: new Date('2025-12-05') },
-  { slug: 'how-to-choose-right-potain-tower-crane', lastModified: new Date('2025-12-10') },
-  { slug: 'potain-mc-vs-mdt-vs-mct-series-differences', lastModified: new Date('2025-12-15') },
-];
-
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     const baseUrl = 'https://www.nibmvb.eu';
     
@@ -36,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       { path: '/towercranes', priority: 0.9, changeFreq: 'weekly' as const }, // Towercranes
       { path: '/technical-info', priority: 0.7, changeFreq: 'monthly' as const }, // Technical info
       { path: '/contact', priority: 0.8, changeFreq: 'monthly' as const },   // Contact
-      { path: '/blog', priority: 0.8, changeFreq: 'weekly' as const },        // Blog (hidden from menu, SEO only)
+      { path: '/blog', priority: 0.8, changeFreq: 'weekly' as const },        // Blog
       { path: '/privacy-policy', priority: 0.5, changeFreq: 'yearly' as const }, // Privacy policy
       { path: '/terms-of-service', priority: 0.5, changeFreq: 'yearly' as const }, // Terms of service
       { path: '/cookies', priority: 0.5, changeFreq: 'yearly' as const },    // Cookies policy
@@ -68,29 +48,45 @@ export default function sitemap(): MetadataRoute.Sitemap {
       });
     });
     
-    // Add tower crane detail pages with language prefixes
-    languages.forEach(lang => {
-      towercranes.forEach(crane => {
-        entries.push({
-          url: `${baseUrl}/${lang}/towercranes/${crane.slug}`,
-          lastModified: crane.lastModified,
-          changeFrequency: 'monthly',
-          priority: lang === 'en' ? 0.7 : 0.6,
-        });
+    // Fetch tower cranes from database
+    try {
+      const cranes = await prisma.crane.findMany({
+        where: { isAvailable: true },
+        select: {
+          slug: true,
+          updatedAt: true,
+          category: true
+        },
+        orderBy: {
+          updatedAt: 'desc'
+        }
       });
-    });
 
-    // Add blog post pages with language prefixes
-    languages.forEach(lang => {
-      blogPosts.forEach(post => {
-        entries.push({
-          url: `${baseUrl}/${lang}/blog/${post.slug}`,
-          lastModified: post.lastModified,
-          changeFrequency: 'monthly',
-          priority: lang === 'en' ? 0.7 : 0.6,
+      // Add tower crane detail pages with language prefixes
+      languages.forEach(lang => {
+        cranes.forEach(crane => {
+          // Determine priority based on category and freshness
+          const daysSinceUpdate = (Date.now() - crane.updatedAt.getTime()) / (1000 * 60 * 60 * 24);
+          const isRecent = daysSinceUpdate < 30;
+          const priority = lang === 'en' 
+            ? (isRecent ? 0.8 : 0.7)
+            : (isRecent ? 0.7 : 0.6);
+
+          entries.push({
+            url: `${baseUrl}/${lang}/towercranes/${crane.slug}`,
+            lastModified: crane.updatedAt,
+            changeFrequency: isRecent ? 'weekly' : 'monthly',
+            priority,
+          });
         });
       });
-    });
+    } catch (dbError) {
+      console.error('Error fetching cranes from database:', dbError);
+      // Continue without crane entries if DB fails
+    }
+
+    // Note: Blog posts would be added here if you have a blog model in the database
+    // For now, we'll skip blog posts as they're not in the database schema
     
     return entries;
   } catch (error) {

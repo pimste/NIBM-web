@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { performanceBudget } from '@/lib/seo/performance-budget';
 
 declare global {
   interface Window {
@@ -216,9 +217,17 @@ const PerformanceMonitor: React.FC = () => {
       window.addEventListener('load', measureWebVitals);
     }
 
+    // Monitor performance budget
+    const cleanup = performanceBudget.monitorPerformance((report) => {
+      if (report.violations.length > 0 && process.env.NODE_ENV === 'development') {
+        console.warn('Performance budget violations:', report.violations);
+        console.warn('Recommendations:', report.recommendations);
+      }
+    });
+
     // Cleanup function
     return () => {
-      // Clean up observers if needed
+      cleanup();
     };
   }, []);
 

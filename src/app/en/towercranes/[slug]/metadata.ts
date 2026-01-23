@@ -1,87 +1,120 @@
 import { Metadata } from 'next'
-
-// Static crane data for metadata generation
-const staticCraneData: { [key: string]: any } = {
-  'potain-mdt-178': {
-    name: 'Potain MDT 178',
-    model: 'MDT 178',
-    year: 2018,
-    description: 'High-performance tower crane with excellent lifting capacity'
-  },
-  'potain-mc-85-b': {
-    name: 'Potain MC 85 B',
-    model: 'MC 85 B',
-    year: 2019,
-    description: 'Reliable tower crane for medium-scale construction projects'
-  },
-  'potain-mdt-219-j10': {
-    name: 'Potain MDT 219 J10',
-    model: 'MDT 219 J10',
-    year: 2020,
-    description: 'Advanced tower crane with superior reach and capacity'
-  },
-  'potain-mct-88': {
-    name: 'Potain MCT 88',
-    model: 'MCT 88',
-    year: 2017,
-    description: 'Compact tower crane ideal for urban construction'
-  },
-  'potain-mc-125': {
-    name: 'Potain MC 125',
-    model: 'MC 125',
-    year: 2021,
-    description: 'Versatile tower crane for various construction applications'
-  },
-  'potain-mdt-189': {
-    name: 'Potain MDT 189',
-    model: 'MDT 189',
-    year: 2019,
-    description: 'Robust tower crane with excellent performance characteristics'
-  },
-  'potain-mc-175-b': {
-    name: 'Potain MC 175 B',
-    model: 'MC 175 B',
-    year: 2020,
-    description: 'Heavy-duty tower crane for large construction projects'
-  },
-  'potain-mdt-268-j12': {
-    name: 'Potain MDT 268 J12',
-    model: 'MDT 268 J12',
-    year: 2022,
-    description: 'State-of-the-art tower crane with maximum efficiency'
-  },
-  'potain-mct-135': {
-    name: 'Potain MCT 135',
-    model: 'MCT 135',
-    year: 2021,
-    description: 'High-capacity tower crane for demanding construction tasks'
-  }
-}
+import { prisma } from '@/lib/prisma'
+import { generatePageMetadata } from '@/app/page-metadata'
+import { optimizeContentForSEO } from '@/lib/seo/content-optimizer'
+import { getConversionKeywords, generateConversionMetaDescription } from '@/lib/seo/conversion-keywords'
 
 export async function generateTowerCraneMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const crane = staticCraneData[params.slug]
-  
-  if (!crane) {
+  try {
+    // Fetch crane from database
+    const crane = await prisma.crane.findUnique({
+      where: { slug: params.slug },
+      select: {
+        name: true,
+        model: true,
+        year: true,
+        description: true,
+        maxCapacity: true,
+        maxJibLength: true,
+        maxHeight: true,
+        condition: true,
+        category: true,
+        isAvailable: true
+      }
+    })
+
+    if (!crane) {
+      return {
+        title: 'Tower Crane - NIBM',
+        description: 'Professional tower crane services and equipment',
+      }
+    }
+
+    // Build content string for TF-IDF analysis
+    const contentParts = [
+      crane.description || '',
+      `Model: ${crane.model}`,
+      `Year: ${crane.year || 'N/A'}`,
+      `Maximum capacity: ${crane.maxCapacity}`,
+      `Maximum jib length: ${crane.maxJibLength}`,
+      `Maximum height: ${crane.maxHeight}`,
+      `Condition: ${crane.condition || 'Excellent'}`,
+      `Category: ${crane.category || 'Sale'}`,
+      'Professional tower crane services by NIBM Tower Cranes. Expert solutions for construction projects.'
+    ]
+    const content = contentParts.filter(Boolean).join('. ')
+
+    // Define conversion-focused keywords (inquiry intent)
+    const conversionKeywords = getConversionKeywords(
+      crane.name,
+      crane.category as 'sale' | 'rental'
+    )
+    
+    // Combine with base keywords
+    const targetKeywords = [
+      ...conversionKeywords, // Conversion keywords first (higher priority)
+      crane.name,
+      crane.model,
+      'Potain tower crane',
+      'NIBM tower cranes'
+    ].filter(Boolean) as string[]
+
+    // Optimize content with TF-IDF
+    const optimization = optimizeContentForSEO(content, targetKeywords, {
+      minKeywordDensity: 0.5,
+      maxKeywordDensity: 3.0,
+      includeLSI: true,
+      optimizeMeta: true
+    })
+
+    // Generate conversion-focused meta description with CTA
+    const conversionDescription = generateConversionMetaDescription(
+      crane.name,
+      crane.category as 'sale' | 'rental',
+      optimization.suggestedMetaDescription || crane.description || '',
+      true // Include CTA
+    )
+    
+    // Build base metadata with conversion focus
+    const baseMetadata: Metadata = {
+      title: `${crane.name} - ${crane.category === 'rental' ? 'Tower Crane Rental' : 'Tower Crane For Sale'} | NIBM`,
+      description: conversionDescription,
+      keywords: [
+        ...conversionKeywords.slice(0, 5), // Prioritize conversion keywords
+        crane.name,
+        crane.model,
+        'Potain tower crane',
+        'NIBM tower cranes',
+        ...optimization.optimizedKeywords.slice(0, 3)
+      ],
+      openGraph: {
+        title: `${crane.name} - NIBM Tower Cranes`,
+        description: optimization.suggestedMetaDescription || crane.description || '',
+        type: 'website',
+        siteName: 'NIBM - Tower Crane Services',
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: `${crane.name} - NIBM`,
+        description: optimization.suggestedMetaDescription || crane.description || '',
+      },
+    }
+
+    // Generate page metadata with canonical URLs and hreflang
+    return generatePageMetadata(
+      baseMetadata,
+      `/en/towercranes/${params.slug}`,
+      'https://www.nibmvb.eu',
+      ['en', 'nl', 'de'],
+      content,
+      targetKeywords
+    )
+  } catch (error) {
+    console.error('Error generating crane metadata:', error)
+    // Fallback metadata
     return {
       title: 'Tower Crane - NIBM',
       description: 'Professional tower crane services and equipment',
     }
-  }
-
-  return {
-    title: `${crane.name} - Tower Crane Details | NIBM`,
-    description: `${crane.description}. Model: ${crane.model}, Year: ${crane.year ?? '-'}. Professional tower crane services by NIBM.`,
-    keywords: `tower crane, ${crane.name}, ${crane.model}, construction equipment, NIBM`,
-    openGraph: {
-      title: `${crane.name} - NIBM`,
-      description: crane.description,
-      type: 'website',
-      siteName: 'NIBM - Tower Crane Services',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: `${crane.name} - NIBM`,
-      description: crane.description,
-    },
   }
 } 

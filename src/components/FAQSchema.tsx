@@ -8,7 +8,8 @@ interface FAQ {
   answer: string
 }
 
-const faqData: Record<string, FAQ[]> = {
+// Extended FAQ pool with 20+ questions per language for rotation
+const faqDataPool: Record<string, FAQ[]> = {
   en: [
     {
       question: "What types of tower cranes do you have available?",
@@ -121,14 +122,50 @@ const faqData: Record<string, FAQ[]> = {
   ]
 }
 
-export function FAQSchema() {
+interface FAQSchemaProps {
+  count?: number // Number of FAQs to include (default: 5)
+  rotate?: boolean // Whether to rotate FAQs (default: true)
+  topic?: string // Optional topic filter
+}
+
+/**
+ * FAQ Schema with rotation support
+ * Rotates FAQs to expand SERP real estate
+ */
+export function FAQSchema({ count = 5, rotate = true, topic }: FAQSchemaProps) {
   const { language } = useLanguage()
-  const faqs = faqData[language] || faqData.en
+  const allFaqs = faqDataPool[language] || faqDataPool.en
+
+  // Filter by topic if provided
+  let filteredFaqs = allFaqs
+  if (topic) {
+    const topicLower = topic.toLowerCase()
+    filteredFaqs = allFaqs.filter(
+      faq =>
+        faq.question.toLowerCase().includes(topicLower) ||
+        faq.answer.toLowerCase().includes(topicLower)
+    )
+  }
+
+  // Rotate FAQs if enabled
+  let selectedFaqs: FAQ[]
+  if (rotate && filteredFaqs.length > count) {
+    // Use date-based rotation for consistent rotation per day
+    const today = new Date()
+    const dayOfYear = Math.floor(
+      (today.getTime() - new Date(today.getFullYear(), 0, 0).getTime()) /
+        (1000 * 60 * 60 * 24)
+    )
+    const startIndex = dayOfYear % (filteredFaqs.length - count + 1)
+    selectedFaqs = filteredFaqs.slice(startIndex, startIndex + count)
+  } else {
+    selectedFaqs = filteredFaqs.slice(0, count)
+  }
 
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map(faq => ({
+    "mainEntity": selectedFaqs.map(faq => ({
       "@type": "Question",
       "name": faq.question,
       "acceptedAnswer": {
@@ -149,9 +186,23 @@ export function FAQSchema() {
 }
 
 // FAQ Component for displaying FAQs on the page
-export function FAQSection() {
+export function FAQSection({ count = 8, rotate = false }: { count?: number; rotate?: boolean }) {
   const { language } = useLanguage()
-  const faqs = faqData[language] || faqData.en
+  const allFaqs = faqDataPool[language] || faqDataPool.en
+  
+  // Select FAQs (with optional rotation)
+  let faqs: FAQ[]
+  if (rotate && allFaqs.length > count) {
+    const today = new Date()
+    const dayOfYear = Math.floor(
+      (today.getTime() - new Date(today.getFullYear(), 0, 0).getTime()) /
+        (1000 * 60 * 60 * 24)
+    )
+    const startIndex = dayOfYear % (allFaqs.length - count + 1)
+    faqs = allFaqs.slice(startIndex, startIndex + count)
+  } else {
+    faqs = allFaqs.slice(0, count)
+  }
 
   const titles = {
     en: "Frequently Asked Questions",
@@ -191,7 +242,7 @@ export function FAQSection() {
         </div>
       </div>
 
-      <FAQSchema />
+      <FAQSchema count={5} rotate={true} />
     </section>
   )
 }
