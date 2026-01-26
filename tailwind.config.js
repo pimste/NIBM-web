@@ -23,7 +23,7 @@ module.exports = {
   				'700': '#003D99',
   				'800': '#002966',
   				'900': '#001433',
-  				DEFAULT: 'hsl(var(--primary))',
+  				DEFAULT: '#0B3B7F',  /* Original brand blue */
   				foreground: 'hsl(var(--primary-foreground))'
   			},
   			secondary: {
@@ -37,7 +37,7 @@ module.exports = {
   				'700': '#995B00',
   				'800': '#663D00',
   				'900': '#331E00',
-  				DEFAULT: 'hsl(var(--secondary))',
+  				DEFAULT: '#FFA500',  /* Original brand orange */
   				foreground: 'hsl(var(--secondary-foreground))'
   			},
   			neutral: {

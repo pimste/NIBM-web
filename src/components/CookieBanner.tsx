@@ -125,7 +125,10 @@ export function CookieBanner() {
               </button>
               <button
                 onClick={acceptCookies}
-                className="px-4 py-2 text-sm text-white bg-primary hover:bg-primary-700 rounded-md transition-colors font-medium"
+                className="px-4 py-2 text-sm text-white rounded-md transition-colors font-medium"
+                style={{ backgroundColor: '#0B3B7F' }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#003D99'}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#0B3B7F'}
               >
                 {language === 'nl' && 'Accepteren'}
                 {language === 'de' && 'Akzeptieren'}

@@ -16,17 +16,25 @@ export default function HeroSection() {
     <div ref={ref} className="relative h-screen min-h-[650px] flex items-center justify-center overflow-hidden">
       {/* Background Video with next-video optimization */}
       <div className="absolute inset-0 z-0">
-        <Video
-          src="/videos/new_backgroundvid.mp4"
-          className="absolute inset-0 w-full h-full object-cover"
-          poster="/images/optimized/sunset-TC-2.webp"
-          autoPlay
-          muted
-          loop
-          playsInline
-          controls={false}
-          style={{ objectFit: 'cover' }}
-        />
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <Video
+            src="/videos/new_backgroundvid.mp4"
+            poster="/images/optimized/sunset-TC-2.webp"
+            autoPlay
+            muted
+            loop
+            playsInline
+            controls={false}
+            style={{ 
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              position: 'absolute',
+              top: 0,
+              left: 0
+            }}
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
       </div>
 

@@ -116,7 +116,7 @@ export function Header() {
             >
               <Link href="/" className="flex items-center">
                 <Image 
-                  src={isScrolled ? "/images/optimized/logo-blue.webp" : "/images/optimized/logo-white.webp"}
+                  src={isScrolled ? "/images/logo-blue.png" : "/images/logo-white.png"}
                   alt="NIBM Tower Cranes Logo"
                   width={160}
                   height={50}
@@ -212,18 +212,12 @@ export function Header() {
                 <div className="flex items-center justify-between mb-10">
                   <Link href="/" onClick={() => setMobileMenuOpen(false)}>
                     <Image 
-                      src="/images/optimized/logo-white.webp"
+                      src="/images/logo-white.png"
                       alt="NIBM Tower Cranes Logo"
                       width={150}
                       height={50}
                       className="h-12 w-auto"
-                      placeholder="blur"
-                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
                       priority
-                      fetchPriority="high"
-                      loading="eager"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      quality={80}
                     />
                   </Link>
                   <div className="flex items-center">
