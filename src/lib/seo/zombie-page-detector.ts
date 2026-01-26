@@ -282,3 +282,7 @@ export async function detectZombiePages(): Promise<ZombiePageReport> {
 export async function autoNoindexZombiePages() {
   return await zombiePageDetector.autoNoindexZombiePages()
 }
+
+export async function restorePage(url: string) {
+  return await zombiePageDetector.restorePage(url)
+}

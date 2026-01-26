@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+const { withNextVideo } = require('next-video/process');
 const withBundleAnalyzer = process.env.ANALYZE === 'true' 
   ? require('@next/bundle-analyzer')()
   : (config) => config;
@@ -64,6 +65,38 @@ const nextConfig = {
       {
         source: '/admin',
         destination: '/en/admin/login',
+        permanent: true,
+      },
+      // SEO: Common misspellings and variations
+      {
+        source: '/tower-cranes',
+        destination: '/en/towercranes',
+        permanent: true,
+      },
+      {
+        source: '/crane',
+        destination: '/en/towercranes',
+        permanent: true,
+      },
+      {
+        source: '/cranes',
+        destination: '/en/towercranes',
+        permanent: true,
+      },
+      {
+        source: '/rental',
+        destination: '/en/towercranes',
+        permanent: true,
+      },
+      {
+        source: '/sale',
+        destination: '/en/towercranes',
+        permanent: true,
+      },
+      // SEO: Canonical enforcement - remove trailing slashes for consistency
+      {
+        source: '/:path+/',
+        destination: '/:path+',
         permanent: true,
       },
     ];
@@ -144,10 +177,6 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'strict-origin-when-cross-origin',
           },
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
         ],
       },
       {
@@ -219,18 +248,57 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: '/:lang(en|nl|de)/towercranes/:slug*',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, s-maxage=3600, stale-while-revalidate=86400',
+          },
+          {
+            key: 'X-Robots-Tag',
+            value: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+          },
+        ],
+      },
+      {
+        source: '/:lang(en|nl|de)/:path*',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'index, follow',
+          },
+        ],
+      },
     ];
   },
   experimental: {
-    optimizePackageImports: ['framer-motion', 'react-icons'],
+    optimizePackageImports: ['motion', 'react-icons', '@heroicons/react'],
     // Only enable CSS optimization if running in production
     optimizeCss: process.env.NODE_ENV === 'production',
     scrollRestoration: true,
-    webVitalsAttribution: ['CLS', 'LCP'],
+    webVitalsAttribution: ['CLS', 'LCP', 'FCP', 'FID', 'TTFB'],
+    optimizeServerReact: true,
+    webpackBuildWorker: true,
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? {
+      exclude: ['error', 'warn'],
+    } : false,
   },
   env: {
     CUSTOM_KEY: 'my-value',
   },
 };
 
-module.exports = withBundleAnalyzer(nextConfig);
+// Wrap with next-video for optimized video delivery
+module.exports = withNextVideo(withBundleAnalyzer(nextConfig), {
+  provider: 'vercel-blob',
+  providerConfig: {
+    'vercel-blob': {
+      // Use the existing blob store with videos/ subfolder
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    },
+  },
+  folder: 'videos',
+});

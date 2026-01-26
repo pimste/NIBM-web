@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { useLanguage } from '@/context/LanguageContext'
 import { ClientOnly } from '@/components/ClientOnly'
 import { FaArrowRight, FaSearch, FaFilter, FaTimes } from 'react-icons/fa'

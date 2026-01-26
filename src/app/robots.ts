@@ -9,8 +9,10 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/api/',
           '/admin/',
-          '/_next/'
+          '/_next/',
+          '/analytics/', // Block analytics PDFs from indexing
         ],
+        crawlDelay: 0, // Allow immediate crawling (removed delay for better indexing)
       },
       {
         userAgent: 'Googlebot',
@@ -18,7 +20,8 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/api/',
           '/admin/',
-          '/_next/'
+          '/_next/',
+          '/analytics/',
         ],
       },
       {
@@ -27,8 +30,25 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           '/api/',
           '/admin/',
-          '/_next/'
+          '/_next/',
+          '/analytics/',
         ],
+      },
+      {
+        userAgent: 'Googlebot-Image',
+        allow: [
+          '/images/',
+          '/videos/',
+        ],
+        disallow: [
+          '/admin/',
+          '/analytics/',
+        ],
+      },
+      // Block aggressive scrapers and bad bots
+      {
+        userAgent: ['AhrefsBot', 'SemrushBot', 'DotBot', 'MJ12bot', 'BLEXBot'],
+        disallow: ['/'],
       },
     ],
     sitemap: 'https://www.nibmvb.eu/sitemap.xml',

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { FaArrowRight } from 'react-icons/fa'
-import { motion } from 'framer-motion'
+import { motion } from 'motion/react'
 import { useLanguage } from '@/context/LanguageContext'
 import { useLanguageUrl } from '@/hooks/useLanguageUrl'
 

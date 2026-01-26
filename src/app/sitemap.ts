@@ -10,16 +10,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     
     // Main static pages with priorities and change frequencies
     const routes = [
-      { path: '', priority: 1.0, changeFreq: 'weekly' as const },           // Home
+      { path: '', priority: 1.0, changeFreq: 'daily' as const },           // Home - changed to daily for freshness signal
       { path: '/about', priority: 0.8, changeFreq: 'monthly' as const },    // About
-      { path: '/services', priority: 0.9, changeFreq: 'monthly' as const }, // Services
-      { path: '/towercranes', priority: 0.95, changeFreq: 'weekly' as const }, // Towercranes - Increased priority for conversion pages
+      { path: '/services', priority: 0.9, changeFreq: 'weekly' as const }, // Services - increased to weekly
+      { path: '/towercranes', priority: 0.95, changeFreq: 'daily' as const }, // Towercranes - changed to daily (inventory changes)
       { path: '/technical-info', priority: 0.7, changeFreq: 'monthly' as const }, // Technical info
-      { path: '/contact', priority: 0.8, changeFreq: 'monthly' as const },   // Contact
+      { path: '/contact', priority: 0.85, changeFreq: 'monthly' as const },   // Contact - increased priority (conversion page)
       { path: '/blog', priority: 0.8, changeFreq: 'weekly' as const },        // Blog
-      { path: '/privacy-policy', priority: 0.5, changeFreq: 'yearly' as const }, // Privacy policy
-      { path: '/terms-of-service', priority: 0.5, changeFreq: 'yearly' as const }, // Terms of service
-      { path: '/cookies', priority: 0.5, changeFreq: 'yearly' as const },    // Cookies policy
+      { path: '/privacy-policy', priority: 0.3, changeFreq: 'yearly' as const }, // Privacy policy - reduced priority
+      { path: '/terms-of-service', priority: 0.3, changeFreq: 'yearly' as const }, // Terms of service - reduced priority
+      { path: '/cookies', priority: 0.3, changeFreq: 'yearly' as const },    // Cookies policy - reduced priority
     ];
     
     // Create sitemap entries with proper language subfolders
@@ -69,17 +69,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           // Determine priority based on category and freshness
           const daysSinceUpdate = (Date.now() - crane.updatedAt.getTime()) / (1000 * 60 * 60 * 24);
           const isRecent = daysSinceUpdate < 30;
-          // Increased priority: 0.85 for English (up from 0.8), 0.75 for other languages (up from 0.7)
-          // This helps search engines prioritize these conversion pages
-          const priority = lang === 'en' 
-            ? (isRecent ? 0.85 : 0.85) // Keep high priority for all English crane pages
-            : (isRecent ? 0.75 : 0.75); // Keep high priority for all other language crane pages
+          const isVeryRecent = daysSinceUpdate < 7;
+          
+          // SEO optimization: Higher priority for recent inventory and sale category
+          const basePriority = crane.category === 'sale' ? 0.90 : 0.85; // Sale pages get higher priority
+          const recencyBoost = isVeryRecent ? 0.05 : (isRecent ? 0.03 : 0);
+          const langMultiplier = lang === 'en' ? 1.0 : 0.9;
+          
+          const priority = Math.min(0.95, (basePriority + recencyBoost) * langMultiplier);
+          
+          // SEO optimization: More frequent updates for recent inventory
+          const changeFreq = isVeryRecent ? 'daily' : (isRecent ? 'weekly' : 'monthly');
 
           entries.push({
             url: `${baseUrl}/${lang}/towercranes/${crane.slug}`,
             lastModified: crane.updatedAt,
-            // More frequent changeFrequency for crane pages to signal active inventory
-            changeFrequency: isRecent ? 'weekly' : 'weekly', // Changed from monthly to weekly
+            changeFrequency: changeFreq as 'daily' | 'weekly' | 'monthly',
             priority,
           });
         });

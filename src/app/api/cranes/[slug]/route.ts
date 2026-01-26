@@ -1,8 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { prisma } from '@/lib/prisma'
 
-// Enable caching for GET requests - revalidate every 5 minutes
-export const revalidate = 300
+// Use Node.js runtime for Prisma compatibility
+export const runtime = 'nodejs'
+
+// Enable caching for GET requests - revalidate every 1 hour to match CDN cache
+export const revalidate = 3600
 
 // GET /api/cranes/[slug] - Fetch single crane by slug (public API - only show available ones)
 export async function GET(

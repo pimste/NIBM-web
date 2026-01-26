@@ -1,8 +1,8 @@
 'use client'
 
-import { useRef, useState, useEffect } from 'react'
+import { useRef } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
+import Video from 'next-video'
 import { AnimatedElement } from './AnimatedElement'
 import { useLanguage } from '@/context/LanguageContext'
 import { useLanguageUrl } from '@/hooks/useLanguageUrl'
@@ -11,46 +11,23 @@ export default function HeroSection() {
   const ref = useRef(null)
   const { t } = useLanguage()
   const { getUrl } = useLanguageUrl()
-  const [isClient, setIsClient] = useState(false)
-
-  useEffect(() => {
-    setIsClient(true)
-  }, [])
 
   return (
     <div ref={ref} className="relative h-screen min-h-[650px] flex items-center justify-center overflow-hidden">
-      {/* Background Video - Testing */}
+      {/* Background Video with next-video optimization */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 w-full h-full">
-          {isClient ? (
-            /* Video Background - Only render on client */
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-            >
-              <source src="/videos/new_backgroundvid.mp4" type="video/mp4" />
-            </video>
-          ) : (
-            /* Fallback image for server-side rendering */
-            <Image
-              src="/images/optimized/sunset-TC-2.webp"
-              alt="Tower crane silhouette against sunset cityscape"
-              fill
-              sizes="100vw"
-              priority
-              fetchPriority="high"
-              quality={85}
-              loading="eager"
-              className="object-cover"
-              placeholder="blur"
-              blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+P+/HgAFeAJpgZXCLgAAAABJRU5ErkJggg=="
-            />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
-        </div>
+        <Video
+          src="/videos/new_backgroundvid.mp4"
+          className="absolute inset-0 w-full h-full object-cover"
+          poster="/images/optimized/sunset-TC-2.webp"
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls={false}
+          style={{ objectFit: 'cover' }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
       </div>
 
       {/* Content */}

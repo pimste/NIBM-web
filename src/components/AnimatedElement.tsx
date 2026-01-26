@@ -1,8 +1,8 @@
 'use client'
 
-import { ReactNode, useState, useEffect } from 'react'
+import { ReactNode } from 'react'
 import { useInView } from 'react-intersection-observer'
-import dynamic from 'next/dynamic'
+import { motion } from 'motion/react'
 
 // Define types
 type AnimationVariant = 'fadeIn' | 'slideUp' | 'slideIn' | 'scale' | 'bounce'
@@ -16,12 +16,7 @@ interface AnimatedElementProps {
   threshold?: number
 }
 
-// Static component for when motion is loading or unavailable
-function StaticElement({ children, className = '' }: { children: ReactNode; className?: string }) {
-  return <div className={className}>{children}</div>
-}
-
-// Main AnimatedElement component
+// Main AnimatedElement component using Motion library
 export function AnimatedElement({
   children,
   className = '',
@@ -36,56 +31,50 @@ export function AnimatedElement({
     triggerOnce: true,
   })
 
-  // Track if motion component is loaded
-  const [MotionDiv, setMotionDiv] = useState<any>(null)
-  const [isLoaded, setIsLoaded] = useState(false)
-
-  useEffect(() => {
-    // Dynamically import the motion component
-    import('framer-motion').then((mod) => {
-      setMotionDiv(mod.motion.div)
-      setIsLoaded(true)
-    }).catch((err) => {
-      console.error('Failed to load framer-motion:', err)
-    })
-  }, [])
-
-  // Return static version if motion isn't loaded yet
-  if (!isLoaded || !MotionDiv) {
-    return <StaticElement className={className}>{children}</StaticElement>
+  // Define animation based on variant
+  const getAnimation = () => {
+    const baseAnimation = { opacity: 1 }
+    
+    switch (animationVariant) {
+      case 'slideUp':
+        return { ...baseAnimation, y: 0 }
+      case 'slideIn':
+        return { ...baseAnimation, x: 0 }
+      case 'scale':
+        return { ...baseAnimation, scale: 1 }
+      default:
+        return baseAnimation
+    }
   }
 
-  // Animation variants
-  const variants = {
-    hidden: {
-      opacity: 0,
-      y: animationVariant === 'slideUp' ? 50 : 0,
-      x: animationVariant === 'slideIn' ? 50 : 0,
-      scale: animationVariant === 'scale' ? 0.8 : 1,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      x: 0,
-      scale: 1,
-      transition: {
+  const getInitial = () => {
+    const baseInitial = { opacity: 0 }
+    
+    switch (animationVariant) {
+      case 'slideUp':
+        return { ...baseInitial, y: 50 }
+      case 'slideIn':
+        return { ...baseInitial, x: 50 }
+      case 'scale':
+        return { ...baseInitial, scale: 0.8 }
+      default:
+        return baseInitial
+    }
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      className={className}
+      initial={getInitial()}
+      animate={inView ? getAnimation() : getInitial()}
+      transition={{
         duration,
         delay,
         ease: animationVariant === 'bounce' ? 'backOut' : 'easeOut',
-      },
-    },
-  }
-
-  // Render the motion component
-  return (
-    <MotionDiv
-      ref={ref}
-      className={className}
-      initial="hidden"
-      animate={inView ? 'visible' : 'hidden'}
-      variants={variants}
+      }}
     >
       {children}
-    </MotionDiv>
+    </motion.div>
   )
 } 

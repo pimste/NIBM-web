@@ -6,204 +6,50 @@ import { Header } from '@/components/Header'
 import { Footer } from '@/components/Footer'
 import { SEOProvider } from '@/components/SEOProvider'
 import { BreadcrumbNav } from '@/components/BreadcrumbNav'
-import Script from 'next/script'
-import dynamic from 'next/dynamic'
 import { LangAttributeUpdater } from '@/components/LangAttributeUpdater'
 import { FontFallbacks } from '@/components/FontFallbacks'
 import { Analytics } from '@/components/Analytics'
 import { Analytics as VercelAnalytics } from '@vercel/analytics/next'
-import PerformanceMonitor from '@/components/PerformanceMonitor'
 import SEOOptimizer from '@/components/SEOOptimizer'
 import { LanguageProvider } from '@/context/LanguageContext'
 import { CookieBanner } from '@/components/CookieBanner'
 
-// Optimized font loading with subsets and display options
+// Optimized font loading - reduced weights for better performance
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
   preload: true,
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '600'], // Removed 500, 700 - use 400 or 600 instead
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
 })
 
 const montserrat = Montserrat({
   subsets: ['latin'],
-  display: 'swap',
+  display: 'optional', // Use optional for display text - better performance
   variable: '--font-montserrat',
   preload: true,
-  weight: ['700', '800'],
+  weight: ['700'], // Removed 800 - not critical
+  fallback: ['var(--font-inter)', 'system-ui', 'sans-serif'],
 })
 
-// Preload component
+// Preload component - optimized for critical resources only
 function Preload() {
   return (
     <>
-      {/* Critical images that should load immediately */}
+      {/* Only preload the hero video poster for instant visual */}
       <link rel="preload" href="/images/optimized/sunset-TC-2.webp" as="image" type="image/webp" fetchPriority="high" />
-      <link rel="preload" href="/images/optimized/cropped-Top-page2-potain6.webp" as="image" type="image/webp" />
-      <link rel="preload" href="/images/optimized/logo-blue.webp" as="image" type="image/webp" fetchPriority="high" />
+      <link rel="preload" href="/images/optimized/logo-blue.webp" as="image" type="image/webp" />
       
-      {/* Prefetch next likely images - assuming these are commonly accessed */}
-      <link rel="prefetch" href="/images/optimized/gidgehlen.webp" as="image" type="image/webp" />
-      <link rel="prefetch" href="/images/optimized/Potain-MDT-178_3W.webp" as="image" type="image/webp" />
-      
-      {/* DNS prefetch and preconnect */}
+      {/* DNS prefetch for own domain only */}
       <link rel="preconnect" href="https://www.nibmvb.eu" />
       <link rel="dns-prefetch" href="https://www.nibmvb.eu" />
-      <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
 
       <FontFallbacks />
     </>
   )
 }
 
-// Progressive image loading script - helps with lazy loading and avoiding layout shifts
-function ProgressiveImageLoadingScript() {
-  return (
-    <Script 
-      id="progressive-image-loading"
-      strategy="afterInteractive"
-    >{`
-      document.addEventListener('DOMContentLoaded', function() {
-        // Handle progressive image loading with blur transitions
-        const progressiveImages = document.querySelectorAll('.progressive-image');
-        
-        function loadImage(img) {
-          const src = img.dataset.src;
-          if (!src) return;
-          
-          const newImg = new Image();
-          newImg.src = src;
-          newImg.onload = () => {
-            img.classList.add('loaded');
-            img.src = src;
-            img.removeAttribute('data-src');
-          };
-        }
-        
-        if ('IntersectionObserver' in window) {
-          const imageObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-              if (entry.isIntersecting) {
-                loadImage(entry.target);
-                imageObserver.unobserve(entry.target);
-              }
-            });
-          }, {
-            rootMargin: '50px 0px',
-            threshold: 0.01
-          });
-          
-          progressiveImages.forEach(img => {
-            imageObserver.observe(img);
-          });
-        } else {
-          // Fallback for browsers that don't support IntersectionObserver
-          progressiveImages.forEach(img => {
-            loadImage(img);
-          });
-        }
-      });
-    `}
-    </Script>
-  )
-}
-
-// LazyLoad component - to improve Largest Contentful Paint
-function LazyLoadScript() {
-  return (
-    <Script 
-      id="lazy-load-script"
-      strategy="afterInteractive"
-    >{`
-      // Lazy load images that are not in viewport
-      document.addEventListener('DOMContentLoaded', function() {
-        // IntersectionObserver is supported in modern browsers
-        if ('IntersectionObserver' in window) {
-          const lazyImages = Array.from(document.querySelectorAll('img.lazy'));
-          
-          const imageObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-              if (entry.isIntersecting) {
-                const lazyImage = entry.target;
-                if (lazyImage.dataset.src) {
-                  lazyImage.src = lazyImage.dataset.src;
-                  lazyImage.classList.remove('lazy');
-                  imageObserver.unobserve(lazyImage);
-                }
-              }
-            });
-          });
-          
-          lazyImages.forEach(function(lazyImage) {
-            imageObserver.observe(lazyImage);
-          });
-        } else {
-          // Fallback for browsers that don't support IntersectionObserver
-          let active = false;
-          
-          const lazyLoad = function() {
-            if (active === false) {
-              active = true;
-              
-              setTimeout(function() {
-                const lazyImages = document.querySelectorAll('img.lazy');
-                
-                lazyImages.forEach(function(lazyImage) {
-                  if ((lazyImage.getBoundingClientRect().top <= window.innerHeight && lazyImage.getBoundingClientRect().bottom >= 0) && getComputedStyle(lazyImage).display !== 'none') {
-                    if (lazyImage.dataset.src) {
-                      lazyImage.src = lazyImage.dataset.src;
-                      lazyImage.classList.remove('lazy');
-                    }
-                    
-                    if (lazyImages.length === 0) {
-                      document.removeEventListener('scroll', lazyLoad);
-                      window.removeEventListener('resize', lazyLoad);
-                      window.removeEventListener('orientationChange', lazyLoad);
-                    }
-                  }
-                });
-                
-                active = false;
-              }, 200);
-            }
-          };
-          
-          document.addEventListener('scroll', lazyLoad);
-          window.addEventListener('resize', lazyLoad);
-          window.addEventListener('orientationChange', lazyLoad);
-          lazyLoad();
-        }
-      });
-    `}</Script>
-  )
-}
-
-// Service Worker Registration
-function ServiceWorkerScript() {
-  return (
-    <Script
-      id="register-sw"
-      strategy="afterInteractive"
-    >{`
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/sw.js').then(
-            function(registration) {
-              // Registration was successful
-              console.log('ServiceWorker registration successful with scope: ', registration.scope);
-            }, 
-            function(err) {
-              // registration failed :(
-              console.log('ServiceWorker registration failed: ', err);
-            }
-          );
-        });
-      }
-    `}</Script>
-  )
-}
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -337,12 +183,8 @@ export default function RootLayout({
             <CookieBanner />
           </LangAttributeUpdater>
         </LanguageProvider>
-        <LazyLoadScript />
-        <ProgressiveImageLoadingScript />
-        <ServiceWorkerScript />
-        <PerformanceMonitor />
         <SEOOptimizer />
-        <VercelAnalytics />
+        <VercelAnalytics mode="production" />
       </body>
     </html>
   )

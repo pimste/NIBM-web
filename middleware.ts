@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 const defaultLocale = 'en';
 const supportedLocales = ['en', 'nl', 'de'];
 
-// Known spam referrers to block
+// Known spam referrers and SEO scrapers to block
 const SPAM_REFERRERS = [
   'mysticforge.top',
   'neonflux.top',
@@ -15,6 +15,13 @@ const SPAM_REFERRERS = [
   'netforge.top',
   'cloudforge.top',
   'dataforge.top',
+  // SEO spam/scraper sites
+  'semalt.com',
+  'buttons-for-website.com',
+  'simple-share-buttons.com',
+  'best-seo-solution.com',
+  'darodar.com',
+  'trafficmonetize.org',
 ];
 
 // Suspicious user agents to block (generic terms like 'bot' are checked after legitimate bots)
@@ -44,6 +51,15 @@ const SUSPICIOUS_USER_AGENTS = [
   'got',
   'request',
   'urllib',
+  // SEO scrapers and aggressive bots
+  'ahrefsbot',
+  'semrushbot',
+  'dotbot',
+  'mj12bot',
+  'blexbot',
+  'petalbot',
+  'megaindex',
+  'linkdexbot',
 ];
 
 // Legitimate search engine bots to allow
@@ -135,13 +151,14 @@ export function middleware(request: NextRequest) {
     pathname.startsWith('/videos/') ||
     pathname.startsWith('/fonts/') ||
     pathname.startsWith('/assets/') ||
+    pathname.startsWith('/technical docs/') ||
     pathname === '/favicon.ico' ||
     pathname === '/favicon.png' ||
     pathname === '/apple-touch-icon.png' ||
     pathname === '/robots.txt' ||
     pathname === '/sitemap.xml' ||
     pathname === '/site.webmanifest' ||
-    /\.(jpg|jpeg|png|gif|webp|avif|svg|ico|woff|woff2|ttf|eot|otf|mp4|webm|mov|avi|pdf|zip)$/i.test(pathname);
+    /\.(jpg|jpeg|png|gif|webp|avif|svg|ico|woff|woff2|ttf|eot|otf|mp4|webm|mov|avi|pdf|xlsx|zip)$/i.test(pathname);
   
   if (isAssetPath) {
     // For assets, be more aggressive - block any suspicious bot
