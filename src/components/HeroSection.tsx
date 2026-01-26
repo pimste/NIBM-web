@@ -6,6 +6,7 @@ import Video from 'next-video'
 import { AnimatedElement } from './AnimatedElement'
 import { useLanguage } from '@/context/LanguageContext'
 import { useLanguageUrl } from '@/hooks/useLanguageUrl'
+import backgroundVideo from '/public/videos/new_backgroundvid.mp4'
 
 export default function HeroSection() {
   const ref = useRef(null)
@@ -14,11 +15,20 @@ export default function HeroSection() {
 
   return (
     <div ref={ref} className="relative h-screen min-h-[650px] flex items-center justify-center overflow-hidden">
-      {/* Background Video with next-video optimization */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 w-full h-full overflow-hidden">
+      {/* Background Video with Vercel Blob optimization */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-0" style={{ 
+          width: '100%',
+          height: '100%',
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          minWidth: '100%',
+          minHeight: '100%'
+        }}>
           <Video
-            src="/videos/new_backgroundvid.mp4"
+            src={backgroundVideo}
             poster="/images/optimized/sunset-TC-2.webp"
             autoPlay
             muted
@@ -28,18 +38,15 @@ export default function HeroSection() {
             style={{ 
               width: '100%',
               height: '100%',
-              objectFit: 'cover',
-              position: 'absolute',
-              top: 0,
-              left: 0
+              objectFit: 'cover'
             }}
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 z-10"></div>
       </div>
 
       {/* Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <div className="max-w-4xl mx-auto text-center">
           <div>
             <AnimatedElement>
@@ -96,7 +103,7 @@ export default function HeroSection() {
 
       {/* Scroll Down Indicator */}
       <div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 text-white flex flex-col items-center cursor-pointer drop-shadow-md hover:scale-105 transition-transform duration-300"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 text-white flex flex-col items-center cursor-pointer drop-shadow-md hover:scale-105 transition-transform duration-300"
       >
         <span className="text-sm font-medium tracking-wide mb-2 backdrop-blur-sm bg-black/10 px-3 py-1 rounded-full">{t('hero.scroll')}</span>
         <svg 
