@@ -42,9 +42,10 @@ export async function GET() {
     }))
     
     // Add cache control headers with stale-while-revalidate strategy
+    // Increased caching to reduce origin requests and bandwidth usage
     return NextResponse.json(transformedCranes, {
       headers: {
-        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
+        'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
         'Vary': 'Accept'
       }
     })

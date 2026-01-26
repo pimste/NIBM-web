@@ -31,7 +31,7 @@ export default function HeroSection() {
               playsInline
               className="absolute inset-0 w-full h-full object-cover"
             >
-              <source src={`/api/video?t=${Date.now()}`} type="video/mp4" />
+              <source src="/videos/new_backgroundvid.mp4" type="video/mp4" />
             </video>
           ) : (
             /* Fallback image for server-side rendering */

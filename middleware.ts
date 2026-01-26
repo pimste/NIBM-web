@@ -157,17 +157,18 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
   
-  // SECOND: Handle API routes - no i18n processing needed, but still check bots
-  // API routes have their own rate limiting, but we still block obvious spam bots
+  // SECOND: Handle API routes - no i18n processing needed, but aggressively block bots
+  // API routes have their own rate limiting, but we need aggressive bot blocking to prevent bandwidth abuse
   if (pathname.startsWith('/api')) {
-    // Only block obvious spam referrers on API routes, allow everything else
-    // (legitimate API calls from automated systems should work)
-    const referer = request.headers.get('referer')?.toLowerCase() || '';
-    if (referer) {
-      const isSpamReferrer = SPAM_REFERRERS.some((spam) => referer.includes(spam));
-      if (isSpamReferrer) {
-        return new NextResponse('Forbidden', { status: 403 });
-      }
+    // Apply aggressive bot detection to API routes to prevent scraping and bandwidth abuse
+    // This is especially important for routes that serve large files or data
+    if (isBlockedBot(request, true)) {
+      return new NextResponse('Forbidden', { 
+        status: 403,
+        headers: {
+          'Cache-Control': 'no-store, no-cache, must-revalidate',
+        },
+      });
     }
     return NextResponse.next();
   }
