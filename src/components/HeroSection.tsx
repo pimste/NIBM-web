@@ -2,11 +2,9 @@
 
 import { useRef } from 'react'
 import Link from 'next/link'
-import Video from 'next-video'
 import { AnimatedElement } from './AnimatedElement'
 import { useLanguage } from '@/context/LanguageContext'
 import { useLanguageUrl } from '@/hooks/useLanguageUrl'
-import backgroundVideo from '/public/videos/new_backgroundvid.mp4'
 
 export default function HeroSection() {
   const ref = useRef(null)
@@ -27,8 +25,8 @@ export default function HeroSection() {
           minWidth: '100%',
           minHeight: '100%'
         }}>
-          <Video
-            src={backgroundVideo}
+          <video
+            src="https://a5db2zzmd8pkwmho.public.blob.vercel-storage.com/videos/new_backgroundvid.mp4"
             poster="/images/optimized/sunset-TC-2.webp"
             autoPlay
             muted
