@@ -47,7 +47,11 @@ const flagStyles: Record<Language, { background: string }> = {
   }
 };
 
-export function LanguageSwitcher() {
+interface LanguageSwitcherProps {
+  variant?: 'dropdown' | 'inline'
+}
+
+export function LanguageSwitcher({ variant = 'dropdown' }: LanguageSwitcherProps) {
   const languageContext = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const router = useRouter()
@@ -132,8 +136,8 @@ export function LanguageSwitcher() {
     </div>
   );
 
-  // The actual language switcher UI
-  const switcherUI = (
+  // The dropdown UI (desktop)
+  const dropdownUI = (
     <div className="relative">
       <button 
         className="flex items-center p-1.5 rounded-md hover:bg-white/10 transition-colors group"
@@ -183,6 +187,62 @@ export function LanguageSwitcher() {
       </AnimatePresence>
     </div>
   );
+
+  // The inline UI (mobile)
+  const inlineUI = (
+    <div className="flex flex-col space-y-2">
+      {Object.entries(flagStyles).map(([code, styles], index) => {
+        const isActive = language === code;
+        return (
+          <motion.button
+            key={code}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ 
+              duration: 0.3, 
+              delay: index * 0.1,
+              ease: "easeOut" 
+            }}
+            className={`
+              flex items-center justify-between w-full px-4 py-3 rounded-lg
+              transition-all duration-300 text-lg font-medium
+              ${isActive 
+                ? 'bg-secondary text-white shadow-lg scale-105' 
+                : 'bg-white/10 text-white hover:bg-white/20'
+              }
+            `}
+            onClick={() => changeLanguage(code as Language)}
+          >
+            <div className="flex items-center">
+              <div 
+                className="w-8 h-8 rounded-full shadow-md border-2 border-white/30 mr-4 flex-shrink-0"
+                style={{
+                  background: styles.background
+                }}
+              ></div>
+              <span>{languageLabels[code as Language]}</span>
+            </div>
+            {isActive && (
+              <motion.span
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 500, 
+                  damping: 30 
+                }}
+                className="text-xl"
+              >
+                ✓
+              </motion.span>
+            )}
+          </motion.button>
+        );
+      })}
+    </div>
+  );
+
+  const switcherUI = variant === 'inline' ? inlineUI : dropdownUI;
 
   return (
     typeof ClientOnly === 'function' ? (

@@ -220,18 +220,21 @@ export function Header() {
                       priority
                     />
                   </Link>
-                  <div className="flex items-center">
-                    <div className="mr-4">
-                      <LanguageSwitcher />
-                    </div>
-                    <button
-                      type="button"
-                      className="text-white hover:text-secondary"
-                      onClick={toggleMenu}
-                    >
-                      <FaTimes className="h-6 w-6" />
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    className="text-white hover:text-secondary"
+                    onClick={toggleMenu}
+                  >
+                    <FaTimes className="h-6 w-6" />
+                  </button>
+                </div>
+
+                {/* Language Section */}
+                <div className="mb-8">
+                  <p className="text-white/60 text-sm uppercase tracking-wide mb-4">
+                    Select Language
+                  </p>
+                  <LanguageSwitcher variant="inline" />
                 </div>
                 
                 <nav className="space-y-8">
