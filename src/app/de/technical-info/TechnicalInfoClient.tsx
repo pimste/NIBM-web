@@ -16,15 +16,6 @@ const technicalDocuments: Array<{
   url: string
 }> = [
   {
-    id: 1,
-    title: 'K Masten - Technische Dokumentation',
-    description: 'Umfassende technische Dokumentation für K Masten, einschließlich Spezifikationen, Installationsrichtlinien und Wartungsverfahren.',
-    fileSize: '10.0 MB',
-    fileType: 'PDF',
-    category: 'Spezifikationen',
-    url: '/technical docs/02GP_534_2022_07-1_EN_K masts.pdf',
-  },
-  {
     id: 2,
     title: 'Teleskop Turm Sektionen T 41, T 61, T 851',
     description: 'Detaillierte technische Spezifikationen und Installationsrichtlinien für Teleskop Turm Sektionen T 41, T 61 und T 851.',
@@ -32,24 +23,6 @@ const technicalDocuments: Array<{
     fileType: 'PDF',
     category: 'Spezifikationen',
     url: '/technical docs/02GP_631_2019_04_EN_Telescoping T 41-T 61-T 851 (2).pdf',
-  },
-  {
-    id: 3,
-    title: 'K Masten Neue Generation',
-    description: 'Technische Dokumentation für die neue Generation von K Masten, einschließlich Designmerkmale, Spezifikationen und Installationsverfahren.',
-    fileSize: '1.2 MB',
-    fileType: 'PDF',
-    category: 'Spezifikationen',
-    url: '/technical docs/02FP_173_2017_03_EN_K Masts New Generation.pdf',
-  },
-  {
-    id: 4,
-    title: 'K Masten Montageanleitung',
-    description: 'Montage- und Installationsanleitung für K Masten, mit Verfahren für ordnungsgemäße Montage und Sicherheitsanforderungen.',
-    fileSize: '1.2 MB',
-    fileType: 'PDF',
-    category: 'Betrieb',
-    url: '/technical docs/H19-032-E - K Masts ages_EN.pdf',
   },
   {
     id: 5,

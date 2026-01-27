@@ -16,15 +16,6 @@ const technicalDocuments: Array<{
   url: string
 }> = [
   {
-    id: 1,
-    title: 'K Masts - Technical Documentation',
-    description: 'Comprehensive technical documentation for K masts, including specifications, installation guidelines, and maintenance procedures.',
-    fileSize: '10.0 MB',
-    fileType: 'PDF',
-    category: 'Specifications',
-    url: '/technical docs/02GP_534_2022_07-1_EN_K masts.pdf',
-  },
-  {
     id: 2,
     title: 'Telescoping Tower Sections T 41, T 61, T 851',
     description: 'Detailed technical specifications and installation guidelines for telescoping tower sections T 41, T 61, and T 851.',
@@ -32,24 +23,6 @@ const technicalDocuments: Array<{
     fileType: 'PDF',
     category: 'Specifications',
     url: '/technical docs/02GP_631_2019_04_EN_Telescoping T 41-T 61-T 851 (2).pdf',
-  },
-  {
-    id: 3,
-    title: 'K Masts New Generation',
-    description: 'Technical documentation for the new generation of K masts, including design features, specifications, and installation procedures.',
-    fileSize: '1.2 MB',
-    fileType: 'PDF',
-    category: 'Specifications',
-    url: '/technical docs/02FP_173_2017_03_EN_K Masts New Generation.pdf',
-  },
-  {
-    id: 4,
-    title: 'K Masts Assembly Guide',
-    description: 'Assembly and installation guide for K masts, covering proper assembly procedures and safety requirements.',
-    fileSize: '1.2 MB',
-    fileType: 'PDF',
-    category: 'Operations',
-    url: '/technical docs/H19-032-E - K Masts ages_EN.pdf',
   },
   {
     id: 5,
